@@ -1,5 +1,5 @@
 # SilliconWebStore
-###Projeto Loja de periféricos e outros eletrônicos
+### Projeto Loja de periféricos e outros eletrônicos
 
 # Funcionamento da aplicação
 
