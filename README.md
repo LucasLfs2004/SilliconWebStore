@@ -33,3 +33,4 @@
 - Preto: #000000
 - Branco: #FFFFFF
 
+![Paleta de cores]](LOGO/PALETA.png)
