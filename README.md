@@ -24,6 +24,7 @@
 
 # Paleta de cores para a marca
 
+- Roxo escuro: #010f20
 - Roxo: #5B43D6
 - Rosa claro: #E859CE
 - Rosa choque: #F406D7
