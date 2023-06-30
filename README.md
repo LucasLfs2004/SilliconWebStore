@@ -22,3 +22,12 @@
 - Layout da versão mobile da aplicação
 - Porte da aplicação web para app mobile
 
+# Paleta de cores para a marca
+
+{c:#5b43d6}[fa=check-circle /]{/c} Roxo
+{c:#e859ce}[fa=check-circle /]{/c} Rosa claro
+{c:#f406d7}[fa=check-circle /]{/c} Rosa choque
+{c:#02efdf}[fa=check-circle /]{/c} Ciano
+{c:#c1c5d6}[fa=check-circle /]{/c} Cinza
+{c:#000000}[fa=check-circle /]{/c} Preto
+{c:#ffffff}[fa=check-circle /]{/c} Branco
