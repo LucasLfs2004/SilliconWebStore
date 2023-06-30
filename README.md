@@ -24,14 +24,11 @@
 
 # Paleta de cores para a marca
 
-{c:#5b43d6} Roxo {/c}
+- Roxo: #5B43D6
+- Rosa claro: #E859CE
+- Rosa choque: #F406D7
+- Ciano: #02EFDF
+- Cinza: #C1C5D6
+- Preto: #000000
+- Branco: #FFFFFF
 
-{c:#e859ce} Rosa claro {/c}
-
-{c:#f406d7} Rosa choque {/c}
-
-{c:#02efdf} Ciano {/c}
-
-{c:#c1c5d6} Cinza {/c}
-
-{c:#000000} Preto {/c}
