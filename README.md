@@ -34,3 +34,30 @@
 - Branco: #FFFFFF
 
 ![Paleta de cores](./LOGO/PALETA.png)
+
+
+
+# Tabelas do banco de dados
+
+## category
+uuid
+nome_categoria
+
+## product
+uuid int not null
+nome string
+imagens
+marca
+descricao
+fabricante
+preco
+juros
+
+## person
+uuid
+nome
+cpf
+rg
+email
+
+## vendedor
