@@ -76,4 +76,6 @@ SENHA VARCHAR(255) NOT NULL,
 PRIMARY KEY(ID)
 );
 
-select * from person;
+INSERT INTO PERSON (ID, NAME, CPF, EMAIL, NASCIMENTO, TELEFONE, SENHA) VALUES (0, 'Lucas Ferreira Silva', '520.945.658-74', 'lucas.lfs2004@gmail.com', '2004-06-19', '(11) 97968-4799', 'GallardoLP-570');
+
+SELECT * FROM PERSON
