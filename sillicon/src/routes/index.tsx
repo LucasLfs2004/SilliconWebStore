@@ -1,16 +1,19 @@
-import React, { Suspense } from 'react';
-import { Route, Routes } from 'react-router';
+import { Suspense } from 'react';
+import { useRoutes } from 'react-router-dom';
 import { Spinner } from '../components/spinner/index';
-import Login from '../pages/login/Index';
+import CreateAccount from '../pages/createAccount';
+import Login from '../pages/login';
 
-const Content = props => (
-  <Suspense fallback={<Spinner />}>
-    <Routes>
-      <Route path='/' element={<Login />} />
-      {/* <Route exact path='/agents' element={<Agents />} /> */}
-      {/* <Route path='*' element={<NotFound />} /> */}
-    </Routes>
-  </Suspense>
-);
+const Content = (props: any) => {
+  const routes = useRoutes([
+    { path: '/', element: <Login /> },
+    {
+      path: '/create-account',
+      element: <CreateAccount />,
+    },
+  ]);
+
+  return <Suspense fallback={<Spinner />}>{routes}</Suspense>;
+};
 
 export default Content;

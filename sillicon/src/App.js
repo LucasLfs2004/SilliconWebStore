@@ -1,8 +1,15 @@
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import Content from './routes/index.tsx';
 
 function App() {
-  return <Content />;
+  return (
+    <div className='app'>
+      <BrowserRouter>
+        <Content />
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

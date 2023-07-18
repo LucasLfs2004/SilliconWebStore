@@ -11,10 +11,14 @@ import {
   Section,
   Title,
 } from './styles';
-const Login: React.FC = () => {
+
+const CreateAccount: React.FC = () => {
+  const [nome, setNome] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
-
+  const [confirmPass, setConfirmPass] = useState('');
   return (
     <Container>
       <Header>
@@ -23,10 +27,24 @@ const Login: React.FC = () => {
       <Section>
         <div className='top'>
           <img src='/assets/imgs/vga.svg' alt='' />
-          <Title className='title'>Login</Title>
+          <Title className='title'>Criar conta</Title>
         </div>
-
         <Form>
+          <FormInput
+            label={'nome'}
+            value={nome}
+            onChange={(e: string) => setNome(e)}
+          />
+          <FormInput
+            label={'cpf'}
+            value={cpf}
+            onChange={(e: string) => setCpf(e)}
+          />
+          <FormInput
+            label={'telefone'}
+            value={phone}
+            onChange={(e: string) => setPhone(e)}
+          />
           <FormInput
             label={'email'}
             value={email}
@@ -37,15 +55,15 @@ const Login: React.FC = () => {
             value={pass}
             onChange={(e: string) => setPass(e)}
           />
-          <BtnSubmit text={'Entrar'} />
+          <FormInput
+            label={'Confirmar senha'}
+            value={confirmPass}
+            onChange={(e: string) => setConfirmPass(e)}
+          />
+          <BtnSubmit text={'Criar conta'} />
         </Form>
         <Message>
-          Não tem conta?
-          <Link to={'/create-account'}> clique aqui!</Link>
-        </Message>
-        <Message>
-          Esqueci minha
-          <Link to={'/'}> senha</Link>
+          Já tem conta? <Link to={'/'}> entrar</Link>
         </Message>
       </Section>
       <Footer>
@@ -56,4 +74,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default CreateAccount;
