@@ -15,6 +15,10 @@ const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
 
+  const handle = () => {
+    return;
+  };
+
   return (
     <Container>
       <Header>
@@ -37,7 +41,7 @@ const Login: React.FC = () => {
             value={pass}
             onChange={(e: string) => setPass(e)}
           />
-          <BtnSubmit text={'Entrar'} />
+          <BtnSubmit text={'Entrar'} onClick={() => handle()} />
         </Form>
         <Message>
           Não tem conta?

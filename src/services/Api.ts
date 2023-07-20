@@ -1,7 +1,10 @@
 import axios from "axios";
 
 export const Api = axios.create({
-  baseURL: 'https://0.0.0.0:8080',
+  baseURL: 'http://0.0.0.0:8080',
+  headers: {
+    'Content-Type': 'application/json',
+  }
 });
 
 // Api.interceptors.request.use(

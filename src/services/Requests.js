@@ -1,10 +1,40 @@
-import { useAuth } from '../contexts/Auth/useAuth';
 import { Api } from './Api';
 
 const headers = {
   'Content-Type': 'application/json',
 };
 
+export const createAccount = async (
+  name,
+  cpf,
+  email,
+  birth,
+  phone,
+  password,
+) => {
+  try {
+    const response = await Api.post('/create-account', {
+      name,
+      cpf,
+      email,
+      birth,
+      phone,
+      password,
+    });
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const effectLogin = async () => {
+  try {
+  } catch (error) {
+    return error.message;
+  }
+};
 
 export const fetchPopularMovies = async page => {
   try {
@@ -43,7 +73,7 @@ export const getProviders = async () => {
     Api.get('/movies/providers', { headers: headers }),
     Api.get('/series/providers', { headers: headers }),
   ]);
-  
+
   return [
     {
       movieProviders,
@@ -55,10 +85,10 @@ export const getProviders = async () => {
 export const getRecommendations = async () => {
   try {
     const [firstRecommendations, secondRecommendations, thirdRecommendations] =
-    await Promise.all([
-      Api.get('/recommendations', { headers: headers }),
-      Api.get('/recommendations', { headers: headers }),
-      Api.get('/recommendations', { headers: headers }),
+      await Promise.all([
+        Api.get('/recommendations', { headers: headers }),
+        Api.get('/recommendations', { headers: headers }),
+        Api.get('/recommendations', { headers: headers }),
       ]);
     return [
       {
@@ -117,7 +147,7 @@ export const getDiscoverMovie = async (genreId, providerId, page) => {
       await Api.get(
         `/movies/discover?genre_ids=${genreId}&provider_ids=${providerId}&page=${page}`,
         { headers: headers },
-        )
+      )
     ).data;
   } catch (error) {
     console.log(error);
@@ -131,7 +161,6 @@ export const getMovieInfo = async movieId => {
     console.error(error.message);
   }
 };
-
 
 // export const getPopularMoviesAndSeries = async () => {
 //   const [movies, series, releases] = await Promise.all([
