@@ -18,29 +18,6 @@ const CreateAccount = () => {
     resolver: zodResolver(CreateAccountZod),
   });
 
-  // const handleCreateAccount = async e => {
-  //   e.preventDefault();
-
-  //   console.log('HandleCreateAccount');
-  //   try {
-  //     const data = moment(birth, 'DD/MM/YYYY', true).format('YYYY-MM-DD');
-  //     const dados = await createAccount(nome, cpf, email, data, phone, pass);
-  //     console.log(dados);
-  //     alert('Conta criada com sucesso');
-
-  //     setNome('');
-  //     setCpf('');
-  //     setPhone('');
-  //     setEmail('');
-  //     setBirth('');
-  //     setPass('');
-  //     setConfirmPass('');
-  //   } catch (error) {
-  //     console.log(error.response.data);
-  //     alert('Não foi possível criar sua conta');
-  //   }
-  // };
-
   const handleCreateAccount = async data => {
     console.log('HandleCreateAccount');
     try {
