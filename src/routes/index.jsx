@@ -4,10 +4,12 @@ import { Spinner } from '../components/spinner/index';
 import CreateAccount from '../pages/createAccount';
 import Home from '../pages/home';
 import Login from '../pages/login';
+import SideMenu from '../pages/sideMenu';
 
 const Content = props => {
   const routes = useRoutes([
     { path: '/', element: <Home /> },
+    {path: '/', element: <SideMenu/>},
     { path: '/login', element: <Login /> },
     {
       path: '/create-account',
