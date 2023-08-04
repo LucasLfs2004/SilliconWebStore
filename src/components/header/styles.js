@@ -1,7 +1,8 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const Header = styled.header`
   width: calc(100% - 30px);
+  padding: 0 15px;
   background-color: #010f20;
   height: 60px;
   margin: 0;
@@ -9,7 +10,6 @@ export const Header = styled.header`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 15px;
 `;
 
 export const Logo = styled.div`
@@ -53,12 +53,6 @@ export const Pesquisa = styled.div`
     border: none;
     background-color: transparent;
   }
-`;
-
-export const Sidebar = styled.button`
-  margin: 0;
-  background-color: transparent;
-  border: none;
 `;
 
 export const Carrinho = styled.button`

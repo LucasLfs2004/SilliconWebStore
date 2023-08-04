@@ -7,6 +7,7 @@ export const Menu = styled.section`
   position: absolute;
   top: 60px;
   left: ${props => (props.show === true ? '0' : '100%')};
+  display: ${props => (props.show === true ? 'block' : 'none')};
   transition: all 1s ease;
   background-color: #010f20;
 `;
