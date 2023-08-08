@@ -4,7 +4,6 @@ import * as C from './styles';
 
 const Menu = () => {
   const [showMenu, setShowMenu] = useState(false);
-  console.log(showMenu);
   return (
     <C.Container>
       <C.Sidebar onClick={() => setShowMenu(!showMenu)}>
