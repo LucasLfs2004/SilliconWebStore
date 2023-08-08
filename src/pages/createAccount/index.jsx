@@ -117,10 +117,7 @@ const CreateAccount = () => {
             />
             <p>{errors?.confirm_password?.message}</p>
           </C.FormInput>
-          <BtnSubmit
-            text={'Criar conta'}
-            onClick={e => handleCreateAccount(e)}
-          />
+          <BtnSubmit text={'Criar conta'} />
         </C.Form>
         <C.Message>
           Já tem conta? <Link to={'/'}> entrar</Link>

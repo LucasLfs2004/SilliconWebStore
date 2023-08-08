@@ -21,7 +21,7 @@ const Menu = () => {
           <line y1='12.5' x2='20' y2='12.5' stroke='#D1D9E6' />
         </svg>
       </C.Sidebar>
-      <C.Menu show={showMenu}>
+      <C.Menu show={showMenu.toString()}>
         <C.UserRow>
           <svg
             width='25'

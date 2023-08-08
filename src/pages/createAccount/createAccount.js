@@ -26,7 +26,7 @@ export const CreateAccountZod = z
     password: z
       .string()
       .min(8, 'A senha deve possuir no mínimo 8 caracteres')
-      .regex(/[!@#$%^&*(),.?":{}|<>]/, {
+      .regex(/[!@#$%^&*(),.?":{}|<>-]/, {
         message: 'A senha deve conter pelo menos um caracter especial',
       })
       .regex(/[0-9]/, { message: 'A senha deve conter pelo menos um número' })
@@ -41,7 +41,7 @@ export const CreateAccountZod = z
     confirm_password: z
       .string()
       .min(8, 'A senha deve possuir no mínimo 8 caracteres')
-      .regex(/[!@#$%^&*(),.?":{}|<>]/, {
+      .regex(/[!@#$%^&*(),.?":{}|<>-]/, {
         message: 'A senha deve conter pelo menos um caracter especial',
       })
       .regex(/[0-9]/, { message: 'A senha deve conter pelo menos um número' })

@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { Spinner } from '../components/Spinner/index';
+import { Spinner } from '../components/Spinner';
 import AddProduct from '../pages/AddProduct';
 import CreateAccount from '../pages/createAccount';
 import Home from '../pages/home';

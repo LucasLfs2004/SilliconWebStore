@@ -28,10 +28,16 @@ export const createAccount = async (
   }
 };
 
-export const effectLogin = async () => {
+export const effectLogin = async (email, pass) => {
   try {
+    const response = await Api.post('/login', {
+      email,
+      pass,
+    });
+    const data = response.data;
+    return data;
   } catch (error) {
-    return error.message;
+    return error;
   }
 };
 
