@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import Menu from '../SideBar';
 import * as C from './styles';
 
 const Header = () => {
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <C.Header>
       <C.DivBlock>
@@ -20,7 +23,7 @@ const Header = () => {
         <C.Carrinho>
           <img src='/assets/imgs/carrinho.svg' alt='' />
         </C.Carrinho>
-        <Menu />
+        <Menu showMenu={showMenu} />
       </C.DivBlock>
     </C.Header>
   );

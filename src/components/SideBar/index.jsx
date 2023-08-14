@@ -57,7 +57,9 @@ const Menu = () => {
           </svg>
 
           <C.ActionUser>
-            {userInfo && userInfo !== null && userInfo !== undefined ? (
+            {JSON.parse(localStorage.getItem('user')) &&
+            JSON.parse(localStorage.getItem('user')) !== null &&
+            JSON.parse(localStorage.getItem('user')) !== undefined ? (
               <C.LoggedRow>
                 <C.UserInfos>
                   <p className='nome'>{userInfo.name}</p>
@@ -88,6 +90,15 @@ const Menu = () => {
             <Link>Mais vendidos</Link>
           </C.Item>
         </C.List>
+
+        {JSON.parse(localStorage.getItem('user'))?.email ===
+          'admin@sillicon.com' && (
+          <C.List>
+            <C.Item>
+              <Link to={'/add-product'}>Adicionar produto</Link>
+            </C.Item>
+          </C.List>
+        )}
       </C.Menu>
     </C.Container>
   );

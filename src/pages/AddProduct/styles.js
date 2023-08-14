@@ -105,7 +105,7 @@ export const FormInput = styled.div`
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  min-width: 78.78%;
+  width: 78.78%;
 
   label {
     color: #5b43d6;
@@ -124,6 +124,35 @@ export const FormInput = styled.div`
     width: calc(100% - 28px);
     height: 30px;
     padding: 0 14px;
+    font-size: 12px;
+    transition: all 0.5s ease;
+  }
+
+  .no-spin {
+    -moz-appearance: textfield; /* Firefox */
+    appearance: textfield; /* Chrome, Safari, Edge */
+  }
+
+  .no-spin::-webkit-inner-spin-button,
+  .no-spin::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0; /* Pode adicionar um espaço em branco se necessário */
+  }
+
+  select {
+    background-color: #ecf0f3;
+    box-shadow: 5px 5px 6px 0px #d1d9e6,
+      -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
+    border-radius: 5px;
+    border: none;
+    width: calc(100% - 28px);
+    height: 30px;
+    padding: 0 14px;
+    font-size: 12px;
+    transition: all 0.5s ease;
+    color: #c1c5d6;
+    width: calc(100% - 28px);
+    font-weight: 300;
     font-size: 12px;
   }
 
@@ -149,6 +178,19 @@ export const FormInput = styled.div`
     font-weight: 275;
     margin: 0;
   }
+`;
+
+export const RowInput = styled.div`
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  column-gap: 18px;
+  width: 100%;
+`;
+
+export const InputVisible = styled.input`
+  opacity: ${props => (props.view ? 1 : 0)};
 `;
 
 export const RadioInput = styled.div`
@@ -240,5 +282,40 @@ export const InputImg = styled.div`
     img {
       padding-left: 26px;
     }
+  }
+`;
+
+export const Carousel = styled.section`
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  .carousel-image-product {
+    width: 100%;
+  }
+
+  .slick-prev::before,
+  .slick-next::before {
+    color: #5ce1e6;
+    opacity: 0.75;
+  }
+
+  .slick-dots li button::before {
+    color: #fff;
+    opacity: 1;
+  }
+
+  .slick-dots li.slick-active button::before {
+    color: #5ce1e6;
+    opacity: 1;
+  }
+`;
+
+export const ItemDiv = styled.div`
+  margin: 0;
+
+  img {
+    width: 100%;
   }
 `;

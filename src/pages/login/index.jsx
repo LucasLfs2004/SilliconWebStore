@@ -33,8 +33,11 @@ const Login = () => {
       const response = await effectLogin(login.email, login.pass);
       console.log(response);
       console.log(response.user_data);
-      localStorage.setItem('user', JSON.stringify(response.user_data));
-      localStorage.setItem('token', response.user_token);
+      if (response) {
+        console.log('Entrei aqui');
+        localStorage.setItem('user', JSON.stringify(response.user_data));
+        localStorage.setItem('token', response.user_token);
+      }
       window.history.back();
     } catch (error) {
       alert('Erro, não foi possível realizar o login');
