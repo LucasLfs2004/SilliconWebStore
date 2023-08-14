@@ -3,7 +3,20 @@ import { Link } from 'react-router-dom';
 import * as C from './styles';
 
 const Menu = () => {
+  const [userInfo, setUserInfo] = useState(
+    JSON.parse(localStorage.getItem('user')),
+  );
   const [showMenu, setShowMenu] = useState(false);
+
+  const handleLogout = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    setUserInfo(null);
+    console.log(localStorage);
+  };
+
   return (
     <C.Container>
       <C.Sidebar onClick={() => setShowMenu(!showMenu)}>
@@ -44,9 +57,21 @@ const Menu = () => {
           </svg>
 
           <C.ActionUser>
-            <Link to={'/login'}>Entrar</Link>
-            <p>ou</p>
-            <Link to={'/create-account'}>Criar conta</Link>
+            {userInfo && userInfo !== null && userInfo !== undefined ? (
+              <C.LoggedRow>
+                <C.UserInfos>
+                  <p className='nome'>{userInfo.name}</p>
+                  <p className='email'>{userInfo.email}</p>
+                </C.UserInfos>
+                <button onClick={e => handleLogout(e)}>Sair</button>
+              </C.LoggedRow>
+            ) : (
+              <>
+                <Link to={'/login'}>Entrar</Link>
+                <p>ou</p>
+                <Link to={'/create-account'}>Criar conta</Link>
+              </>
+            )}
           </C.ActionUser>
         </C.UserRow>
         <C.List>

@@ -27,6 +27,9 @@ export const ActionUser = styled.div`
   margin: 0;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  margin-right: 15px;
 
   a {
     color: #fff;
@@ -69,4 +72,34 @@ export const Sidebar = styled.button`
 
 export const Container = styled.div`
   margin: 0;
+`;
+
+export const LoggedRow = styled.div`
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+  button {
+    background-color: transparent;
+    border: none;
+    font-size: 12px;
+    color: #fff;
+  }
+`;
+
+export const UserInfos = styled.div`
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  p {
+    font-weight: 500;
+    color: #fff;
+    font-size: 12px;
+  }
+
+  .email {
+    font-size: 7px;
+  }
 `;
