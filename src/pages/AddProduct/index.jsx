@@ -11,16 +11,13 @@ import * as C from './styles';
 import { categorys } from './product';
 
 const AddProduct = () => {
-  //   const {
-  //     handleSubmit,
-  //     register,
-  //     formState: { errors },
-  //   } = useForm({
-  //     mode: 'all',
-  //     resolver: zodResolver(CreateAccountZod),
-  //   });
-
+  const [name, setName] = useState('');
+  const [brand, setBrand] = useState('');
+  const [price, setPrice] = useState(0);
+  const [description, setDescription] = useState('');
   const [categorySelect, setcategorySelect] = useState(null);
+  const [stock, setStock] = useState(0);
+
   console.log(categorySelect);
 
   const settings = {
@@ -41,6 +38,18 @@ const AddProduct = () => {
 
   const nextStep = e => {
     e.preventDefault();
+    e.stopPropagation();
+    const product = {
+      name: name,
+      marca: brand,
+      price: price,
+      stock: stock,
+      description: description,
+      featured: categorySelect,
+    };
+
+    console.log(product);
+
     handleRightArrow();
   };
 
@@ -88,13 +97,21 @@ const AddProduct = () => {
             <C.Form width={itemWidth} onSubmit={nextStep}>
               <C.FormInput>
                 <label>nome</label>
-                <input type='text' placeholder={'nome'} />
+                <input
+                  type='text'
+                  placeholder={'nome'}
+                  onChange={e => setName(e.target.value)}
+                />
                 {/* <p>{errors?.name?.message}</p> */}
               </C.FormInput>
               <C.FormInput>
                 <label>marca</label>
-                <input type='text' placeholder='marca' />
-                {/* <p>{errors?.cpf?.message}</p> */}
+                <input
+                  type='text'
+                  placeholder='marca'
+                  onChange={e => setBrand(e.target.value)}
+                />
+                {/* <p>{errors?.brand?.message}</p> */}
               </C.FormInput>
               <C.FormInput>
                 <label>preço</label>
@@ -105,8 +122,9 @@ const AddProduct = () => {
                   step='0.01'
                   placeholder='preço'
                   className='no-spin'
+                  onChange={e => setPrice(e.target.value)}
                 />
-                {/* <p>{errors?.phone?.message}</p> */}
+                {/* <p>{errors?.price?.message}</p> */}
               </C.FormInput>
               <C.FormInput>
                 <label>estoque</label>
@@ -114,6 +132,7 @@ const AddProduct = () => {
                   type='number'
                   className='no-spin'
                   placeholder={'estoque'}
+                  onChange={e => setStock(e.target.value)}
                 />
                 {/* <p>{errors?.email?.message}</p> */}
               </C.FormInput>
@@ -154,7 +173,11 @@ const AddProduct = () => {
               </C.FormInput>
               <C.FormInput>
                 <label>descrição</label>
-                <textarea type='text' placeholder={'descrição'} />
+                <textarea
+                  type='text'
+                  placeholder={'descrição'}
+                  onChange={e => setDescription(e.target.value)}
+                />
                 {/* <p>{errors?.password?.message}</p> */}
               </C.FormInput>
               <C.RadioInput>

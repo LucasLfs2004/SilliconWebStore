@@ -1,20 +1,17 @@
 import DOMPurify from 'dompurify';
 import { z } from 'zod';
 
-export const LoginZod = z
+export const AddProductZod = z
   .object({
-    nome: z.string().transform(field => DOMPurify.sanitize(field)),
-    marca: z.string().transform(field => DOMPurify.sanitize(field)),
-    preco: z
-      .number()
-      .positive()
-      .transform(field => DOMPurify.sanitize(field)),
-    estoque: z
+    name: z.string().transform(field => DOMPurify.sanitize(field)),
+    brand: z.string().transform(field => DOMPurify.sanitize(field)),
+    stock: z
       .number()
       .int()
+      .positive()
       .transform(field => DOMPurify.sanitize(field)),
 
-    descricao: z.string().transform(field => DOMPurify.sanitize(field)),
+    description: z.string().transform(field => DOMPurify.sanitize(field)),
   })
   .required();
 
