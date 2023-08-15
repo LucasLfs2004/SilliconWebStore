@@ -5,6 +5,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import BtnSubmit from '../../components/BtnSubmit';
 import Header from '../../components/Header';
+import { uploadImages } from '../../services/Requests';
 import * as C from './styles';
 
 import { brands, categorys } from './product';
@@ -28,7 +29,7 @@ const AddProduct = () => {
 
   const [isFeatured, setIsFeatured] = useState(false);
 
-  console.log(brand);
+  // console.log(brand);
   const settings = {
     dots: true,
     infinite: true,
@@ -133,10 +134,10 @@ const AddProduct = () => {
   };
 
   const handleFileChange = event => {
-    const files = Array.from(event.target.files);
-    setSelectedFiles(files);
+    const newfile = Array.from(event.target.files);
+    setSelectedFiles(files => [...files, ...newfile]);
 
-    const newImages = files.map(file => URL.createObjectURL(file));
+    const newImages = newfile.map(file => URL.createObjectURL(file));
     setPreviewImages(prevImages => [...prevImages, ...newImages]);
   };
   const handleRightArrow = () => {
@@ -147,6 +148,22 @@ const AddProduct = () => {
   useEffect(() => {
     setItemWidth(widthAreaRef?.current?.offsetWidth / numberOfItens);
   }, []);
+
+  console.log(selectedFiles);
+
+  const handleUploadImages = e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const formData = new FormData();
+    selectedFiles.forEach(file => {
+      formData.append('path', file);
+    });
+    console.log(formData);
+
+    const retorno = uploadImages(formData);
+    console.log(retorno);
+  };
 
   return (
     <C.Container>
@@ -305,7 +322,7 @@ const AddProduct = () => {
               </C.RadioInput>
               <BtnSubmit text={'Próximo'} />
             </C.Form>
-            <C.Form width={itemWidth}>
+            <C.Form onSubmit={handleUploadImages} width={itemWidth}>
               <C.InputImg>
                 <p>Adicionar imagens</p>
                 <input
@@ -333,6 +350,7 @@ const AddProduct = () => {
                   </Slider>
                 </C.Carousel>
               </C.InputImg>
+              <button type='submit'>Submit</button>
               <C.BackButton text={'Voltar'} onClick={e => handleBackForm(e)}>
                 Voltar
               </C.BackButton>
