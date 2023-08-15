@@ -9,6 +9,11 @@ export const Container = styled.main`
   flex-direction: column;
   align-items: center;
   padding-bottom: 30px;
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+  }
 `;
 
 export const Section = styled.section`
@@ -156,6 +161,10 @@ export const FormInput = styled.div`
     font-size: 12px;
   }
 
+  select.selected {
+    color: #000;
+  }
+
   textarea {
     height: 120px;
     padding: 10px 14px;
@@ -185,12 +194,19 @@ export const RowInput = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  column-gap: 18px;
   width: 100%;
+  column-gap: ${props => (props.view ? '18px' : '0')};
+
+  select {
+    width: ${props => (props.view ? 'calc(45% - 28px)' : '100%')};
+  }
 `;
 
 export const InputVisible = styled.input`
+  transition: all 0.5s ease;
   opacity: ${props => (props.view ? 1 : 0)};
+  width: ${props => !props.view && '0 !important'};
+  padding: ${props => !props.view && '0 !important'};
 `;
 
 export const RadioInput = styled.div`
@@ -318,4 +334,8 @@ export const ItemDiv = styled.div`
   img {
     width: 100%;
   }
+`;
+
+export const BackButton = styled.button`
+  margin: 0;
 `;

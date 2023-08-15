@@ -3,23 +3,32 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import BtnNavigation from '../../components/BtnNavigation';
 import BtnSubmit from '../../components/BtnSubmit';
 import Header from '../../components/Header';
 import * as C from './styles';
 
-import { categorys } from './product';
+import { brands, categorys } from './product';
 
 const AddProduct = () => {
   const [name, setName] = useState('');
-  const [brand, setBrand] = useState('');
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState('');
-  const [categorySelect, setcategorySelect] = useState(null);
   const [stock, setStock] = useState(0);
 
-  console.log(categorySelect);
+  const [brand, setBrand] = useState('');
+  const [brandSelect, setBrandSelect] = useState('null');
+  const [errorBrand, setErrorBrand] = useState('');
 
+  const [category, setCategory] = useState(null);
+  const [categorySelect, setCategorySelect] = useState('null');
+  const [errorCategory, setErrorCategory] = useState('');
+
+  const [product, setProduct] = useState({});
+  const [errors, setErrors] = useState({});
+
+  const [isFeatured, setIsFeatured] = useState(false);
+
+  console.log(brand);
   const settings = {
     dots: true,
     infinite: true,
@@ -39,31 +48,87 @@ const AddProduct = () => {
   const nextStep = e => {
     e.preventDefault();
     e.stopPropagation();
-    const product = {
-      name: name,
-      marca: brand,
-      price: price,
-      stock: stock,
-      description: description,
-      featured: categorySelect,
+    validateInputs() && handleRightArrow();
+  };
+
+  const validateInputs = () => {
+    let valid = true;
+
+    let erro = {
+      name: '',
+      brand: '',
+      description: '',
+      category: '',
+      stock: '',
+      price: '',
+    };
+    let product = {
+      featured: isFeatured,
     };
 
-    console.log(product);
+    if (name.length > 3) {
+      product.name = name;
+    } else {
+      erro.name = 'O nome precisa ter no mínimo 3 caracteres';
+      valid = false;
+    }
 
-    handleRightArrow();
+    if (description.length > 15) {
+      product.description = description;
+    } else {
+      erro.description = 'A descrição precisa ter no mínimo 15 caracteres';
+      valid = false;
+    }
+
+    if (stock > 0) {
+      product.stock = stock;
+    } else {
+      erro.stock = 'Insira uma quantidade válida';
+      valid = false;
+    }
+    if (price > 0) {
+      product.price = price;
+    } else {
+      erro.price = 'Insira um preço válido';
+      valid = false;
+    }
+
+    if (categorySelect !== 'null' && categorySelect !== 'outro') {
+      product.category = categorySelect;
+    } else if (categorySelect === 'outro' && category !== '') {
+      product.category = category;
+    } else {
+      erro.category = 'Selecione uma categoria para o produto';
+      valid = false;
+    }
+
+    if (brandSelect !== 'null' && brandSelect !== 'outro') {
+      product.category = brandSelect;
+    } else if (brandSelect === 'outro' && brand !== '') {
+      product.brand = brand;
+    } else {
+      erro.brand = 'Adicione a marca do produto';
+      valid = false;
+    }
+
+    !valid ? setErrors(erro) : setErrors({});
+    valid && setProduct(product);
+    return valid;
+  };
+
+  const handleBackForm = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleLeftArrow();
   };
 
   const handleLeftArrow = () => {
-    console.log('executando');
+    // console.log('executando');
     let x = scrollX;
     const area = widthAreaRef.current.offsetWidth;
     const left = x - area;
-    console.log(x);
-    console.log(area);
-    console.log(left);
     if (left >= 0) {
       setScrollX(left);
-      console.log(scrollX);
     }
   };
 
@@ -79,11 +144,10 @@ const AddProduct = () => {
     setScrollX(area);
   };
 
-  console.log(previewImages);
-
   useEffect(() => {
     setItemWidth(widthAreaRef?.current?.offsetWidth / numberOfItens);
   }, []);
+
   return (
     <C.Container>
       <Header />
@@ -102,16 +166,48 @@ const AddProduct = () => {
                   placeholder={'nome'}
                   onChange={e => setName(e.target.value)}
                 />
-                {/* <p>{errors?.name?.message}</p> */}
+                <p>{errors?.name}</p>
               </C.FormInput>
-              <C.FormInput>
+              <C.FormInput className='category'>
                 <label>marca</label>
-                <input
-                  type='text'
-                  placeholder='marca'
-                  onChange={e => setBrand(e.target.value)}
-                />
-                {/* <p>{errors?.brand?.message}</p> */}
+
+                <C.RowInput view={brandSelect === 'outro'}>
+                  <select
+                    name='category'
+                    id='categorySelect'
+                    onChange={e => setBrandSelect(e.target.value)}
+                    className={
+                      brandSelect !== null &&
+                      brandSelect !== 'null' &&
+                      'selected'
+                    }
+                  >
+                    <option checked value={'null'}>
+                      Selecionar
+                    </option>
+                    {brands &&
+                      brands.map((item, key) => {
+                        const brand = item
+                          .toLowerCase()
+                          .trim()
+                          .replaceAll(' ', '_')
+                          .normalize('NFD')
+                          .replace(/[\u0300-\u036f]/g, '');
+                        return (
+                          <option key={key} value={brand}>
+                            {item}
+                          </option>
+                        );
+                      })}
+                  </select>
+                  <C.InputVisible
+                    type='text'
+                    placeholder={'marca'}
+                    view={brandSelect === 'outro'}
+                    onChange={e => setBrand(e.target.value)}
+                  />
+                </C.RowInput>
+                <p>{errors?.brand}</p>
               </C.FormInput>
               <C.FormInput>
                 <label>preço</label>
@@ -124,7 +220,7 @@ const AddProduct = () => {
                   className='no-spin'
                   onChange={e => setPrice(e.target.value)}
                 />
-                {/* <p>{errors?.price?.message}</p> */}
+                <p>{errors?.price}</p>
               </C.FormInput>
               <C.FormInput>
                 <label>estoque</label>
@@ -134,18 +230,23 @@ const AddProduct = () => {
                   placeholder={'estoque'}
                   onChange={e => setStock(e.target.value)}
                 />
-                {/* <p>{errors?.email?.message}</p> */}
+                <p>{errors?.stock}</p>
               </C.FormInput>
               <C.FormInput className='category'>
                 <label>categoria</label>
 
-                <C.RowInput>
+                <C.RowInput view={categorySelect === 'outro'}>
                   <select
                     name='category'
                     id='categorySelect'
-                    onChange={e => setcategorySelect(e.target.value)}
+                    onChange={e => setCategorySelect(e.target.value)}
+                    className={
+                      categorySelect !== null &&
+                      categorySelect !== 'null' &&
+                      'selected'
+                    }
                   >
-                    <option checked value={null}>
+                    <option checked value={'null'}>
                       Selecionar
                     </option>
                     {categorys &&
@@ -166,10 +267,11 @@ const AddProduct = () => {
                   <C.InputVisible
                     type='text'
                     placeholder={'categoria'}
-                    view={categorySelect === 'outros'}
+                    onChange={e => setCategory(e.target.value)}
+                    view={categorySelect === 'outro'}
                   />
                 </C.RowInput>
-                {/* <p>{errors?.birth?.message}</p> */}
+                <p>{errors?.category}</p>
               </C.FormInput>
               <C.FormInput>
                 <label>descrição</label>
@@ -178,18 +280,25 @@ const AddProduct = () => {
                   placeholder={'descrição'}
                   onChange={e => setDescription(e.target.value)}
                 />
-                {/* <p>{errors?.password?.message}</p> */}
+                <p>{errors?.description}</p>
               </C.FormInput>
               <C.RadioInput>
                 <p>lançamento</p>
                 <div className='optionLancamento'>
-                  <input type='radio' name='lancamento' id='sim' />
+                  <input
+                    type='radio'
+                    checked={isFeatured}
+                    onChange={e => setIsFeatured(true)}
+                    name='lancamento'
+                    id='sim'
+                  />
                   <label htmlFor='sim'>Sim</label>
                   <input
                     type='radio'
-                    checked={true}
+                    checked={!isFeatured}
                     name='lancamento'
                     id='nao'
+                    onChange={e => setIsFeatured(false)}
                   />
                   <label htmlFor='nao'>Não</label>
                 </div>
@@ -224,10 +333,9 @@ const AddProduct = () => {
                   </Slider>
                 </C.Carousel>
               </C.InputImg>
-              <BtnNavigation
-                text={'Voltar'}
-                onClick={() => handleLeftArrow()}
-              />
+              <C.BackButton text={'Voltar'} onClick={e => handleBackForm(e)}>
+                Voltar
+              </C.BackButton>
             </C.Form>
           </C.Scroll>
         </C.Area>
