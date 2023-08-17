@@ -43,7 +43,10 @@ const AddImage = () => {
     e.stopPropagation();
 
     const formData = new FormData();
-    formData.append('file', selectedFiles[0]);
+    selectedFiles.forEach(file => {
+      formData.append('files', file, file.name);
+    });
+
     console.log(formData);
 
     const retorno = uploadImages(formData);

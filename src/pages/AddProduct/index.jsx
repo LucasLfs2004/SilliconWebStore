@@ -52,6 +52,23 @@ const AddProduct = () => {
     validateInputs() && handleRightArrow();
   };
 
+  let categorias = [];
+
+  categorys.forEach(categoria => {
+    let objeto = {
+      id: 'string',
+      name: categoria
+        .toLowerCase()
+        .trim()
+        .replaceAll(' ', '_')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, ''),
+    };
+    categorias.push(objeto);
+  });
+
+  console.log(categorias);
+
   const validateInputs = () => {
     let valid = true;
 
@@ -64,6 +81,7 @@ const AddProduct = () => {
       price: '',
     };
     let product = {
+      owner: JSON.parse(localStorage.getItem('user')).id,
       featured: isFeatured,
     };
 
