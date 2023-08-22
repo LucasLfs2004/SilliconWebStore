@@ -5,9 +5,9 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import BtnSubmit from '../../components/BtnSubmit';
 import Header from '../../components/Header';
-import { uploadImages } from '../../services/Requests';
 import * as C from './styles';
 
+import { createProduct } from '../../services/Requests';
 import { brands, categorys } from './product';
 
 const AddProduct = () => {
@@ -52,6 +52,41 @@ const AddProduct = () => {
     validateInputs() && handleRightArrow();
   };
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (validateInputs()) {
+      const formData = new FormData();
+      console.log(product);
+
+      formData.append('owner', product.owner);
+      formData.append('name', product.name);
+      formData.append('description', product.description);
+      formData.append('brand', product.brand);
+      formData.append('category', product.category);
+      formData.append('price', product.price);
+      formData.append('stock', product.stock);
+      formData.append('featured', product.featured);
+      selectedFiles.forEach(file => {
+        formData.append('files', file, file.name);
+      });
+      console.log(formData);
+      try {
+        const data = await createProduct(formData);
+        console.log(data);
+        alert('Produto cadastrado com sucesso');
+      } catch (error) {
+        console.log(error);
+        alert('Ocorreu um erro!');
+      }
+    } else {
+      handleLeftArrow();
+    }
+
+    // console.log('Submit');
+  };
+
   let categorias = [];
 
   categorys.forEach(categoria => {
@@ -67,7 +102,7 @@ const AddProduct = () => {
     categorias.push(objeto);
   });
 
-  console.log(categorias);
+  // console.log(categorias);
 
   const validateInputs = () => {
     let valid = true;
@@ -83,6 +118,7 @@ const AddProduct = () => {
     let product = {
       owner: JSON.parse(localStorage.getItem('user')).id,
       featured: isFeatured,
+      category: 'notebook',
     };
 
     if (name.length > 3) {
@@ -122,7 +158,7 @@ const AddProduct = () => {
     }
 
     if (brandSelect !== 'null' && brandSelect !== 'outro') {
-      product.category = brandSelect;
+      product.brand = brandSelect;
     } else if (brandSelect === 'outro' && brand !== '') {
       product.brand = brand;
     } else {
@@ -158,6 +194,7 @@ const AddProduct = () => {
     const newImages = newfile.map(file => URL.createObjectURL(file));
     setPreviewImages(prevImages => [...prevImages, ...newImages]);
   };
+
   const handleRightArrow = () => {
     const area = widthAreaRef.current.offsetWidth;
     setScrollX(area);
@@ -167,21 +204,22 @@ const AddProduct = () => {
     setItemWidth(widthAreaRef?.current?.offsetWidth / numberOfItens);
   }, []);
 
-  console.log(selectedFiles);
+  // console.log(selectedFiles);
 
-  const handleUploadImages = e => {
-    e.preventDefault();
-    e.stopPropagation();
+  // const handleUploadImages = e => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
 
-    const formData = new FormData();
-    selectedFiles.forEach(file => {
-      formData.append('path', file);
-    });
-    console.log(formData);
+  //   const formData = new FormData();
+  //   selectedFiles.forEach(file => {
+  //     formData.append('files', file, file.name);
+  //   });
 
-    const retorno = uploadImages(formData);
-    console.log(retorno);
-  };
+  //   console.log(formData);
+
+  //   const retorno = uploadImages(formData);
+  //   console.log(retorno);
+  // };
 
   return (
     <C.Container>
@@ -192,8 +230,12 @@ const AddProduct = () => {
           <C.Title className='title'>Cadastrar produto</C.Title>
         </div>
         <C.Area ref={widthAreaRef}>
-          <C.Scroll marginLeft={scrollX} ref={widthScroll}>
-            <C.Form width={itemWidth} onSubmit={nextStep}>
+          <C.Form
+            marginLeft={scrollX}
+            ref={widthScroll}
+            onSubmit={handleSubmit}
+          >
+            <C.DivWrap width={itemWidth}>
               <C.FormInput>
                 <label>nome</label>
                 <input
@@ -338,9 +380,12 @@ const AddProduct = () => {
                   <label htmlFor='nao'>Não</label>
                 </div>
               </C.RadioInput>
+              <C.BtnNavigation type='button' onClick={e => nextStep(e)}>
+                Próximo
+              </C.BtnNavigation>
               <BtnSubmit text={'Próximo'} />
-            </C.Form>
-            <C.Form onSubmit={handleUploadImages} width={itemWidth}>
+            </C.DivWrap>
+            <C.DivWrap width={itemWidth}>
               <C.InputImg>
                 <p>Adicionar imagens</p>
                 <input
@@ -368,12 +413,12 @@ const AddProduct = () => {
                   </Slider>
                 </C.Carousel>
               </C.InputImg>
-              <button type='submit'>Submit</button>
-              <C.BackButton text={'Voltar'} onClick={e => handleBackForm(e)}>
+              <BtnSubmit text={'Criar'} type='submit' />
+              <C.BtnNavigation text={'Voltar'} onClick={e => handleBackForm(e)}>
                 Voltar
-              </C.BackButton>
-            </C.Form>
-          </C.Scroll>
+              </C.BtnNavigation>
+            </C.DivWrap>
+          </C.Form>
         </C.Area>
         <C.Message>
           <Link to={'/'}>cancelar</Link>

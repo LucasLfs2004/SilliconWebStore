@@ -66,9 +66,40 @@ export const uploadImages = async files => {
   }
 };
 
-export const fetchPopularSeries = async page => {
+export const createProduct = async formData => {
   try {
-    return (await Api.get(`/series/popular?page=${page}`)).data;
+    const response = await Api.post(
+      `/create-product`,
+
+      formData,
+
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const testRequest = async formData => {
+  try {
+    const response = await Api.post(
+      `/product`,
+
+      formData,
+
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return response;
   } catch (error) {
     return error;
   }

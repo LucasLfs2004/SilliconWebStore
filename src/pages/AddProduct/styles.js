@@ -51,7 +51,7 @@ export const Area = styled.div`
   overflow: hidden;
 `;
 
-export const Scroll = styled.div`
+export const Form = styled.form`
   margin: 0;
   display: flex;
   flex-direction: row;
@@ -59,7 +59,7 @@ export const Scroll = styled.div`
   transition: margin-left 0.3s ease;
 `;
 
-export const Form = styled.form`
+export const DivWrap = styled.section`
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -338,4 +338,16 @@ export const ItemDiv = styled.div`
 
 export const BackButton = styled.button`
   margin: 0;
+`;
+
+export const BtnNavigation = styled.button`
+  background-color: #5b43d6;
+  color: #fff;
+  border-radius: 5px;
+  width: 45.5%;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
 `;
