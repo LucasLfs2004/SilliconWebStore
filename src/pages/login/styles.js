@@ -16,6 +16,7 @@ export const Header = styled.header`
 
 export const Section = styled.section`
   margin: 0;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;

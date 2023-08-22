@@ -54,18 +54,29 @@ export const Area = styled.div`
 export const Form = styled.form`
   margin: 0;
   display: flex;
+
   flex-direction: row;
   margin-left: -${props => props.marginLeft}px;
   transition: margin-left 0.3s ease;
+
+  @media (min-width: 600px) {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 export const DivWrap = styled.section`
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${props => props.width}px;
   row-gap: 20px;
+  width: 48%;
+
+  @media (max-width: 520px) {
+    width: ${props => props.width}px;
+  }
 
   button {
     margin-top: 8px;
@@ -215,7 +226,7 @@ export const RadioInput = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: calc(100% - 80px);
+  width: 78.78%;
   column-gap: 24px;
 
   p {
@@ -272,6 +283,10 @@ export const InputImg = styled.div`
   font-size: 10px;
   row-gap: 4px;
 
+  @media (min-width: 600px) {
+    align-items: center;
+  }
+
   p {
     color: #5b43d6;
     padding-left: 3px;
@@ -305,7 +320,9 @@ export const Carousel = styled.section`
   margin-top: 40px;
   display: flex;
   flex-direction: row;
+  max-width: 400px;
   width: 100%;
+  z-index: 1;
 
   .carousel-image-product {
     width: 100%;
@@ -330,6 +347,7 @@ export const Carousel = styled.section`
 
 export const ItemDiv = styled.div`
   margin: 0;
+  max-width: 400px;
 
   img {
     width: 100%;
@@ -341,13 +359,17 @@ export const BackButton = styled.button`
 `;
 
 export const BtnNavigation = styled.button`
+  display: none;
   background-color: #5b43d6;
   color: #fff;
   border-radius: 5px;
   width: 45.5%;
   height: 30px;
-  display: flex;
   align-items: center;
   justify-content: center;
   border: none;
+
+  @media (max-width: 500px) {
+    display: flex;
+  }
 `;

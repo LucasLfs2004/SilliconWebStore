@@ -21,6 +21,7 @@ export const Section = styled.section`
   flex-direction: column;
   align-items: center;
   background: #ecf0f3;
+  max-width: 400px;
   width: 84.61%;
   height: 640px;
   border-radius: 15px;

@@ -18,11 +18,9 @@ const AddProduct = () => {
 
   const [brand, setBrand] = useState('');
   const [brandSelect, setBrandSelect] = useState('null');
-  const [errorBrand, setErrorBrand] = useState('');
 
   const [category, setCategory] = useState(null);
   const [categorySelect, setCategorySelect] = useState('null');
-  const [errorCategory, setErrorCategory] = useState('');
 
   const [product, setProduct] = useState({});
   const [errors, setErrors] = useState({});
@@ -41,7 +39,6 @@ const AddProduct = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [previewImages, setPreviewImages] = useState([]);
   const [scrollX, setScrollX] = useState(0);
-  const numberOfItens = 1;
   const [itemWidth, setItemWidth] = useState(0);
   const widthAreaRef = useRef(null);
   const widthScroll = useRef(null);
@@ -178,7 +175,6 @@ const AddProduct = () => {
   };
 
   const handleLeftArrow = () => {
-    // console.log('executando');
     let x = scrollX;
     const area = widthAreaRef.current.offsetWidth;
     const left = x - area;
@@ -201,25 +197,8 @@ const AddProduct = () => {
   };
 
   useEffect(() => {
-    setItemWidth(widthAreaRef?.current?.offsetWidth / numberOfItens);
+    setItemWidth(widthAreaRef?.current?.offsetWidth);
   }, []);
-
-  // console.log(selectedFiles);
-
-  // const handleUploadImages = e => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-
-  //   const formData = new FormData();
-  //   selectedFiles.forEach(file => {
-  //     formData.append('files', file, file.name);
-  //   });
-
-  //   console.log(formData);
-
-  //   const retorno = uploadImages(formData);
-  //   console.log(retorno);
-  // };
 
   return (
     <C.Container>
@@ -383,7 +362,6 @@ const AddProduct = () => {
               <C.BtnNavigation type='button' onClick={e => nextStep(e)}>
                 Próximo
               </C.BtnNavigation>
-              <BtnSubmit text={'Próximo'} />
             </C.DivWrap>
             <C.DivWrap width={itemWidth}>
               <C.InputImg>
@@ -401,23 +379,24 @@ const AddProduct = () => {
                   <img src='/assets/imgs/vgathin.svg' alt='vga' />
                   <p>adicionar imagens</p>
                 </label>
-
-                <C.Carousel>
-                  <Slider className='carousel-image-product' {...settings}>
-                    {previewImages &&
-                      previewImages.map((image, index) => (
-                        <C.ItemDiv key={index} className='carousel-item'>
-                          <img src={image} alt={`Imagem ${index}`} />
-                        </C.ItemDiv>
-                      ))}
-                  </Slider>
-                </C.Carousel>
               </C.InputImg>
+
+              <C.Carousel>
+                <Slider className='carousel-image-product' {...settings}>
+                  {previewImages &&
+                    previewImages.map((image, index) => (
+                      <C.ItemDiv key={index} className='carousel-item'>
+                        <img src={image} alt={`Imagem ${index}`} />
+                      </C.ItemDiv>
+                    ))}
+                </Slider>
+              </C.Carousel>
               <BtnSubmit text={'Criar'} type='submit' />
               <C.BtnNavigation text={'Voltar'} onClick={e => handleBackForm(e)}>
                 Voltar
               </C.BtnNavigation>
             </C.DivWrap>
+            {/* <BtnSubmit text={'Criar'} type='submit' /> */}
           </C.Form>
         </C.Area>
         <C.Message>
