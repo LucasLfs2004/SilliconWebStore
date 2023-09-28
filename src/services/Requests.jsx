@@ -32,14 +32,14 @@ export const createAccount = async (
   }
 };
 
-export const effectLogin = async (email, senha) => {
-  console.log(email, senha);
+export const effectLogin = async (email, password) => {
+  console.log(email, password);
   try {
     const response = await Api.post(
       '/login',
       {
         email,
-        senha,
+        password,
       },
       {
         headers: {
@@ -69,7 +69,7 @@ export const uploadImages = async files => {
 export const createProduct = async formData => {
   try {
     const response = await Api.post(
-      `/create-product`,
+      `/product`,
 
       formData,
 

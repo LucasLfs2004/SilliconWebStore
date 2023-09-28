@@ -12,7 +12,6 @@ const Menu = () => {
     e.preventDefault();
     e.stopPropagation();
     localStorage.removeItem('user');
-    localStorage.removeItem('token');
     setUserInfo(null);
     console.log(localStorage);
   };
@@ -91,8 +90,7 @@ const Menu = () => {
           </C.Item>
         </C.List>
 
-        {JSON.parse(localStorage.getItem('user'))?.email ===
-          'admin@sillicon.com' && (
+        {JSON.parse(localStorage.getItem('user'))?.is_seller && (
           <C.List>
             <C.Item>
               <Link to={'/add-product'}>Adicionar produto</Link>

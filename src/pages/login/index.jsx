@@ -31,12 +31,10 @@ const Login = () => {
       };
 
       const response = await effectLogin(login.email, login.pass);
-      console.log(response);
-      console.log(response.user_data);
+      // console.log(response);
       if (response) {
-        console.log('Entrei aqui');
+        // console.log('Entrei aqui', response);
         localStorage.setItem('user', JSON.stringify(response.user_data));
-        localStorage.setItem('token', response.user_token);
       }
       window.history.back();
     } catch (error) {

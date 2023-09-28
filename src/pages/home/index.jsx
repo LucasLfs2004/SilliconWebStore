@@ -1,7 +1,10 @@
+import CardProduct from '../../components/CardProduct';
 import Header from '../../components/Header';
 import * as C from './styles';
 
 const Home = () => {
+  
+
   return (
     <C.Container>
       <Header />
@@ -17,6 +20,7 @@ const Home = () => {
       <C.TitlePurple>
         <h1>Promoções</h1>
       </C.TitlePurple>
+      <CardProduct />
     </C.Container>
   );
 };

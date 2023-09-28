@@ -155,7 +155,7 @@ const AddProduct = () => {
     }
 
     if (brandSelect !== 'null' && brandSelect !== 'outro') {
-      product.brand = brandSelect;
+      product.brand = brandSelect.toLowerCase();
     } else if (brandSelect === 'outro' && brand !== '') {
       product.brand = brand;
     } else {

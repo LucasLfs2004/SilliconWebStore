@@ -1,6 +1,5 @@
 import { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { Spinner } from '../components/Spinner';
 import AddImage from '../pages/AddImage';
 import AddProduct from '../pages/AddProduct';
 import CreateAccount from '../pages/createAccount';
@@ -22,7 +21,7 @@ const Content = props => {
     { path: '/upload', element: <AddImage /> },
   ]);
 
-  return <Suspense fallback={<Spinner />}>{routes}</Suspense>;
+  return <Suspense >{routes}</Suspense>;
 };
 
 export default Content;
