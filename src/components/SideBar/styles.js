@@ -10,6 +10,7 @@ export const Menu = styled.section`
   display: ${props => (props.show === 'true' ? 'block' : 'none')};
   transition: all 1s ease;
   background-color: #010f20;
+  z-index: 99;
 `;
 
 export const UserRow = styled.div`

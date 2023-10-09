@@ -23,7 +23,7 @@ const Header = () => {
         <C.Carrinho>
           <img src='/assets/imgs/carrinho.svg' alt='' />
         </C.Carrinho>
-        <Menu showMenu={showMenu} />
+        <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
       </C.DivBlock>
     </C.Header>
   );
