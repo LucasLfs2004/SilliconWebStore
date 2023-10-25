@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Menu from '../SideBar';
-import * as C from './styles';
+import * as C from './sss';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);

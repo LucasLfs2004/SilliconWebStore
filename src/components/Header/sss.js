@@ -31,7 +31,9 @@ export const Logo = styled.div`
 export const Pesquisa = styled.div`
   margin: 0;
   background-color: #ecf0f3;
-  box-shadow: 5px 5px 6px 0px #d1d9e6 inset, -5px -5px 6px 0px #fff inset;
+  box-shadow:
+    5px 5px 6px 0px #d1d9e6 inset,
+    -5px -5px 6px 0px #fff inset;
   border: none;
   border-radius: 5px;
   display: flex;

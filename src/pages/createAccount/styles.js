@@ -25,7 +25,9 @@ export const Section = styled.section`
   width: 84.61%;
   height: 640px;
   border-radius: 15px;
-  box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
+  box-shadow:
+    10px 10px 20px 0px #d1d9e6 inset,
+    -10px -10px 20px 0px #fff inset;
 
   .top {
     margin-top: 20px;
@@ -104,7 +106,8 @@ export const FormInput = styled.div`
 
   input {
     background: #ecf0f3;
-    box-shadow: 5px 5px 6px 0px #d1d9e6,
+    box-shadow:
+      5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     border-radius: 5px;
     border: none;

@@ -5,7 +5,7 @@ import Stars from '../Stars';
 import * as C from './styles';
 
 const CardProduct = ({ item }) => {
-  console.log(item)
+  console.log(item);
 
   const settings = {
     dots: true,
@@ -20,7 +20,7 @@ const CardProduct = ({ item }) => {
       <C.Rating>
         <Stars rating={item.rating} />
         <C.RatingValue>
-          {item.rating}   ({item.amount_rating})
+          {item.rating} ({item.amount_rating})
         </C.RatingValue>
       </C.Rating>
       <C.CarouselImg>
@@ -32,51 +32,40 @@ const CardProduct = ({ item }) => {
               </C.ImgProduct>
             ))}
         </Slider>
-        {item.discount &&
+        {item.discount && (
           <C.Discount>
-            <p>
-              {item.discount}%
-            </p>
-            <img src="/assets/icons/seta.svg" alt="" />
+            <p>{item.discount}%</p>
+            <img src='/assets/icons/seta.svg' alt='' />
           </C.Discount>
-        }
+        )}
       </C.CarouselImg>
-      <C.NameProduct>
-        {item.name}
-      </C.NameProduct>
+      <C.NameProduct>{item.name}</C.NameProduct>
       <C.PriceView>
         <C.InCash>
           <C.Price>
             R$ {(item.price - item.price * (item.inCash / 100)).toFixed(2)}
           </C.Price>
-          <p className='condition'>
-            À vista no pix
-          </p>
+          <p className='condition'>À vista no pix</p>
         </C.InCash>
         <C.Portions>
-          <C.Price>
-            R$ {item.price}
-          </C.Price>
-          <p className="condition">
-            {item.portions}x de R$ {(((item.price * 100) / item.portions) / 100).toFixed(2)}
+          <C.Price>R$ {item.price}</C.Price>
+          <p className='condition'>
+            {item.portions}x de R${' '}
+            {((item.price * 100) / item.portions / 100).toFixed(2)}
           </p>
         </C.Portions>
       </C.PriceView>
       <C.Buttons>
         <C.Button>
-          <p>
-            Adicionar ao carrinho
-          </p>
+          <p>Adicionar ao carrinho</p>
         </C.Button>
         <C.Button>
-          <img src="/assets/icons/carrinho.svg" alt="" />
-          <p>
-            Comprar
-          </p>
+          <img src='/assets/icons/carrinho.svg' alt='' />
+          <p>Comprar</p>
         </C.Button>
       </C.Buttons>
     </C.Card>
-  )
-}
+  );
+};
 
-export default CardProduct
+export default CardProduct;

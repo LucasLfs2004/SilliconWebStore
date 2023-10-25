@@ -69,10 +69,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-
-
-
 # SilliconWebStore
+
 ### Projeto Loja de periféricos e outros eletrônicos
 
 # Funcionamento da aplicação
@@ -83,7 +81,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 - Deve possuir tela de adm geral
 - Deve possuir todos os processor de um grande e-commerce
 
-# Processos de  desenvolvimento do Sillicon
+# Processos de desenvolvimento do Sillicon
 
 - Levantamento de regras de usabilidade, regras de negócio.
 - Lista de funcionalidades principais presentes na aplicação
@@ -109,15 +107,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ![Paleta de cores](./LOGO/PALETA.png)
 
-
-
 # Tabelas do banco de dados
 
 ## category
+
 uuid
 nome_categoria
 
 ## product
+
 uuid int not null
 nome string
 imagens
@@ -128,6 +126,7 @@ preco
 juros
 
 ## person
+
 uuid
 nome
 cpf
@@ -135,7 +134,6 @@ rg
 email
 
 ## vendedor
-
 
 ## MySQL
 
@@ -152,4 +150,4 @@ PRIMARY KEY(ID)
 
 INSERT INTO PERSON (ID, NAME, CPF, EMAIL, NASCIMENTO, TELEFONE, SENHA) VALUES (0, 'Lucas Ferreira Silva', '520.945.658-74', 'lucas.lfs2004@gmail.com', '2004-06-19', '(11) 97968-4799', 'GallardoLP-570');
 
-SELECT * FROM PERSON
+SELECT \* FROM PERSON

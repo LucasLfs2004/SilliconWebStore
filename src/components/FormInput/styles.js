@@ -16,7 +16,8 @@ export const Container = styled.div`
 
   input {
     background: #ecf0f3;
-    box-shadow: 5px 5px 6px 0px #d1d9e6,
+    box-shadow:
+      5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     border-radius: 5px;
     border: none;

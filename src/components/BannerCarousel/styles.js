@@ -1,17 +1,17 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Container = styled.div`
   margin: 0;
   width: 100%;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   height: calc(100vw / 2.5);
   z-index: 1;
 
   *:focus {
-  outline: 0;
-  outline: none;
+    outline: 0;
+    outline: none;
   }
-    .carousel-image-product {
+  .carousel-image-product {
     width: 100%;
   }
 
@@ -43,8 +43,7 @@ export const Container = styled.div`
     color: #5ce1e6;
     opacity: 1;
   }
-
-`
+`;
 
 export const ItemBanner = styled.div`
   margin: 0;
@@ -58,4 +57,4 @@ export const ItemBanner = styled.div`
     width: 100%;
     height: 100%;
   }
-`
+`;

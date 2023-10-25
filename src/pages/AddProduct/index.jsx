@@ -4,7 +4,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import BtnSubmit from '../../components/BtnSubmit';
-import Header from '../../components/Header/header';
+import Header from '../../components/Header';
 import * as C from './styles';
 
 import { createProduct } from '../../services/Requests';

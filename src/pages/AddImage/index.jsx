@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import Header from '../../components/Header/header';
+import Header from '../../components/Header';
 import { uploadImages } from '../../services/Requests';
 import * as C from './styles';
 

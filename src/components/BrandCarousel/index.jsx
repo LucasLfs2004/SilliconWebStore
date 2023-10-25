@@ -1,42 +1,10 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import { brands } from '../../falseDatabase/brands';
 import * as C from './styles';
 
 const BrandCarousel = () => {
-  const brands = [
-    {
-      brand: 'Apple',
-      img_path: '/assets/brands/appleLogo.svg',
-      href: '/apple',
-    },
-    {
-      brand: 'Asus',
-      img_path: '/assets/brands/asusLogo.svg',
-      href: '/asus',
-    },
-    {
-      brand: 'Gigabyte',
-      img_path: '/assets/brands/gigabyteLogo.svg',
-      href: '/gigabyte',
-    },
-    {
-      brand: 'Logitech',
-      img_path: '/assets/brands/logitechLogo.svg',
-      href: '/logitech',
-    },
-    {
-      brand: 'Xbox',
-      img_path: '/assets/brands/xboxLogo.svg',
-      href: '/xbox',
-    },
-    {
-      brand: 'Amd',
-      img_path: '/assets/brands/amdLogo.svg',
-      href: '/amd',
-    },
-  ];
-
   const settings = {
     dots: true,
     infinite: true,

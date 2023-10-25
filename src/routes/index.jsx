@@ -5,6 +5,7 @@ import AddProduct from '../pages/AddProduct';
 import CreateAccount from '../pages/createAccount';
 import Home from '../pages/home';
 import Login from '../pages/login';
+import Product from '../pages/product';
 
 const Content = props => {
   const routes = useRoutes([
@@ -19,9 +20,10 @@ const Content = props => {
       element: <AddProduct />,
     },
     { path: '/upload', element: <AddImage /> },
+    { path: '/product', element: <Product /> },
   ]);
 
-  return <Suspense >{routes}</Suspense>;
+  return <Suspense>{routes}</Suspense>;
 };
 
 export default Content;

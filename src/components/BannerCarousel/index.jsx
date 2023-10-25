@@ -1,14 +1,10 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import { banners } from '../../falseDatabase/banner';
 import * as C from './styles';
 
 const BannerCarousel = () => {
-  const banners = [
-    '/assets/carousel/carouselApple.png',
-    '/assets/carousel/CarouselRtx.png',
-    '/assets/carousel/carouselXbox.jpeg',
-  ];
   const settings = {
     dots: true,
     infinite: true,

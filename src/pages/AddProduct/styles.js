@@ -23,7 +23,9 @@ export const Section = styled.section`
   background: #ecf0f3;
   width: 84.61%;
   border-radius: 15px;
-  box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
+  box-shadow:
+    10px 10px 20px 0px #d1d9e6 inset,
+    -10px -10px 20px 0px #fff inset;
 
   .top {
     margin-left: 35px;
@@ -133,7 +135,8 @@ export const FormInput = styled.div`
   input,
   textarea {
     background: #ecf0f3;
-    box-shadow: 5px 5px 6px 0px #d1d9e6,
+    box-shadow:
+      5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     border-radius: 5px;
     border: none;
@@ -157,7 +160,8 @@ export const FormInput = styled.div`
 
   select {
     background-color: #ecf0f3;
-    box-shadow: 5px 5px 6px 0px #d1d9e6,
+    box-shadow:
+      5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     border-radius: 5px;
     border: none;
@@ -239,7 +243,8 @@ export const RadioInput = styled.div`
     height: 25px;
     width: 100px;
     background-color: #ecf0f3;
-    box-shadow: 5px 5px 6px 0px #d1d9e6,
+    box-shadow:
+      5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     display: flex;
     flex-direction: row;
@@ -261,13 +266,15 @@ export const RadioInput = styled.div`
     }
 
     input[type='radio']:checked + label:nth-of-type(1) {
-      box-shadow: 5px 5px 6px 0px #d1d9e6,
+      box-shadow:
+        5px 5px 6px 0px #d1d9e6,
         -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
       color: #5ce1e6;
       border-radius: 5px;
     }
     input[type='radio']:checked + label:nth-of-type(2) {
-      box-shadow: -5px 5px 6px 0px #d1d9e6,
+      box-shadow:
+        -5px 5px 6px 0px #d1d9e6,
         -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
       color: #5ce1e6;
       border-radius: 5px;
@@ -305,7 +312,8 @@ export const InputImg = styled.div`
     height: 30px;
     border-radius: 5px;
     background-color: #ecf0f3;
-    box-shadow: 5px 5px 6px 0px #d1d9e6,
+    box-shadow:
+      5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     width: 76%;
     column-gap: 16px;
