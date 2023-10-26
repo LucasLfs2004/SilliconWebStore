@@ -10,6 +10,10 @@ export const Card = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 5px 10px 16px 10px;
+
+  a {
+    width: 100%;
+  }
 `;
 
 export const Rating = styled.div`

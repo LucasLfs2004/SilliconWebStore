@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Menu from '../SideBar';
-import * as C from './sss';
+import * as C from './styles';
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -9,8 +10,10 @@ const Header = () => {
     <C.Header>
       <C.DivBlock>
         <C.Logo>
-          <h1>SILLICON</h1>
-          <img src='/assets/imgs/vga-azul.svg' alt='' />
+          <Link to={'/'}>
+            <h1>SILLICON</h1>
+            <img src='/assets/imgs/vga-azul.svg' alt='' />
+          </Link>
         </C.Logo>
       </C.DivBlock>
       <C.Pesquisa>

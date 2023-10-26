@@ -13,6 +13,7 @@ import { seller } from '../../falseDatabase/seller';
 import * as C from './styles';
 
 export const Product = () => {
+  const [seePortions, setSeePortions] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const product = products[0];
 
@@ -24,6 +25,17 @@ export const Product = () => {
   );
   const brandProduct = brands.find(item => item.id === product.brand_id);
   const sellerName = seller.find(item => item.id === product.seller_id).name;
+
+  const priceCredit =
+    product.value.priceNow * (1 + product.value.feesCredit / 100);
+  const priceInPortions =
+    priceCredit *
+    (1 + product.value.feesMonthly / 100) ** product.value.portions;
+  const pricePerPortions = priceInPortions / product.value.portions;
+  const portions = [];
+  for (let i = 1; i <= product.value.portions; i++) {
+    portions[i - 1] = priceCredit * (1 + product.value.feesMonthly / 100) ** i;
+  }
 
   const settings = {
     dots: true,
@@ -92,12 +104,72 @@ export const Product = () => {
         <C.Name>{product.name}</C.Name>
         <C.IdProduct>Código: xxxxxxxx</C.IdProduct>
         <C.RowPrice>
-          <img src='/assets/icons/creditCard.svg' alt='' />
+          <img src='/assets/icons/pix.svg' alt='' />
           <C.Price>
-            <p>{product.price}</p>
+            <p>
+              {product.value.priceNow.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+              })}
+            </p>
             <span>à vista no pix</span>
           </C.Price>
         </C.RowPrice>
+        <C.RowPrice>
+          <img src='/assets/icons/creditCard.svg' alt='' />
+          <C.Price>
+            <p>
+              {priceInPortions.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+              })}
+            </p>
+            <span>
+              {product.value.portions} x de{' '}
+              {pricePerPortions.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+              })}
+            </span>
+            <C.BtnPortions onClick={() => setSeePortions(!seePortions)}>
+              <img src='/assets/icons/miniArrowGray.svg' alt='' />
+              <p>Ver parcelas</p>
+            </C.BtnPortions>
+          </C.Price>
+        </C.RowPrice>
+        <C.PortionsDisplay className={seePortions && 'view'} view={seePortions}>
+          <h4>Parcelas</h4>
+          <C.Display>
+            {portions?.map((item, index) => {
+              return (
+                <C.Portion>
+                  <p>
+                    {index + 1} x de{' '}
+                    {(item / (index + 1)).toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                      minimumFractionDigits: 2,
+                    })}
+                  </p>
+                  <span>
+                    {item.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                      minimumFractionDigits: 2,
+                    })}
+                  </span>
+                </C.Portion>
+              );
+            })}
+          </C.Display>
+          <span className='desc'>
+            *Em até {product.value.portions}x com juros de{' '}
+            {product.value.feesMonthly}% a.m.
+          </span>
+        </C.PortionsDisplay>
       </C.PriceArea>
       <Footer />
     </C.Page>

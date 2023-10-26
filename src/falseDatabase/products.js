@@ -10,14 +10,17 @@ export const products = [
     ],
     rating: 4.5,
     amount_rating: 15,
-    price: 2499.99,
-    portions: 10,
-    inCash: 10,
-    discount: 22,
     brand_id: 3,
     category_id: 4596,
-    warranty: 12,
+    warranty: 24,
     seller_id: 1,
+    value: {
+      priceNow: 2249.99,
+      CommonPrice: 3000.00,
+      portions: 12,
+      feesMonthly: 1.50,
+      feesCredit: 4,
+    }
   },
   {
     id: 1851,
@@ -41,5 +44,12 @@ export const products = [
     category_id: 2486,
     warranty: 12,
     seller_id: 1,
+    value: {
+      priceNow: 18499.99,
+      CommonPrice: 24999.99,
+      portions: 12,
+      feesMonthly: 1.60,
+      feesCredit: 4,
+    }
   },
 ];
