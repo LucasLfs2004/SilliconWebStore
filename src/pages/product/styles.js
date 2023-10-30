@@ -204,6 +204,11 @@ export const Price = styled.div`
     font-weight: 500;
     line-height: normal;
   }
+
+  &.cian p,
+  &.cian span {
+    color: #5ce1e6;
+  }
 `;
 
 export const BtnPortions = styled.button`
@@ -288,4 +293,36 @@ export const Display = styled.div`
   max-height: 280px;
   align-items: center;
   row-gap: 10px;
+`;
+
+export const BuyComponent = styled.div`
+  background-color: #010f20;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7%;
+`;
+
+export const BuyBtn = styled.button`
+  width: 33%;
+  height: 30px;
+  border-radius: 5px;
+  background: #ecf0f3;
+  border: none;
+  box-shadow: 5px 5px 6px 0px #d1d9e6 inset, -5px -5px 6px 0px #fff inset;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 12px;
+
+  p {
+    color: #000;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 `;

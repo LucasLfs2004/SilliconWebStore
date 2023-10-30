@@ -171,6 +171,22 @@ export const Product = () => {
           </span>
         </C.PortionsDisplay>
       </C.PriceArea>
+      <C.BuyComponent>
+        <C.Price className='cian'>
+          <p>
+            {product.value.priceNow.toLocaleString('pt-BR', {
+              style: 'currency',
+              currency: 'BRL',
+              minimumFractionDigits: 2,
+            })}
+          </p>
+          <span>À vista no pix</span>
+        </C.Price>
+        <C.BuyBtn>
+          <img src='/assets/icons/carrinhoDark.svg' alt='' />
+          <p>Comprar</p>
+        </C.BuyBtn>
+      </C.BuyComponent>
       <Footer />
     </C.Page>
   );
