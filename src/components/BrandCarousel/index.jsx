@@ -22,7 +22,7 @@ const BrandCarousel = () => {
               <C.ItemBrand
                 key={index}
                 className='carousel-item'
-                href={item.href}
+                href={`/brand/${item.id}`}
               >
                 <img src={item.img_path} alt={`Imagem ${item.brand}`} />
               </C.ItemBrand>

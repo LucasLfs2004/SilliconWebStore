@@ -29,11 +29,11 @@ export const RouteCategory = styled.p`
 export const SimpleInfos = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
   padding: 6px 0;
-  column-gap: 12px;
+  margin: 0 auto;
   background-color: #010f20;
+  width: 100%;
 
   p {
     color: #fff;
@@ -44,8 +44,36 @@ export const SimpleInfos = styled.div`
   }
 `;
 
+export const LogoInfo = styled.div`
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+  img {
+    max-height: 18px;
+    max-width: 70px;
+  }
+`;
+
+export const WarrantyInfo = styled.div`
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  column-gap: 24px;
+  margin: 0 24px;
+  align-items: center;
+  width: 40%;
+
+  p {
+    width: 100px;
+    text-align: center;
+  }
+`;
+
 export const BtnActions = styled.div`
   display: flex;
+  width: 30%;
   flex-direction: row;
   column-gap: 8px;
 

@@ -16,12 +16,14 @@ const CardProduct = ({ item }) => {
     slidesToScroll: 1,
   };
 
-  const priceInPortions = item.value.priceNow * ((1 + (item.value.feesMonthly / 100)) ** item.value.portions)
-  const pricePerPortions = priceInPortions / item.value.portions
+  const priceInPortions =
+    item.value.priceNow *
+    (1 + item.value.feesMonthly / 100) ** item.value.portions;
+  const pricePerPortions = priceInPortions / item.value.portions;
 
   return (
     <C.Card>
-      <Link to={'/product'}>
+      <Link to={`/product/${item.id}`}>
         <C.Rating>
           <Stars rating={item.rating} />
           <C.RatingValue>
@@ -48,14 +50,29 @@ const CardProduct = ({ item }) => {
         <C.PriceView>
           <C.InCash>
             <C.Price>
-              {item?.value?.priceNow.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })}
+              {item?.value?.priceNow.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+              })}
             </C.Price>
             <p className='condition'>À vista no pix</p>
           </C.InCash>
           <C.Portions>
-            <C.Price>{priceInPortions.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })}</C.Price>
+            <C.Price>
+              {priceInPortions.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+              })}
+            </C.Price>
             <p className='condition'>
-              {item.value.portions}x de {pricePerPortions.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 })}
+              {item.value.portions}x de{' '}
+              {pricePerPortions.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+                minimumFractionDigits: 2,
+              })}
             </p>
           </C.Portions>
         </C.PriceView>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useParams } from 'react-router';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
@@ -15,8 +16,8 @@ import * as C from './styles';
 export const Product = () => {
   const [seePortions, setSeePortions] = useState(false);
   const [favorite, setFavorite] = useState(false);
-  const product = products[0];
-
+  const id = parseInt(useParams().id);
+  const product = products.find(item => item.id === id);
   const categoryProduct = category.find(
     item => item.id === product.category_id,
   );
@@ -54,16 +55,25 @@ export const Product = () => {
           <span>{' > '}</span> {brandProduct.brand}
         </C.RouteCategory>
         <C.SimpleInfos>
-          <img src={brandProduct.img_path} color='#000000' alt='' />
-          <img src='/assets/icons/linePurple.svg' alt='' />
-          <p>
-            {product.warranty && product.warranty > 12
-              ? `${product.warranty / 12} anos de garantia`
-              : `${product.warranty} ${
-                  product.warranty > 1 ? 'meses' : 'mês'
-                } de garantia`}
-          </p>
-          <img src='/assets/icons/linePurple.svg' alt='' />
+          <C.LogoInfo>
+            <img
+              className='logoBrand'
+              src={brandProduct.img_path}
+              color='#000000'
+              alt=''
+            />
+          </C.LogoInfo>
+          <C.WarrantyInfo>
+            <img src='/assets/icons/linePurple.svg' alt='' />
+            <p>
+              {product.warranty && product.warranty > 12
+                ? `${product.warranty / 12} anos de garantia`
+                : `${product.warranty} ${
+                    product.warranty > 1 ? 'meses' : 'mês'
+                  } de garantia`}
+            </p>
+            <img src='/assets/icons/linePurple.svg' alt='' />
+          </C.WarrantyInfo>
           <C.BtnActions>
             <button onClick={() => setFavorite(!favorite)}>
               {favorite ? (

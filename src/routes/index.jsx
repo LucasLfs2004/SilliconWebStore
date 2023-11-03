@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
 import AddImage from '../pages/AddImage';
 import AddProduct from '../pages/AddProduct';
+import Brand from '../pages/brand';
 import CreateAccount from '../pages/createAccount';
 import Home from '../pages/home';
 import Login from '../pages/login';
@@ -20,7 +21,11 @@ const Content = props => {
       element: <AddProduct />,
     },
     { path: '/upload', element: <AddImage /> },
-    { path: '/product', element: <Product /> },
+    { path: '/product/:id', element: <Product /> },
+    {
+      path: '/brand/:id',
+      element: <Brand />,
+    },
   ]);
 
   return <Suspense>{routes}</Suspense>;

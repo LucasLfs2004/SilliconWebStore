@@ -91,7 +91,7 @@ export const ImgProduct = styled.div`
   justify-content: center;
 
   img {
-    max-width: calc(100vw / 2);
+    max-width: calc(100vw / 2.4375);
   }
 `;
 
