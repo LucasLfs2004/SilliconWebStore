@@ -56,7 +56,7 @@ export const Bottom = styled.section`
   flex-direction: column;
   background-color: #5b43d6;
   row-gap: 2px;
-  padding: 4px 0;
+  padding: 5px 0;
 
   p,
   a {

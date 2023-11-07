@@ -24,7 +24,9 @@ const Header = () => {
       </C.Pesquisa>
       <C.DivBlock>
         <C.Carrinho>
-          <img src='/assets/imgs/carrinho.svg' alt='' />
+          <Link to={'/carrinho'}>
+            <img src='/assets/imgs/carrinho.svg' alt='' />
+          </Link>
         </C.Carrinho>
         <Menu showMenu={showMenu} setShowMenu={setShowMenu} />
       </C.DivBlock>

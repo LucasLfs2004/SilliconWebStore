@@ -1,12 +1,19 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import { addToCart } from '../../store/actions/cartActions';
 import Stars from '../Stars';
 import * as C from './styles';
 
-const CardProduct = ({ item }) => {
-  console.log(item);
+const CardProduct = ({ item }, props) => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(item));
+  };
+  // console.log(item);
 
   const settings = {
     dots: true,
@@ -20,6 +27,27 @@ const CardProduct = ({ item }) => {
     item.value.priceNow *
     (1 + item.value.feesMonthly / 100) ** item.value.portions;
   const pricePerPortions = priceInPortions / item.value.portions;
+
+  // const addToCart = () => {
+  //   const cartLocalStorage = [];
+  //   if (
+  //     localStorage.getItem('cart') !== undefined &&
+  //     localStorage.getItem('cart') !== null
+  //   ) {
+  //     const storageItem = localStorage.getItem('cart');
+  //     const arrayCart = storageItem.split(',');
+  //     let include = false;
+  //     arrayCart.forEach(element => {
+  //       if (element == item.id) {
+  //         include = true;
+  //       }
+  //     });
+  //     !include && arrayCart.push(item.id);
+  //     localStorage.setItem('cart', arrayCart);
+  //   } else {
+  //     localStorage.setItem('cart', [item.id]);
+  //   }
+  // };
 
   return (
     <C.Card>
@@ -77,7 +105,7 @@ const CardProduct = ({ item }) => {
           </C.Portions>
         </C.PriceView>
         <C.Buttons>
-          <C.Button>
+          <C.Button onClick={() => handleAddToCart(item)}>
             <p>Adicionar ao carrinho</p>
           </C.Button>
           <C.Button>

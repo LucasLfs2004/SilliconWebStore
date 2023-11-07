@@ -14,7 +14,7 @@ const Stars = ({ rating }) => {
     }
   }
 
-  console.log(stars);
+  // console.log(stars);
   return (
     <C.Row>
       {stars.map((item, index) => (

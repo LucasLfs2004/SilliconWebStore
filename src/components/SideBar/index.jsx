@@ -13,7 +13,7 @@ const Menu = () => {
     e.stopPropagation();
     localStorage.removeItem('user');
     setUserInfo(null);
-    console.log(localStorage);
+    // console.log(localStorage);
   };
 
   return (

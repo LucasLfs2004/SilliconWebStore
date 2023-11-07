@@ -187,6 +187,7 @@ export const Button = styled.button`
   column-gap: 10px;
   background: #02eddf;
   border: none;
+  z-index: 10;
 
   p {
     color: #010d20;

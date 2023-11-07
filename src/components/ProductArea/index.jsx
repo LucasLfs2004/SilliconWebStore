@@ -5,7 +5,8 @@ import * as C from './styles';
 const ProductArea = () => {
   return (
     <C.Container>
-      {products && products.map((item, index) => <CardProduct item={item} />)}
+      {products &&
+        products.map((item, index) => <CardProduct key={index} item={item} />)}
     </C.Container>
   );
 };
