@@ -3,69 +3,39 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import { products } from '../../falseDatabase/products';
-import { ClearCart } from '../../store/actions/cartActions';
+import {
+  clearCart,
+  decrementAmountProduct,
+  incrementAmountProduct,
+  removeProduct,
+} from '../../store/actions/cartActions';
+import { applyVoucher } from '../../store/actions/voucherActions';
 import * as C from './styles';
 
 const Carrinho = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector(state => state.cart);
+  const voucher = useSelector(state => state.voucher);
   const [shipPrice, setShipPrice] = useState(5.99);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [discount, setDiscount] = useState(0);
-  const carrinhoIds = localStorage.getItem('cart')?.split(',');
-  const [cupons, setCupons] = useState(['nadamal']);
-  const [carrinhoItems, setCarrinhoItems] = useState([]);
   const [cupom, setCupom] = useState('');
-  const [cupomValid, setCupomValid] = useState(false);
 
-  const cart = useSelector(state => state.cart);
-  //   console.log('cart', cart);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    loadProducts();
-  }, [localStorage]);
-
-  const loadProducts = () => {
-    // console.log('loadProducts chamado');
-    let carrinho = [];
-    products.forEach(element => {
-      let item = carrinhoIds?.find(item => element.id == parseInt(item));
-      if (item !== undefined && item !== null) {
-        carrinho.push(element);
-      }
-    });
-    setCarrinhoItems(carrinho);
-  };
-
-  const clearAll = () => {
-    dispatch(ClearCart());
+  const applyCupom = () => {
+    if (cupom.toLowerCase() === 'nadamal') {
+      dispatch(applyVoucher({ voucher: 'nadamal', discount: 0.05 }));
+      setCupom('');
+    }
   };
 
   useEffect(() => {
     let value = 0;
-    carrinhoItems.forEach(element => {
-      //   console.log(element.value.priceNow);
-      value += element.value.priceNow;
+    cart.forEach(element => {
+      value += element.product.value.priceNow * element.amount;
     });
     value += shipPrice;
     setTotalPrice(value);
-  }, [loadProducts]);
+  }, [dispatch]);
 
-  const removeItemCart = id => {
-    console.log(id);
-  };
-
-  const applyCupom = () => {
-    if (cupom.toLowerCase() === 'nadamal') {
-      setCupomValid(true);
-      console.log('Cupom ativado');
-      setDiscount(5);
-    }
-  };
-
-  console.log(carrinhoItems);
-  console.log('valid cupom? ', cupomValid);
   return (
     <C.Container>
       <Header />
@@ -73,7 +43,7 @@ const Carrinho = () => {
         <C.Cart>
           <C.Top>
             <C.Title>Produtos e Serviços</C.Title>
-            <C.BtnDelete onClick={() => clearAll()}>
+            <C.BtnDelete onClick={() => dispatch(clearCart())}>
               <img src='/assets/icons/trash.svg' alt='' />
               Remover Todos
             </C.BtnDelete>
@@ -101,11 +71,27 @@ const Carrinho = () => {
                       </C.Price>
                       <C.Buttons>
                         <C.BtnQuantidade>
-                          <button>{'<'}</button>
+                          <button
+                            onClick={() =>
+                              dispatch(decrementAmountProduct(item.product.id))
+                            }
+                          >
+                            {'<'}
+                          </button>
                           <p>{item.amount}</p>
-                          <button>{'>'}</button>
+                          <button
+                            onClick={() =>
+                              dispatch(incrementAmountProduct(item.product.id))
+                            }
+                          >
+                            {'>'}
+                          </button>
                         </C.BtnQuantidade>
-                        <C.ButtonDelete onClick={() => removeItemCart(index)}>
+                        <C.ButtonDelete
+                          onClick={() =>
+                            dispatch(removeProduct(item.product.id))
+                          }
+                        >
                           <img src='/assets/icons/trash.svg' alt='' />
                         </C.ButtonDelete>
                       </C.Buttons>
@@ -135,10 +121,18 @@ const Carrinho = () => {
                   Aplicar
                 </C.ButtonPurple>
               </C.RowCupom>
-              {cupomValid && (
+              {voucher?.voucher !== null && (
                 <C.CupomApply>
-                  <p className='green'>Cupom aplicado: {cupom}</p>
-                  <span>5% off</span>
+                  <p className='green'>Cupom aplicado: {voucher?.voucher}</p>
+                  <span>
+                    {voucher.discount > 1
+                      ? `${voucher.discount.toLocaleString('pt-BR', {
+                          style: 'currency',
+                          currency: 'BRL',
+                          minimumFractionDigits: 2,
+                        })} de desconto`
+                      : `${voucher.discount * 100}% off`}
+                  </span>
                 </C.CupomApply>
               )}
             </C.CupomArea>
@@ -163,15 +157,27 @@ const Carrinho = () => {
                   </p>
                 </C.RowP>
               ))}
-            {discount > 0 && (
+            {voucher.discount > 0 && (
               <C.RowP>
                 <p className='grey'>Desconto</p>
                 <p className='purple'>
-                  {(-(totalPrice * discount) / 100).toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })}
+                  {voucher.discount > 1
+                    ? (-(totalPrice - voucher.discount)).toLocaleString(
+                        'pt-BR',
+                        {
+                          style: 'currency',
+                          currency: 'BRL',
+                          minimumFractionDigits: 2,
+                        },
+                      )
+                    : (-(totalPrice * voucher.discount)).toLocaleString(
+                        'pt-BR',
+                        {
+                          style: 'currency',
+                          currency: 'BRL',
+                          minimumFractionDigits: 2,
+                        },
+                      )}
                 </p>
               </C.RowP>
             )}
@@ -187,16 +193,16 @@ const Carrinho = () => {
             </C.RowP>
             <C.RowP>
               <p>Total</p>
-              {discount > 0 ? (
+              {voucher.discount > 0 ? (
                 <p>
-                  {(totalPrice - (totalPrice * discount) / 100).toLocaleString(
-                    'pt-BR',
-                    {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                    },
-                  )}
+                  {(
+                    totalPrice -
+                    (totalPrice * voucher.discount) / 100
+                  ).toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                  })}
                 </p>
               ) : (
                 <p>
@@ -210,7 +216,9 @@ const Carrinho = () => {
             </C.RowP>
           </C.CartResume>
           <C.Navigation>
-            <Link className='payment'>Pagamento</Link>
+            <Link className='payment' to={'/payment'}>
+              Pagamento
+            </Link>
             <Link className='continue' to={'/'}>
               Continuar comprando
             </Link>

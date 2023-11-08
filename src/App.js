@@ -9,7 +9,9 @@ function App() {
     <Provider store={store}>
       <div className='app'>
         <BrowserRouter>
+          {/* <Header /> */}
           <Content />
+          {/* <Footer /> */}
         </BrowserRouter>
       </div>
     </Provider>

@@ -80,7 +80,6 @@ export const products = [
     brand: 'Apple',
     image: [
       '/assets/imgProducts/iphone15pro_1.jpeg',
-      '/assets/imgProducts/iphone15pro_2.jpeg',
       '/assets/imgProducts/iphone15pro_3.jpeg',
       '/assets/imgProducts/iphone15pro_4.jpeg',
       '/assets/imgProducts/iphone15pro_5.jpeg',

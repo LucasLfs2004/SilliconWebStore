@@ -7,6 +7,7 @@ import Carrinho from '../pages/carrinho';
 import CreateAccount from '../pages/createAccount';
 import Home from '../pages/home';
 import Login from '../pages/login';
+import Payment from '../pages/payment';
 import Product from '../pages/product';
 
 const Content = props => {
@@ -30,6 +31,10 @@ const Content = props => {
     {
       path: '/carrinho',
       element: <Carrinho />,
+    },
+    {
+      path: '/payment',
+      element: <Payment />,
     },
   ]);
 

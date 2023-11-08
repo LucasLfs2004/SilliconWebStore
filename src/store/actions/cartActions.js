@@ -4,6 +4,7 @@ import {
   DECREMENT_AMOUNT_PRODUCT,
   INCREMENT_AMOUNT_PRODUCT,
   INITIALIZE_CART,
+  REMOVE_PRODUCT,
 } from './actionTypes';
 
 export const initializeCart = () => {
@@ -38,6 +39,13 @@ export const incrementAmountProduct = id => {
 export const decrementAmountProduct = id => {
   return {
     type: DECREMENT_AMOUNT_PRODUCT,
+    payload: id,
+  };
+};
+
+export const removeProduct = id => {
+  return {
+    type: REMOVE_PRODUCT,
     payload: id,
   };
 };
