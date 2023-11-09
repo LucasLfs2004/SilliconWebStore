@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useParams } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { useNavigate, useParams } from 'react-router';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
@@ -11,9 +12,12 @@ import { category } from '../../falseDatabase/category';
 import { department } from '../../falseDatabase/department';
 import { products } from '../../falseDatabase/products';
 import { seller } from '../../falseDatabase/seller';
+import { addToCart } from '../../store/actions/cartActions';
 import * as C from './styles';
 
 export const Product = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [seePortions, setSeePortions] = useState(false);
   const [favorite, setFavorite] = useState(false);
   const id = parseInt(useParams().id);
@@ -44,6 +48,13 @@ export const Product = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+  };
+
+  const buyProduct = () => {
+    console.log('buyProduct');
+    dispatch(addToCart(product));
+    console.log('alterando rota');
+    navigate('/carrinho');
   };
 
   return (
@@ -192,7 +203,7 @@ export const Product = () => {
           </p>
           <span>À vista no pix</span>
         </C.Price>
-        <C.BuyBtn>
+        <C.BuyBtn onClick={() => buyProduct()}>
           <img src='/assets/icons/carrinhoDark.svg' alt='' />
           <p>Comprar</p>
         </C.BuyBtn>

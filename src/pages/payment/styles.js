@@ -15,6 +15,15 @@ export const Title = styled.h1`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  &.blue {
+    color: #5ce1e6;
+  }
+
+  &.no-padding {
+    width: 100%;
+    padding: 5px 0 10px 0;
+  }
 `;
 
 export const Subtitle = styled.h2`
@@ -35,6 +44,22 @@ export const Paragraph = styled.p`
   &.spaced {
     padding-left: 34px;
   }
+
+  &.mini {
+    font-size: 10px;
+  }
+
+  &.margin-top {
+    margin-top: 10px;
+  }
+`;
+
+export const Span = styled.span`
+  color: rgba(236, 240, 243, 0.7);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 `;
 
 export const Ship = styled.div`
@@ -93,11 +118,24 @@ export const Payment = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 5px;
+  margin-bottom: 28px;
+`;
+
+export const ItemPay = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #010f20;
+  border-left: 3px solid #010f20;
+  transition: border 0.3s ease-in-out;
+
+  &.selected {
+    border-left: 3px solid #5ce1e6;
+  }
 `;
 
 export const PayCard = styled.button`
   border: none;
-  background-color: #010f20;
+  background-color: transparent;
   width: 100%;
   padding: 0;
   display: flex;
@@ -105,12 +143,36 @@ export const PayCard = styled.button`
   align-items: center;
   column-gap: 16px;
   padding: 12px 20px;
-  border-left: 3px solid #010f20;
+`;
 
-  transition: border 0.3s ease-in-out;
+export const InfoPay = styled.div`
+  display: none;
+  flex-direction: column;
 
-  &.selected {
-    border-left: 3px solid #5ce1e6;
-    /* padding: 12px 17px; */
+  &.view {
+    display: flex;
   }
+`;
+
+export const List = styled.ul`
+  color: #fff;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;
+
+export const Resume = styled.section`
+  margin: 0;
+  background-color: #010f20;
+  width: 95%;
+  padding: 0 2.5%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+`;
+
+export const Box = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
