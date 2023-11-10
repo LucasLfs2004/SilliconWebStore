@@ -11,7 +11,7 @@ export const Title = styled.h1`
   color: #010f20;
   width: 95%;
   padding: 5px 2.5% 10px 2.5%;
-  font-size: 16px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -28,7 +28,7 @@ export const Title = styled.h1`
 
 export const Subtitle = styled.h2`
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -46,17 +46,17 @@ export const Paragraph = styled.p`
   }
 
   &.mini {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   &.margin-top {
-    margin-top: 10px;
+    margin-top: 12px;
   }
 `;
 
 export const Span = styled.span`
   color: rgba(236, 240, 243, 0.7);
-  font-size: 11px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -97,7 +97,7 @@ export const Button = styled.button`
   margin: 0;
   color: #fff;
   text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -106,7 +106,7 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   column-gap: 5px;
-  width: 96px;
+  width: 104px;
   border-radius: 3px;
   background-color: transparent;
   border: 1px solid #fff;
@@ -156,8 +156,39 @@ export const InfoPay = styled.div`
 
 export const List = styled.ul`
   color: #fff;
-  font-size: 10px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+`;
+
+export const ButtonsPayment = styled.div`
+  margin: 30px 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+`;
+
+export const ButtonNavigation = styled.button`
+  border: none;
+  display: flex;
+  width: 95%;
+  margin: 0 2.5%;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background: #010f20;
+  color: #fff;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  &.transparent {
+    background-color: transparent;
+    border: 1px solid #02eddf;
+    color: #010f20;
+  }
 `;

@@ -66,7 +66,7 @@ const Payment = () => {
             )}
             <C.Paragraph>Cartão de crédito</C.Paragraph>
           </C.PayCard>
-          {payment.payForm === 'credit-card' && <NewCard />}
+          {payment.payForm === 'credit-card' && <NewCard view={true} />}
         </C.ItemPay>
         <C.ItemPay className={payment.payForm === 'pix' && 'selected'}>
           <C.PayCard onClick={() => dispatch(setPayForm('pix'))}>
@@ -87,6 +87,10 @@ const Payment = () => {
         </C.ItemPay>
       </C.Payment>
       <PurchaseResume />
+      <C.ButtonsPayment>
+        <C.ButtonNavigation>Finalizar pagamento</C.ButtonNavigation>
+        <C.ButtonNavigation className='transparent'>Voltar</C.ButtonNavigation>
+      </C.ButtonsPayment>
       <Footer />
     </C.Container>
   );

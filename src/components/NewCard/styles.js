@@ -34,5 +34,13 @@ export const Input = styled.input`
 `;
 
 export const Select = styled.select`
+  border-radius: 3px;
+  border: 1px solid #5ce1e6;
+  width: ${props => props.width};
   background-color: transparent;
+  outline: none;
+  height: 30px;
+  padding: 0 9px;
+  background-color: transparent;
+  color: #fff;
 `;

@@ -4,7 +4,7 @@ export const Resume = styled.section`
   margin: 0;
   background-color: #010f20;
   width: 95%;
-  padding: 0 2.5%;
+  padding: 12px 2.5%;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -36,7 +36,7 @@ export const Line = styled.div`
 export const Title = styled.h1`
   color: #010f20;
   width: 100%;
-  padding: 5px 0 0 0;
+  padding: 0;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;

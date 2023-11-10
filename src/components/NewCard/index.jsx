@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux';
 import * as C from './styles';
 
-const NewCard = props => {
+const NewCard = (portions = false) => {
+  const payment = useSelector(state => state.payment);
   return (
     <C.Display>
       <C.Row>
@@ -17,9 +19,21 @@ const NewCard = props => {
       <C.Row>
         <C.Input width={'100%'} placeholder='CPF/CNPJ do titular do cartão' />
       </C.Row>
-      {props.portions && (
+      {portions && (
         <C.Row>
-          <C.Select></C.Select>
+          <C.Select width={'100%'}>
+            <option value='null'>Selecionar parcela</option>
+            {payment.portions.map((item, key) => (
+              <option value={item.often} key={key}>
+                {item.often} x de{' '}
+                {item.valuePortion.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                  minimumFractionDigits: 2,
+                })}
+              </option>
+            ))}
+          </C.Select>
         </C.Row>
       )}
     </C.Display>

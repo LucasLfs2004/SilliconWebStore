@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Search from '../Search';
 import Menu from '../SideBar';
 import * as C from './styles';
 
@@ -16,12 +17,7 @@ const Header = () => {
           </Link>
         </C.Logo>
       </C.DivBlock>
-      <C.Pesquisa>
-        <input type='text' />
-        <button>
-          <img src='/assets/imgs/searchIcon.svg' alt='' />
-        </button>
-      </C.Pesquisa>
+      <Search />
       <C.DivBlock>
         <C.Carrinho>
           <Link to={'/carrinho'}>

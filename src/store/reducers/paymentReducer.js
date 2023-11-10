@@ -61,6 +61,7 @@ const paymentReducer = (state = initialState, action) => {
         portions.push({
           often: i + 1,
           valueCredit: priceTotal,
+          valuePortion: priceTotal / (i + 1),
         });
       }
       return {
@@ -86,7 +87,10 @@ const paymentReducer = (state = initialState, action) => {
     case SET_PAY_FORM:
       return {
         ...state,
-        payForm: action.payload,
+        payForm: {
+          method: action.payload.method,
+          portion: action.payload.portion ? action.payload : null,
+        },
       };
     default:
       return state;
