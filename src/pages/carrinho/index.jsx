@@ -1,40 +1,55 @@
 import { useEffect, useState } from 'react';
+import InputMask from 'react-input-mask';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import EmptyCart from '../../components/EmptyCart';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import { getCep } from '../../services/Requests';
 import {
   clearCart,
   decrementAmountProduct,
   incrementAmountProduct,
   removeProduct,
 } from '../../store/actions/cartActions';
-import { applyVoucher } from '../../store/actions/voucherActions';
+import {
+  calculatePayment,
+  clearVoucher,
+  setShipInfos,
+  setVoucher,
+} from '../../store/actions/paymentActions';
 import * as C from './styles';
 
 const Carrinho = () => {
   const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
-  const voucher = useSelector(state => state.voucher);
+  const payment = useSelector(state => state.payment);
+  console.log(payment);
   const [shipPrice, setShipPrice] = useState(5.99);
-  const [totalPrice, setTotalPrice] = useState(0);
   const [cupom, setCupom] = useState('');
+  const [cep, setCep] = useState('');
 
   const applyCupom = () => {
     if (cupom.toLowerCase() === 'nadamal') {
-      dispatch(applyVoucher({ voucher: 'nadamal', discount: 0.05 }));
+      dispatch(setVoucher({ voucher: 'nadamal', discount: 0.05 }));
+      dispatch(calculatePayment(cart));
       setCupom('');
     }
   };
 
+  const searchCep = async () => {
+    const response = await getCep(cep);
+    dispatch(setShipInfos(response));
+    console.log(payment);
+    console.log(response);
+  };
+
   useEffect(() => {
-    let value = 0;
-    cart.forEach(element => {
-      value += element.product.value.priceNow * element.amount;
-    });
-    value += shipPrice;
-    setTotalPrice(value);
-  }, [dispatch]);
+    if (cart.length === 0) {
+      dispatch(clearVoucher());
+    }
+    dispatch(calculatePayment(cart));
+  }, [cart]);
 
   return (
     <C.Container>
@@ -103,16 +118,28 @@ const Carrinho = () => {
               <C.RowCep>
                 <C.InputDisplay>
                   <p>Insira seu CEP:</p>
-                  <C.InputCep />
+                  <InputMask
+                    mask={'99999-999'}
+                    placeholder=''
+                    value={cep}
+                    onChange={e => setCep(e.target.value)}
+                    className='center'
+                  />
                 </C.InputDisplay>
-                <C.ButtonPurple>Calcular</C.ButtonPurple>
+                <C.ButtonPurple onClick={() => searchCep()}>
+                  Calcular
+                </C.ButtonPurple>
               </C.RowCep>
+
+              <C.CepInfo>
+                {payment?.shipInfos?.logradouro} - {payment?.shipInfos?.bairro}
+              </C.CepInfo>
             </C.CepArea>
             <C.CupomArea>
               <C.RowCupom>
                 <C.InputDisplay>
                   <p>Cupom de desconto:</p>
-                  <C.InputCep
+                  <input
                     value={cupom}
                     onChange={e => setCupom(e.target.value)}
                   />
@@ -121,17 +148,17 @@ const Carrinho = () => {
                   Aplicar
                 </C.ButtonPurple>
               </C.RowCupom>
-              {voucher?.voucher !== null && (
+              {payment?.voucher !== null && (
                 <C.CupomApply>
-                  <p className='green'>Cupom aplicado: {voucher?.voucher}</p>
+                  <p className='green'>Cupom aplicado: {payment?.voucher}</p>
                   <span>
-                    {voucher.discount > 1
-                      ? `${voucher.discount.toLocaleString('pt-BR', {
+                    {payment.discount > 1
+                      ? `${payment.discount.toLocaleString('pt-BR', {
                           style: 'currency',
                           currency: 'BRL',
                           minimumFractionDigits: 2,
                         })} de desconto`
-                      : `${voucher.discount * 100}% off`}
+                      : `${payment.discount * 100}% off`}
                   </span>
                 </C.CupomApply>
               )}
@@ -157,62 +184,42 @@ const Carrinho = () => {
                   </p>
                 </C.RowP>
               ))}
-            {voucher.discount > 0 && (
+            {payment.discountValue > 0 && (
               <C.RowP>
                 <p className='grey'>Desconto</p>
                 <p className='purple'>
-                  {voucher.discount > 1
-                    ? (-(totalPrice - voucher.discount)).toLocaleString(
-                        'pt-BR',
-                        {
-                          style: 'currency',
-                          currency: 'BRL',
-                          minimumFractionDigits: 2,
-                        },
-                      )
-                    : (-(totalPrice * voucher.discount)).toLocaleString(
-                        'pt-BR',
-                        {
-                          style: 'currency',
-                          currency: 'BRL',
-                          minimumFractionDigits: 2,
-                        },
-                      )}
-                </p>
-              </C.RowP>
-            )}
-            <C.RowP>
-              <p className='grey'>Entrega</p>
-              <p>
-                {shipPrice.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })}
-              </p>
-            </C.RowP>
-            <C.RowP>
-              <p>Total</p>
-              {voucher.discount > 0 ? (
-                <p>
-                  {(
-                    totalPrice -
-                    (totalPrice * voucher.discount) / 100
-                  ).toLocaleString('pt-BR', {
+                  {payment.discountValue.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
                     minimumFractionDigits: 2,
                   })}
                 </p>
-              ) : (
+              </C.RowP>
+            )}
+            <C.RowP>
+              <p className='grey'>Entrega</p>
+              {payment.shipValue > 0 && (
                 <p>
-                  {totalPrice.toLocaleString('pt-BR', {
+                  {payment.shipValue.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
                     minimumFractionDigits: 2,
                   })}
                 </p>
               )}
+            </C.RowP>
+            <C.RowP>
+              <p>Total</p>
+              <p>
+                {(payment.valueTotal + payment.shipValue).toLocaleString(
+                  'pt-BR',
+                  {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                  },
+                )}
+              </p>
             </C.RowP>
           </C.CartResume>
           <C.Navigation>
@@ -225,14 +232,7 @@ const Carrinho = () => {
           </C.Navigation>
         </C.Cart>
       ) : (
-        <C.EmptyCart>
-          <h3>Nenhum item foi adicionado ao seu carrinho :(</h3>
-          <p>Que tal olhar outros produtos?</p>
-          <Link to={'/'}>
-            <img src='/assets/icons/carrinho.svg' alt='' />
-            Ir às compras
-          </Link>
-        </C.EmptyCart>
+        <EmptyCart />
       )}
 
       <Footer />

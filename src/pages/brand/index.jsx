@@ -11,8 +11,6 @@ const Brand = () => {
   const [order, setOrder] = useState('Ordenar');
   const [openOrder, setOpenOrder] = useState(false);
   const id_brand = parseInt(useParams().id);
-  console.log(id_brand);
-  console.log();
 
   let productsBrand = [];
   products.forEach(item => {

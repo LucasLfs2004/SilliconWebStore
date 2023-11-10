@@ -172,6 +172,9 @@ export const CepArea = styled.div`
   flex-direction: column;
   width: 95%;
   padding: 0 2.5%;
+  justify-content: center;
+  row-gap: 6px;
+  height: 70px;
 `;
 export const CupomArea = styled.div`
   display: flex;
@@ -187,7 +190,15 @@ export const RowCep = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
+`;
+
+export const CepInfo = styled.span`
+  color: #010f2095;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  height: 17px;
 `;
 
 export const RowCupom = styled.div`
@@ -224,20 +235,27 @@ export const InputDisplay = styled.div`
   flex-direction: row;
   column-gap: 9px;
   align-items: center;
+
+  input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    padding: 0 5px 3px 5px;
+    outline: none;
+    background-color: transparent;
+    border: none;
+
+    border-bottom: 0.5px solid #5b43d6;
+  }
+
+  input.center {
+    width: 65px;
+    text-align: center;
+  }
 `;
 
-export const InputCep = styled.input`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  padding: 0 5px 3px 5px;
-  outline: none;
-  background-color: transparent;
-  border: none;
-
-  border-bottom: 0.5px solid #5b43d6;
-`;
+export const InputCep = styled.input``;
 
 export const ButtonPurple = styled.button`
   background-color: #5b43d6;
@@ -319,54 +337,5 @@ export const Navigation = styled.div`
   a.continue {
     border: 1px solid #02eddf;
     color: #010f20;
-  }
-`;
-export const EmptyCart = styled.main`
-  background-color: #ecf0f3;
-  height: calc(100vh - 304px);
-  padding: 44px 6% 0 6%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  h3 {
-    color: #010f20;
-    text-align: center;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-
-  p {
-    color: #010f20;
-    text-align: center;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin: 14px 0 44px 0;
-  }
-
-  a {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    height: 30px;
-    gap: 12px;
-    background-color: #02eddf;
-    border-radius: 3px;
-
-    color: #010f20;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-
-    img {
-      width: 23px;
-    }
   }
 `;

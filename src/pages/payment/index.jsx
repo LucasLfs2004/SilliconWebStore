@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import NewCard from '../../components/NewCard';
+import PurchaseResume from '../../components/PurchaseResume';
+import { setPayForm } from '../../store/actions/paymentActions';
 import * as C from './styles';
 
 const Payment = () => {
-  const [pay, setPay] = useState(0);
-
+  const payment = useSelector(state => state.payment);
+  const dispatch = useDispatch();
   return (
     <C.Container>
       <Header />
@@ -36,16 +38,16 @@ const Payment = () => {
       </C.Ship>
       <C.Title>Forma de Pagamento</C.Title>
       <C.Payment>
-        <C.ItemPay className={pay === 1 && 'selected'}>
-          <C.PayCard onClick={() => setPay(1)}>
-            {pay === 1 ? (
+        <C.ItemPay className={payment.payForm === 'boleto' && 'selected'}>
+          <C.PayCard onClick={() => dispatch(setPayForm('boleto'))}>
+            {payment.payForm === 'boleto' ? (
               <img src='/assets/icons/boletoBlue.svg' alt='' />
             ) : (
               <img src='/assets/icons/boletoWhite.svg' alt='' />
             )}
             <C.Paragraph>Boleto bancário</C.Paragraph>
           </C.PayCard>
-          <C.InfoPay className={pay === 1 && 'view'}>
+          <C.InfoPay className={payment.payForm === 'boleto' && 'view'}>
             <C.List>
               <li>2 dias úteis para efetuação do pagamento</li>
               <li>2 dias úteis para comprovação do pagamento</li>
@@ -55,27 +57,27 @@ const Payment = () => {
             </C.List>
           </C.InfoPay>
         </C.ItemPay>
-        <C.ItemPay className={pay === 2 && 'selected'}>
-          <C.PayCard onClick={() => setPay(2)}>
-            {pay === 2 ? (
+        <C.ItemPay className={payment.payForm === 'credit-card' && 'selected'}>
+          <C.PayCard onClick={() => dispatch(setPayForm('credit-card'))}>
+            {payment.payForm === 'credit-card' ? (
               <img src='/assets/icons/creditCardBlue.svg' alt='' />
             ) : (
               <img src='/assets/icons/creditCardWhite.svg' alt='' />
             )}
             <C.Paragraph>Cartão de crédito</C.Paragraph>
           </C.PayCard>
-          {pay === 2 && <NewCard />}
+          {payment.payForm === 'credit-card' && <NewCard />}
         </C.ItemPay>
-        <C.ItemPay className={pay === 3 && 'selected'}>
-          <C.PayCard onClick={() => setPay(3)}>
-            {pay === 3 ? (
+        <C.ItemPay className={payment.payForm === 'pix' && 'selected'}>
+          <C.PayCard onClick={() => dispatch(setPayForm('pix'))}>
+            {payment.payForm === 'pix' ? (
               <img src='/assets/icons/pixBlue.svg' alt='' />
             ) : (
               <img src='/assets/icons/pixWhite.svg' alt='' />
             )}
             <C.Paragraph>PIX</C.Paragraph>
           </C.PayCard>
-          <C.InfoPay className={pay === 3 && 'view'}>
+          <C.InfoPay className={payment.payForm === 'pix' && 'view'}>
             <C.List>
               <li>Aprovação imediata</li>
               <li>1 Hora para efetuar o pagamento</li>
@@ -84,16 +86,7 @@ const Payment = () => {
           </C.InfoPay>
         </C.ItemPay>
       </C.Payment>
-      <C.Resume>
-        <C.Title className='blue no-padding'>Resumo</C.Title>
-        <C.Paragraph>Método selecionado: </C.Paragraph>
-        <C.Paragraph>Total a pagar: </C.Paragraph>
-        {pay === 2 && <C.Span>Portions</C.Span>}
-        <C.Box>
-          <C.Paragraph>Endereço principal</C.Paragraph>
-          <C.Span>Rua Vicente do Rêgo Monteiro, 137 - Parque Brasil</C.Span>
-        </C.Box>
-      </C.Resume>
+      <PurchaseResume />
       <Footer />
     </C.Container>
   );

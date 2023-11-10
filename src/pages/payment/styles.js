@@ -161,18 +161,3 @@ export const List = styled.ul`
   font-weight: 400;
   line-height: normal;
 `;
-
-export const Resume = styled.section`
-  margin: 0;
-  background-color: #010f20;
-  width: 95%;
-  padding: 0 2.5%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 10px;
-`;
-
-export const Box = styled.div`
-  display: flex;
-  flex-direction: column;
-`;

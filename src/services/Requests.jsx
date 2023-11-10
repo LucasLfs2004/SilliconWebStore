@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Api } from './Api';
 
 export const createAccount = async (
@@ -116,6 +117,14 @@ export const fetchNowPlaying = async () => {
 export const fetchOnTheAir = async () => {
   try {
     return (await Api.get('/series/on_the_air')).data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getCep = async cep => {
+  try {
+    return (await axios.get(`https://viacep.com.br/ws/${cep}/json/`)).data;
   } catch (error) {
     return error;
   }

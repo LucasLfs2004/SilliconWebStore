@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { initializeCart } from './actions/cartActions';
-import { initializeVoucher } from './actions/voucherActions';
+import { initializePayment } from './actions/paymentActions';
 import cartReducer from './reducers/cartReducer';
-import voucherReducer from './reducers/voucherReducer';
+import paymentReducer from './reducers/paymentReducer';
 
 const store = configureStore({
   reducer: {
     cart: cartReducer,
-    voucher: voucherReducer,
+    payment: paymentReducer,
   },
 });
 
 store.dispatch(initializeCart());
-store.dispatch(initializeVoucher());
+store.dispatch(initializePayment());
 
 export default store;
