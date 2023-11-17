@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import InputMask from 'react-input-mask';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Container } from '../../CommomStyles';
 import EmptyCart from '../../components/EmptyCart';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
@@ -52,7 +53,7 @@ const Carrinho = () => {
   }, [cart]);
 
   return (
-    <C.Container>
+    <Container>
       <Header />
       {cart && cart.length > 0 ? (
         <C.Cart>
@@ -236,7 +237,7 @@ const Carrinho = () => {
       )}
 
       <Footer />
-    </C.Container>
+    </Container>
   );
 };
 

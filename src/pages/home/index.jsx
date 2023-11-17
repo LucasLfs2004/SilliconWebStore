@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Container } from '../../CommomStyles';
 import BannerCarousel from '../../components/BannerCarousel';
 import BrandCarousel from '../../components/BrandCarousel';
 import Footer from '../../components/Footer';
@@ -12,7 +13,7 @@ const Home = () => {
   const dispatch = useDispatch();
   dispatch(calculatePayment(cart));
   return (
-    <C.Container>
+    <Container>
       <Header />
       <BannerCarousel />
       <C.TitlePurple>
@@ -24,7 +25,7 @@ const Home = () => {
       </C.TitlePurple>
       <ProductArea></ProductArea>
       <Footer />
-    </C.Container>
+    </Container>
   );
 };
 

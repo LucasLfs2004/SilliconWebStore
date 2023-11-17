@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import NewCard from '../../components/NewCard';
@@ -10,7 +11,7 @@ const Payment = () => {
   const payment = useSelector(state => state.payment);
   const dispatch = useDispatch();
   return (
-    <C.Container>
+    <Container>
       <Header />
       <C.Title>Endereço de entrega</C.Title>
       <C.Ship>
@@ -92,7 +93,7 @@ const Payment = () => {
         <C.ButtonNavigation className='transparent'>Voltar</C.ButtonNavigation>
       </C.ButtonsPayment>
       <Footer />
-    </C.Container>
+    </Container>
   );
 };
 

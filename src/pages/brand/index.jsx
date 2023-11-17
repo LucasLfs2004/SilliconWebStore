@@ -1,29 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { Container } from '../../CommomStyles';
 import CardProduct from '../../components/CardProduct';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { brands } from '../../falseDatabase/brands';
-import { products } from '../../falseDatabase/products';
+import { OrderProduct } from './hooks';
 import * as C from './styles';
 
 const Brand = () => {
   const [order, setOrder] = useState('Ordenar');
   const [openOrder, setOpenOrder] = useState(false);
   const id_brand = parseInt(useParams().id);
+  const [list, setList] = useState([]);
 
-  let productsBrand = [];
-  products.forEach(item => {
-    item.brand_id === id_brand && productsBrand.push(item);
-  });
+  useEffect(() => {
+    setList(OrderProduct(order, id_brand));
+  }, [order, setOrder]);
 
   const orderList = [
     'Menor preço',
     'Maior preço',
     'Mais avaliados',
-    'Mais recentes',
-    'Mais procurados',
-    'Promoções',
+    // 'Mais recentes',
+    // 'Mais procurados',
+    // 'Promoções',
   ];
 
   const SelectOrder = item => {
@@ -32,7 +33,7 @@ const Brand = () => {
   };
   let brand = brands.find(item => item.id === id_brand);
   return (
-    <C.Container>
+    <Container>
       <Header />
       <C.TopBrand>
         <C.NameBrand>{brand.brand}</C.NameBrand>
@@ -63,11 +64,11 @@ const Brand = () => {
         </C.BtnOrder>
       </C.Buttons>
       <C.ProductArea>
-        {productsBrand &&
-          productsBrand.map((item, index) => <CardProduct item={item} />)}
+        {list &&
+          list.map((item, index) => <CardProduct key={index} item={item} />)}
       </C.ProductArea>
       <Footer />
-    </C.Container>
+    </Container>
   );
 };
 
