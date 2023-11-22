@@ -4,10 +4,10 @@ export const Header = styled.header`
   position: fixed;
   top: 0;
   z-index: 99;
-  width: calc(100% - 30px);
-  padding: 0 15px;
+  width: calc(100% - 4%);
+  padding: 0 2%;
   background-color: #010f20;
-  height: 60px;
+  height: 80px;
   margin: 0;
   display: flex;
   flex-direction: row;
@@ -28,6 +28,16 @@ export const Logo = styled.div`
     font-weight: 500;
     margin: 0;
     margin-bottom: -2px;
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 16px;
+    }
+
+    img {
+      width: 66px;
+    }
   }
 `;
 
@@ -62,16 +72,39 @@ export const Carrinho = styled.button`
   margin: 0;
   border: none;
   background-color: transparent;
+
+  @media (min-width: 1024px) {
+    img {
+      height: 24px;
+    }
+  }
 `;
 
 export const DivBlock = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   width: 15%;
 
   button {
     margin: 0;
     padding: 0;
+  }
+
+  .carrinho {
+    margin: 0;
+    border: none;
+    background-color: transparent;
+  }
+
+  @media (min-width: 1024px) {
+    .carrinho img {
+      height: 24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    width: 8%;
   }
 `;

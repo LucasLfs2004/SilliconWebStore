@@ -18,6 +18,12 @@ export const Search = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 25px;
+
+  @media (min-width: 1024px) {
+    height: 35px;
+    width: 250px;
+    border-radius: 10px;
+  }
 `;
 
 export const Input = styled.input`
@@ -53,6 +59,12 @@ export const Result = styled.section`
   z-index: 50;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.3);
+
+  @media (min-width: 1024px) {
+    top: 80px;
+    width: 100%;
+    align-items: center;
+  }
 `;
 
 export const Products = styled.div`
@@ -62,6 +74,10 @@ export const Products = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+
+  @media (min-width: 1024px) {
+    width: 40%;
+  }
 `;
 
 export const ItemProduct = styled.a`

@@ -43,6 +43,10 @@ export const Container = styled.div`
     color: #5ce1e6;
     opacity: 1;
   }
+
+  @media (min-width: 1024px) {
+    height: calc(100vw / 4.8);
+  }
 `;
 
 export const ItemBanner = styled.div`

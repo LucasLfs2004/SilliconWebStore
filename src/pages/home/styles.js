@@ -28,6 +28,13 @@ export const TitlePurple = styled.article`
     font-size: 16px;
     font-weight: 700;
   }
+
+  @media (min-width: 1024px) {
+    height: 75px;
+    h1 {
+      font-size: 24px;
+    }
+  }
 `;
 
 export const CarouselMarcas = styled.div`

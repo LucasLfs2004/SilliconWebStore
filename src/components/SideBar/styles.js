@@ -69,6 +69,12 @@ export const Sidebar = styled.button`
   margin: 0;
   background-color: transparent;
   border: none;
+
+  @media (min-width: 1024px) {
+    img {
+      width: 30px;
+    }
+  }
 `;
 
 export const Container = styled.div`

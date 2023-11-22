@@ -19,18 +19,7 @@ const Menu = () => {
   return (
     <C.Container>
       <C.Sidebar onClick={() => setShowMenu(!showMenu)}>
-        <svg
-          xmlns='http://www.w3.org/2000/svg'
-          width='20'
-          height='13'
-          viewBox='0 0 20 13'
-          fill='none'
-        >
-          <line y1='0.5' x2='20' y2='0.5' stroke='#D1D9E6' />
-          <line y1='4.5' x2='20' y2='4.5' stroke='#D1D9E6' />
-          <line y1='8.5' x2='20' y2='8.5' stroke='#D1D9E6' />
-          <line y1='12.5' x2='20' y2='12.5' stroke='#D1D9E6' />
-        </svg>
+        <img src='/assets/icons/menuIcon.svg' alt='' />
       </C.Sidebar>
       <C.Menu show={showMenu.toString()}>
         <C.UserRow>

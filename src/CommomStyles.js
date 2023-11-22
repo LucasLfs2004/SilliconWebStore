@@ -5,4 +5,8 @@ export const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media (min-width: 1024px) {
+    margin-top: 80px;
+  }
 `;
