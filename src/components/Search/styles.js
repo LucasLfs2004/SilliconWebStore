@@ -20,7 +20,7 @@ export const Search = styled.div`
   height: 25px;
 
   @media (min-width: 1024px) {
-    height: 35px;
+    height: 30px;
     width: 250px;
     border-radius: 10px;
   }
@@ -35,6 +35,10 @@ export const Input = styled.input`
 
   &:focus {
     outline: 0;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 14px;
   }
 `;
 

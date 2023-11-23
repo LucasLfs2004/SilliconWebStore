@@ -28,33 +28,12 @@ const CardProduct = ({ item }, props) => {
     (1 + item.value.feesMonthly / 100) ** item.value.portions;
   const pricePerPortions = priceInPortions / item.value.portions;
 
-  // const addToCart = () => {
-  //   const cartLocalStorage = [];
-  //   if (
-  //     localStorage.getItem('cart') !== undefined &&
-  //     localStorage.getItem('cart') !== null
-  //   ) {
-  //     const storageItem = localStorage.getItem('cart');
-  //     const arrayCart = storageItem.split(',');
-  //     let include = false;
-  //     arrayCart.forEach(element => {
-  //       if (element == item.id) {
-  //         include = true;
-  //       }
-  //     });
-  //     !include && arrayCart.push(item.id);
-  //     localStorage.setItem('cart', arrayCart);
-  //   } else {
-  //     localStorage.setItem('cart', [item.id]);
-  //   }
-  // };
-
   return (
     <C.Card>
       <Link to={`/product/${item.id}`}>
         <C.Rating>
           <Stars rating={item.rating} />
-          <C.RatingValue>
+          <C.RatingValue className='dark-hover'>
             {item.rating} ({item.amount_rating})
           </C.RatingValue>
         </C.Rating>
@@ -74,7 +53,7 @@ const CardProduct = ({ item }, props) => {
             </C.Discount>
           )}
         </C.CarouselImg>
-        <C.NameProduct>{item.name}</C.NameProduct>
+        <C.NameProduct className='dark-hover'>{item.name}</C.NameProduct>
         <C.PriceView>
           <C.InCash>
             <C.Price>

@@ -8,4 +8,13 @@ export const Container = styled.section`
   width: 100%;
   align-items: center;
   padding: 30px 0;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: calc(100% - 4%);
+    margin: auto;
+    padding: 30px 2%;
+    column-gap: 20px;
+  }
 `;
