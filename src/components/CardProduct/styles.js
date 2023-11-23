@@ -17,20 +17,21 @@ export const Card = styled.div`
 
   @media (min-width: 1024px) {
     padding: 5px 10px 10px 10px;
-    width: calc((100% / 6) - 40px);
+    width: calc((100% / 6) - 42px);
     min-width: 240px;
     height: auto;
     min-height: 370px;
     transition: all 0.15s ease-in-out;
     border-radius: 5px;
-    border: 1px solid #010f20;
+    border: 2px solid #010f20;
+    cursor: pointer;
 
     &:hover {
-      background-color: transparent;
-
-      .dark-hover {
+      border-radius: 8px;
+      border-color: #02eddf;
+      /* .dark-hover {
         color: #010f20;
-      }
+      } */
     }
   }
 `;
@@ -59,7 +60,7 @@ export const RatingValue = styled.div`
   }
 `;
 
-export const CarouselImg = styled.div`
+export const ContentImg = styled.div`
   position: relative;
   height: calc(100vw / 2.4375);
   width: 100%;
@@ -79,8 +80,10 @@ export const CarouselImg = styled.div`
     border-radius: 5px;
   }
 
-  .slick-arrow {
-    display: none !important;
+  @media (max-width: 1024px) {
+    .slick-arrow {
+      display: none !important;
+    }
   }
 
   .slick-dots {
@@ -107,7 +110,33 @@ export const CarouselImg = styled.div`
     height: 200px;
 
     .carousel-image-product {
-      height: auto;
+      /* height: auto;
+      width: 200px; */
+      display: none;
+    }
+
+    .slick-arrow {
+      background-color: transparent;
+    }
+
+    .slick-arrow:before {
+      color: #5ce1e6;
+    }
+  }
+`;
+
+export const ImageProductWeb = styled.div`
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+
+    img {
+      height: 100%;
     }
   }
 `;
@@ -239,6 +268,7 @@ export const Buttons = styled.div`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  z-index: 10;
 
   @media (min-width: 1024px) {
     flex-direction: column;
@@ -267,9 +297,20 @@ export const Button = styled.button`
 
   @media (min-width: 1024px) {
     width: 100%;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
     p {
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+
+    &.cart {
+      display: none;
+    }
+
+    &:hover {
+      background-color: #2dd3c9;
     }
   }
 `;
