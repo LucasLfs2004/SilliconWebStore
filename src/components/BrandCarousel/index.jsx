@@ -9,8 +9,8 @@ const BrandCarousel = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: window.screen.width > 1024 ? 6 : 3,
+    slidesToScroll: window.screen.width > 1024 ? 6 : 3,
   };
 
   return (

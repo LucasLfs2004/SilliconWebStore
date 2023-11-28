@@ -92,7 +92,7 @@ const Carrinho = () => {
                               dispatch(decrementAmountProduct(item.product.id))
                             }
                           >
-                            {'<'}
+                            <img src='/assets/icons/arrowLeftIcon.svg' alt='' />
                           </button>
                           <p>{item.amount}</p>
                           <button
@@ -100,7 +100,10 @@ const Carrinho = () => {
                               dispatch(incrementAmountProduct(item.product.id))
                             }
                           >
-                            {'>'}
+                            <img
+                              src='/assets/icons/arrowRightIcon.svg'
+                              alt=''
+                            />
                           </button>
                         </C.BtnQuantidade>
                         <C.ButtonDelete

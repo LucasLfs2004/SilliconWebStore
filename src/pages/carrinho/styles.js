@@ -153,10 +153,23 @@ export const BtnQuantidade = styled.div`
     width: 6px;
     color: #5b43d6;
     font-size: 13px;
-    font-style: normal;
     font-weight: 300;
-    line-height: normal;
     text-align: center;
+  }
+
+  @media (min-width: 1024px) {
+    button {
+      height: 23px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 10px;
+    }
+
+    p {
+      font-size: 15px;
+      font-weight: 400;
+    }
   }
 `;
 
@@ -165,6 +178,14 @@ export const ButtonDelete = styled.button`
   border: none;
   padding: 0;
   background-color: transparent;
+
+  @media (min-width: 1024px) {
+    cursor: pointer;
+
+    img {
+      height: 18px;
+    }
+  }
 `;
 
 export const CepArea = styled.div`

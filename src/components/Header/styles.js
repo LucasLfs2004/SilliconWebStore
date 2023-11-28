@@ -7,12 +7,16 @@ export const Header = styled.header`
   width: calc(100% - 4%);
   padding: 0 2%;
   background-color: #010f20;
-  height: 80px;
+  height: 60px;
   margin: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  @media (min-width: 1024px) {
+    height: 80px;
+  }
 `;
 
 export const Logo = styled.div`

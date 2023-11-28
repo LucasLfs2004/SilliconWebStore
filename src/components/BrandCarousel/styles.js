@@ -68,4 +68,12 @@ export const ItemBrand = styled.a`
     width: auto;
     max-height: 35px;
   }
+
+  @media (min-width: 1024px) {
+    img {
+      max-height: 60px;
+      min-width: 45%;
+      max-width: 150px;
+    }
+  }
 `;
