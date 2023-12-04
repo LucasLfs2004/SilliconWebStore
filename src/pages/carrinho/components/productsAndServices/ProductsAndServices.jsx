@@ -17,7 +17,9 @@ const ProductsAndServices = () => {
         </C.BtnDelete>
       </C.Top>
       <C.SellFrom>
-        Vendido e Entregue por <strong>Sillicon Store</strong>
+        <p>
+          Vendido e Entregue por <strong>Sillicon Store</strong>
+        </p>
       </C.SellFrom>
       <C.CartArea>
         {cart &&

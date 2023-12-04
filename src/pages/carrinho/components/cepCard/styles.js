@@ -67,4 +67,43 @@ export const CepInfo = styled.span`
   }
 `;
 
-export const ShipValue = styled.div``;
+export const ShipValue = styled.div`
+  margin: 0;
+  display: flex;
+  justify-content: end;
+  flex-direction: column;
+  row-gap: 4px;
+`;
+
+export const Subtitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 7px;
+
+  div {
+    padding: 0 3px;
+    border-bottom: 1px solid #5b43d6;
+    display: flex;
+    flex-direction: row;
+    column-gap: 4px;
+  }
+
+  h2 {
+    color: #010f20;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  h1 {
+    color: #5b43d6;
+    font-size: 12px;
+    font-weight: 700;
+  }
+`;
+export const TimeShip = styled.div`
+  color: rgba(1, 15, 32, 0.6);
+  font-size: 10px;
+  font-weight: 500;
+  text-align: right;
+`;

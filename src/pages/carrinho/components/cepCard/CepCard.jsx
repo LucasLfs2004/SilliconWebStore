@@ -38,7 +38,26 @@ const CepCard = () => {
               `${payment?.shipInfos?.logradouro} - ${payment?.shipInfos?.bairro}`}
           </C.CepInfo>
         </C.ColumnBox>
-        <C.ShipValue></C.ShipValue>
+        <C.ShipValue>
+          {payment.shipValue > 0 && (
+            <>
+              <C.Subtitle>
+                <div>
+                  <img src='/assets/icons/truckIcon.svg' alt='' />
+                  <h2>Frete:</h2>
+                </div>
+                <h1>
+                  {payment.shipValue.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                  })}
+                </h1>
+              </C.Subtitle>
+              <C.TimeShip>5 dias úteis</C.TimeShip>
+            </>
+          )}
+        </C.ShipValue>
       </C.RowBox>
     </C.CepArea>
   );
