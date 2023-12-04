@@ -1,8 +1,8 @@
-import { products } from '../../falseDatabase/products';
+// import { products } from '../../falseDatabase/products';
 import CardProduct from '../CardProduct';
 import * as C from './styles';
 
-const ProductArea = () => {
+const ProductArea = ({ products }) => {
   return (
     <C.Container>
       {products &&

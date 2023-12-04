@@ -5,6 +5,7 @@ import BrandCarousel from '../../components/BrandCarousel';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import ProductArea from '../../components/ProductArea';
+import { products } from '../../falseDatabase/products';
 import { calculatePayment } from '../../store/actions/paymentActions';
 import * as C from './styles';
 
@@ -23,7 +24,7 @@ const Home = () => {
       <C.TitlePurple>
         <h1>Promoções</h1>
       </C.TitlePurple>
-      <ProductArea></ProductArea>
+      <ProductArea products={products} />
       <Footer />
     </Container>
   );

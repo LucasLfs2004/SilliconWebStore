@@ -16,5 +16,6 @@ export const Container = styled.section`
     margin: auto;
     padding: 30px 2%;
     column-gap: 20px;
+    margin: 0;
   }
 `;

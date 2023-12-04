@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { Container } from '../../CommomStyles';
-import CardProduct from '../../components/CardProduct';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import ProductArea from '../../components/ProductArea';
+import BtnFilter from '../../components/btnFilter';
+import BtnOrder from '../../components/btnOrder';
 import { brands } from '../../falseDatabase/brands';
 import { OrderProduct } from './hooks';
 import * as C from './styles';
@@ -16,16 +18,7 @@ const Brand = () => {
 
   useEffect(() => {
     setList(OrderProduct(order, id_brand));
-  }, [order, setOrder]);
-
-  const orderList = [
-    'Menor preço',
-    'Maior preço',
-    'Mais avaliados',
-    // 'Mais recentes',
-    // 'Mais procurados',
-    // 'Promoções',
-  ];
+  }, [order, id_brand]);
 
   const SelectOrder = item => {
     setOrder(item);
@@ -35,38 +28,33 @@ const Brand = () => {
   return (
     <Container>
       <Header />
-      <C.TopBrand>
-        <C.NameBrand>{brand.brand}</C.NameBrand>
-        <img src={brand.img_path} alt='' />
-      </C.TopBrand>
-      <C.Buttons>
-        <C.BtnFilter>
-          <img src='/assets/icons/filtro.png' alt='' />
-          <p>Filtrar</p>
-        </C.BtnFilter>
-        <C.BtnOrder className={openOrder && 'open'}>
-          <button onClick={() => setOpenOrder(!openOrder)} className='row'>
-            <img src='/assets/icons/ordenar.png' alt='' />
-            <p>{order}</p>
-          </button>
-          <C.SelectOrder className={openOrder && 'view'} view={openOrder}>
-            {orderList.map((item, index) => (
-              <C.OrderOption
-                onClick={() => openOrder && SelectOrder(item)}
-                className={openOrder && 'view'}
-                view={openOrder}
-                key={index}
-              >
-                {item}
-              </C.OrderOption>
-            ))}
-          </C.SelectOrder>
-        </C.BtnOrder>
-      </C.Buttons>
-      <C.ProductArea>
-        {list &&
-          list.map((item, index) => <CardProduct key={index} item={item} />)}
-      </C.ProductArea>
+      <C.Brand>
+        <C.TopBrand>
+          <C.NameBrand>{brand.brand}</C.NameBrand>
+          <img src={brand.img_path} alt='' />
+          <C.Buttons className='web'>
+            <BtnFilter boxShadow={false} />
+            <BtnOrder
+              boxShadow={false}
+              openOrder={openOrder}
+              setOpenOrder={setOpenOrder}
+              order={order}
+              SelectOrder={SelectOrder}
+            />
+          </C.Buttons>
+        </C.TopBrand>
+        <C.Buttons className='mobile'>
+          <BtnFilter boxShadow={true} />
+          <BtnOrder
+            boxShadow={true}
+            openOrder={openOrder}
+            setOpenOrder={setOpenOrder}
+            order={order}
+            SelectOrder={SelectOrder}
+          />
+        </C.Buttons>
+        <ProductArea products={list} />
+      </C.Brand>
       <Footer />
     </Container>
   );

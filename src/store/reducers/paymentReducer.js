@@ -37,16 +37,20 @@ const paymentReducer = (state = initialState, action) => {
       }
       let maxPortion = 0;
       action.payload.forEach(element => {
-        if (element.product.value.portions > maxPortion)
+        if (maxPortion === 0) {
           maxPortion = element.product.value.portions;
+        } else if (element.product.value.portions < maxPortion) {
+          maxPortion = element.product.value.portions;
+        }
       });
       let portions = [];
+      console.log(action.payload);
       console.log('maxPortion', maxPortion);
       for (let i = 0; i < maxPortion; i++) {
         let priceTotal = 0;
-        console.log('props', action.payload);
+        // console.log('props', action.payload);
         action.payload.forEach(element => {
-          console.log(element);
+          // console.log(element);
           let price =
             element.product.value.priceNow *
             element.amount *
@@ -56,7 +60,7 @@ const paymentReducer = (state = initialState, action) => {
               price * (1 + element.product.value.feesMonthly / 100) ** (i + 1);
           }
           priceTotal = priceTotal + price;
-          console.log(priceTotal);
+          // console.log(priceTotal);
         });
         portions.push({
           often: i + 1,
