@@ -8,9 +8,9 @@ const CepCard = () => {
   const { cep, setCep, searchCep, payment } = useCepCard();
 
   return (
-    <C.CepArea>
-      <C.RowBox>
-        <Title>
+    <C.CepArea className='cep-area'>
+      <C.RowBox className='mobile-end'>
+        <Title className='only-web'>
           <img src='/assets/icons/locationIcon.svg' alt='' />
           <h1>Endereço de entrega</h1>
         </Title>

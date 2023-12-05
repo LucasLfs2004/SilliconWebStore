@@ -10,7 +10,7 @@ export const CartResume = styled.div`
   @media (min-width: 1024px) {
     background-color: #fff;
     width: calc(360px);
-    height: 586px;
+    height: 605px;
     padding: 15px 0;
     row-gap: 22px;
     justify-content: space-between;
@@ -175,5 +175,10 @@ export const Navigation = styled.div`
   a.continue {
     border: 1px solid #02eddf;
     color: #010f20;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 18px 0;
+    width: 100%;
   }
 `;

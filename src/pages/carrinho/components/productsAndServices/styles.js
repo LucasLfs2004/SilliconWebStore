@@ -8,6 +8,8 @@ export const CartComponent = styled.div`
     background-color: #fff;
     margin-top: 20px;
     padding: 0 20px;
+    min-height: 479px;
+    padding-bottom: 36px;
   }
 `;
 

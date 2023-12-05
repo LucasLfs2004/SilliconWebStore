@@ -14,6 +14,7 @@ export const ItemCart = styled.div`
     height: 100px;
     width: calc(100% - 28px);
     padding: 16px 10px 10px 18px;
+    border-bottom: 1px solid #02eddf;
   }
 `;
 
@@ -70,6 +71,9 @@ export const BoxInfos = styled.div`
     overflow: hidden;
     max-width: 500px;
   }
+  p.grey {
+    display: none;
+  }
 
   @media (min-width: 1024px) {
     p {
@@ -78,6 +82,7 @@ export const BoxInfos = styled.div`
 
     p.grey {
       color: #696969;
+      display: block;
     }
 
     p.font-mini {
@@ -143,10 +148,9 @@ export const BtnQuantidade = styled.div`
   p {
     color: #010f20;
     font-size: 13px;
-    font-style: normal;
     font-weight: 300;
-    line-height: normal;
     text-align: center;
+    min-width: 10px;
   }
 
   button {
@@ -158,6 +162,15 @@ export const BtnQuantidade = styled.div`
     font-size: 13px;
     font-weight: 300;
     text-align: center;
+    min-width: 10px;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    column-gap: 4px;
   }
 
   @media (min-width: 1024px) {
@@ -173,7 +186,7 @@ export const BtnQuantidade = styled.div`
     p {
       font-size: 15px;
       font-weight: 400;
-      min-width: 8px;
+      min-width: 10px;
       text-align: center;
     }
   }
@@ -189,11 +202,15 @@ export const ButtonDelete = styled.button`
   }
 
   @media (min-width: 1024px) {
-    cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
-    column-gap: 12px;
+    column-gap: 6px;
+    cursor: pointer;
+
+    div {
+      width: 40px;
+    }
 
     p {
       display: block;

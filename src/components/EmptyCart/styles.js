@@ -48,4 +48,27 @@ export const EmptyCart = styled.main`
       width: 23px;
     }
   }
+
+  @media (min-width: 1024px) {
+    width: 100%;
+
+    h3 {
+      font-size: 32px;
+      max-width: 640px;
+    }
+
+    p {
+      font-size: 20px;
+    }
+
+    a {
+      font-size: 20px;
+      height: 45px;
+      width: 250px;
+      font-weight: 500;
+      img {
+        width: 28px;
+      }
+    }
+  }
 `;

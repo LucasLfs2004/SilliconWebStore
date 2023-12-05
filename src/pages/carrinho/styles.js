@@ -1,15 +1,10 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`;
-
 export const Title = styled.div`
-  &.only-web {
-    display: none;
+  @media (max-width: 1024px) {
+    &.only-web {
+      display: none;
+    }
   }
 
   h1 {
@@ -41,8 +36,10 @@ export const ContentPage = styled.div`
   width: 100%;
   min-height: calc(100vh - 260px);
   background-color: #ecf0f3;
+  display: flex;
+  flex-direction: column;
+
   @media (min-width: 1024px) {
-    display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: start;
@@ -64,11 +61,8 @@ export const BoxInfos = styled.div`
     min-width: 900px;
     max-width: 1000px;
     flex-direction: column-reverse;
+    width: 100%;
   }
-
-  /* @media (min-width: 1024px) and (max-width: 1460px) {
-     width: calc(100% - 60px); 
-  } */
 `;
 
 export const CartComponent = styled.div`

@@ -23,7 +23,7 @@ export const VoucherCard = () => {
 
   return (
     <C.CupomArea>
-      <Title>
+      <Title className='only-web'>
         <img src='  assets/icons/voucherIcon.svg' alt='' />
         <h1>Cupom de desconto</h1>
       </Title>

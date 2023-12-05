@@ -2,14 +2,15 @@ import styled from 'styled-components';
 
 export const CepArea = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   width: 95%;
-  padding: 0 2.5%;
+  padding: 8px 2.5%;
   justify-content: center;
   row-gap: 6px;
   height: 70px;
 
   @media (min-width: 1024px) {
+    flex-direction: column;
     background-color: #fff;
     height: auto;
     width: 100%;
@@ -19,19 +20,31 @@ export const CepArea = styled.div`
 `;
 
 export const RowBox = styled.div`
-  display: none;
+  display: flex;
+  flex-direction: row;
+  a {
+    color: #010f20;
+    font-size: 10px;
+    font-weight: 500;
+    text-align: end;
+    margin-top: -16px;
+  }
+
+  @media (max-width: 1024px) {
+    &.mobile-end {
+      justify-content: end;
+    }
+  }
 
   @media (min-width: 1024px) {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 
     a {
-      width: 90px;
       color: #02eddf;
+      width: 90px;
+      margin: 0;
       font-size: 10px;
-      font-weight: 500;
     }
   }
 `;
@@ -68,11 +81,15 @@ export const CepInfo = styled.span`
 `;
 
 export const ShipValue = styled.div`
-  margin: 0;
-  display: flex;
-  justify-content: end;
-  flex-direction: column;
-  row-gap: 4px;
+  display: none;
+
+  @media (min-width: 1024px) {
+    margin: 0;
+    display: flex;
+    justify-content: end;
+    flex-direction: column;
+    row-gap: 4px;
+  }
 `;
 
 export const Subtitle = styled.div`

@@ -8,7 +8,7 @@ export const CupomArea = styled.div`
   width: 95%;
   padding: 0 2.5%;
 
-  @media (min-width: 104px) {
+  @media (min-width: 1024px) {
     background-color: #fff;
     padding: 4px 20px 8px 20px;
     height: auto;
