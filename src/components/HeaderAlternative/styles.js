@@ -97,12 +97,10 @@ export const DivBlock = styled.div`
   }
 
   @media (min-width: 1024px) {
+    width: 3%;
+
     .carrinho img {
       height: 24px;
     }
-  }
-
-  @media (min-width: 1024px) {
-    width: 8%;
   }
 `;

@@ -6,6 +6,7 @@ export const Container = styled.main`
   flex-direction: column;
   min-height: calc(100vh - 60px);
   align-items: center;
+  width: 100%;
 
   @media (min-width: 1024px) {
     margin-top: 80px;

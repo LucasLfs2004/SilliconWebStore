@@ -1,10 +1,35 @@
 import styled from 'styled-components';
 
-export const Container = styled.section`
+export const ContentPage = styled.section`
   display: flex;
   flex-direction: column;
-  background-color: #ecf0f3;
-  min-height: 100vh;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    width: 100%;
+    column-gap: 36px;
+    justify-content: center;
+    padding: 64px 0;
+    background: #ecf0f3;
+  }
+`;
+
+export const Box = styled.section`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    &.left-side {
+      width: 900px;
+      row-gap: 36px;
+    }
+
+    &.right-side {
+      width: 400px;
+    }
+  }
 `;
 
 export const Title = styled.h1`
@@ -23,6 +48,12 @@ export const Title = styled.h1`
   &.no-padding {
     width: 100%;
     padding: 5px 0 10px 0;
+  }
+
+  @media (min-width: 1024px) {
+    &.only-mobile {
+      display: none;
+    }
   }
 `;
 
@@ -51,6 +82,10 @@ export const Paragraph = styled.p`
 
   &.margin-top {
     margin-top: 12px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 14px;
   }
 `;
 

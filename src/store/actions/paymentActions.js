@@ -12,7 +12,7 @@ export const initializePayment = () => {
     valueTotal: 0,
     discountValue: 0,
     portions: [],
-    payForm: null,
+    payForm: { method: null, portions: null },
     shipValue: 0,
     shipInfos: {},
     voucher: null,

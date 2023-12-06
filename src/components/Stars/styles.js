@@ -11,4 +11,15 @@ export const Row = styled.div`
     width: 15px;
     height: 15px;
   }
+
+  @media (min-width: 1024px) {
+    width: auto;
+    height: 23px;
+    column-gap: 5px;
+
+    img {
+      width: 23px;
+      height: 23px;
+    }
+  }
 `;
