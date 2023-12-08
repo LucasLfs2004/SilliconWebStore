@@ -41,28 +41,32 @@ const ItemCart = ({ item }) => {
           </C.Price>
           <C.Buttons>
             <C.BtnQuantidade>
-              <p>quant...</p>
-              <button
-                onClick={() =>
-                  dispatch(decrementAmountProduct(item.product.id))
-                }
-              >
-                <img src='/assets/icons/arrowLeftIcon.svg' alt='' />
-              </button>
-              <p>{item.amount}</p>
-              <button
-                onClick={() =>
-                  dispatch(incrementAmountProduct(item.product.id))
-                }
-              >
-                <img src='/assets/icons/arrowRightIcon.svg' alt='' />
-              </button>
+              <p>quant.</p>
+              <div className='row'>
+                <button
+                  onClick={() =>
+                    dispatch(decrementAmountProduct(item.product.id))
+                  }
+                >
+                  <img src='/assets/icons/arrowLeftIcon.svg' alt='' />
+                </button>
+                <p>{item.amount}</p>
+                <button
+                  onClick={() =>
+                    dispatch(incrementAmountProduct(item.product.id))
+                  }
+                >
+                  <img src='/assets/icons/arrowRightIcon.svg' alt='' />
+                </button>
+              </div>
             </C.BtnQuantidade>
             <C.ButtonDelete
               onClick={() => dispatch(removeProduct(item.product.id))}
             >
               <p>Remover</p>
-              <img src='/assets/icons/trash.svg' alt='' />
+              <div>
+                <img src='/assets/icons/trash.svg' alt='' />
+              </div>
             </C.ButtonDelete>
           </C.Buttons>
         </C.Box>

@@ -1,215 +1,37 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate, useParams } from 'react-router';
-import Slider from 'react-slick';
+import { useParams } from 'react-router';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
-import Stars from '../../components/Stars';
-import { brands } from '../../falseDatabase/brands';
 import { category } from '../../falseDatabase/category';
-import { department } from '../../falseDatabase/department';
 import { products } from '../../falseDatabase/products';
-import { seller } from '../../falseDatabase/seller';
-import { addToCart } from '../../store/actions/cartActions';
+import ProductPresentation from './components/ProductPresentation';
+import PriceProduct from './components/priceProduct';
+import TopInfos from './components/topInfos';
 import * as C from './styles';
 
 export const Product = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [seePortions, setSeePortions] = useState(false);
-  const [favorite, setFavorite] = useState(false);
   const id = parseInt(useParams().id);
   const product = products.find(item => item.id === id);
   const categoryProduct = category.find(
     item => item.id === product.category_id,
   );
-  const departmentProduct = department.find(
-    item => item.id === categoryProduct.department_id,
-  );
-  const brandProduct = brands.find(item => item.id === product.brand_id);
-  const sellerName = seller.find(item => item.id === product.seller_id).name;
-
-  const priceCredit =
-    product.value.priceNow * (1 + product.value.feesCredit / 100);
-  const priceInPortions =
-    priceCredit *
-    (1 + product.value.feesMonthly / 100) ** product.value.portions;
-  const pricePerPortions = priceInPortions / product.value.portions;
-  const portions = [];
-  for (let i = 1; i <= product.value.portions; i++) {
-    portions[i - 1] = priceCredit * (1 + product.value.feesMonthly / 100) ** i;
-  }
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
-  const buyProduct = () => {
-    console.log('buyProduct');
-    dispatch(addToCart(product));
-    console.log('alterando rota');
-    navigate('/carrinho');
-  };
 
   return (
-    <C.Page>
+    <Container>
       <Header />
-      <C.TopInfos>
-        <C.RouteCategory>
-          {departmentProduct.name} <span>{' > '}</span> {categoryProduct.name}
-          <span>{' > '}</span> {brandProduct.brand}
-        </C.RouteCategory>
-        <C.SimpleInfos>
-          <C.LogoInfo>
-            <img
-              className='logoBrand'
-              src={brandProduct.img_path}
-              color='#000000'
-              alt=''
-            />
-          </C.LogoInfo>
-          <C.WarrantyInfo>
-            <img src='/assets/icons/linePurple.svg' alt='' />
-            <p>
-              {product.warranty && product.warranty > 12
-                ? `${product.warranty / 12} anos de garantia`
-                : `${product.warranty} ${
-                    product.warranty > 1 ? 'meses' : 'mês'
-                  } de garantia`}
-            </p>
-            <img src='/assets/icons/linePurple.svg' alt='' />
-          </C.WarrantyInfo>
-          <C.BtnActions>
-            <button onClick={() => setFavorite(!favorite)}>
-              {favorite ? (
-                <img src='/assets/icons/favoritePurple.svg' alt='' />
-              ) : (
-                <img src='/assets/icons/favoriteGray.svg' alt='' />
-              )}
-            </button>
-            <img src='/assets/icons/shareGray.svg' alt='' />
-          </C.BtnActions>
-        </C.SimpleInfos>
-      </C.TopInfos>
-      <C.DarkArea>
-        <C.Rating>
-          <Stars rating={product.rating} />
-          <C.RatingValue>
-            {product.rating} ({product.amount_rating})
-          </C.RatingValue>
-        </C.Rating>
-        <C.CarouselImage>
-          <Slider className='carousel-image-product' {...settings}>
-            {product &&
-              product.image.map((img_path, index) => (
-                <C.ImgProduct key={index}>
-                  <img
-                    src={img_path}
-                    alt={`Imagem ${product.name} - ${index}`}
-                  />
-                </C.ImgProduct>
-              ))}
-          </Slider>
-        </C.CarouselImage>
-        <C.Seller>
-          Vendido e entregue por <span>{sellerName}</span>
-        </C.Seller>
-      </C.DarkArea>
-      <C.PriceArea>
-        <C.Name>{product.name}</C.Name>
-        <C.IdProduct>Código: xxxxxxxx</C.IdProduct>
-        <C.RowPrice>
-          <img src='/assets/icons/pix.svg' alt='' />
-          <C.Price>
-            <p>
-              {product.value.priceNow.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              })}
-            </p>
-            <span>à vista no pix</span>
-          </C.Price>
-        </C.RowPrice>
-        <C.RowPrice>
-          <img src='/assets/icons/creditCard.svg' alt='' />
-          <C.Price>
-            <p>
-              {priceInPortions.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              })}
-            </p>
-            <span>
-              {product.value.portions} x de{' '}
-              {pricePerPortions.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              })}
-            </span>
-            <C.BtnPortions onClick={() => setSeePortions(!seePortions)}>
-              <img src='/assets/icons/miniArrowGray.svg' alt='' />
-              <p>Ver parcelas</p>
-            </C.BtnPortions>
-          </C.Price>
-        </C.RowPrice>
-        <C.PortionsDisplay className={seePortions && 'view'} view={seePortions}>
-          <h4>Parcelas</h4>
-          <C.Display>
-            {portions?.map((item, index) => {
-              return (
-                <C.Portion>
-                  <p>
-                    {index + 1} x de{' '}
-                    {(item / (index + 1)).toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                    })}
-                  </p>
-                  <span>
-                    {item.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                    })}
-                  </span>
-                </C.Portion>
-              );
-            })}
-          </C.Display>
-          <span className='desc'>
-            *Em até {product.value.portions}x com juros de{' '}
-            {product.value.feesMonthly}% a.m.
-          </span>
-        </C.PortionsDisplay>
-      </C.PriceArea>
-      <C.BuyComponent>
-        <C.Price className='cian'>
-          <p>
-            {product.value.priceNow.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            })}
-          </p>
-          <span>À vista no pix</span>
-        </C.Price>
-        <C.BuyBtn onClick={() => buyProduct()}>
-          <img src='/assets/icons/carrinhoDark.svg' alt='' />
-          <p>Comprar</p>
-        </C.BuyBtn>
-      </C.BuyComponent>
+      <C.ContentPage>
+        <C.BoxContent>
+          <TopInfos categoryProduct={categoryProduct} product={product} />
+          <ProductPresentation />
+        </C.BoxContent>
+        <C.BoxContent>
+          <PriceProduct />
+        </C.BoxContent>
+      </C.ContentPage>
       <Footer />
-    </C.Page>
+    </Container>
   );
 };
 

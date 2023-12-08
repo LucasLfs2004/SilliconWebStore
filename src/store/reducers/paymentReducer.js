@@ -11,7 +11,7 @@ const initialState = {
   valueTotal: 0,
   discountValue: 0,
   portions: [],
-  payForm: null,
+  payForm: { method: null, portions: null },
   shipValue: 0,
   shipInfos: {},
 };

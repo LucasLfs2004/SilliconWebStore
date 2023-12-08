@@ -1,7 +1,7 @@
 import { Container } from '../../CommomStyles';
 import EmptyCart from '../../components/EmptyCart';
 import Footer from '../../components/Footer';
-import Header from '../../components/Header';
+import HeaderPage from '../../components/HeaderAlternative';
 import CartResume from './components/cartResume/CartResume';
 import CepCard from './components/cepCard/CepCard';
 import ProductsAndServices from './components/productsAndServices/ProductsAndServices';
@@ -14,7 +14,11 @@ const Carrinho = () => {
 
   return (
     <Container>
-      <Header />
+      {/* <Header /> */}
+      <HeaderPage
+        img_path={'/assets/icons/carrinho-gradient.svg'}
+        page_title={'Carrinho'}
+      />
       {cart && cart.length > 0 ? (
         <C.ContentPage>
           <C.BoxInfos>
