@@ -4,18 +4,18 @@ import AddImage from '../pages/AddImage';
 import AddProduct from '../pages/AddProduct';
 import Brand from '../pages/brand';
 import Carrinho from '../pages/carrinho';
-import CreateAccount from '../pages/createAccount';
 import Home from '../pages/home';
-import Login from '../pages/login';
 import Payment from '../pages/payment';
 import Product from '../pages/product';
+import Login from '../pages/signIn';
+import CreateAccount from '../pages/signUp';
 
 const Content = props => {
   const routes = useRoutes([
     { path: '/', element: <Home /> },
-    { path: '/login', element: <Login /> },
+    { path: '/signin', element: <Login /> },
     {
-      path: '/create-account',
+      path: '/signup',
       element: <CreateAccount />,
     },
     {

@@ -44,7 +44,7 @@ const Login = () => {
         </Form>
         <Message>
           Não tem conta?
-          <Link to={'/create-account'}> clique aqui!</Link>
+          <Link to={'/signup'}> clique aqui!</Link>
         </Message>
         <Message>
           Esqueci minha

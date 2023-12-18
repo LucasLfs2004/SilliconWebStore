@@ -1,5 +1,49 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import DOMPurify from 'dompurify';
+import moment from 'moment';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
 import { z } from 'zod';
+import { createAccount } from '../../services/Requests';
+import { setUser } from '../../store/actions/userActions';
+
+export const useSignUp = () => {
+  const dispatch = useDispatch();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    mode: 'all',
+    resolver: zodResolver(CreateAccountZod),
+  });
+
+  const handleCreateAccount = async data => {
+    console.log('HandleCreateAccount');
+    try {
+      const user = {
+        name: data.name,
+        cpf: data.cpf,
+        phone: data.phone,
+        email: data.email,
+        birth: moment(data.birth, 'DD/MM/YYYY', true).format('YYYY-MM-DD'),
+        password: data.password,
+      };
+      //   const dataFormata = moment(user.birth, 'DD/MM/YYYY', true).format(
+      //     'YYYY-MM-DD',
+      //   );
+      const data_user = await createAccount(user);
+      console.log(data_user);
+      dispatch(setUser(data_user));
+      window.history.back();
+    } catch (error) {
+      console.log(error.response.data);
+      alert('Não foi possível criar sua conta');
+    }
+  };
+
+  return { handleCreateAccount, errors, register, handleSubmit };
+};
 
 export const CreateAccountZod = z
   .object({
@@ -22,6 +66,9 @@ export const CreateAccountZod = z
     birth: z
       .string()
       .min(10)
+      .regex(/[0-9]/, {
+        message: 'dd/mm/yyyy',
+      })
       .transform(field => DOMPurify.sanitize(field)),
     password: z
       .string()

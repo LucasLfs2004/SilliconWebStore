@@ -1,31 +1,13 @@
 import axios from 'axios';
 import { Api } from './Api';
 
-export const createAccount = async (
-  name,
-  cpf,
-  email,
-  birth,
-  phone,
-  password,
-) => {
+export const createAccount = async user => {
   try {
-    const response = await Api.post(
-      '/create-account',
-      {
-        name,
-        cpf,
-        email,
-        birth,
-        phone,
-        password,
+    const response = await Api.post('/create-account', user, {
+      headers: {
+        'Content-Type': 'application/json',
       },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
+    });
     const data = response.data;
     return data;
   } catch (error) {

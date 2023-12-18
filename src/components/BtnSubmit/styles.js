@@ -10,4 +10,9 @@ export const Button = styled.button`
   align-items: center;
   justify-content: center;
   border: none;
+
+  @media (min-width: 1024px) {
+    font-size: 16px;
+    font-weight: 600;
+  }
 `;

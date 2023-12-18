@@ -38,9 +38,9 @@ const Menu = () => {
               </C.LoggedRow>
             ) : (
               <>
-                <Link to={'/login'}>Entrar</Link>
+                <Link to={'/signin'}>Entrar</Link>
                 <p>ou</p>
-                <Link to={'/create-account'}>Criar conta</Link>
+                <Link to={'/signup'}>Criar conta</Link>
               </>
             )}
           </C.ActionUser>

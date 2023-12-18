@@ -7,6 +7,11 @@ export const Container = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 50px;
+
+  @media (min-width: 1024px) {
+    padding: 0;
+  }
 `;
 
 export const Header = styled.header`
@@ -22,9 +27,10 @@ export const Section = styled.section`
   align-items: center;
   background: #ecf0f3;
   width: 84.61%;
-  height: 407px;
+  /* height: 407px; */
   border-radius: 15px;
   box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
+  padding-bottom: 12px;
 
   .top {
     margin-top: 20px;
@@ -37,6 +43,14 @@ export const Section = styled.section`
   @media (min-width: 1024px) {
     height: auto;
     padding-bottom: 12px;
+
+    .top img {
+      width: 80%;
+    }
+
+    &.sign-up {
+      max-width: 800px;
+    }
   }
 `;
 
@@ -47,6 +61,10 @@ export const Title = styled.h1`
   font-style: normal;
   font-weight: 500;
   margin: 0;
+
+  @media (min-width: 1024px) {
+    font-size: 16px;
+  }
 `;
 
 export const Form = styled.form`
@@ -59,6 +77,12 @@ export const Form = styled.form`
   button {
     margin-top: 7px;
   }
+
+  @media (min-width: 1024px) {
+    &.sign-up {
+      row-gap: 32px;
+    }
+  }
 `;
 
 export const Message = styled.p`
@@ -69,6 +93,14 @@ export const Message = styled.p`
 
   a {
     color: #51e1e6;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 12px;
+
+    a {
+      font-weight: 600;
+    }
   }
 `;
 
@@ -88,6 +120,37 @@ export const Footer = styled.footer`
 
   a {
     color: #010f20;
+  }
+
+  @media (min-width: 1024px) {
+    height: 50px;
+    a,
+    p {
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+`;
+
+export const InputArea = styled.div`
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 45px;
+  width: 100%;
+  align-items: center;
+
+  &.sign-up {
+    row-gap: 16px;
+  }
+
+  @media (min-width: 1024px) {
+    flex-wrap: wrap;
+
+    &.sign-up {
+      height: 370px;
+      row-gap: 32px;
+    }
   }
 `;
 
@@ -135,15 +198,29 @@ export const FormInput = styled.div`
   }
 
   @media (min-width: 1024px) {
+    input {
+      font-size: 14px;
+    }
     input::placeholder {
-      font-size: 12px;
+      font-size: 14px;
       font-weight: 400;
     }
+
+    label {
+      font-size: 12px;
+      font-weight: 500;
+    }
     p {
-      font-size: 10px;
+      font-size: 11px;
       padding-top: 4px;
+      padding-left: 12px;
       line-height: 16px;
       height: 16px;
+    }
+
+    &.sign-up {
+      min-width: auto;
+      width: 300px;
     }
   }
 `;
