@@ -82,6 +82,16 @@ export const searchProducts = async name_search => {
   }
 };
 
+export const getBrands = async () => {
+  try {
+    const response = await Api.get(`/brand`);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 // export const testRequest = async formData => {
 //   try {
 //     const response = await Api.post(

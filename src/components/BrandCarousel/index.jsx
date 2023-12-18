@@ -1,17 +1,13 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import { brands } from '../../falseDatabase/brands';
+// import { brands } from '../../falseDatabase/brands';
+import { api_path } from '../../constants/api_path';
 import * as C from './styles';
+import { settings, useBrandCarousel } from './useBrandCarousel';
 
 const BrandCarousel = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: window.screen.width > 1024 ? 6 : 3,
-    slidesToScroll: window.screen.width > 1024 ? 6 : 3,
-  };
+  const { brands } = useBrandCarousel();
 
   return (
     <C.Container>
@@ -24,7 +20,10 @@ const BrandCarousel = () => {
                 className='carousel-item'
                 href={`/brand/${item.id}`}
               >
-                <img src={item.img_path} alt={`Imagem ${item.brand}`} />
+                <img
+                  src={`${api_path}/image/brand/${item.img_path}`}
+                  alt={`Imagem ${item.brand}`}
+                />
               </C.ItemBrand>
             ))}
         </Slider>
