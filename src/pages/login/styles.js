@@ -24,9 +24,7 @@ export const Section = styled.section`
   width: 84.61%;
   height: 407px;
   border-radius: 15px;
-  box-shadow:
-    10px 10px 20px 0px #d1d9e6 inset,
-    -10px -10px 20px 0px #fff inset;
+  box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
 
   .top {
     margin-top: 20px;
@@ -34,6 +32,11 @@ export const Section = styled.section`
     flex-direction: column;
     align-items: center;
     row-gap: 7px;
+  }
+
+  @media (min-width: 1024px) {
+    height: auto;
+    padding-bottom: 12px;
   }
 `;
 
@@ -99,13 +102,12 @@ export const FormInput = styled.div`
     color: #5b43d6;
     font-size: 10px;
     padding-left: 3px;
-    font-weight: 275;
+    font-weight: 300;
   }
 
   input {
     background: #ecf0f3;
-    box-shadow:
-      5px 5px 6px 0px #d1d9e6,
+    box-shadow: 5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     border-radius: 5px;
     border: none;
@@ -113,12 +115,13 @@ export const FormInput = styled.div`
     height: 30px;
     padding: 0 14px;
     font-size: 12px;
+    outline: none;
   }
 
   input::placeholder {
     color: #c1c5d6;
     font-size: 10px;
-    font-weight: 275;
+    font-weight: 300;
   }
   p {
     height: 12px;
@@ -127,7 +130,20 @@ export const FormInput = styled.div`
     line-height: 12px;
     color: #000;
     padding-left: 3px;
-    font-weight: 275;
+    font-weight: 300;
     margin: 0;
+  }
+
+  @media (min-width: 1024px) {
+    input::placeholder {
+      font-size: 12px;
+      font-weight: 400;
+    }
+    p {
+      font-size: 10px;
+      padding-top: 4px;
+      line-height: 16px;
+      height: 16px;
+    }
   }
 `;

@@ -12,3 +12,6 @@ export const CALCULATE_PAYMENT = 'CALCULATE_PAYMENT';
 export const SET_SHIP_INFOS = 'SET_SHIP_INFOS';
 export const CLEAR_VOUCHER = 'CLEAR_VOUCHER';
 export const SET_PAY_FORM = 'SET_PAY_FORM';
+export const INITIALIZE_USER = 'INITIALIZE_USER';
+export const SET_USER = 'SET_USER';
+export const CLEAR_USER = 'CLEAR_USER';

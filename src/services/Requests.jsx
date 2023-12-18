@@ -33,22 +33,15 @@ export const createAccount = async (
   }
 };
 
-export const effectLogin = async (email, password) => {
-  console.log(email, password);
+export const effectLogin = async dataLogin => {
+  console.log(dataLogin);
   try {
-    const response = await Api.post(
-      '/login',
-      {
-        email,
-        password,
+    const response = await Api.post('/login', dataLogin, {
+      headers: {
+        'Content-Type': 'application/json',
       },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    );
-    const data = response.data;
+    });
+    const data = response;
     return data;
   } catch (error) {
     return error;
@@ -87,24 +80,44 @@ export const createProduct = async formData => {
   }
 };
 
-export const testRequest = async formData => {
+export const getProducts = async () => {
   try {
-    const response = await Api.post(
-      `/product`,
-
-      formData,
-
-      {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      },
-    );
-    return response;
+    const response = await Api.get(`/product/40`);
+    console.log(response);
+    return response.data;
   } catch (error) {
     return error;
   }
 };
+
+export const searchProducts = async name_search => {
+  try {
+    const response = await Api.get(`/product/name/${name_search}`);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+// export const testRequest = async formData => {
+//   try {
+//     const response = await Api.post(
+//       `/product`,
+
+//       formData,
+
+//       {
+//         headers: {
+//           'Content-Type': 'multipart/form-data',
+//         },
+//       },
+//     );
+//     return response;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 export const fetchNowPlaying = async () => {
   try {

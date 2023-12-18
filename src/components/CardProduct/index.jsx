@@ -1,32 +1,19 @@
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import { addToCart } from '../../store/actions/cartActions';
 import Stars from '../Stars';
 import * as C from './styles';
+import { useCardProduct } from './useCardProduct';
 
-const CardProduct = ({ item }, props) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const handleAddToCart = event => {
-    event.stopPropagation();
-    dispatch(addToCart(item));
-  };
-
-  const handleBuyProduct = event => {
-    event.stopPropagation();
-    dispatch(addToCart(item));
-    navigate('/payment');
-  };
-
-  const navigateToProduct = event => {
-    event.stopPropagation();
-    navigate(`/product/${item.id}`);
-  };
-  // console.log(item);
+const CardProduct = ({ item }) => {
+  const {
+    handleAddToCart,
+    handleBuyProduct,
+    navigateToProduct,
+    priceInPortions,
+    pricePerPortions,
+    price,
+  } = useCardProduct(item);
 
   const settings = {
     dots: true,
@@ -35,31 +22,33 @@ const CardProduct = ({ item }, props) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
-  const priceInPortions =
-    item.value.priceNow *
-    (1 + item.value.feesMonthly / 100) ** item.value.portions;
-  const pricePerPortions = priceInPortions / item.value.portions;
+  console.log(item);
 
   return (
     <C.Card onClick={event => navigateToProduct(event)}>
       <C.Rating>
-        <Stars rating={item.rating} />
+        <Stars rating={item.rating.rating_value} />
         <C.RatingValue className='dark-hover'>
-          {item.rating} ({item.amount_rating})
+          {item.rating.rating_value} ({item.rating.amount_rating})
         </C.RatingValue>
       </C.Rating>
       <C.ContentImg>
         <Slider className='carousel-image-product' {...settings}>
           {item &&
-            item.image.map((img_path, index) => (
+            item.images.map((img_path, index) => (
               <C.ImgProduct key={index}>
-                <img src={img_path} alt={`Imagem ${item.name}`} />
+                <img
+                  src={`http://0.0.0.0:8080/image/product/${img_path}`}
+                  alt={`Imagem ${item.name}`}
+                />
               </C.ImgProduct>
             ))}
         </Slider>
         <C.ImageProductWeb>
-          <img src={item?.image[0]} alt='' />
+          <img
+            src={`http://0.0.0.0:8080/image/product/${item?.images[0]}`}
+            alt=''
+          />
         </C.ImageProductWeb>
 
         {item?.discount && (
@@ -73,7 +62,7 @@ const CardProduct = ({ item }, props) => {
       <C.PriceView>
         <C.InCash>
           <C.Price>
-            {item?.value?.priceNow.toLocaleString('pt-BR', {
+            {price.toLocaleString('pt-BR', {
               style: 'currency',
               currency: 'BRL',
               minimumFractionDigits: 2,

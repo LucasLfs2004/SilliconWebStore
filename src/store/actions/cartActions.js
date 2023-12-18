@@ -8,7 +8,9 @@ import {
 } from './actionTypes';
 
 export const initializeCart = () => {
-  const cartData = JSON.parse(localStorage.getItem('cart')) || [];
+  // const item = localStorage.getItem('cart');
+  // const cartData = item !== undefined ? JSON.parse(item) : [];
+  const cartData = [];
   return {
     type: INITIALIZE_CART,
     payload: cartData,

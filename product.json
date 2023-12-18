@@ -1,0 +1,34 @@
+{
+  "id": "041dc6c2-2555-4bdf-88ae-c005626d1a76",
+  "name": "Placa de Vídeo RX 6600 CLD 8G ASRock AMD Radeon, 8GB, GDDR6 - 90-GA2RZZ-00UANF",
+  "brand": "AMD",
+  "model": "90-GA2RZZ-00UANF",
+  "stock": 50,
+  "value": {
+    "portions": 12,
+    "price_now": null,
+    "fees_credit": 4,
+    "common_price": 1059.99,
+    "fees_monthly": 1.5
+  },
+  "active": 1,
+  "images": [
+    "public/product/1702314904.3107789rx6600_3.jpeg",
+    "public/product/1702314904.3049338rx6600_2.jpeg",
+    "public/product/1702314904.319927rx6600_5.jpeg",
+    "public/product/1702314904.293344rx6600_1.jpeg",
+    "public/product/1702314904.3148339rx6600_4.jpeg"
+  ],
+  "rating": {
+    "comments": [],
+    "rating_value": 0,
+    "amount_rating": 0
+  },
+  "category": "Placa de vídeo",
+  "featured": 1,
+  "warranty": 24,
+  "description": {
+    "desc_html": "<h1>Teste</h1>",
+    "updated_at": "2023-12-12 01:44:18.000000"
+  }
+}

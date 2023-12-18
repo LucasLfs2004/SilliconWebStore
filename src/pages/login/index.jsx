@@ -1,9 +1,5 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import BtnSubmit from '../../components/BtnSubmit';
-import { effectLogin } from '../../services/Requests';
-import { LoginZod } from './login';
 import {
   Container,
   Footer,
@@ -14,34 +10,10 @@ import {
   Section,
   Title,
 } from './styles';
-const Login = () => {
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
-    mode: 'all',
-    resolver: zodResolver(LoginZod),
-  });
-  const handleEffectLogin = async data => {
-    try {
-      const login = {
-        email: data.email,
-        pass: data.password,
-      };
+import { useLogin } from './useLogin';
 
-      const response = await effectLogin(login.email, login.pass);
-      // console.log(response);
-      if (response) {
-        // console.log('Entrei aqui', response);
-        localStorage.setItem('user', JSON.stringify(response.user_data));
-      }
-      window.history.back();
-    } catch (error) {
-      alert('Erro, não foi possível realizar o login');
-      console.log(error);
-    }
-  };
+const Login = () => {
+  const { handleEffectLogin, handleSubmit, register, errors } = useLogin();
 
   return (
     <Container>

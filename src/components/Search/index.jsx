@@ -1,22 +1,51 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { products } from '../../falseDatabase/products';
+import { useDebounce } from '../../hooks/useDebounce';
+import { searchProducts } from '../../services/Requests';
 import * as C from './styles';
 const Search = () => {
   const [search, setSearch] = useState('');
-  const [result, setResult] = useState([]);
+  const [showResult, setShowResult] = useState([]);
 
-  useEffect(() => {
-    const searchResult = products.filter(product =>
-      product.name.toLowerCase().includes(search.toLowerCase()),
-    );
-    if (search === '') {
-      setResult([]);
-    } else {
-      setResult(searchResult);
-    }
-    console.log(searchResult);
-  }, [search]);
+  // useEffect(() => {
+  //   const searchResult = products.filter(product =>
+  //     product.name.toLowerCase().includes(search.toLowerCase()),
+  //   );
+  //   if (search === '') {
+  //     setResult([]);
+  //   } else {
+  //     setResult(searchResult);
+  //   }
+  //   console.log(searchResult);
+  // }, [search]);
+
+  // const handleSearch = async () => {
+  //   const searchResult = await searchProducts(search);
+  //   if (search === null) {
+  //     setResult([]);
+  //   } else {
+  //     setResult(searchResult);
+  //   }
+  //   console.log(searchResult);
+  // };
+
+  const debouncedSearch = useDebounce(search, 300);
+
+  const {
+    data: dataProduct = [],
+    // isFetching: searchLoading,
+    // isError: searchError,
+    // isFetched: searchFetchStatus,
+  } = useQuery({
+    queryKey: ['search-products', debouncedSearch],
+    queryFn: async () => {
+      const response = await searchProducts(debouncedSearch);
+      return response;
+    },
+    enabled: !!debouncedSearch,
+  });
+
   return (
     <C.Container>
       <C.Search>
@@ -24,29 +53,52 @@ const Search = () => {
           type='text'
           placeholder='pesquisar'
           value={search}
+          onFocus={() => setShowResult(true)}
+          onBlur={e => (e.target.placeholder = 'pesquisar')}
           onChange={e => setSearch(e.target.value)}
         />
-        <C.BtnSearch>
-          <img src='/assets/imgs/searchIcon.svg' alt='' />
-        </C.BtnSearch>
+        <C.BtnsSearch>
+          <C.BtnSearch
+            onClick={() => {
+              setShowResult(false);
+              setSearch('');
+            }}
+          >
+            <img src='/assets/icons/x.svg' alt='' />
+          </C.BtnSearch>
+          <C.BtnSearch
+          // onClick={() => handleSearch()}
+          >
+            <img src='/assets/imgs/searchIcon.svg' alt='' />
+          </C.BtnSearch>
+        </C.BtnsSearch>
       </C.Search>
-      {result.length > 0 && (
-        <C.Result onClick={() => setResult([])}>
+      {dataProduct.length > 0 && showResult && (
+        <C.Result onClick={() => setShowResult(false)}>
           <C.Products>
             <C.Text className='mini'>Resultados</C.Text>
-            {result &&
-              result.map((item, index) => (
-                <Link to={`product/${item.id}`}>
+            {dataProduct &&
+              dataProduct.map((item, index) => (
+                <Link to={`product/${item.id}`} key={index}>
                   <C.ItemProduct key={index}>
-                    <img src={item.image[0]} alt='' />
+                    <img
+                      src={`http://0.0.0.0:8080/image/product/${item.images[0]}`}
+                      alt=''
+                    />
                     <C.InfoProduct>
                       <C.Text>{item.name}</C.Text>
                       <C.Text className='mini'>
-                        {item.value.priceNow.toLocaleString('pt-BR', {
-                          style: 'currency',
-                          currency: 'BRL',
-                          minimumFractionDigits: 2,
-                        })}
+                        {item.value.price_now
+                          ? item.value.price_now.toLocaleString('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL',
+                              minimumFractionDigits: 2,
+                            })
+                          : item.value.common_price.toLocaleString('pt-BR', {
+                              style: 'currency',
+                              currency: 'BRL',
+                              minimumFractionDigits: 2,
+                            })}
                       </C.Text>
                     </C.InfoProduct>
                   </C.ItemProduct>

@@ -42,6 +42,11 @@ export const Input = styled.input`
   }
 `;
 
+export const BtnsSearch = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const BtnSearch = styled.button`
   border: none;
   background-color: transparent;
@@ -89,11 +94,20 @@ export const ItemProduct = styled.a`
   display: flex;
   flex-direction: row;
   column-gap: 9px;
-  border-bottom: 0.5px solid #5ce1e6;
-  padding: 0 5px 7px 5px;
+  border: 0.5px solid transparent;
+  border-bottom-color: #5ce1e6;
+  padding: 7px 5px 7px 5px;
+  transition: all 0.3s ease-in-out;
 
   img {
     width: 12.8%;
+  }
+
+  @media (min-width: 1024px) {
+    &:hover {
+      border-color: #5ce1e6;
+      border-radius: 3px;
+    }
   }
 `;
 
@@ -110,5 +124,10 @@ export const Text = styled.div`
 
   & .mini {
     font-size: 8px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 15px;
+    font-weight: 500;
   }
 `;

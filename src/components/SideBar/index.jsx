@@ -1,19 +1,21 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { clearUser } from '../../store/actions/userActions';
+// import { clearUser } from '../../store/actions/userActions';
 import * as C from './styles';
 
 const Menu = () => {
-  const [userInfo, setUserInfo] = useState(
-    JSON.parse(localStorage.getItem('user')),
-  );
+  const user = useSelector(state => state.user);
+  console.log('user', user);
   const [showMenu, setShowMenu] = useState(false);
+  const dispatch = useDispatch();
 
   const handleLogout = e => {
     e.preventDefault();
     e.stopPropagation();
-    localStorage.removeItem('user');
-    setUserInfo(null);
-    // console.log(localStorage);
+    dispatch(clearUser());
+    console.log('logout efetuado');
   };
 
   return (
@@ -26,13 +28,11 @@ const Menu = () => {
           <img src='/assets/icons/userIcon.svg' alt='' />
 
           <C.ActionUser>
-            {JSON.parse(localStorage.getItem('user')) &&
-            JSON.parse(localStorage.getItem('user')) !== null &&
-            JSON.parse(localStorage.getItem('user')) !== undefined ? (
+            {user.access_token ? (
               <C.LoggedRow>
                 <C.UserInfos>
-                  <p className='nome'>{userInfo.name}</p>
-                  <p className='email'>{userInfo.email}</p>
+                  <p className='nome'>{user.data.name}</p>
+                  <p className='email'>{user.data.email}</p>
                 </C.UserInfos>
                 <button onClick={e => handleLogout(e)}>Sair</button>
               </C.LoggedRow>
@@ -60,7 +60,7 @@ const Menu = () => {
           </C.Item>
         </C.List>
 
-        {JSON.parse(localStorage.getItem('user'))?.is_seller && (
+        {user.isSeller && (
           <C.List>
             <C.Item>
               <Link to={'/add-product'}>Adicionar produto</Link>
