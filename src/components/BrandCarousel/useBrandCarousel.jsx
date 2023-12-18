@@ -7,9 +7,9 @@ export const useBrandCarousel = () => {
     isError,
     isLoading,
   } = useQuery({
+    queryKey: ['brands-carousel'],
     queryFn: async () => await getBrands(),
   });
-
   return { brands, isError, isLoading };
 };
 

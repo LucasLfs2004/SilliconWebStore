@@ -65,7 +65,7 @@ export const createProduct = async formData => {
 export const getProducts = async () => {
   try {
     const response = await Api.get(`/product/40`);
-    console.log(response);
+    console.log('products request', response);
     return response.data;
   } catch (error) {
     return error;
@@ -111,21 +111,21 @@ export const getBrands = async () => {
 //   }
 // };
 
-export const fetchNowPlaying = async () => {
-  try {
-    return (await Api.get('/movies/now_playing')).data;
-  } catch (error) {
-    return error;
-  }
-};
+// export const fetchNowPlaying = async () => {
+//   try {
+//     return (await Api.get('/movies/now_playing')).data;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
-export const fetchOnTheAir = async () => {
-  try {
-    return (await Api.get('/series/on_the_air')).data;
-  } catch (error) {
-    return error;
-  }
-};
+// export const fetchOnTheAir = async () => {
+//   try {
+//     return (await Api.get('/series/on_the_air')).data;
+//   } catch (error) {
+//     return error;
+//   }
+// };
 
 export const getCep = async cep => {
   try {

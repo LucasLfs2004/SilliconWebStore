@@ -1,28 +1,37 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../services/Requests";
-import { calculatePayment } from "../../store/actions/paymentActions";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { calculatePayment } from '../../store/actions/paymentActions';
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
+import { getProducts } from '../../services/Requests';
 
 export const useHome = () => {
-    const cart = useSelector(state => state.cart);
-    const dispatch = useDispatch();
+  const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch();
 
-    const { data, isError, isLoading,} = useQuery({
-    queryFn: async () => await getProducts(),
+  //   const { data: brands } = useQuery({
+  //     queryFn: async () => {
+  //       const response = await getBrands();
+  //       console.log(response);
+  //       return response;
+  //     },
+  //   });
+
+  const {
+    data: products,
+    isError,
+    isLoading,
+  } = useQuery({
+    queryKey: ['products-home'],
+    queryFn: async () => {
+      const response = await getProducts();
+      return response;
+    },
   });
-    
-    useEffect(() => {
-        dispatch(calculatePayment(cart));
-    }, [cart])
 
-    // console.log("products", data)
+  useEffect(() => {
+    dispatch(calculatePayment(cart));
+  }, [cart]);
 
-    return {
-        products: data,
-        isError,
-        isLoading,
-        cart
-    }
-}
+  return { products, isError, isLoading, cart };
+};

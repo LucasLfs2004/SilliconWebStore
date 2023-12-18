@@ -3,7 +3,7 @@ import CardProduct from '../CardProduct';
 import * as C from './styles';
 
 const ProductArea = ({ products }) => {
-  // console.log('products', products);
+  console.log('products', products);
   return (
     <C.Container>
       {products &&

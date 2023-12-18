@@ -21,7 +21,7 @@ const BrandCarousel = () => {
                 href={`/brand/${item.id}`}
               >
                 <img
-                  src={`${api_path}/image/brand/${item.img_path}`}
+                  src={`${api_path}/image/brand/${item.brand_logo}`}
                   alt={`Imagem ${item.brand}`}
                 />
               </C.ItemBrand>
