@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { api_path } from '../../../../constants/api_path';
+import { CarouselImageWeb } from '../carouselWeb';
 import SimpleInfos from '../simpleInfos';
 import * as C from './styles';
 
@@ -9,12 +10,11 @@ const ProductImagesWeb = ({ product }) => {
       ? `${api_path}/image/product/${product.images[0]}`
       : '',
   );
-  // console.log('product on productImagesWeb', product);
 
   return (
     <C.Content>
       <C.ImagesColumn className='images-carousel-web'>
-        {product.images.length > 0 &&
+        {/* {product.images.length > 0 &&
           product.images.map((item, key) => (
             <C.PreviewCard
               key={key}
@@ -22,7 +22,8 @@ const ProductImagesWeb = ({ product }) => {
             >
               <img src={`${api_path}/image/product/${item}`} alt='' />
             </C.PreviewCard>
-          ))}
+          ))} */}
+        <CarouselImageWeb items={product?.images} setImg={setImg} />
       </C.ImagesColumn>
 
       <C.ContentColumn>
