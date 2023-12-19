@@ -4,16 +4,24 @@ import 'slick-carousel/slick/slick.css';
 // import { brands } from '../../falseDatabase/brands';
 import { api_path } from '../../constants/api_path';
 import * as C from './styles';
-import { settings, useBrandCarousel } from './useBrandCarousel';
+import { useBrandCarousel } from './useBrandCarousel';
 
 const BrandCarousel = () => {
   const { brands } = useBrandCarousel();
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: window.screen.width > 1024 ? 6 : 3,
+    slidesToScroll: window.screen.width > 1024 ? 6 : 3,
+  };
 
   return (
     <C.Container>
       <C.Carousel>
         <Slider className='carousel-image-product' {...settings}>
-          {brands &&
+          {brands?.length > 0 &&
             brands.map((item, index) => (
               <C.ItemBrand
                 key={index}

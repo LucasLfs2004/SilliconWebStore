@@ -1,27 +1,32 @@
 import { useState } from 'react';
-import { brands } from '../../../../falseDatabase/brands';
+import { api_path } from '../../../../constants/api_path';
 import SimpleInfos from '../simpleInfos';
 import * as C from './styles';
 
 const ProductImagesWeb = ({ product }) => {
-  const productImgs = product.image;
-  console.log(productImgs);
-  const brandProduct = brands.find(item => item.id === product.brand_id);
-  const [img, setImg] = useState(productImgs[0]);
+  const [img, setImg] = useState(
+    product?.images?.length > 0
+      ? `${api_path}/image/product/${product.images[0]}`
+      : '',
+  );
+  // console.log('product on productImagesWeb', product);
 
   return (
     <C.Content>
-      <C.ImagesColumn>
-        {productImgs.length > 0 &&
-          productImgs.map((item, key) => (
-            <C.PreviewCard key={key} onClick={() => setImg(item)}>
-              <img src={item} alt='' />
+      <C.ImagesColumn className='images-carousel-web'>
+        {product.images.length > 0 &&
+          product.images.map((item, key) => (
+            <C.PreviewCard
+              key={key}
+              onClick={() => setImg(`${api_path}/image/product/${item}`)}
+            >
+              <img src={`${api_path}/image/product/${item}`} alt='' />
             </C.PreviewCard>
           ))}
       </C.ImagesColumn>
 
       <C.ContentColumn>
-        <SimpleInfos brandProduct={brandProduct} product={product} />
+        <SimpleInfos product={product} />
         <C.ProductImage>
           <img src={img} alt='' />
         </C.ProductImage>

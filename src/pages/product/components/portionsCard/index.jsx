@@ -30,8 +30,8 @@ const PortionsCard = ({ seePortions, portions, product, setSeePortions }) => {
           })}
         </C.Display>
         <C.Description>
-          *Em até {product.value.portions}x com juros de{' '}
-          {product.value.feesMonthly}% a.m.
+          *Em até {product?.value?.portions}x com juros de{' '}
+          {product?.value?.fees_monthly}% a.m.
         </C.Description>
       </C.PortionsDisplay>
     </C.Background>

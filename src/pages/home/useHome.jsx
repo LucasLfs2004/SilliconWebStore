@@ -9,14 +9,6 @@ export const useHome = () => {
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
 
-  //   const { data: brands } = useQuery({
-  //     queryFn: async () => {
-  //       const response = await getBrands();
-  //       console.log(response);
-  //       return response;
-  //     },
-  //   });
-
   const {
     data: products,
     isError,

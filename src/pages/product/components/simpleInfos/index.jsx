@@ -1,14 +1,20 @@
 import { useState } from 'react';
+import { api_path } from '../../../../constants/api_path';
 import * as C from './styles';
 
-const SimpleInfos = ({ brandProduct, product }) => {
+const SimpleInfos = ({ product }) => {
   const [favorite, setFavorite] = useState(false);
   return (
     <C.SimpleInfos>
       <C.LogoInfo>
         <img
           className='logoBrand'
-          src={brandProduct.img_path}
+          src={`${api_path}/image/brand/${
+            window.screen > 1024
+              ? product?.brand?.logo_black
+              : product?.brand?.logo
+          }
+          `}
           color='#000000'
           alt=''
         />
@@ -16,10 +22,10 @@ const SimpleInfos = ({ brandProduct, product }) => {
       <C.WarrantyInfo>
         <img src='/assets/icons/linePurple.svg' alt='' />
         <p>
-          {product.warranty && product.warranty > 12
-            ? `${product.warranty / 12} anos de garantia`
-            : `${product.warranty} ${
-                product.warranty > 1 ? 'meses' : 'mês'
+          {product?.warranty && product?.warranty > 12
+            ? `${product?.warranty / 12} anos de garantia`
+            : `${product?.warranty} ${
+                product?.warranty > 1 ? 'meses' : 'mês'
               } de garantia`}
         </p>
         <img src='/assets/icons/linePurple.svg' alt='' />

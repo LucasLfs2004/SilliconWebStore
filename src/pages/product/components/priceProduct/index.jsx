@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import Stars from '../../../../components/Stars';
 import PortionsCard from '../portionsCard';
 import ShipCalcCard from '../shipCalc';
@@ -5,37 +6,50 @@ import * as C from './styles';
 import { usePriceProduct } from './usePriceProduct';
 
 const PriceProduct = () => {
+  const product = useSelector(state => state.product);
+  console.log('product in priceProduct', product);
   const {
     buyProduct,
     pricePerPortions,
     seePortions,
     setSeePortions,
-    product,
     priceInPortions,
     handleAddToCart,
     portions,
-  } = usePriceProduct();
+  } = usePriceProduct(product);
+
+  console.log('prices', {
+    portions: portions,
+    priceInPortions: priceInPortions,
+    pricePerPortions: pricePerPortions,
+  });
 
   return (
     <>
       <C.PriceArea>
         <C.Rating>
-          <Stars rating={product.rating} />
-          <p>({product.rating})</p>
+          <Stars rating={product?.rating?.rating} />
+          <p>({product?.rating?.rating})</p>
         </C.Rating>
-        <C.Name>{product.name}</C.Name>
+        <C.Name>{product?.name}</C.Name>
         <C.IdProduct>Código: xxxxxxxx</C.IdProduct>
-        <C.BrandProduct>Marca: {product.brand}</C.BrandProduct>
+        <C.BrandProduct>Marca: {product?.brand?.name}</C.BrandProduct>
         <C.RowPriceBtn>
           <C.RowPrice>
             <img src='/assets/icons/pix.svg' alt='' />
             <C.Price>
               <p>
-                {product.value.priceNow.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })}
+                {product?.value?.price_now
+                  ? product?.value?.price_now.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                      minimumFractionDigits: 2,
+                    })
+                  : product?.value?.common_price.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                      minimumFractionDigits: 2,
+                    })}
               </p>
               <span>à vista no pix</span>
             </C.Price>
@@ -60,7 +74,7 @@ const PriceProduct = () => {
             })}
           </p>
           <span>
-            Em até {product.value.portions} x de{' '}
+            Em até {product?.value?.portions} x de{' '}
             <strong>
               {pricePerPortions.toLocaleString('pt-BR', {
                 style: 'currency',
@@ -88,7 +102,7 @@ const PriceProduct = () => {
               })}
             </p>
             <span>
-              {product.value.portions} x de{' '}
+              {product?.value?.portions} x de{' '}
               {pricePerPortions.toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL',
@@ -110,7 +124,7 @@ const PriceProduct = () => {
         </C.SeePortions>
 
         <C.SellFrom>
-          Vendido e entregue por <span>Sillicon Store</span>
+          Vendido e entregue por <span>{product?.store_name}</span>
         </C.SellFrom>
 
         <PortionsCard
@@ -125,11 +139,17 @@ const PriceProduct = () => {
       <C.BuyComponent>
         <C.Price className='cian'>
           <p>
-            {product.value.priceNow.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            })}
+            {product?.value?.price_now
+              ? product.value.price_now.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                  minimumFractionDigits: 2,
+                })
+              : product?.value?.common_price.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                  minimumFractionDigits: 2,
+                })}
           </p>
           <span>À vista no pix</span>
         </C.Price>

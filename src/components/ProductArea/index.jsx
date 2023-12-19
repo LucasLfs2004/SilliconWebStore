@@ -6,7 +6,7 @@ const ProductArea = ({ products }) => {
   console.log('products', products);
   return (
     <C.Container>
-      {products &&
+      {products?.length > 0 &&
         products.map((item, index) => <CardProduct key={index} item={item} />)}
     </C.Container>
   );

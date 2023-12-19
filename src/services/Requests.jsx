@@ -65,7 +65,18 @@ export const createProduct = async formData => {
 export const getProducts = async () => {
   try {
     const response = await Api.get(`/product/40`);
-    console.log('products request', response);
+    // console.log('products request', response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getProduct = async id => {
+  try {
+    console.log(id);
+    const response = await Api.get(`/product/id/${id}`);
+    // console.log('products request', response);
     return response.data;
   } catch (error) {
     return error;
