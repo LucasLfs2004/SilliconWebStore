@@ -11,11 +11,11 @@ export const CarouselImageWeb = ({ items }) => {
   const photoWidthRef = useRef(null);
 
   const largura = window.screen.width;
-  const [itemWidth, setItemWidth] = useState(0);
   const [itemMargin, setItemMargin] = useState(0);
+  const [itemWidth, setItemWidth] = useState(0);
   const widthAreaRef = useRef(null);
   const widthScroll = useRef(null);
-  let numberOfItens = largura > 620 ? 7 : 2;
+  const numberOfItems = 5;
 
   const handleLeftArrow = () => {
     let x = scrollX;
@@ -46,17 +46,14 @@ export const CarouselImageWeb = ({ items }) => {
   }, [data, items]);
 
   useEffect(() => {
-    let width = parseInt(widthAreaRef?.current?.offsetWidth / 220) * 220;
-    setItemMargin(
-      largura > 620
-        ? (widthAreaRef.current.offsetWidth - width) /
-            2 /
-            parseInt(widthAreaRef?.current?.offsetWidth / 220)
-        : 0,
-    );
-    setItemWidth(
-      largura > 620 ? 220 : widthAreaRef?.current?.offsetWidth / numberOfItens,
-    );
+    let width = parseInt(widthAreaRef?.current?.offsetWidth / 70) * 70;
+    // setItemMargin(
+    //   (widthAreaRef.current.offsetWidth - width) /
+    //     2 /
+    //     parseInt(widthAreaRef?.current?.offsetWidth / 70),
+    // );
+    setItemWidth(widthAreaRef.current.offsetWidth / 5);
+    console.log(itemWidth);
   }, []);
 
   console.log('widthAreaRef: ', widthAreaRef?.current?.offsetWidth);
@@ -73,10 +70,7 @@ export const CarouselImageWeb = ({ items }) => {
               {items.length > 0 &&
                 items.map((item, index) => (
                   <div key={index}>
-                    <C.Item
-                      marginItem={itemMargin}
-                      width={largura > 620 ? 220 : itemWidth}
-                    >
+                    <C.Item marginItem={itemMargin} width={itemWidth}>
                       <img
                         src={`${api_path}/image/product/${item}`}
                         alt={item.original_title}

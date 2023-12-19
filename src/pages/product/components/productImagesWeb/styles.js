@@ -8,6 +8,7 @@ export const Content = styled.section`
   padding: 8px 24px 36px 24px;
   align-items: center;
   border-radius: 5px;
+  justify-content: center;
 `;
 
 export const ImagesColumn = styled.div`
@@ -16,28 +17,11 @@ export const ImagesColumn = styled.div`
   row-gap: 18px;
 `;
 
-export const PreviewCard = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 70px;
-  height: 70px;
-  background-color: #fff;
-  box-shadow: -8px -8px 30px 0px rgba(209, 217, 230, 0.25),
-    8px 8px 30px 0px rgba(209, 217, 230, 0.25);
-  border-radius: 2px;
-  border: none;
-  cursor: pointer;
-
-  img {
-    width: 65px;
-    max-height: 65px;
-  }
-`;
-
 export const ContentColumn = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 700px;
 `;
 
 export const ProductImage = styled.div`
@@ -53,5 +37,87 @@ export const ProductImage = styled.div`
 
   img {
     width: 350px;
+  }
+`;
+
+export const Carousel = styled.section`
+  width: 100px;
+  height: 370px;
+
+  /* width: 500px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 
+  .slick-slider {
+    height: 100%;
+  }
+
+  *:focus {
+    outline: 0;
+    outline: none;
+  }
+  .carousel-image-product {
+    width: 100%;
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .slick-prev::before,
+  .slick-next::before {
+    color: #5ce1e6;
+    opacity: 0.75;
+  }
+
+  .slick-dots {
+    position: absolute;
+    bottom: 0px;
+    display: none !important;
+  }
+
+  .slick-dots li {
+    margin: 0;
+  }
+
+  .slick-arrow {
+    display: none !important; 
+    position: static !important;
+  }
+
+  .slick-dots li button::before {
+    color: #fff;
+    opacity: 1;
+  }
+
+  .slick-dots li.slick-active button::before {
+    color: #5ce1e6;
+    opacity: 1;
+  } */
+`;
+
+export const ItemCard = styled.div`
+  display: flex !important;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const PreviewCard = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px !important;
+  height: 70px;
+  background-color: #fff;
+  box-shadow: -8px -8px 30px 0px rgba(209, 217, 230, 0.25),
+    8px 8px 30px 0px rgba(209, 217, 230, 0.25);
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+
+  img {
+    width: 65px;
+    max-height: 65px;
   }
 `;

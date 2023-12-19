@@ -2,9 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.section`
   margin-bottom: 50px;
-  padding-left: 6rem;
-  padding-right: 6rem;
-  width: 800px;
+  margin-top: 24px;
+  width: 100%;
 
   h2 {
     padding-left: 1rem;
@@ -215,8 +214,10 @@ export const Item = styled.div`
   position: relative;
   transform: scale(0.9);
   transition: all ease 0.2s;
-  border-radius: 20px;
+  border-radius: 4px;
   margin: 0 ${props => props.marginItem}px;
+  /* width: 80px; */
+  /* height: 80px; */
 
   img {
     width: 100%;

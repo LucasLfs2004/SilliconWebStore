@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
 import AddImage from '../pages/AddImage';
 import AddProduct from '../pages/AddProduct';
+import CarouselTeste from '../pages/CarouselTeste';
 import Brand from '../pages/brand';
 import Carrinho from '../pages/carrinho';
 import Home from '../pages/home';
@@ -35,6 +36,10 @@ const Content = props => {
     {
       path: '/payment',
       element: <Payment />,
+    },
+    {
+      path: '/carousel-teste',
+      element: <CarouselTeste />,
     },
   ]);
 
