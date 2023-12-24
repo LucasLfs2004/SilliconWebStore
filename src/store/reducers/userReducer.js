@@ -15,8 +15,8 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZE_USER:
-      console.log('iniciando a porra do user', initialState);
-      return initialState;
+      console.log('iniciando a porra do user', action.payload);
+      return action.payload;
     case SET_USER:
       console.log(action);
       const dataUser = {
@@ -24,6 +24,16 @@ const userReducer = (state = initialState, action) => {
         email: action.payload.person.email,
         name: action.payload.person.name,
       };
+      localStorage.setItem(
+        'user',
+        JSON.stringify({
+          access_token: action.payload.access_token,
+          data: dataUser,
+          idSeller: action.payload.person.id_seller,
+          isAdmin: action.payload.person.is_admin,
+          isSeller: action.payload.person.is_seller,
+        }),
+      );
       return {
         ...state,
         access_token: action.payload.access_token,
@@ -33,6 +43,7 @@ const userReducer = (state = initialState, action) => {
         isSeller: action.payload.person.is_seller,
       };
     case CLEAR_USER:
+      localStorage.removeItem('user');
       return initialState;
     default:
       return state;

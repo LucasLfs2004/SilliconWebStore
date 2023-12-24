@@ -126,6 +126,12 @@ export const LoggedRow = styled.div`
     font-size: 12px;
     color: #fff;
   }
+
+  @media (min-width: 1024px) {
+    button {
+      font-size: 14px;
+    }
+  }
 `;
 
 export const UserInfos = styled.div`
@@ -140,5 +146,14 @@ export const UserInfos = styled.div`
 
   .email {
     font-size: 7px;
+  }
+
+  @media (min-width: 1024px) {
+    p {
+      font-size: 14px;
+    }
+    .email {
+      font-size: 9px;
+    }
   }
 `;

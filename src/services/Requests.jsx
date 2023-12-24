@@ -103,6 +103,20 @@ export const getBrands = async () => {
   }
 };
 
+export const getProfile = async token => {
+  try {
+    const response = await Api.get('/person/me', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 // export const testRequest = async formData => {
 //   try {
 //     const response = await Api.post(

@@ -1,7 +1,7 @@
 import { CLEAR_USER, INITIALIZE_USER, SET_USER } from './actionTypes';
 
 export const initializeUser = () => {
-  const userData = {
+  const userObj = {
     access_token: null,
     data: {
       id: null,
@@ -12,6 +12,11 @@ export const initializeUser = () => {
     isAdmin: false,
     isSeller: false,
   };
+
+  const userStorage = localStorage.getItem('user');
+  const userData =
+    userStorage === undefined ? userObj : JSON.parse(userStorage);
+  console.log('inicializando usuário', userData);
   return {
     type: INITIALIZE_USER,
     payload: userData,

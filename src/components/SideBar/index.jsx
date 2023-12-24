@@ -28,7 +28,7 @@ const Menu = () => {
           <img src='/assets/icons/userIcon.svg' alt='' />
 
           <C.ActionUser>
-            {user.access_token ? (
+            {user?.access_token ? (
               <C.LoggedRow>
                 <C.UserInfos>
                   <p className='nome'>{user.data.name}</p>
@@ -45,6 +45,13 @@ const Menu = () => {
             )}
           </C.ActionUser>
         </C.UserRow>
+        {user?.access_token && (
+          <C.List>
+            <C.Item>
+              <Link to={'/profile'}>Meu perfil</Link>
+            </C.Item>
+          </C.List>
+        )}
         <C.List>
           <C.Item>
             <Link>Lançamentos</Link>
@@ -60,7 +67,7 @@ const Menu = () => {
           </C.Item>
         </C.List>
 
-        {user.isSeller && (
+        {user?.isSeller && (
           <C.List>
             <C.Item>
               <Link to={'/add-product'}>Adicionar produto</Link>

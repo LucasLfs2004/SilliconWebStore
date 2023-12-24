@@ -8,6 +8,7 @@ import Carrinho from '../pages/carrinho';
 import Home from '../pages/home';
 import Payment from '../pages/payment';
 import Product from '../pages/product';
+import Profile from '../pages/profile';
 import Login from '../pages/signIn';
 import CreateAccount from '../pages/signUp';
 
@@ -40,6 +41,10 @@ const Content = props => {
     {
       path: '/carousel-teste',
       element: <CarouselTeste />,
+    },
+    {
+      path: '/profile',
+      element: <Profile />,
     },
   ]);
 
