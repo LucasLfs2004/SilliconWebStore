@@ -21,6 +21,7 @@ export const useProfile = () => {
     queryFn: async () => {
       if (user.access_token) {
         const response = await getProfile(user.access_token);
+        console.log(response);
         response.birthday = moment(response.birthday)
           .locale('pt-br')
           .format('DD/MM/YYYY');

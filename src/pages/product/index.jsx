@@ -17,9 +17,10 @@ import * as C from './styles';
 export const Product = () => {
   const id = parseInt(useParams().id);
   const dispatch = useDispatch();
+  console.log('id of product:', id);
 
   const { data: product_data } = useQuery({
-    queryKey: ['products-home'],
+    queryKey: ['product-id'],
     queryFn: async () => {
       const response = await getProduct(id);
       return response;

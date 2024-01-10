@@ -111,6 +111,7 @@ export const getProfile = async token => {
         'Content-Type': 'application/json',
       },
     });
+    console.log('user request', response);
     return response.data;
   } catch (error) {
     return error;
