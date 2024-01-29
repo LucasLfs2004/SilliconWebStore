@@ -4,9 +4,6 @@ import ProductImagesWeb from '../productImagesWeb';
 import * as C from './styles';
 
 const ProductPresentation = ({ product }) => {
-  // const id = parseInt(useParams().id);
-  // const product = products.find(item => item.id === id);
-  // const sellerName = seller.find(item => item.id === product.seller_id).name;
   return (
     <C.DarkArea>
       <C.Rating>

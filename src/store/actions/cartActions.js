@@ -7,13 +7,13 @@ import {
   REMOVE_PRODUCT,
 } from './actionTypes';
 
-export const initializeCart = () => {
+export const initializeCart = (cart) => {
   // const item = localStorage.getItem('cart');
   // const cartData = item !== undefined ? JSON.parse(item) : [];
   const cartData = [];
   return {
     type: INITIALIZE_CART,
-    payload: cartData,
+    payload: cart || cartData,
   };
 };
 

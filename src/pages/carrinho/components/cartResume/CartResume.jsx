@@ -11,20 +11,29 @@ const CartResume = () => {
         <C.Title className='margin'>Resumo</C.Title>
         <C.ResumeList>
           {cart &&
-            cart.map((item, index) => (
+            cart?.cart?.map((item, index) => (
               <C.RowP key={index}>
                 <p className='grey'>
-                  {item.amount} x {item.product.name}
+                  {item.amount} x {item?.name}
                 </p>
                 <p>
-                  {(item.product.value.priceNow * item.amount).toLocaleString(
-                    'pt-BR',
-                    {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                    },
-                  )}
+                  {item?.value?.price_now
+                    ? (item?.value?.price_now * item.amount).toLocaleString(
+                        'pt-BR',
+                        {
+                          style: 'currency',
+                          currency: 'BRL',
+                          minimumFractionDigits: 2,
+                        },
+                      )
+                    : (item?.value?.common_price * item.amount).toLocaleString(
+                        'pt-BR',
+                        {
+                          style: 'currency',
+                          currency: 'BRL',
+                          minimumFractionDigits: 2,
+                        },
+                      )}
                 </p>
               </C.RowP>
             ))}

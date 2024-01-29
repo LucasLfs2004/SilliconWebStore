@@ -111,7 +111,22 @@ export const getProfile = async token => {
         'Content-Type': 'application/json',
       },
     });
-    console.log('user request', response);
+    // console.log('user request', response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getCart = async token => {
+  try {
+    const response = await Api.get('/cart', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log('cart request with token', response);
     return response.data;
   } catch (error) {
     return error;

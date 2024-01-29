@@ -44,7 +44,7 @@ export const PurchaseResume = () => {
         <C.Title className='blue no-padding'>Resumo</C.Title>
         <C.ResumeList>
           {cart &&
-            cart.map((item, index) => (
+            cart?.cart?.map((item, index) => (
               <C.RowP key={index}>
                 <C.Paragraph>
                   {item.amount} x {item.product.name}

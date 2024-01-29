@@ -1,11 +1,15 @@
 export const useItemCart = item => {
   console.log(item);
-  const inCash = item?.product.value?.priceNow;
-  const portions = item.product.value.portions;
+  const inCash = item?.value?.price_now
+    ? item?.value?.price_now
+    : item?.value?.common_price;
+  const portions = item.value.portions;
   const inCredit =
     inCash *
-    (1 + item?.product?.value?.feesCredit / 100) *
-    (1 + item.product.value.feesMonthly / 100) ** portions;
+    (1 + item?.value?.fees_credit / 100) *
+    (1 + item?.value?.fees_monthly / 100) ** portions;
+
+  console.log('inCash', inCash);
 
   return {
     inCash: inCash.toLocaleString('pt-BR', {

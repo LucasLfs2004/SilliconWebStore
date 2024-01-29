@@ -16,7 +16,7 @@ export const initializeUser = () => {
   const userStorage = localStorage.getItem('user');
   const userData =
     userStorage === undefined ? userObj : JSON.parse(userStorage);
-  console.log('inicializando usuário', userData);
+  // console.log('inicializando usuário', userData);
   return {
     type: INITIALIZE_USER,
     payload: userData,

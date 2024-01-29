@@ -17,6 +17,8 @@ const BrandCarousel = () => {
     slidesToScroll: window.screen.width > 1024 ? 6 : 3,
   };
 
+  console.log('brands', brands);
+
   return (
     <C.Container>
       <C.Carousel>

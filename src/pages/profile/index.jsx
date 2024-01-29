@@ -6,7 +6,6 @@ import { useProfile } from './useProfile';
 
 const Profile = () => {
   const { profile } = useProfile();
-  console.log(profile);
 
   return (
     <Container>
