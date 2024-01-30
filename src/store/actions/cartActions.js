@@ -11,6 +11,7 @@ export const initializeCart = (cart) => {
   // const item = localStorage.getItem('cart');
   // const cartData = item !== undefined ? JSON.parse(item) : [];
   const cartData = [];
+  console.log(cart)
   return {
     type: INITIALIZE_CART,
     payload: cart || cartData,

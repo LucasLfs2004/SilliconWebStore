@@ -133,6 +133,22 @@ export const getCart = async token => {
   }
 };
 
+export const setShipInfo = async (token, params) => {
+  try {
+    console.log(params);
+    const response = await Api.post('/cart-ship', params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log('cart request with token', response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 // export const testRequest = async formData => {
 //   try {
 //     const response = await Api.post(

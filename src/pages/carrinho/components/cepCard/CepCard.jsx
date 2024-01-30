@@ -5,7 +5,8 @@ import * as C from './styles';
 import { useCepCard } from './useCepCard';
 
 const CepCard = () => {
-  const { cep, setCep, searchCep, payment } = useCepCard();
+  const { cep, setCep, searchCep, payment, calcShip, cart } = useCepCard();
+  console.log(cart);
 
   return (
     <C.CepArea className='cep-area'>
@@ -14,7 +15,11 @@ const CepCard = () => {
           <img src='/assets/icons/locationIcon.svg' alt='' />
           <h1>Endereço de entrega</h1>
         </Title>
-        <Link to={'/'}>Esqueci meu CEP</Link>
+        <Link
+          to={'https://buscacepinter.correios.com.br/app/endereco/index.php?t'}
+        >
+          Esqueci meu CEP
+        </Link>
       </C.RowBox>
       <C.RowBox>
         <C.ColumnBox>
@@ -29,34 +34,30 @@ const CepCard = () => {
                 className='center'
               />
             </InputDisplay>
-            <ButtonPurple onClick={() => searchCep()}>Calcular</ButtonPurple>
+            <ButtonPurple onClick={() => calcShip()}>Calcular</ButtonPurple>
           </C.RowCep>
 
-          <C.CepInfo>
-            {payment.shipInfos.logradouro &&
-              payment.shipInfos.bairro &&
-              `${payment?.shipInfos?.logradouro} - ${payment?.shipInfos?.bairro}`}
-          </C.CepInfo>
+          <C.CepInfo>{cart.ship_street && cart.ship_street}</C.CepInfo>
         </C.ColumnBox>
         <C.ShipValue>
-          {payment.shipValue > 0 && (
-            <>
-              <C.Subtitle>
-                <div>
-                  <img src='/assets/icons/truckIcon.svg' alt='' />
-                  <h2>Frete:</h2>
-                </div>
-                <h1>
-                  {payment.shipValue.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })}
-                </h1>
-              </C.Subtitle>
-              <C.TimeShip>5 dias úteis</C.TimeShip>
-            </>
-          )}
+          <>
+            <C.Subtitle>
+              <div>
+                <img src='/assets/icons/truckIcon.svg' alt='' />
+                <h2>Frete:</h2>
+              </div>
+              <h1>
+                {cart.ship_value > 0
+                  ? cart.ship_value.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                      minimumFractionDigits: 2,
+                    })
+                  : 'Grátis'}
+              </h1>
+            </C.Subtitle>
+            <C.TimeShip>{cart.ship_deadline} dias úteis</C.TimeShip>
+          </>
         </C.ShipValue>
       </C.RowBox>
     </C.CepArea>

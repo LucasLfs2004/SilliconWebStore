@@ -23,7 +23,7 @@ const ProductsAndServices = () => {
       </C.SellFrom>
       <C.CartArea>
         {cart &&
-          cart?.cart?.map((item, index) => (
+          cart?.items?.map((item, index) => (
             <ItemCart key={index} item={item} />
           ))}
       </C.CartArea>

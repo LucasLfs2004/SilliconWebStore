@@ -13,6 +13,7 @@ const cartReducer = (state = initialState, action) => {
   let list = [];
   switch (action.type) {
     case INITIALIZE_CART:
+      console.log('payload', action.payload)
       return action.payload;
     case ADD_TO_CART:
       const product = action.payload;

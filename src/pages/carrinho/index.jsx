@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '../../CommomStyles';
 import EmptyCart from '../../components/EmptyCart';
@@ -17,25 +16,18 @@ import { useCart } from './useCart';
 const Carrinho = () => {
   const cart = useCart();
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
 
   const { data: cartRequest } = useQuery({
     queryKey: ['cart-data'],
     queryFn: async () => {
       if (user.access_token) {
         const response = await getCart(user.access_token);
-        console.log(response);
+        dispatch(initializeCart(response));
         return response;
       }
     },
   });
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(initializeCart(cartRequest));
-  }, [cartRequest]);
-
-  console.log('cart in page cart', cart);
 
   return (
     <Container>
@@ -44,7 +36,7 @@ const Carrinho = () => {
         img_path={'/assets/icons/carrinho-gradient.svg'}
         page_title={'Carrinho'}
       />
-      {cart?.cart && cart.cart.length > 0 ? (
+      {cart?.items && cart.items.length > 0 ? (
         <C.ContentPage>
           <C.BoxInfos>
             <ProductsAndServices />
