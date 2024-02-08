@@ -4,7 +4,7 @@ import { calculatePayment } from '../../store/actions/paymentActions';
 
 import { useQuery } from '@tanstack/react-query';
 import { getCart, getProducts } from '../../services/Requests';
-import { initializeCart } from '../../store/actions/cartActions';
+import { setCart } from '../../store/actions/cartActions';
 
 export const useHome = () => {
   const cart = useSelector(state => state.cart);
@@ -35,7 +35,7 @@ export const useHome = () => {
 
   useEffect(() => {
     console.log('cartRequest', cartRequest);
-    dispatch(initializeCart(cartRequest?.cart));
+    dispatch(setCart(cartRequest));
   }, [cartRequest]);
 
   useEffect(() => {

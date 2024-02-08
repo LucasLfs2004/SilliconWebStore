@@ -133,6 +133,21 @@ export const getCart = async token => {
   }
 };
 
+export const clearCartUser = async token => {
+  try {
+    const response = await Api.delete('/cart', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log('cart delete', response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const setShipInfo = async (token, params) => {
   try {
     console.log(params);
@@ -143,6 +158,65 @@ export const setShipInfo = async (token, params) => {
       },
     });
     console.log('cart request with token', response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const setVoucher = async (token, code) => {
+  try {
+    console.log(code);
+    console.log(token);
+    const response = await Api.post('/cart-discount', code, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log('return of setVoucher', response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const clearVoucher = async token => {
+  try {
+    const response = await Api.delete('/cart-discount', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateCartItem = async (token, params) => {
+  try {
+    const response = await Api.patch('/cart-item', params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const removeCartItem = async (token, params) => {
+  try {
+    const response = await Api.delete(`/cart-item/${params}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
     return response.data;
   } catch (error) {
     return error;

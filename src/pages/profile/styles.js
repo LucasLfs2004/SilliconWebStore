@@ -18,6 +18,10 @@ export const Row = styled.div`
   flex-direction: row;
   align-items: center;
 
+  &.mt{
+    margin-top: ${props => props.mt}px;
+  }
+
   &.gap {
     column-gap: ${props => props.gap}px;
   }
@@ -25,15 +29,37 @@ export const Row = styled.div`
   &.between {
     justify-content: space-between;
   }
+
+  p {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  img.common-width {
+    height: 14px;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+  }
 `;
 
 export const NeumorphismCard = styled.div`
   border-radius: 8px;
-  background: #ecf0f3;
-  box-shadow: inset -9px -9px 18px #d7dadd, inset 9px 9px 18px #ffffff;
+  background: #010f20;
+  box-shadow: inset -10px -10px 25px #02183350, inset 10px 10px 25px #00060D50;
   width: calc(86% - 40px);
   margin: 12px 8%;
   padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+
+  &.gap {
+    row-gap: ${props => props.gap}px;
+  }
 `;
 
 export const UserInfos = styled.div`
@@ -41,25 +67,11 @@ export const UserInfos = styled.div`
   flex-direction: column;
   row-gap: 6px;
 
-  p {
-    color: #010f20;
-    font-size: 14px;
-    font-weight: 400;
-  }
 
-  img.common-width {
-    width: 16px;
-  }
-
-  h3 {
-    font-size: 18px;
-    font-weight: 600;
-    color: #5b43d6;
-  }
 `;
 
 export const BtnEdit = styled.div`
-  width: 22px;
+  width: 16px;
   border: none;
   background-color: transparent;
 
@@ -71,3 +83,30 @@ export const BtnEdit = styled.div`
     cursor: pointer;
   }
 `;
+export const BtnAdd = styled.div`
+  width: 16px;
+  border: none;
+  background-color: transparent;
+
+  img {
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    cursor: pointer;
+  }
+`;
+
+export const TextBorderBottom = styled.p`
+  border-bottom: 1px solid #02EDDF;
+  color: #fff;
+  width: auto;
+  /* padding-left: 3px; */
+  padding-right: 6px;
+`
+
+export const ParagraphShip = styled.p`
+  font-size: 12px;
+  color: #D1D9E6;
+  font-weight: 500;
+`

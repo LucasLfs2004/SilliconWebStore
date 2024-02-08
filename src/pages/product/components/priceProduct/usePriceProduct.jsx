@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { addToCart } from '../../../../store/actions/cartActions';
 
 export const usePriceProduct = product => {
   const [seePortions, setSeePortions] = useState(false);
@@ -43,14 +42,14 @@ export const usePriceProduct = product => {
 
   const buyProduct = () => {
     // console.log('buyProduct');
-    dispatch(addToCart(product));
+    // dispatch(addToCart(product));
     // console.log('alterando rota');
     navigate('/carrinho');
   };
 
   const handleAddToCart = event => {
     event.stopPropagation();
-    dispatch(addToCart(product));
+    // dispatch(addToCart(product));
   };
 
   return {

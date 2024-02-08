@@ -1,6 +1,5 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { addToCart } from '../../store/actions/cartActions';
 
 export const useCardProduct = item => {
   const navigate = useNavigate();
@@ -8,12 +7,12 @@ export const useCardProduct = item => {
 
   const handleAddToCart = event => {
     event.stopPropagation();
-    dispatch(addToCart(item));
+    // dispatch(addToCart(item));
   };
 
   const handleBuyProduct = event => {
     event.stopPropagation();
-    dispatch(addToCart(item));
+    // dispatch(addToCart(item));
     navigate('/payment');
   };
 

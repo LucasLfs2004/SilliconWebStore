@@ -1,23 +1,35 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  calculatePayment,
-  setVoucher,
-} from '../../../../store/actions/paymentActions';
+import { clearVoucher, setVoucher } from '../../../../services/Requests';
+import { setCart } from '../../../../store/actions/cartActions';
 import { ButtonPurple, InputDisplay, Title } from '../../styles';
 import * as C from './styles';
 
 export const VoucherCard = () => {
   const payment = useSelector(state => state.payment);
   const cart = useSelector(state => state.cart);
+  const user = useSelector(state => state.user);
   const [cupom, setCupom] = useState('');
   const dispatch = useDispatch();
 
-  const applyCupom = () => {
-    if (cupom.toLowerCase() === 'nadamal') {
-      dispatch(setVoucher({ voucher: 'nadamal', discount: 0.05 }));
-      dispatch(calculatePayment(cart));
-      setCupom('');
+  const applyVoucher = async () => {
+    if (user.access_token) {
+      const cartUpdated = await setVoucher(user.access_token, {
+        code: String(cupom.toUpperCase()),
+      });
+      console.log(cartUpdated);
+      dispatch(setCart(cartUpdated));
+    } else {
+      console.log('User not logged');
+    }
+  };
+
+  const removeVoucher = async () => {
+    if (user.access_token) {
+      const cartUpdated = await clearVoucher(user.access_token);
+      dispatch(setCart(cartUpdated));
+    } else {
+      console.log('User not logged');
     }
   };
 
@@ -36,21 +48,27 @@ export const VoucherCard = () => {
             onChange={e => setCupom(e.target.value)}
           />
         </InputDisplay>
-        <ButtonPurple onClick={() => applyCupom()}>Aplicar</ButtonPurple>
+        <ButtonPurple
+          onClick={() =>
+            cart.voucher !== null ? removeVoucher() : applyVoucher()
+          }
+        >
+          {cart.voucher !== null ? 'Limpar' : 'Aplicar'}
+        </ButtonPurple>
       </C.RowCupom>
 
       <C.CupomApply>
-        {payment?.voucher !== null && (
+        {cart.voucher !== null && (
           <>
-            <p className='green'>Cupom aplicado: {payment?.voucher}</p>
+            <p className='green'>Cupom aplicado: {cart?.voucher}</p>
             <span>
-              {payment.discount > 1
+              {cart.discount > 1
                 ? `${payment.discount.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
                     minimumFractionDigits: 2,
                   })} de desconto`
-                : `${payment.discount * 100}% off`}
+                : `${cart.discount * 100}% off`}
             </span>
           </>
         )}

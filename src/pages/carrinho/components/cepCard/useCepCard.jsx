@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { regionList } from '../../../../constants/list_ship';
 import { getCep, setShipInfo } from '../../../../services/Requests';
-import { initializeCart } from '../../../../store/actions/cartActions';
+import { setCart } from '../../../../store/actions/cartActions';
 
 export const useCepCard = () => {
   const payment = useSelector(state => state.payment);
   const user = useSelector(state => state.user);
-  const [cep, setCep] = useState('');
-  const dispatch = useDispatch();
   const cart = useSelector(state => state.cart);
+  const [cep, setCep] = useState(cart.ship_cep ? cart.ship_cep : '');
+  const dispatch = useDispatch();
 
   const searchCep = async () => {
     console.log('cep', cep);
@@ -43,7 +43,7 @@ export const useCepCard = () => {
         cep: uf.cep,
         street: uf.logradouro + ' - ' + uf.bairro,
       });
-      dispatch(initializeCart(cartData));
+      dispatch(setCart(cartData));
     }
   };
 

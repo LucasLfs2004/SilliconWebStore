@@ -5,7 +5,7 @@ import EmptyCart from '../../components/EmptyCart';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
 import { getCart } from '../../services/Requests';
-import { initializeCart } from '../../store/actions/cartActions';
+import { setCart } from '../../store/actions/cartActions';
 import CartResume from './components/cartResume/CartResume';
 import CepCard from './components/cepCard/CepCard';
 import ProductsAndServices from './components/productsAndServices/ProductsAndServices';
@@ -23,11 +23,14 @@ const Carrinho = () => {
     queryFn: async () => {
       if (user.access_token) {
         const response = await getCart(user.access_token);
-        dispatch(initializeCart(response));
+        dispatch(setCart(response));
+        console.log('response queryKey cart-data', response);
         return response;
       }
     },
   });
+
+  console.log(cart);
 
   return (
     <Container>

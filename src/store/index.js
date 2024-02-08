@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { initializeCart } from './actions/cartActions';
+import { setCart } from './actions/cartActions';
 import { initializePayment } from './actions/paymentActions';
 import { initializeProduct } from './actions/productActions';
 import { initializeUser } from './actions/userActions';
@@ -17,7 +17,7 @@ const store = configureStore({
   },
 });
 
-store.dispatch(initializeCart());
+store.dispatch(setCart());
 store.dispatch(initializePayment());
 store.dispatch(initializeUser());
 store.dispatch(initializeProduct());

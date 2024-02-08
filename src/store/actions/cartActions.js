@@ -1,54 +1,34 @@
 import {
-  ADD_TO_CART,
   CLEAR_CART,
-  DECREMENT_AMOUNT_PRODUCT,
-  INCREMENT_AMOUNT_PRODUCT,
-  INITIALIZE_CART,
-  REMOVE_PRODUCT,
+  SET_CART
 } from './actionTypes';
 
-export const initializeCart = (cart) => {
-  // const item = localStorage.getItem('cart');
-  // const cartData = item !== undefined ? JSON.parse(item) : [];
-  const cartData = [];
-  console.log(cart)
-  return {
-    type: INITIALIZE_CART,
-    payload: cart || cartData,
-  };
-};
+const modelCart = {
+  cart_total_value: 0,
+  discount: null,
+  discount_value: 0,
+  items: [],
+  list_portions: [],
+  portions: 0,
+  product_total_value: 0,
+  ship_cep: null,
+  ship_deadline: null,
+  ship_street: null,
+  ship_value: 0,
+  voucher: null
+}
 
-export const addToCart = product => {
+export const setCart = (cart) => {
   return {
-    type: ADD_TO_CART,
-    payload: product,
+    type: SET_CART,
+    payload: cart || modelCart,
   };
 };
 
 export const clearCart = () => {
   return {
     type: CLEAR_CART,
-    payload: [],
+    payload: {},
   };
 };
 
-export const incrementAmountProduct = id => {
-  return {
-    type: INCREMENT_AMOUNT_PRODUCT,
-    payload: id,
-  };
-};
-
-export const decrementAmountProduct = id => {
-  return {
-    type: DECREMENT_AMOUNT_PRODUCT,
-    payload: id,
-  };
-};
-
-export const removeProduct = id => {
-  return {
-    type: REMOVE_PRODUCT,
-    payload: id,
-  };
-};
