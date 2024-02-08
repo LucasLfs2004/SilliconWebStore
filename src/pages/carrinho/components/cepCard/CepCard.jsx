@@ -5,8 +5,7 @@ import * as C from './styles';
 import { useCepCard } from './useCepCard';
 
 const CepCard = () => {
-  const { cep, setCep, searchCep, payment, calcShip, cart } = useCepCard();
-  console.log(cart);
+  const { cep, setCep, calcShip, cart } = useCepCard();
 
   return (
     <C.CepArea className='cep-area'>

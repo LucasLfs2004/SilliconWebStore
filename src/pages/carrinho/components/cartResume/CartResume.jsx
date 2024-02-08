@@ -1,10 +1,9 @@
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import * as C from './styles';
-import { useCartResume } from './useCartResume';
 
 const CartResume = () => {
-  const { payInfos, payment, cart } = useCartResume();
-
+  const cart = useSelector(state => state.cart);
   return (
     <C.CartResume>
       <C.TopBox>

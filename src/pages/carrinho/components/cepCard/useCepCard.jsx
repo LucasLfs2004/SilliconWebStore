@@ -5,7 +5,6 @@ import { getCep, setShipInfo } from '../../../../services/Requests';
 import { setCart } from '../../../../store/actions/cartActions';
 
 export const useCepCard = () => {
-  const payment = useSelector(state => state.payment);
   const user = useSelector(state => state.user);
   const cart = useSelector(state => state.cart);
   const [cep, setCep] = useState(cart.ship_cep ? cart.ship_cep : '');
@@ -36,8 +35,6 @@ export const useCepCard = () => {
     if (user.access_token && uf !== null) {
       const region = findRegion(uf.uf);
 
-      console.log(region);
-
       const cartData = await setShipInfo(user.access_token, {
         region: region,
         cep: uf.cep,
@@ -47,5 +44,5 @@ export const useCepCard = () => {
     }
   };
 
-  return { payment, cep, setCep, searchCep, findRegion, calcShip, cart };
+  return { cep, setCep, calcShip, cart };
 };

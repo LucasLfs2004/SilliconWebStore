@@ -50,10 +50,12 @@ export const VoucherCard = () => {
         </InputDisplay>
         <ButtonPurple
           onClick={() =>
-            cart.voucher !== null ? removeVoucher() : applyVoucher()
+            cart.voucher !== null && cupom === ''
+              ? removeVoucher()
+              : applyVoucher()
           }
         >
-          {cart.voucher !== null ? 'Limpar' : 'Aplicar'}
+          {cart.voucher !== null && cupom === '' ? 'Limpar' : 'Aplicar'}
         </ButtonPurple>
       </C.RowCupom>
 
@@ -63,7 +65,7 @@ export const VoucherCard = () => {
             <p className='green'>Cupom aplicado: {cart?.voucher}</p>
             <span>
               {cart.discount > 1
-                ? `${payment.discount.toLocaleString('pt-BR', {
+                ? `${cart.discount.toLocaleString('pt-BR', {
                     style: 'currency',
                     currency: 'BRL',
                     minimumFractionDigits: 2,
