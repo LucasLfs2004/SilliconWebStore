@@ -6,9 +6,10 @@ import Header from '../../components/Header';
 import ProductArea from '../../components/ProductArea';
 import BtnFilter from '../../components/btnFilter';
 import BtnOrder from '../../components/btnOrder';
-import { brands } from '../../falseDatabase/brands';
+import { api_path } from '../../constants/api_path';
 import { OrderProduct } from './hooks';
 import * as C from './styles';
+import useBrand from './useBrand';
 
 const Brand = () => {
   const [order, setOrder] = useState('Ordenar');
@@ -24,14 +25,17 @@ const Brand = () => {
     setOrder(item);
     setOpenOrder(false);
   };
-  let brand = brands.find(item => item.id === id_brand);
+
+  const { brand } = useBrand();
+  console.log(brand);
+  // let brand = brands.find(item => item.id === id_brand);
   return (
     <Container>
       <Header />
       <C.Brand>
         <C.TopBrand>
-          <C.NameBrand>{brand.brand}</C.NameBrand>
-          <img src={brand.img_path} alt='' />
+          <C.NameBrand>{brand?.brand_name}</C.NameBrand>
+          <img src={`${api_path}/image/brand/${brand?.brand_logo}`} alt='' />
           <C.Buttons className='web'>
             <BtnFilter boxShadow={false} />
             <BtnOrder
@@ -53,7 +57,7 @@ const Brand = () => {
             SelectOrder={SelectOrder}
           />
         </C.Buttons>
-        <ProductArea products={list} />
+        <ProductArea products={brand?.products} />
       </C.Brand>
       <Footer />
     </Container>

@@ -72,6 +72,15 @@ export const getProducts = async () => {
   }
 };
 
+export const getProductsOfBrand = async brand => {
+  try {
+    const response = await Api.get(`/product/brand/${brand}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getProduct = async id => {
   try {
     console.log(id);

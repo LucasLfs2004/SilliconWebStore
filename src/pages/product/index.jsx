@@ -20,7 +20,7 @@ export const Product = () => {
   console.log('id of product:', id);
 
   const { data: product_data } = useQuery({
-    queryKey: ['product-id'],
+    queryKey: ['product-id', id],
     queryFn: async () => {
       const response = await getProduct(id);
       return response;
