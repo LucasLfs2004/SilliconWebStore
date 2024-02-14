@@ -2,7 +2,6 @@ import { styled } from 'styled-components';
 
 export const Container = styled.main`
   margin: 0;
-  background-color: #010f20;
   min-height: 100vh;
   height: 100%;
   display: flex;
@@ -16,16 +15,25 @@ export const Container = styled.main`
   }
 `;
 
+export const Body = styled.section`
+  background-color: #010f20;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 36px;
+`;
+
 export const Section = styled.section`
+  background-color: #010f20;
   margin: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   background: #ecf0f3;
   width: 84.61%;
   border-radius: 15px;
-  box-shadow:
-    10px 10px 20px 0px #d1d9e6 inset,
-    -10px -10px 20px 0px #fff inset;
+  box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
 
   .top {
     margin-left: 35px;
@@ -51,6 +59,7 @@ export const Area = styled.div`
   display: flex;
   flex: 1;
   overflow: hidden;
+  padding: 18px;
 `;
 
 export const Form = styled.form`
@@ -135,8 +144,7 @@ export const FormInput = styled.div`
   input,
   textarea {
     background: #ecf0f3;
-    box-shadow:
-      5px 5px 6px 0px #d1d9e6,
+    box-shadow: 5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     border-radius: 5px;
     border: none;
@@ -145,6 +153,8 @@ export const FormInput = styled.div`
     padding: 0 14px;
     font-size: 12px;
     transition: all 0.5s ease;
+    outline: none;
+    color: #010f20cc;
   }
 
   .no-spin {
@@ -160,8 +170,7 @@ export const FormInput = styled.div`
 
   select {
     background-color: #ecf0f3;
-    box-shadow:
-      5px 5px 6px 0px #d1d9e6,
+    box-shadow: 5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     border-radius: 5px;
     border: none;
@@ -201,6 +210,26 @@ export const FormInput = styled.div`
     padding-left: 3px;
     font-weight: 275;
     margin: 0;
+  }
+  @media (min-width: 1440px) {
+    width: 350px;
+
+    &.half {
+      width: 157px;
+    }
+
+    &.complete-width {
+      width: 100%;
+    }
+
+    input,
+    textarea {
+      width: calc(100% - 28px);
+    }
+
+    select {
+      width: 100%;
+    }
   }
 `;
 
@@ -243,8 +272,7 @@ export const RadioInput = styled.div`
     height: 25px;
     width: 100px;
     background-color: #ecf0f3;
-    box-shadow:
-      5px 5px 6px 0px #d1d9e6,
+    box-shadow: 5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     display: flex;
     flex-direction: row;
@@ -266,15 +294,13 @@ export const RadioInput = styled.div`
     }
 
     input[type='radio']:checked + label:nth-of-type(1) {
-      box-shadow:
-        5px 5px 6px 0px #d1d9e6,
+      box-shadow: 5px 5px 6px 0px #d1d9e6,
         -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
       color: #5ce1e6;
       border-radius: 5px;
     }
     input[type='radio']:checked + label:nth-of-type(2) {
-      box-shadow:
-        -5px 5px 6px 0px #d1d9e6,
+      box-shadow: -5px 5px 6px 0px #d1d9e6,
         -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
       color: #5ce1e6;
       border-radius: 5px;
@@ -312,8 +338,7 @@ export const InputImg = styled.div`
     height: 30px;
     border-radius: 5px;
     background-color: #ecf0f3;
-    box-shadow:
-      5px 5px 6px 0px #d1d9e6,
+    box-shadow: 5px 5px 6px 0px #d1d9e6,
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     width: 76%;
     column-gap: 16px;

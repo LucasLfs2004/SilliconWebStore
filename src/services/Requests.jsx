@@ -112,6 +112,15 @@ export const getBrands = async () => {
   }
 };
 
+export const getCategorys = async () => {
+  try {
+    const response = await Api.get('/category');
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getProfile = async token => {
   try {
     const response = await Api.get('/person/me', {

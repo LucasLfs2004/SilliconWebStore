@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import BtnSubmit from '../../components/BtnSubmit';
 import Header from '../../components/Header';
 import * as C from './styles';
 
+import { Container } from '../../CommomStyles';
 import { createProduct } from '../../services/Requests';
-import { brands, categorys } from './product';
+import FormDesk from './components/desktop';
+import { categorys } from './product';
 
 const AddProduct = () => {
   const [name, setName] = useState('');
@@ -201,213 +201,22 @@ const AddProduct = () => {
   }, []);
 
   return (
-    <C.Container>
+    <Container>
       <Header />
-      <C.Section>
-        <div className='top'>
-          <img src='/assets/imgs/vga.svg' alt='' />
-          <C.Title className='title'>Cadastrar produto</C.Title>
-        </div>
-        <C.Area ref={widthAreaRef}>
-          <C.Form
-            marginLeft={scrollX}
-            ref={widthScroll}
-            onSubmit={handleSubmit}
-          >
-            <C.DivWrap width={itemWidth}>
-              <C.FormInput>
-                <label>nome</label>
-                <input
-                  type='text'
-                  placeholder={'nome'}
-                  onChange={e => setName(e.target.value)}
-                />
-                <p>{errors?.name}</p>
-              </C.FormInput>
-              <C.FormInput className='category'>
-                <label>marca</label>
-
-                <C.RowInput view={brandSelect === 'outro'}>
-                  <select
-                    name='category'
-                    id='categorySelect'
-                    onChange={e => setBrandSelect(e.target.value)}
-                    className={
-                      brandSelect !== null &&
-                      brandSelect !== 'null' &&
-                      'selected'
-                    }
-                  >
-                    <option checked value={'null'}>
-                      Selecionar
-                    </option>
-                    {brands &&
-                      brands.map((item, key) => {
-                        const brand = item
-                          .toLowerCase()
-                          .trim()
-                          .replaceAll(' ', '_')
-                          .normalize('NFD')
-                          .replace(/[\u0300-\u036f]/g, '');
-                        return (
-                          <option key={key} value={brand}>
-                            {item}
-                          </option>
-                        );
-                      })}
-                  </select>
-                  <C.InputVisible
-                    type='text'
-                    placeholder={'marca'}
-                    view={brandSelect === 'outro'}
-                    onChange={e => setBrand(e.target.value)}
-                  />
-                </C.RowInput>
-                <p>{errors?.brand}</p>
-              </C.FormInput>
-              <C.FormInput>
-                <label>preço</label>
-                <input
-                  type='number'
-                  name=''
-                  id=''
-                  step='0.01'
-                  placeholder='preço'
-                  className='no-spin'
-                  onChange={e => setPrice(e.target.value)}
-                />
-                <p>{errors?.price}</p>
-              </C.FormInput>
-              <C.FormInput>
-                <label>estoque</label>
-                <input
-                  type='number'
-                  className='no-spin'
-                  placeholder={'estoque'}
-                  onChange={e => setStock(e.target.value)}
-                />
-                <p>{errors?.stock}</p>
-              </C.FormInput>
-              <C.FormInput className='category'>
-                <label>categoria</label>
-
-                <C.RowInput view={categorySelect === 'outro'}>
-                  <select
-                    name='category'
-                    id='categorySelect'
-                    onChange={e => setCategorySelect(e.target.value)}
-                    className={
-                      categorySelect !== null &&
-                      categorySelect !== 'null' &&
-                      'selected'
-                    }
-                  >
-                    <option checked value={'null'}>
-                      Selecionar
-                    </option>
-                    {categorys &&
-                      categorys.map((item, key) => {
-                        const category = item
-                          .toLowerCase()
-                          .trim()
-                          .replaceAll(' ', '_')
-                          .normalize('NFD')
-                          .replace(/[\u0300-\u036f]/g, '');
-                        return (
-                          <option key={key} value={category}>
-                            {item}
-                          </option>
-                        );
-                      })}
-                  </select>
-                  <C.InputVisible
-                    type='text'
-                    placeholder={'categoria'}
-                    onChange={e => setCategory(e.target.value)}
-                    view={categorySelect === 'outro'}
-                  />
-                </C.RowInput>
-                <p>{errors?.category}</p>
-              </C.FormInput>
-              <C.FormInput>
-                <label>descrição</label>
-                <textarea
-                  type='text'
-                  placeholder={'descrição'}
-                  onChange={e => setDescription(e.target.value)}
-                />
-                <p>{errors?.description}</p>
-              </C.FormInput>
-              <C.RadioInput>
-                <p>lançamento</p>
-                <div className='optionLancamento'>
-                  <input
-                    type='radio'
-                    checked={isFeatured}
-                    onChange={e => setIsFeatured(true)}
-                    name='lancamento'
-                    id='sim'
-                  />
-                  <label htmlFor='sim'>Sim</label>
-                  <input
-                    type='radio'
-                    checked={!isFeatured}
-                    name='lancamento'
-                    id='nao'
-                    onChange={e => setIsFeatured(false)}
-                  />
-                  <label htmlFor='nao'>Não</label>
-                </div>
-              </C.RadioInput>
-              <C.BtnNavigation type='button' onClick={e => nextStep(e)}>
-                Próximo
-              </C.BtnNavigation>
-            </C.DivWrap>
-            <C.DivWrap width={itemWidth}>
-              <C.InputImg>
-                <p>Adicionar imagens</p>
-                <input
-                  type='file'
-                  id='img-input'
-                  src=''
-                  alt=''
-                  accept='image/png, image/jpeg'
-                  multiple
-                  onChange={handleFileChange}
-                />
-                <label htmlFor='img-input'>
-                  <img src='/assets/imgs/vgathin.svg' alt='vga' />
-                  <p>adicionar imagens</p>
-                </label>
-              </C.InputImg>
-
-              <C.Carousel>
-                <Slider className='carousel-image-product' {...settings}>
-                  {previewImages &&
-                    previewImages.map((image, index) => (
-                      <C.ItemDiv key={index} className='carousel-item'>
-                        <img src={image} alt={`Imagem ${index}`} />
-                      </C.ItemDiv>
-                    ))}
-                </Slider>
-              </C.Carousel>
-              <BtnSubmit text={'Criar'} type='submit' />
-              <C.BtnNavigation text={'Voltar'} onClick={e => handleBackForm(e)}>
-                Voltar
-              </C.BtnNavigation>
-            </C.DivWrap>
-            {/* <BtnSubmit text={'Criar'} type='submit' /> */}
-          </C.Form>
-        </C.Area>
-        <C.Message>
-          <Link to={'/'}>cancelar</Link>
-        </C.Message>
-      </C.Section>
+      <C.Body>
+        <C.Section>
+          <div className='top'>
+            <img src='/assets/imgs/vga.svg' alt='' />
+            <C.Title className='title'>Cadastrar produto</C.Title>
+          </div>
+          {window.screen.width > 1024 && <FormDesk />}
+        </C.Section>
+      </C.Body>
       <C.Footer>
         <p>SILLICON STORE - VAREJO DE PRODUTOS DE INFORMÁTICA LTDA</p>
         <Link to={'/'}>TERMOS E PRIVACIDADE</Link>
       </C.Footer>
-    </C.Container>
+    </Container>
   );
 };
 
