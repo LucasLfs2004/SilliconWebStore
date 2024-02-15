@@ -22,6 +22,8 @@ export const Body = styled.section`
   flex-direction: column;
   align-items: center;
   padding-top: 36px;
+  min-height: calc(100vh - 90px);
+  height: auto;
 `;
 
 export const Section = styled.section`
@@ -36,7 +38,7 @@ export const Section = styled.section`
   box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
 
   .top {
-    margin-left: 35px;
+    /* margin-left: 35px; */
     margin-top: 20px;
     display: flex;
     flex-direction: row;
@@ -60,6 +62,10 @@ export const Area = styled.div`
   flex: 1;
   overflow: hidden;
   padding: 18px;
+
+  @media (min-width: 1024px) {
+    column-gap: 36px;
+  }
 `;
 
 export const Form = styled.form`
@@ -105,6 +111,11 @@ export const Message = styled.p`
 
   a {
     color: #51e1e6;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 12px;
+    font-weight: 600;
   }
 `;
 
@@ -155,6 +166,14 @@ export const FormInput = styled.div`
     transition: all 0.5s ease;
     outline: none;
     color: #010f20cc;
+  }
+
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  input[type='number']:hover,
+  input[type='number']:focus {
+    -moz-appearance: number-input;
   }
 
   .no-spin {
@@ -211,6 +230,23 @@ export const FormInput = styled.div`
     font-weight: 275;
     margin: 0;
   }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    width: 50%;
+
+    &.half {
+      width: calc(25% - 18px);
+    }
+
+    select {
+      width: 100%;
+    }
+
+    &.complete-width {
+      width: 100%;
+    }
+  }
+
   @media (min-width: 1440px) {
     width: 350px;
 
@@ -347,13 +383,30 @@ export const InputImg = styled.div`
       padding-left: 26px;
     }
   }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    width: 250px;
+    align-items: flex-start;
+
+    label {
+      width: 100%;
+    }
+  }
+  @media (min-width: 1440px) {
+    width: 300px;
+    align-items: flex-start;
+
+    label {
+      width: 100%;
+    }
+  }
 `;
 
 export const Carousel = styled.section`
   margin-top: 40px;
   display: flex;
   flex-direction: row;
-  max-width: 400px;
+  max-width: 280px;
   width: 100%;
   z-index: 1;
 
@@ -375,6 +428,14 @@ export const Carousel = styled.section`
   .slick-dots li.slick-active button::before {
     color: #5ce1e6;
     opacity: 1;
+  }
+
+  @media (min-width: 1024px) and (max-width: 1440px) {
+    max-width: 200px;
+  }
+
+  @media (min-width: 1440px) {
+    max-width: 280px;
   }
 `;
 
@@ -404,5 +465,23 @@ export const BtnNavigation = styled.button`
 
   @media (max-width: 500px) {
     display: flex;
+  }
+`;
+
+export const BtnSubmit = styled.button`
+  display: flex;
+  background-color: #5b43d6;
+  color: #fff;
+  border-radius: 5px;
+  width: 45.5%;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border: none;
+
+  @media (min-width: 1024px) {
+    width: 150px;
+    font-weight: 500;
+    cursor: pointer;
   }
 `;

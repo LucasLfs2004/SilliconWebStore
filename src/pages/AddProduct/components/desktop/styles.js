@@ -3,6 +3,10 @@ import styled from 'styled-components';
 export const ColumnForm = styled.section`
   display: flex;
   flex-direction: column;
+
+  &.center {
+    align-items: center;
+  }
 `;
 
 export const RowBox = styled.div`
