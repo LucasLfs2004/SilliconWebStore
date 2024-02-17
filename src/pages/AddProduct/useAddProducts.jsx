@@ -1,24 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
+import DOMPurify from 'dompurify';
 import { useState } from 'react';
-import { getBrands, getCategorys } from '../../services/Requests';
+import { useSelector } from 'react-redux';
+import { z } from 'zod';
+import {
+  createProduct,
+  getBrands,
+  getCategorys,
+} from '../../services/Requests';
 
 const useAddProducts = () => {
-  const [name, setName] = useState('');
-  const [price, setPrice] = useState(0);
-  const [description, setDescription] = useState('');
-  const [stock, setStock] = useState(0);
-  const [brand, setBrand] = useState('');
-  const [brandSelect, setBrandSelect] = useState('null');
-  const [category, setCategory] = useState(null);
-  const [categorySelect, setCategorySelect] = useState('null');
-  const [product, setProduct] = useState({});
-  const [errors, setErrors] = useState({});
-  const [isFeatured, setIsFeatured] = useState(false);
-  const [model, setModel] = useState('');
-  const [warranty, setWarranty] = useState('');
-  const [portions, setPortions] = useState(0);
-  const [feesMonthly, setFeesMonthly] = useState(0);
-  const [feesCredit, setFeesCredit] = useState(0);
+  const user = useSelector(state => state.user);
+
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
 
@@ -31,7 +24,6 @@ const useAddProducts = () => {
     queryFn: async () => await getCategorys(),
   });
 
-  // console.log(brand);
   const settings = {
     dots: true,
     infinite: true,
@@ -48,45 +40,104 @@ const useAddProducts = () => {
     setPreviewImages(prevImages => [...prevImages, ...newImages]);
   };
 
+  const handleCreateProduct = async data => {
+    if (selectedFiles.length > 0) {
+      try {
+        const formData = new FormData();
+        formData.append('owner', user.idSeller);
+        formData.append('name', data.name);
+        formData.append('brand_id', data.brand);
+        formData.append('category_id', data.category);
+        formData.append('price', data.price);
+        formData.append('portions', data.portions);
+        formData.append('fees_monthly', data.feesMonthly);
+        formData.append('fees_credit', data.feesCredit);
+        formData.append('stock', data.stock);
+        formData.append('featured', true);
+        formData.append('warranty', data.warranty);
+        formData.append('model', data.model);
+        // formData.append('description', data.description);
+        selectedFiles.forEach(file => {
+          formData.append('files', file, file.name);
+        });
+        console.log('formData do produto', formData);
+        const dataProduct = await createProduct(formData);
+        console.log(dataProduct);
+        alert('Produto cadastrado com sucesso');
+      } catch (error) {
+        alert('Erro, não foi possível criar o produto');
+        console.log('Erro na criação do produto', error);
+      }
+    } else {
+      alert('Insira Imagens por favor');
+    }
+  };
+
+  const productZod = z
+    .object({
+      name: z
+        .string()
+        .min(5, 'Este campo deve ter no mínimo 5 caracteres')
+        .transform(field => DOMPurify.sanitize(field)),
+      model: z.string().transform(field => DOMPurify.sanitize(field)),
+      brand: z.string().transform(field => DOMPurify.sanitize(field)),
+      stock: z
+        .number()
+        .int()
+        .positive()
+        .transform(field => DOMPurify.sanitize(field)),
+      portions: z
+        .number()
+        .int()
+        .positive()
+        .transform(field => DOMPurify.sanitize(field)),
+      warranty: z
+        .number()
+        .int()
+        .positive()
+        .transform(field => DOMPurify.sanitize(field)),
+      price: z
+        .number()
+        .positive()
+        .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
+          message: 'O preço deve ser um número real',
+        })
+        .transform(field => DOMPurify.sanitize(field)),
+      feesMonthly: z
+        .number()
+        .positive()
+        .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
+          message: 'O preço deve ser um número real',
+        })
+        .transform(field => DOMPurify.sanitize(field)),
+      feesCredit: z
+        .number()
+        .positive()
+        .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
+          message: 'O preço deve ser um número real',
+        })
+        .transform(field => DOMPurify.sanitize(field)),
+      category: z
+        .string()
+        .nonempty({ message: 'Selecione uma categoria' })
+        .transform(field => DOMPurify.sanitize(field)),
+      brand: z
+        .string()
+        .nonempty({ message: 'Selecione uma Marca' })
+        .transform(field => DOMPurify.sanitize(field)),
+      description: z.string().transform(field => DOMPurify.sanitize(field)),
+    })
+    .required();
+
   return {
-    name,
-    setName,
-    price,
-    setPrice,
-    description,
-    setDescription,
-    stock,
-    setStock,
-    warranty,
-    setWarranty,
-    brand,
-    setBrand,
-    brandSelect,
-    setBrandSelect,
-    category,
-    setCategory,
-    categorySelect,
-    setCategorySelect,
-    product,
-    setProduct,
-    errors,
-    setErrors,
-    isFeatured,
-    setIsFeatured,
-    model,
-    setModel,
     categorys,
     brands,
-    portions,
-    setPortions,
-    feesCredit,
-    setFeesCredit,
-    feesMonthly,
-    setFeesMonthly,
     previewImages,
     setPreviewImages,
     settings,
     handleFileChange,
+    productZod,
+    handleCreateProduct,
   };
 };
 

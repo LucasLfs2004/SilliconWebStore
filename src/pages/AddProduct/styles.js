@@ -24,9 +24,10 @@ export const Body = styled.section`
   padding-top: 36px;
   min-height: calc(100vh - 90px);
   height: auto;
+  padding-bottom: 36px;
 `;
 
-export const Section = styled.section`
+export const Section = styled.form`
   background-color: #010f20;
   margin: 0;
   display: flex;
@@ -68,17 +69,20 @@ export const Area = styled.div`
   }
 `;
 
-export const Form = styled.form`
-  margin: 0;
+export const Form = styled.section`
   display: flex;
+  flex: 1;
+  overflow: hidden;
+  padding: 10%;
+  flex-direction: column;
 
-  flex-direction: row;
-  margin-left: -${props => props.marginLeft}px;
-  transition: margin-left 0.3s ease;
+  width: calc(100% - 20%);
 
-  @media (min-width: 600px) {
-    width: 100%;
-    justify-content: center;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    column-gap: 36px;
+    padding: 18px;
+    width: auto;
   }
 `;
 
@@ -120,7 +124,7 @@ export const Message = styled.p`
 `;
 
 export const Footer = styled.footer`
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   background-color: #5b43d6;
   height: 30px;
@@ -143,7 +147,7 @@ export const FormInput = styled.div`
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  width: 78.78%;
+  width: 100%;
 
   label {
     color: #5b43d6;
@@ -193,13 +197,12 @@ export const FormInput = styled.div`
       -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
     border-radius: 5px;
     border: none;
-    width: calc(100% - 28px);
     height: 30px;
     padding: 0 14px;
     font-size: 12px;
     transition: all 0.5s ease;
     color: #c1c5d6;
-    width: calc(100% - 28px);
+    width: calc(100%);
     font-weight: 300;
     font-size: 12px;
   }
@@ -347,7 +350,7 @@ export const RadioInput = styled.div`
 export const InputImg = styled.div`
   display: flex;
   flex-direction: column;
-  width: calc(100% - 80px);
+  width: calc(100%);
   font-weight: 300;
   font-size: 10px;
   row-gap: 4px;
@@ -484,4 +487,35 @@ export const BtnSubmit = styled.button`
     font-weight: 500;
     cursor: pointer;
   }
+`;
+
+export const ColumnForm = styled.section`
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+
+  &.center {
+    align-items: center;
+  }
+`;
+
+export const Box = styled.div`
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    column-gap: 36px;
+  }
+`;
+
+export const BoxInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;

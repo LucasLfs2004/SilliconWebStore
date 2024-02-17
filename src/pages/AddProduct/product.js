@@ -1,9 +1,13 @@
 import DOMPurify from 'dompurify';
 import { z } from 'zod';
 
-export const AddProductZod = z
+export const ProductZod = z
   .object({
-    name: z.string().transform(field => DOMPurify.sanitize(field)),
+    name: z
+      .string()
+      .min(5, 'Este campo deve ter no mínimo 5 caracteres')
+      .transform(field => DOMPurify.sanitize(field)),
+    model: z.string().transform(field => DOMPurify.sanitize(field)),
     brand: z.string().transform(field => DOMPurify.sanitize(field)),
     stock: z
       .number()
@@ -12,42 +16,10 @@ export const AddProductZod = z
       .transform(field => DOMPurify.sanitize(field)),
 
     description: z.string().transform(field => DOMPurify.sanitize(field)),
+    category: z
+      .string()
+      .array()
+      .nonempty({ message: 'Selecione uma categoria' })
+      .transform(field => DOMPurify.sanitize(field)),
   })
   .required();
-
-export const categorys = [
-  'Acessórios',
-  'Cabo',
-  'Celular',
-  'Console',
-  'Placa mãe',
-  'Placa de vídeo',
-  'Gabinete',
-  'Processador',
-  'Notebook',
-  'PC gamer',
-  'Outro',
-];
-
-export const brands = [
-  'AMD',
-  'AOC',
-  'Apple',
-  'Asus',
-  'Samsung',
-  'Gigabyte',
-  'Nvidia',
-  'Intel',
-  'Motorola',
-  'LG',
-  'Pichau',
-  'Sharkoon',
-  'Ugreen',
-  'Xiaomi',
-  'Huawei',
-  'Logitech',
-  'Corsair',
-  'Cooler Master',
-  'Rise Mode',
-  'Outro',
-];

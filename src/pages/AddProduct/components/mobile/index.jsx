@@ -16,7 +16,7 @@ import {
 import useAddProducts from '../../useAddProducts';
 import * as C from './styles';
 
-const FormDesk = () => {
+const FormMobile = () => {
   const {
     settings,
     brands,
@@ -43,7 +43,7 @@ const FormDesk = () => {
     console.log('errors', errors);
   }, [errors]);
 
-  // console.log({ brands: brands, categorys: categorys });
+  console.log({ brands: brands, categorys: categorys });
   return (
     <Section onSubmit={handleSubmit(handleCreateProduct)}>
       <div className='top'>
@@ -244,4 +244,4 @@ const FormDesk = () => {
   );
 };
 
-export default FormDesk;
+export default FormMobile;
