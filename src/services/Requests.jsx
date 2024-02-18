@@ -136,6 +136,21 @@ export const getProfile = async token => {
   }
 };
 
+export const getSellerData = async token => {
+  try {
+    const response = await Api.get('/seller/me', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    // console.log('user request', response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getCart = async token => {
   try {
     const response = await Api.get('/cart', {

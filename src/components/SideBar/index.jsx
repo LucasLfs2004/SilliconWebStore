@@ -74,6 +74,13 @@ const Menu = () => {
             </C.Item>
           </C.List>
         )}
+        {user?.isSeller && (
+          <C.List>
+            <C.Item>
+              <Link to={'/profile/my-store'}>Minha loja</Link>
+            </C.Item>
+          </C.List>
+        )}
       </C.Menu>
     </C.Container>
   );

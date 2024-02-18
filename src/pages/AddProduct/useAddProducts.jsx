@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import DOMPurify from 'dompurify';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { z } from 'zod';
 import {
@@ -11,9 +11,14 @@ import {
 
 const useAddProducts = () => {
   const user = useSelector(state => state.user);
-
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
+
+  useEffect(() => {
+    if (!user && !user?.access_token && !user?.idSeller) {
+      window.location.pathname = 'signin';
+    }
+  }, [user]);
 
   const { data: brands } = useQuery({
     queryKey: ['brands-add-product'],

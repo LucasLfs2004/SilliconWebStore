@@ -6,6 +6,7 @@ import CarouselTeste from '../pages/CarouselTeste';
 import Brand from '../pages/brand';
 import Carrinho from '../pages/carrinho';
 import Home from '../pages/home';
+import MyStore from '../pages/myStore';
 import Payment from '../pages/payment';
 import Product from '../pages/product';
 import Profile from '../pages/profile';
@@ -45,6 +46,10 @@ const Content = props => {
     {
       path: '/profile',
       element: <Profile />,
+    },
+    {
+      path: '/profile/my-store',
+      element: <MyStore />,
     },
   ]);
 
