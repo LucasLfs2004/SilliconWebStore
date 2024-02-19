@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { addCartItem } from '../../../../services/Requests';
+import { setCart } from '../../../../store/actions/cartActions';
 
-export const usePriceProduct = product => {
+export const usePriceProduct = () => {
+  //redux
+  const product = useSelector(state => state.product);
+  const user = useSelector(state => state.user);
+
+  //state
   const [seePortions, setSeePortions] = useState(false);
 
-  // const id = parseInt(useParams().id);
-  // const product = products.find(item => item.id === id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  // console.log('product in usePricePrduct', product);
-  // console.log('product in usePricePrduct', product?.value?.price_now);
-  // console.log('product in usePricePrduct', product?.value?.common_price);
 
   let priceCredit = 0,
     pricePerPortions = 0,
@@ -38,21 +39,34 @@ export const usePriceProduct = product => {
     portions[i - 1] =
       priceCredit * (1 + product?.value?.fees_monthly / 100) ** i;
   }
-  // console.log('priceCredit', priceCredit);
 
-  const buyProduct = () => {
-    // console.log('buyProduct');
-    // dispatch(addToCart(product));
-    // console.log('alterando rota');
+  const buyProduct = async () => {
+    if (user.access_token) {
+      const cartReturn = await addCartItem(user.access_token, {
+        id_product: product.id,
+        amount: 1,
+      });
+      dispatch(setCart(cartReturn));
+    }
+
     navigate('/carrinho');
   };
 
-  const handleAddToCart = event => {
+  const handleAddToCart = async event => {
     event.stopPropagation();
-    // dispatch(addToCart(product));
+    if (user.access_token) {
+      const cartReturn = await addCartItem(user.access_token, {
+        id_product: product.id,
+        amount: 1,
+      });
+      console.log(cartReturn);
+      dispatch(setCart(cartReturn));
+      // alert('sucesso');
+    }
   };
 
   return {
+    product,
     buyProduct,
     seePortions,
     setSeePortions,

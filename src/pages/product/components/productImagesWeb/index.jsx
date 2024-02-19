@@ -39,8 +39,28 @@ const ProductImagesWeb = ({ product }) => {
           ))}
       </C.ImagesColumn> */}
 
-      <C.Carousel>
-        <Slider className='carousel-image-product' {...settings}>
+      {product?.images?.length > 4 ? (
+        <C.Carousel>
+          <Slider className='carousel-image-product' {...settings}>
+            {product?.images?.length > 0 &&
+              product.images.map((item, index) => (
+                <C.ItemCard>
+                  <C.PreviewCard
+                    key={index}
+                    className='carousel-item'
+                    onClick={() => setImg(`${api_path}/image/product/${item}`)}
+                  >
+                    <img
+                      src={`${api_path}/image/product/${item}`}
+                      alt={`Imagem ${item}`}
+                    />
+                  </C.PreviewCard>
+                </C.ItemCard>
+              ))}
+          </Slider>
+        </C.Carousel>
+      ) : (
+        <C.Carousel className='no-carousel'>
           {product?.images?.length > 0 &&
             product.images.map((item, index) => (
               <C.ItemCard>
@@ -56,8 +76,8 @@ const ProductImagesWeb = ({ product }) => {
                 </C.PreviewCard>
               </C.ItemCard>
             ))}
-        </Slider>
-      </C.Carousel>
+        </C.Carousel>
+      )}
       <C.ContentColumn>
         <SimpleInfos product={product} />
         <C.ProductImage>

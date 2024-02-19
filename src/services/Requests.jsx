@@ -228,6 +228,20 @@ export const clearVoucher = async token => {
   }
 };
 
+export const addCartItem = async (token, params) => {
+  try {
+    const response = await Api.post('/cart-item', params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const updateCartItem = async (token, params) => {
   try {
     const response = await Api.patch('/cart-item', params, {
@@ -250,6 +264,14 @@ export const removeCartItem = async (token, params) => {
         'Content-Type': 'application/json',
       },
     });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+export const getShipValue = async region => {
+  try {
+    const response = await Api.get(`/ship-value/${region}`);
     return response.data;
   } catch (error) {
     return error;

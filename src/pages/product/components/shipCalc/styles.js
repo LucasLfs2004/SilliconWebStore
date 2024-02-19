@@ -47,3 +47,17 @@ export const CepLocation = styled.p`
   font-size: 14px;
   font-weight: 500;
 `;
+
+export const ButtonCep = styled.button`
+  background-color: #5b43d6;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-weight: 600;
+  padding: 6px 12px;
+  font-size: 16px;
+
+  @media (min-width: 1024px) {
+    cursor: pointer;
+  }
+`;

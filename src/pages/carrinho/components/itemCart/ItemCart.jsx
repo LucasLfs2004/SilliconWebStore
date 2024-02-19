@@ -13,7 +13,7 @@ const ItemCart = ({ item }) => {
   console.log(inCredit);
 
   const updateItemCart = async amount => {
-    if (user.access_token) {
+    if (user.access_token && amount > 0) {
       const cartUpdated = await updateCartItem(user.access_token, {
         id: item.id,
         amount: amount,

@@ -9,6 +9,7 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import { getProduct } from '../../services/Requests';
 import { setProduct } from '../../store/actions/productActions';
+import Comments from './components/Comments';
 import ProductPresentation from './components/ProductPresentation';
 import PriceProduct from './components/priceProduct';
 import TopInfos from './components/topInfos';
@@ -36,13 +37,16 @@ export const Product = () => {
       <Header />
       {product_data && (
         <C.ContentPage>
-          <C.BoxContent>
-            <TopInfos product={product_data} />
-            <ProductPresentation product={product_data} />
-          </C.BoxContent>
-          <C.BoxContent>
-            <PriceProduct product={product_data} />
-          </C.BoxContent>
+          <C.ProductSection>
+            <C.BoxContent>
+              <TopInfos product={product_data} />
+              <ProductPresentation product={product_data} />
+            </C.BoxContent>
+            <C.BoxContent>
+              <PriceProduct product={product_data} />
+            </C.BoxContent>
+          </C.ProductSection>
+          <Comments />
         </C.ContentPage>
       )}
       <Footer />

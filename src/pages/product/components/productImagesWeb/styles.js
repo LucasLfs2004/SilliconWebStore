@@ -41,13 +41,18 @@ export const ProductImage = styled.div`
 `;
 
 export const Carousel = styled.section`
-  width: 100px;
+  width: 70px;
   height: 370px;
 
   /* width: 500px; */
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &.no-carousel {
+    flex-direction: column;
+    row-gap: 2px;
+  }
   /* 
   .slick-slider {
     height: 100%;
@@ -56,14 +61,23 @@ export const Carousel = styled.section`
   *:focus {
     outline: 0;
     outline: none;
-  }
+  } */
   .carousel-image-product {
     width: 100%;
-     display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
+    row-gap: 12px;
+
+    /* padding: 32px 0; */
   }
 
+  .slick-list {
+    box-shadow: -4px -4px 16px 0px rgba(209, 217, 230, 0.25),
+      4px 4px 16px 0px rgba(209, 217, 230, 0.25);
+  }
+
+  /*
   .slick-prev::before,
   .slick-next::before {
     color: #5ce1e6;
@@ -94,6 +108,26 @@ export const Carousel = styled.section`
     color: #5ce1e6;
     opacity: 1;
   } */
+
+  .slick-slide {
+    width: 70px !important;
+  }
+
+  .slick-arrow {
+    position: relative;
+    left: 0;
+    right: 0;
+    /* top: 0; */
+  }
+
+  .slick-arrow.slick-prev {
+    /* bottom: 0 !important; */
+    transform: rotate(90deg);
+  }
+  .slick-arrow.slick-next {
+    /* bottom: 0 !important; */
+    transform: rotate(90deg);
+  }
 `;
 
 export const ItemCard = styled.div`
@@ -110,8 +144,8 @@ export const PreviewCard = styled.button`
   width: 70px !important;
   height: 70px;
   background-color: #fff;
-  box-shadow: -8px -8px 30px 0px rgba(209, 217, 230, 0.25),
-    8px 8px 30px 0px rgba(209, 217, 230, 0.25);
+  /* box-shadow: -4px -4px 16px 0px rgba(209, 217, 230, 0.25),
+    4px 4px 16px 0px rgba(209, 217, 230, 0.25); */
   border-radius: 2px;
   border: none;
   cursor: pointer;

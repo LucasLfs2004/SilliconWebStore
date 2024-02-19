@@ -1,39 +1,25 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCep } from '../../../../services/Requests';
-import { setShipInfos } from '../../../../store/actions/paymentActions';
+import InputMask from 'react-input-mask';
 import * as C from './styles';
+import useCep from './useCep';
 
 const ShipCalcCard = () => {
-  const dispatch = useDispatch();
-  const [cep, setCep] = useState('');
-  const payment = useSelector(state => state.payment);
-  console.log(cep);
-  console.log(payment.shipInfos);
-
-  const searchCep = async () => {
-    const response = await getCep(cep);
-    dispatch(setShipInfos(response));
-    console.log(response);
-  };
-
-  useEffect(() => {
-    console.log(cep.length);
-    if (cep.length >= 8) {
-      searchCep();
-    }
-  }, [cep]);
+  const { cep, setCep, shipValue, calcShip } = useCep();
+  console.log(shipValue);
 
   return (
     <C.Card>
       <C.RowCep>
         <p>Insira seu CEP:</p>
-        <input
+        <InputMask
+          mask={'99999-999'}
           type='text'
           placeholder='00000-000'
           value={cep}
           onChange={e => setCep(e.target.value)}
         />
+        <C.ButtonCep onClick={async () => await calcShip()}>
+          Calcular
+        </C.ButtonCep>
         <a
           target='_blank'
           href='https://buscacepinter.correios.com.br/'
@@ -43,13 +29,28 @@ const ShipCalcCard = () => {
         </a>
       </C.RowCep>
       <C.CepLocation>
-        {payment.shipInfos.logradouro &&
-          payment.shipInfos.bairro &&
-          `${payment?.shipInfos?.logradouro} - ${payment?.shipInfos?.bairro}`}
+        {shipValue?.cep?.logradouro &&
+          shipValue?.cep?.bairro &&
+          `${shipValue.cep.logradouro} - ${shipValue.cep.bairro}`}
         <br />
-        {payment.shipInfos.localidade &&
-          payment.shipInfos.uf &&
-          `${payment?.shipInfos?.localidade} - ${payment?.shipInfos?.uf}`}
+        {shipValue?.cep?.localidade &&
+          shipValue?.cep?.uf &&
+          `${shipValue.cep.localidade} - ${shipValue.cep.uf}`}
+        <br />
+        {shipValue?.value?.value && shipValue?.value?.deadline && (
+          <span>
+            {shipValue?.value?.value > 0
+              ? shipValue.value.value.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                  minimumFractionDigits: 2,
+                })
+              : 'Grátis'}
+            {' - '}
+            {shipValue?.value?.deadline &&
+              ` ${shipValue.value.deadline} dias úteis`}
+          </span>
+        )}
       </C.CepLocation>
     </C.Card>
   );

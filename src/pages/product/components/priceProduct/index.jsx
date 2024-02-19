@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import Stars from '../../../../components/Stars';
 import PortionsCard from '../portionsCard';
 import ShipCalcCard from '../shipCalc';
@@ -6,8 +5,6 @@ import * as C from './styles';
 import { usePriceProduct } from './usePriceProduct';
 
 const PriceProduct = () => {
-  const product = useSelector(state => state.product);
-  console.log('product in priceProduct', product);
   const {
     buyProduct,
     pricePerPortions,
@@ -16,23 +13,20 @@ const PriceProduct = () => {
     priceInPortions,
     handleAddToCart,
     portions,
-  } = usePriceProduct(product);
-
-  console.log('prices', {
-    portions: portions,
-    priceInPortions: priceInPortions,
-    pricePerPortions: pricePerPortions,
-  });
+    product,
+  } = usePriceProduct();
 
   return (
     <>
       <C.PriceArea>
         <C.Rating>
-          <Stars rating={product?.rating?.rating} />
-          <p>({product?.rating?.rating})</p>
+          <Stars rating={product?.rating?.rating_value} />
+          <p>
+            {product?.rating?.rating_value} ({product?.rating?.amount_rating})
+          </p>
         </C.Rating>
         <C.Name>{product?.name}</C.Name>
-        <C.IdProduct>Código: xxxxxxxx</C.IdProduct>
+        <C.IdProduct>Código: {product?.id}</C.IdProduct>
         <C.BrandProduct>Marca: {product?.brand?.name}</C.BrandProduct>
         <C.RowPriceBtn>
           <C.RowPrice>
