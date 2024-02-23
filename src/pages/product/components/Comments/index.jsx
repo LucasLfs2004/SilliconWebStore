@@ -8,7 +8,20 @@ const Comments = () => {
 
   return (
     <C.Container>
-      <C.Title>Comentários ({product?.rating?.comments?.length})</C.Title>
+      <C.Title>Avalições ({product?.rating?.comments?.length})</C.Title>
+      <C.CommentsBox>
+        {product?.rating?.comments?.map(item => {
+          return (
+            <C.CardComment key={item.id_comment}>
+              <C.RowTop>
+                <C.Title className='comment'>{item.title_text}</C.Title>
+                <C.Rate>{item.rating_value}</C.Rate>
+              </C.RowTop>
+              <C.TextComment>{item.text_comment}</C.TextComment>
+            </C.CardComment>
+          );
+        })}
+      </C.CommentsBox>
     </C.Container>
   );
 };
