@@ -18,7 +18,7 @@ const ProductImagesWeb = ({ product }) => {
     infinite: true,
     speed: 1000,
     slidesToShow: 4,
-    slidesToScroll: 4,
+    slidesToScroll: 1,
     vertical: true,
     verticalSwiping: true,
   };
@@ -27,18 +27,6 @@ const ProductImagesWeb = ({ product }) => {
 
   return (
     <C.Content>
-      {/* <C.ImagesColumn className='images-carousel-web'>
-        {product.images.length > 0 &&
-          product.images.map((item, key) => (
-            <C.PreviewCard
-              key={key}
-              onClick={() => setImg(`${api_path}/image/product/${item}`)}
-            >
-              <img src={`${api_path}/image/product/${item}`} alt='' />
-            </C.PreviewCard>
-          ))}
-      </C.ImagesColumn> */}
-
       {product?.images?.length > 4 ? (
         <C.Carousel>
           <Slider className='carousel-image-product' {...settings}>
