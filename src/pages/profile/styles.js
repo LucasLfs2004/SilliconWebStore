@@ -5,6 +5,7 @@ export const ContentPage = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const Title = styled.h3`
@@ -18,7 +19,7 @@ export const Row = styled.div`
   flex-direction: row;
   align-items: center;
 
-  &.mt{
+  &.mt {
     margin-top: ${props => props.mt}px;
   }
 
@@ -50,7 +51,7 @@ export const Row = styled.div`
 export const NeumorphismCard = styled.div`
   border-radius: 8px;
   background: #010f20;
-  box-shadow: inset -10px -10px 25px #02183350, inset 10px 10px 25px #00060D50;
+  box-shadow: inset -10px -10px 25px #02183350, inset 10px 10px 25px #00060d50;
   width: calc(86% - 40px);
   margin: 12px 8%;
   padding: 18px 20px;
@@ -66,8 +67,6 @@ export const UserInfos = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 6px;
-
-
 `;
 
 export const BtnEdit = styled.div`
@@ -98,15 +97,15 @@ export const BtnAdd = styled.div`
 `;
 
 export const TextBorderBottom = styled.p`
-  border-bottom: 1px solid #02EDDF;
+  border-bottom: 1px solid #02eddf;
   color: #fff;
   width: auto;
   /* padding-left: 3px; */
   padding-right: 6px;
-`
+`;
 
 export const ParagraphShip = styled.p`
   font-size: 12px;
-  color: #D1D9E6;
+  color: #d1d9e6;
   font-weight: 500;
-`
+`;

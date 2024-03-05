@@ -1,11 +1,18 @@
 import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import ModalEditShip from './modal/editShip';
 import * as C from './styles';
 import { useProfile } from './useProfile';
 
 const Profile = () => {
-  const { profile, principalShip } = useProfile();
+  const {
+    profile,
+    principalShip,
+    modalEditVisible,
+    setModalEditVisible,
+    handlePrincipalShip,
+  } = useProfile();
 
   console.log('profile: ', profile);
   console.log('Principal endereço de entrega', principalShip);
@@ -65,7 +72,7 @@ const Profile = () => {
               <C.BtnAdd>
                 <img src='/assets/icons/addIcon.svg' alt='' />
               </C.BtnAdd>
-              <C.BtnEdit>
+              <C.BtnEdit onClick={() => setModalEditVisible(true)}>
                 <img src='/assets/icons/editIconPurple.svg' alt='' />
               </C.BtnEdit>
             </C.Row>
@@ -86,6 +93,13 @@ const Profile = () => {
             <C.ParagraphShip>{principalShip.district}</C.ParagraphShip>
           </C.Row>
         </C.NeumorphismCard>
+        <ModalEditShip
+          profile={profile}
+          visible={modalEditVisible}
+          modalVisible={setModalEditVisible}
+          principalShip={principalShip}
+          handlePrincipalShip={handlePrincipalShip}
+        ></ModalEditShip>
       </C.ContentPage>
 
       <Footer />

@@ -23,7 +23,7 @@ const Menu = () => {
       <C.Sidebar onClick={() => setShowMenu(!showMenu)}>
         <img src='/assets/icons/menuIcon.svg' alt='' />
       </C.Sidebar>
-      <C.Menu show={showMenu.toString()}>
+      <C.Menu show={showMenu.toString()} className='Menu'>
         <C.UserRow>
           <img src='/assets/icons/userIcon.svg' alt='' />
 

@@ -1,4 +1,7 @@
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { clearUser } from '../store/actions/userActions';
 import { Api } from './Api';
 
 export const createAccount = async user => {
@@ -129,10 +132,38 @@ export const getProfile = async token => {
         'Content-Type': 'application/json',
       },
     });
-    // console.log('user request', response);
+    console.log('user request', response);
     return response.data;
   } catch (error) {
-    return error;
+    console.log(error);
+
+    // if (error?.response?.status === 401) {
+    //   UserExpired();
+    // }
+    return error.response;
+  }
+};
+export const setPrincipalShipUser = async (id, token) => {
+  try {
+    const response = await Api.post(
+      '/principal-ship',
+      { id: id },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      },
+    );
+    console.log('return of setPrincipalShip', response);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+
+    // if (error?.response?.status === 401) {
+    //   UserExpired();
+    // }
+    return error.response;
   }
 };
 
@@ -319,4 +350,12 @@ export const getCep = async cep => {
   } catch (error) {
     return error;
   }
+};
+
+export const UserExpired = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  localStorage.removeItem('user');
+  dispatch(clearUser());
+  navigate('signin', 'Sua sessão expirou, por favor realize um novo login');
 };

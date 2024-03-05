@@ -2,12 +2,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import DOMPurify from 'dompurify';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router';
 import { z } from 'zod';
 import { effectLogin } from '../../services/Requests';
 import { setUser } from '../../store/actions/userActions';
 
 export const useLogin = () => {
   const dispatch = useDispatch();
+  const { state } = useLocation();
+  console.log(`message of profile navigate: `, state);
 
   const handleEffectLogin = async data => {
     try {

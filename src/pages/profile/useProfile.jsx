@@ -1,11 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getProfile } from '../../services/Requests';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { getProfile, setPrincipalShipUser } from '../../services/Requests';
+import { initializeUser } from '../../store/actions/userActions';
 
 export const useProfile = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
+  const [modalEditVisible, setModalEditVisible] = useState(false);
   const [principalShip, setPrincipalShip] = useState({});
   useEffect(() => {
     if (
@@ -17,12 +22,23 @@ export const useProfile = () => {
     }
   }, [user]);
 
-  const { data: profile } = useQuery({
+  const { data: profile, refetch } = useQuery({
     queryKey: ['profile-data'],
     queryFn: async () => {
       if (user.access_token) {
         const response = await getProfile(user.access_token);
         // console.log('profile user', response);
+
+        if (response?.status && response.status === 401) {
+          dispatch(initializeUser());
+          localStorage.removeItem('user');
+          navigate('/signin', {
+            state: {
+              message: 'Sua sessão expirou, realize o login novamente',
+            },
+          });
+        }
+
         response.birthday = moment(response.birthday)
           .locale('pt-br')
           .format('DD/MM/YYYY');
@@ -43,15 +59,19 @@ export const useProfile = () => {
     }
   }, [profile]);
 
-  // const { data: cart } = useQuery({
-  //   queryKey: ['cart-profile-data'],
-  //   queryFn: async () => {
-  //     if (user.access_token) {
-  //       const response = await getCart(user.access_token);
-  //       return response;
-  //     }
-  //   },
-  // });
+  const handlePrincipalShip = async id => {
+    const success = await setPrincipalShipUser(id, user.access_token);
+    if (success) {
+      await refetch();
+      setModalEditVisible(false);
+    }
+  };
 
-  return { profile, principalShip };
+  return {
+    profile,
+    principalShip,
+    modalEditVisible,
+    setModalEditVisible,
+    handlePrincipalShip,
+  };
 };
