@@ -12,6 +12,7 @@ export const Modal = styled.section`
   margin: 0 5%;
   position: absolute;
   top: 48px;
+  max-height: 600px;
 `;
 
 export const Row = styled.div`
@@ -44,6 +45,10 @@ export const Btn = styled.button`
 
   &.add-btn {
     transform: rotate(45deg);
+  }
+
+  @media (min-width: 1024px) {
+    cursor: pointer;
   }
 `;
 // export const BtnClose = styled.button`

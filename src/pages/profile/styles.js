@@ -61,6 +61,11 @@ export const NeumorphismCard = styled.div`
   &.gap {
     row-gap: ${props => props.gap}px;
   }
+
+  @media (min-width: 1024px) {
+    width: 50%;
+    margin: 0;
+  }
 `;
 
 export const UserInfos = styled.div`
@@ -108,4 +113,13 @@ export const ParagraphShip = styled.p`
   font-size: 12px;
   color: #d1d9e6;
   font-weight: 500;
+`;
+
+export const DisplayCards = styled.div`
+  @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: row;
+    column-gap: 48px;
+    padding: 0 5%;
+  }
 `;

@@ -1,30 +1,34 @@
 import { ParagraphShip } from '../../styles';
 import * as C from './styles';
 
-const ModalEditShip = ({
+const ModalViewShip = ({
   visible,
   modalVisible,
   profile,
   principalShip,
   handlePrincipalShip,
+  addShip,
+  editShip,
 }) => {
   return (
     <C.Modal visible={visible ? 'flex' : 'none'}>
       <C.Row>
         <C.Title>Editar Endereços de entrega</C.Title>
-        <C.Btn className='add-btn' onClick={() => modalVisible(false)}>
-          <img src='/assets/icons/closeIconCyan.svg' alt='' />
-        </C.Btn>
-        <C.Btn onClick={() => modalVisible(false)}>
-          <img src='/assets/icons/closeIconCyan.svg' alt='' />
-        </C.Btn>
+        <C.Row>
+          <C.Btn className='add-btn' onClick={addShip}>
+            <img src='/assets/icons/closeIconCyan.svg' alt='' />
+          </C.Btn>
+          <C.Btn onClick={() => modalVisible(false)}>
+            <img src='/assets/icons/closeIconCyan.svg' alt='' />
+          </C.Btn>
+        </C.Row>
       </C.Row>
       <C.ContentShip>
         {profile?.ship_info?.map((item, index) => (
-          <C.ShipCard>
+          <C.ShipCard key={index}>
             <C.Row className='mt' mt={6}>
               <C.TextBorderBottom>{item.ship_name}</C.TextBorderBottom>
-              <C.Btn>
+              <C.Btn onClick={() => editShip(item)}>
                 <img src='/assets/icons/editIconPurple.svg' alt='' />
               </C.Btn>
             </C.Row>
@@ -56,4 +60,4 @@ const ModalEditShip = ({
   );
 };
 
-export default ModalEditShip;
+export default ModalViewShip;

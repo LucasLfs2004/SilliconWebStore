@@ -300,9 +300,37 @@ export const removeCartItem = async (token, params) => {
     return error;
   }
 };
+
 export const getShipValue = async region => {
   try {
     const response = await Api.get(`/ship-value/${region}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const postShipInfo = async (token, params) => {
+  try {
+    const response = await Api.post('/ship-info', params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+export const patchShipInfo = async (token, params) => {
+  try {
+    const response = await Api.patch('/ship-info', params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
     return response.data;
   } catch (error) {
     return error;

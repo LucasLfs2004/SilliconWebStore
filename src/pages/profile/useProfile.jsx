@@ -3,15 +3,28 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { getProfile, setPrincipalShipUser } from '../../services/Requests';
+import {
+  getProfile,
+  patchShipInfo,
+  postShipInfo,
+  setPrincipalShipUser,
+} from '../../services/Requests';
 import { initializeUser } from '../../store/actions/userActions';
 
 export const useProfile = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  //states from redux
   const user = useSelector(state => state.user);
-  const [modalEditVisible, setModalEditVisible] = useState(false);
+
+  //useStates
+  const [modalViewShipVisible, setModalViewShipVisible] = useState(false);
+  const [modalShipVisible, setModalShipVisible] = useState(false);
+  const [checkedPrincipalShip, setCheckedPrincipalShip] = useState(false);
   const [principalShip, setPrincipalShip] = useState({});
+  const [shipEditObject, setShipEditObject] = useState(undefined);
+
   useEffect(() => {
     if (
       user?.access_token === null ||
@@ -63,15 +76,46 @@ export const useProfile = () => {
     const success = await setPrincipalShipUser(id, user.access_token);
     if (success) {
       await refetch();
-      setModalEditVisible(false);
+      setModalViewShipVisible(false);
+    }
+  };
+
+  const submitForm = async data => {
+    // console.log('SUBMIT COMPLETO: ', data);
+    const params = {
+      ...data,
+      principal_ship: checkedPrincipalShip,
+    };
+    if (user.access_token) {
+      if (shipEditObject === undefined) {
+        const retorno = await postShipInfo(user.access_token, params);
+        console.log('POST BEM SUCEDIDO', retorno);
+      } else {
+        const retorno = await patchShipInfo(user.access_token, {
+          ...params,
+          id: shipEditObject.ship_id,
+        });
+        console.log('PATCH BEM SUCEDIDO', retorno);
+      }
+      await refetch();
+      setShipEditObject(undefined);
+      setCheckedPrincipalShip(false);
+      setModalShipVisible(false);
     }
   };
 
   return {
     profile,
     principalShip,
-    modalEditVisible,
-    setModalEditVisible,
+    modalViewShipVisible,
+    setModalViewShipVisible,
+    modalShipVisible,
+    setModalShipVisible,
     handlePrincipalShip,
+    submitForm,
+    checkedPrincipalShip,
+    setCheckedPrincipalShip,
+    shipEditObject,
+    setShipEditObject,
   };
 };
