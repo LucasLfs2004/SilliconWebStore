@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const Modal = styled.section`
   display: ${props => props.visible};
   flex-direction: column;
@@ -9,9 +16,12 @@ export const Modal = styled.section`
   box-shadow: 13px 13px 26px #010a16, -13px -13px 26px #01142a;
   padding: 18px 20px;
   width: calc(90% - 40px);
-  margin: 0 5%;
   position: absolute;
   top: 48px;
+
+  @media (min-width: 1024px) {
+    max-width: 800px;
+  }
 `;
 
 export const Row = styled.div`
@@ -29,6 +39,10 @@ export const Title = styled.h1`
   border-bottom: 1px solid #02eddf;
   padding: 0 4px;
   width: fit-content;
+
+  @media (min-width: 1024px) {
+    font-size: 18px;
+  }
 `;
 
 export const Btn = styled.button`
@@ -56,10 +70,19 @@ export const Form = styled.form`
 
 export const Box = styled.div`
   display: flex;
-  flex-direction: row;
   width: 100%;
   align-items: flex-start;
   justify-content: space-between;
+  flex-direction: column;
+
+  &.row {
+    flex-direction: row;
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    column-gap: 32px;
+  }
 `;
 
 export const FormInput = styled.div`
@@ -73,6 +96,12 @@ export const FormInput = styled.div`
 
   &.width {
     width: ${props => props.widthP}%;
+  }
+
+  @media (min-width: 1024px) {
+    &.web-width {
+      width: ${props => props.widthw}px;
+    }
   }
 
   label {
