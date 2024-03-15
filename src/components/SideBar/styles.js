@@ -62,11 +62,11 @@ export const ActionUser = styled.div`
 
   @media (min-width: 1024px) {
     a {
-      font-size: 12px;
+      font-size: 13px;
     }
 
     p {
-      font-size: 10px;
+      font-size: 11px;
     }
   }
 `;
@@ -150,10 +150,10 @@ export const UserInfos = styled.div`
 
   @media (min-width: 1024px) {
     p {
-      font-size: 14px;
+      font-size: 16px;
     }
     .email {
-      font-size: 9px;
+      font-size: 11px;
     }
   }
 `;

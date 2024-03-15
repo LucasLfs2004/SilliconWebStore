@@ -5,7 +5,16 @@ import * as C from '../signIn/styles';
 import { useSignUp } from './useSignUp';
 
 const CreateAccount = () => {
-  const { errors, handleCreateAccount, handleSubmit, register } = useSignUp();
+  const {
+    viewPass,
+    setViewPass,
+    viewPassConfirm,
+    setViewPassConfirm,
+    errors,
+    handleCreateAccount,
+    handleSubmit,
+    register,
+  } = useSignUp();
   return (
     <C.Container>
       <C.Header>
@@ -47,11 +56,6 @@ const CreateAccount = () => {
               <p>{errors?.phone?.message}</p>
             </C.FormInput>
             <C.FormInput className='sign-up'>
-              <label>email</label>
-              <input type='text' placeholder={'email'} {...register('email')} />
-              <p>{errors?.email?.message}</p>
-            </C.FormInput>
-            <C.FormInput className='sign-up'>
               <label>data de nascimento</label>
               <InputMask
                 mask='99/99/9999'
@@ -62,21 +66,53 @@ const CreateAccount = () => {
               <p>{errors?.birth?.message}</p>
             </C.FormInput>
             <C.FormInput className='sign-up'>
+              <label>email</label>
+              <input type='text' placeholder={'email'} {...register('email')} />
+              <p>{errors?.email?.message}</p>
+            </C.FormInput>
+            <C.FormInput className='sign-up'>
               <label>senha</label>
-              <input
-                {...register('password')}
-                type='text'
-                placeholder={'senha'}
-              />
+              <C.InputPassword>
+                <input
+                  {...register('password')}
+                  type={viewPass ? 'text' : 'password'}
+                  placeholder={'senha'}
+                />
+                <button type='button' onClick={() => setViewPass(!viewPass)}>
+                  <img
+                    src={
+                      viewPass
+                        ? '/assets/icons/eyeClosedIcon.svg'
+                        : '/assets/icons/eyeIcon.svg'
+                    }
+                    alt=''
+                  />
+                </button>
+              </C.InputPassword>
               <p>{errors?.password?.message}</p>
             </C.FormInput>
             <C.FormInput className='sign-up'>
               <label>confirmar senha</label>
-              <input
-                {...register('confirm_password')}
-                type='text'
-                placeholder={'confirmar senha'}
-              />
+              <C.InputPassword>
+                <input
+                  {...register('confirm_password')}
+                  type={viewPassConfirm ? 'text' : 'password'}
+                  placeholder={'confirmar senha'}
+                />
+                <button
+                  type='button'
+                  onClick={() => setViewPassConfirm(!viewPassConfirm)}
+                >
+                  <img
+                    src={
+                      viewPass
+                        ? '/assets/icons/eyeClosedIcon.svg'
+                        : '/assets/icons/eyeIcon.svg'
+                    }
+                    alt=''
+                  />
+                </button>
+              </C.InputPassword>
               <p>{errors?.confirm_password?.message}</p>
             </C.FormInput>
           </C.InputArea>

@@ -16,7 +16,9 @@ const AddProduct = () => {
     brands,
     categorys,
     brandSelect,
+    setBrandSelect,
     categorySelect,
+    setCategorySelect,
     previewImages,
     handleFileChange,
     handleCreateProduct,
@@ -72,7 +74,7 @@ const AddProduct = () => {
                     name='category'
                     id='categorySelect'
                     {...register('category')}
-                    // onChange={e => setBrandSelect(e.target.value)}
+                    onChange={e => setCategorySelect(e.target.value)}
                     className={
                       categorySelect !== null &&
                       categorySelect !== 'null' &&
@@ -99,7 +101,7 @@ const AddProduct = () => {
                     name='brand'
                     id='brandSelect'
                     {...register('brand')}
-                    // onChange={e => setBrandSelect(e.target.value)}
+                    onChange={e => setBrandSelect(e.target.value)}
                     className={
                       brandSelect !== null &&
                       brandSelect !== 'null' &&

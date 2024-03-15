@@ -73,14 +73,14 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  row-gap: 45px;
+  row-gap: 24px;
   button {
     margin-top: 7px;
   }
 
   @media (min-width: 1024px) {
     &.sign-up {
-      row-gap: 32px;
+      row-gap: 10px;
     }
   }
 `;
@@ -149,7 +149,7 @@ export const InputArea = styled.div`
 
     &.sign-up {
       height: 370px;
-      row-gap: 32px;
+      row-gap: 16px;
     }
   }
 `;
@@ -221,6 +221,38 @@ export const FormInput = styled.div`
     &.sign-up {
       min-width: auto;
       width: 300px;
+    }
+  }
+`;
+
+export const InputPassword = styled.div`
+  width: calc(100% - 28px);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 100%; */
+  background: #ecf0f3;
+  box-shadow: 5px 5px 6px 0px #d1d9e6,
+    -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
+  border-radius: 5px;
+  padding: 0 14px;
+
+  input {
+    width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+  }
+
+  @media (min-width: 1024px) {
+    button {
+      cursor: pointer;
     }
   }
 `;

@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import DOMPurify from 'dompurify';
 import moment from 'moment';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { z } from 'zod';
@@ -9,6 +10,10 @@ import { setUser } from '../../store/actions/userActions';
 
 export const useSignUp = () => {
   const dispatch = useDispatch();
+
+  const [viewPass, setViewPass] = useState();
+  const [viewPassConfirm, setViewPassConfirm] = useState();
+
   const {
     handleSubmit,
     register,
@@ -42,7 +47,16 @@ export const useSignUp = () => {
     }
   };
 
-  return { handleCreateAccount, errors, register, handleSubmit };
+  return {
+    handleCreateAccount,
+    errors,
+    register,
+    handleSubmit,
+    viewPass,
+    setViewPass,
+    viewPassConfirm,
+    setViewPassConfirm,
+  };
 };
 
 export const CreateAccountZod = z

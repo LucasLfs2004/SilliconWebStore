@@ -13,6 +13,8 @@ const useAddProducts = () => {
   const user = useSelector(state => state.user);
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [categorySelect, setCategorySelect] = useState(null);
+  const [brandSelect, setBrandSelect] = useState(null);
 
   useEffect(() => {
     if (!user && !user?.access_token && !user?.idSeller) {
@@ -137,6 +139,10 @@ const useAddProducts = () => {
   return {
     categorys,
     brands,
+    categorySelect,
+    setCategorySelect,
+    brandSelect,
+    setBrandSelect,
     previewImages,
     setPreviewImages,
     settings,

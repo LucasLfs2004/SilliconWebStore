@@ -6,6 +6,7 @@ import {
   Form,
   FormInput,
   Header,
+  InputPassword,
   Message,
   Section,
   Title,
@@ -13,7 +14,14 @@ import {
 import { useLogin } from './useLogin';
 
 const Login = () => {
-  const { handleEffectLogin, handleSubmit, register, errors } = useLogin();
+  const {
+    viewPass,
+    setViewPass,
+    handleEffectLogin,
+    handleSubmit,
+    register,
+    errors,
+  } = useLogin();
 
   return (
     <Container>
@@ -33,11 +41,23 @@ const Login = () => {
           </FormInput>
           <FormInput>
             <label>senha</label>
-            <input
-              type='text'
-              placeholder={'senha'}
-              {...register('password')}
-            />
+            <InputPassword>
+              <input
+                type={viewPass ? 'text' : 'password'}
+                placeholder={'senha'}
+                {...register('password')}
+              />
+              <button type='button' onClick={() => setViewPass(!viewPass)}>
+                <img
+                  src={
+                    viewPass
+                      ? '/assets/icons/eyeClosedIcon.svg'
+                      : '/assets/icons/eyeIcon.svg'
+                  }
+                  alt=''
+                />
+              </button>
+            </InputPassword>
             <p>{errors?.password?.message}</p>
           </FormInput>
           <BtnSubmit text={'Entrar'} />
