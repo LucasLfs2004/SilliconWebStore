@@ -117,17 +117,17 @@ export const FormInput = styled.div`
   }
 
   input {
-    color: #fff;
-  }
-
-  input {
     padding: 11px 10px;
+    color: #fff;
     font-size: 0.75rem;
     border: 2px #818cf8 solid;
     border-radius: 5px;
     background-color: #010f20;
-    /* background: #e8e8e8; */
     border: 1px solid #02eddf;
+  }
+
+  input::placeholder {
+    color: #d1d9e6;
   }
 
   input:focus {
@@ -138,6 +138,16 @@ export const FormInput = styled.div`
     height: 16px;
     font-size: 10px;
     font-weight: 600;
+  }
+
+  @media (min-width: 1024px) {
+    label {
+      font-size: 14px;
+    }
+
+    input {
+      font-size: 14px;
+    }
   }
 `;
 
@@ -173,6 +183,7 @@ export const Checkbox = styled.div`
     .container {
       font-size: 16px;
     }
+
     .container p {
       font-size: 12px;
     }

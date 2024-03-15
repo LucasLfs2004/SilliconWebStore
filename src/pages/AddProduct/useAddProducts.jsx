@@ -84,8 +84,8 @@ const useAddProducts = () => {
         .string()
         .min(5, 'Este campo deve ter no mínimo 5 caracteres')
         .transform(field => DOMPurify.sanitize(field)),
-      model: z.string().transform(field => DOMPurify.sanitize(field)),
-      brand: z.string().transform(field => DOMPurify.sanitize(field)),
+      // model: z.string().transform(field => DOMPurify.sanitize(field)),
+      // brand: z.string().transform(field => DOMPurify.sanitize(field)),
       stock: z
         .number()
         .int()

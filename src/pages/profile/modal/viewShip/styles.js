@@ -14,8 +14,8 @@ export const Modal = styled.section`
   background: #010f20;
   box-shadow: inset -10px -10px 25px #02183350, inset 10px 10px 25px #00060d50;
   box-shadow: 13px 13px 26px #010a16, -13px -13px 26px #01142a;
-  padding: 18px 20px;
-  width: calc(90% - 40px);
+  padding: 18px 0;
+  width: calc(90%);
   /* margin: 0 5%; */
   position: absolute;
   top: 48px;
@@ -31,6 +31,17 @@ export const Row = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  &.padding-horizontal {
+    padding-left: ${props => props.paddinghorizontal}px;
+    padding-right: ${props => props.paddinghorizontal}px;
+  }
+
+  @media (min-width: 1024px) {
+    &.max-width {
+      max-width: ${props => props.maxwidth}px;
+    }
+  }
 `;
 
 export const Title = styled.h1`
@@ -62,8 +73,26 @@ export const Btn = styled.button`
     transform: rotate(45deg);
   }
 
+  &.trash {
+    img {
+      max-width: 20px;
+      height: 16px;
+    }
+  }
+
   @media (min-width: 1024px) {
     cursor: pointer;
+
+    img {
+      max-width: 20px;
+    }
+
+    &.trash {
+      img {
+        max-width: 20px;
+        height: 20px;
+      }
+    }
   }
 `;
 // export const BtnClose = styled.button`
@@ -76,6 +105,25 @@ export const ContentShip = styled.div`
   flex-direction: column;
   row-gap: 12px;
   margin-top: 24px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @media (min-width: 1024px) {
+    max-height: 400px;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+      padding-left: 10px; /* largura da barra de rolagem */
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #2a1b77; /* cor de fundo da trilha de rolagem */
+      border-radius: 5px; /* arredondamento das bordas do botão de rolagem */
+    }
+    &::-webkit-scrollbar-track {
+      background-color: #0c1f36; /* cor do botão de rolagem */
+    }
+  }
 `;
 
 export const ShipCard = styled.div`
@@ -93,6 +141,12 @@ export const TextBorderBottom = styled.p`
   font-size: 12px;
   font-weight: 700px;
   padding-right: 6px;
+
+  @media (min-width: 1024px) {
+    font-size: 16px;
+    padding-right: 8px;
+    padding-left: 2px;
+  }
 `;
 
 export const BtnPrincipal = styled.button`

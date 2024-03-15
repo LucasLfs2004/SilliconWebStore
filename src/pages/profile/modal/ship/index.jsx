@@ -1,12 +1,11 @@
-import 'slick-carousel/slick/slick-theme.css';
-import 'slick-carousel/slick/slick.css';
 import * as C from './styles';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { getCep } from '../../../../services/Requests';
-import useShip from './useShip';
+// import useShip from './useShip';
+import { shipZod } from '../../useProfile';
 
 const ModalShip = ({
   submitForm,
@@ -16,7 +15,7 @@ const ModalShip = ({
   setChecked,
   editObj,
 }) => {
-  const { shipZod } = useShip();
+  // const { shipZod } = useShip();
 
   const {
     register,

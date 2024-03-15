@@ -113,6 +113,10 @@ export const ParagraphShip = styled.p`
   font-size: 12px;
   color: #d1d9e6;
   font-weight: 500;
+
+  @media (min-width: 1024px) {
+    font-size: 14px;
+  }
 `;
 
 export const DisplayCards = styled.div`

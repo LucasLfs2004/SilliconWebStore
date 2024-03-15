@@ -13,7 +13,7 @@ const ModalViewShip = ({
   return (
     <C.Container>
       <C.Modal visible={visible ? 'flex' : 'none'}>
-        <C.Row>
+        <C.Row className='padding-horizontal' paddinghorizontal={20}>
           <C.Title>Editar Endereços de entrega</C.Title>
           <C.Row>
             <C.Btn className='add-btn' onClick={addShip}>
@@ -29,11 +29,16 @@ const ModalViewShip = ({
             <C.ShipCard key={index}>
               <C.Row className='mt' mt={6}>
                 <C.TextBorderBottom>{item.ship_name}</C.TextBorderBottom>
-                <C.Btn onClick={() => editShip(item)}>
-                  <img src='/assets/icons/editIconPurple.svg' alt='' />
-                </C.Btn>
+                <C.Row>
+                  <C.Btn className='trash'>
+                    <img src='/assets/icons/trash.svg' alt='' />
+                  </C.Btn>
+                  <C.Btn onClick={() => editShip(item)}>
+                    <img src='/assets/icons/editIconPurple.svg' alt='' />
+                  </C.Btn>
+                </C.Row>
               </C.Row>
-              <C.Row className='between'>
+              <C.Row className='between max-width' maxwidth={400}>
                 <ParagraphShip>{item.receiver_name}</ParagraphShip>
                 <ParagraphShip>{item.cep}</ParagraphShip>
               </C.Row>

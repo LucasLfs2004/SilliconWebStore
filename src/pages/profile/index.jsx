@@ -1,6 +1,7 @@
 import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import ModalProfile from './modal/editProfile';
 import ModalShip from './modal/ship';
 import ModalViewShip from './modal/viewShip';
 import * as C from './styles';
@@ -14,6 +15,8 @@ const Profile = () => {
     setModalViewShipVisible,
     modalShipVisible,
     setModalShipVisible,
+    modalProfile,
+    setModalProfile,
     handlePrincipalShip,
     submitForm,
     checkedPrincipalShip,
@@ -38,7 +41,7 @@ const Profile = () => {
                   <img src='/assets/icons/userIcon.svg' alt='' />
                   <h3>{profile?.name}</h3>
                 </C.Row>
-                <C.BtnEdit>
+                <C.BtnEdit onClick={() => setModalProfile(true)}>
                   <img src='/assets/icons/editIconPurple.svg' alt='' />
                 </C.BtnEdit>
               </C.Row>
@@ -129,6 +132,11 @@ const Profile = () => {
           checked={checkedPrincipalShip}
           setChecked={setCheckedPrincipalShip}
           editObj={shipEditObject}
+        />
+        <ModalProfile
+          visible={modalProfile}
+          closeModal={() => setModalProfile(false)}
+          profile={profile}
         />
       </C.ContentPage>
 
