@@ -15,6 +15,7 @@ const useAddProducts = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [categorySelect, setCategorySelect] = useState(null);
   const [brandSelect, setBrandSelect] = useState(null);
+  const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     if (!user && !user?.access_token && !user?.idSeller) {
@@ -80,61 +81,17 @@ const useAddProducts = () => {
     }
   };
 
-  const productZod = z
-    .object({
-      name: z
-        .string()
-        .min(5, 'Este campo deve ter no mínimo 5 caracteres')
-        .transform(field => DOMPurify.sanitize(field)),
-      // model: z.string().transform(field => DOMPurify.sanitize(field)),
-      // brand: z.string().transform(field => DOMPurify.sanitize(field)),
-      stock: z
-        .number()
-        .int()
-        .positive()
-        .transform(field => DOMPurify.sanitize(field)),
-      portions: z
-        .number()
-        .int()
-        .positive()
-        .transform(field => DOMPurify.sanitize(field)),
-      warranty: z
-        .number()
-        .int()
-        .positive()
-        .transform(field => DOMPurify.sanitize(field)),
-      price: z
-        .number()
-        .positive()
-        .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
-          message: 'O preço deve ser um número real',
-        })
-        .transform(field => DOMPurify.sanitize(field)),
-      feesMonthly: z
-        .number()
-        .positive()
-        .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
-          message: 'O preço deve ser um número real',
-        })
-        .transform(field => DOMPurify.sanitize(field)),
-      feesCredit: z
-        .number()
-        .positive()
-        .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
-          message: 'O preço deve ser um número real',
-        })
-        .transform(field => DOMPurify.sanitize(field)),
-      category: z
-        .string()
-        .nonempty({ message: 'Selecione uma categoria' })
-        .transform(field => DOMPurify.sanitize(field)),
-      brand: z
-        .string()
-        .nonempty({ message: 'Selecione uma Marca' })
-        .transform(field => DOMPurify.sanitize(field)),
-      description: z.string().transform(field => DOMPurify.sanitize(field)),
-    })
-    .required();
+  console.log({
+    previewImages: previewImages,
+    selectedFiles: selectedFiles,
+    file1: selectedFiles[0],
+  });
+
+  const confirmChanges = files => {
+    console.log('executando a função confirmChanges');
+    setModalVisible(false);
+    setSelectedFiles(...files);
+  };
 
   return {
     categorys,
@@ -147,9 +104,70 @@ const useAddProducts = () => {
     setPreviewImages,
     settings,
     handleFileChange,
-    productZod,
     handleCreateProduct,
+    modalVisible,
+    setModalVisible,
+    selectedFiles,
+    setSelectedFiles,
+    confirmChanges,
+    setPreviewImages,
   };
 };
+
+export const productZod = z
+  .object({
+    name: z
+      .string()
+      .min(5, 'Este campo deve ter no mínimo 5 caracteres')
+      .transform(field => DOMPurify.sanitize(field)),
+    // model: z.string().transform(field => DOMPurify.sanitize(field)),
+    // brand: z.string().transform(field => DOMPurify.sanitize(field)),
+    stock: z
+      .number()
+      .int()
+      .positive()
+      .transform(field => DOMPurify.sanitize(field)),
+    portions: z
+      .number()
+      .int()
+      .positive()
+      .transform(field => DOMPurify.sanitize(field)),
+    warranty: z
+      .number()
+      .int()
+      .positive()
+      .transform(field => DOMPurify.sanitize(field)),
+    price: z
+      .number()
+      .positive()
+      .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
+        message: 'O preço deve ser um número real',
+      })
+      .transform(field => DOMPurify.sanitize(field)),
+    feesMonthly: z
+      .number()
+      .positive()
+      .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
+        message: 'O preço deve ser um número real',
+      })
+      .transform(field => DOMPurify.sanitize(field)),
+    feesCredit: z
+      .number()
+      .positive()
+      .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
+        message: 'O preço deve ser um número real',
+      })
+      .transform(field => DOMPurify.sanitize(field)),
+    category: z
+      .string()
+      .nonempty({ message: 'Selecione uma categoria' })
+      .transform(field => DOMPurify.sanitize(field)),
+    brand: z
+      .string()
+      .nonempty({ message: 'Selecione uma Marca' })
+      .transform(field => DOMPurify.sanitize(field)),
+    description: z.string().transform(field => DOMPurify.sanitize(field)),
+  })
+  .required();
 
 export default useAddProducts;

@@ -8,7 +8,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Slider from 'react-slick';
 import { Container } from '../../CommomStyles';
-import useAddProducts from './useAddProducts';
+import ModalImage from './modalImg';
+import useAddProducts, { productZod } from './useAddProducts';
 
 const AddProduct = () => {
   const {
@@ -22,7 +23,11 @@ const AddProduct = () => {
     previewImages,
     handleFileChange,
     handleCreateProduct,
-    productZod,
+    modalVisible,
+    setModalVisible,
+    setSelectedFiles,
+    setPreviewImages,
+    selectedFiles,
   } = useAddProducts();
 
   const {
@@ -234,6 +239,12 @@ const AddProduct = () => {
                     ))}
                 </Slider>
               </C.Carousel>
+              {previewImages.length > 0 && (
+                <C.BtnModal type='button' onClick={() => setModalVisible(true)}>
+                  <img src='/assets/icons/editIconGray.svg' alt='' />
+                  <p>Editar ordem</p>
+                </C.BtnModal>
+              )}
             </C.ColumnForm>
           </C.Form>
           <C.BtnSubmit type='submit'>Cadastrar</C.BtnSubmit>
@@ -241,6 +252,15 @@ const AddProduct = () => {
             <Link to={'/'}>cancelar</Link>
           </C.Message>
         </C.Section>
+        <ModalImage
+          images={previewImages}
+          files={selectedFiles}
+          visible={modalVisible}
+          setModalVisible={setModalVisible}
+          setFiles={setSelectedFiles}
+          setImages={setPreviewImages}
+          closeModal={() => setModalVisible(false)}
+        />
         {/* {window.screen.width > 1024 ? <FormDesk /> : <FormMobile />} */}
       </C.Body>
       <C.Footer>

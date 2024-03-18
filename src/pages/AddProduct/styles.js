@@ -25,6 +25,7 @@ export const Body = styled.section`
   min-height: calc(100vh - 90px);
   height: auto;
   padding-bottom: 36px;
+  position: relative;
 `;
 
 export const Section = styled.form`
@@ -518,4 +519,32 @@ export const BoxInput = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+`;
+
+export const BtnModal = styled.button`
+  margin-top: 48px;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  color: #c1c5d6;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  height: 30px;
+  border-radius: 5px;
+  background-color: #ecf0f3;
+  box-shadow: 5px 5px 6px 0px #d1d9e6,
+    -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
+  width: 76%;
+  column-gap: 16px;
+
+  img {
+    padding-left: 26px;
+  }
+
+  p {
+    color: #5b43d6;
+    padding-left: 3px;
+  }
 `;
