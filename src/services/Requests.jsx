@@ -337,6 +337,35 @@ export const patchShipInfo = async (token, params) => {
   }
 };
 
+export const deleteProduct = async (token, id_product) => {
+  try {
+    const response = await Api.delete(`/product/${id_product}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const postOfferProduct = async (token, params) => {
+  try {
+    console.log('parametros de postOfferProduct', params);
+    const response = await Api.post(`/seller/product/offer`, params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 // export const testRequest = async formData => {
 //   try {
 //     const response = await Api.post(

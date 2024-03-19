@@ -1,11 +1,12 @@
 import { styled } from 'styled-components';
 
 export const Header = styled.header`
+  width: calc(100vw - 24px);
+  padding: 0 12px;
+
   position: fixed;
   top: 0;
   z-index: 99;
-  width: calc(100% - 4%);
-  padding: 0 2%;
   background-color: #010f20;
   height: 60px;
   margin: 0;
@@ -15,6 +16,8 @@ export const Header = styled.header`
   justify-content: space-between;
 
   @media (min-width: 1024px) {
+    width: calc(100% - 4%);
+    padding: 0 2%;
     height: 80px;
   }
 `;

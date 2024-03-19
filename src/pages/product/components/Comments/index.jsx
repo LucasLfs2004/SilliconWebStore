@@ -10,7 +10,13 @@ const Comments = () => {
 
   return (
     <C.Container>
-      <C.Title>Comentários ({product?.rating?.comments?.length})</C.Title>
+      <C.Title>
+        Comentários (
+        {product?.rating?.comments?.length
+          ? product?.rating?.comments?.length
+          : 0}
+        )
+      </C.Title>
 
       <C.CommentBox>
         {product?.rating?.comments?.map((item, index) => (

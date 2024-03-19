@@ -2,11 +2,24 @@ import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
 import { api_path } from '../../constants/api_path';
+import DetailedInfos from './modal/detailedInfos';
+import OfferModal from './modal/offerModal';
 import * as C from './styles';
 import UseMyStore from './useMyStore';
 
 const MyStore = () => {
-  const { sellerData } = UseMyStore();
+  const {
+    sellerData,
+    handleDeleteProduct,
+    handleOpenOfferModal,
+    offerModal,
+    setOfferModal,
+    productActive,
+    setProductActive,
+    detailModal,
+    setDetailModal,
+    setOfferProduct,
+  } = UseMyStore();
 
   console.log('REQUESTE DAS INFORMAçÕES de vendedor', sellerData);
   return (
@@ -28,21 +41,31 @@ const MyStore = () => {
           </C.HeaderBox>
           {sellerData?.products_from_seller?.map((item, key) => (
             <C.ItemProduct key={key}>
-              <C.ImgProduct>
-                <img
-                  src={`${api_path}/image/product/${item?.images[0]}`}
-                  alt=''
-                />
-              </C.ImgProduct>
-              <C.NameProduct>{item.name}</C.NameProduct>
+              <C.Box>
+                <C.ImgProduct>
+                  <img
+                    src={`${api_path}/image/product/${item?.images[0]}`}
+                    alt=''
+                  />
+                </C.ImgProduct>
+                <C.NameProduct>{item.name}</C.NameProduct>
+              </C.Box>
               <C.InfosProduct>
                 <C.ItemInfo>
                   <C.Paragraph>
                     Preço <br />
                     <span>
                       {item?.value.price_now
-                        ? item?.value.price_now
-                        : item?.value?.common_price}
+                        ? item?.value.price_now.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL',
+                            minimumFractionDigits: 2,
+                          })
+                        : item?.value?.common_price.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL',
+                            minimumFractionDigits: 2,
+                          })}
                     </span>
                   </C.Paragraph>
                   <C.Paragraph>
@@ -69,7 +92,15 @@ const MyStore = () => {
                     Quantidade vendida <br />
                     <span>0</span>
                   </C.Paragraph>
-                  <C.BtnLink>Informações detalhadas</C.BtnLink>
+                  <C.BtnLink
+                    type='button'
+                    onClick={() => {
+                      setProductActive(item);
+                      setDetailModal(true);
+                    }}
+                  >
+                    Informações detalhadas
+                  </C.BtnLink>
                 </C.ItemInfo>
               </C.InfosProduct>
               <C.AreaOptions>
@@ -80,7 +111,10 @@ const MyStore = () => {
                     descrição
                   </C.Paragraph>
                 </C.ActionIcon>
-                <C.ActionIcon>
+                <C.ActionIcon
+                  type='button'
+                  onClick={() => handleOpenOfferModal(item)}
+                >
                   <img src='/assets/icons/offerIcon.svg' alt='' />
                   <C.Paragraph>
                     Adicionar <br />
@@ -94,7 +128,10 @@ const MyStore = () => {
                     produto
                   </C.Paragraph>
                 </C.ActionIcon>
-                <C.ActionIcon>
+                <C.ActionIcon
+                  type='button'
+                  onClick={() => handleDeleteProduct(item.id)}
+                >
                   <img src='/assets/icons/trash.svg' alt='' />
                   <C.Paragraph className='red'>
                     Apagar <br />
@@ -106,7 +143,17 @@ const MyStore = () => {
           ))}
         </C.ProductArea>
       </C.Main>
-
+      <OfferModal
+        product={productActive}
+        visible={offerModal}
+        setOffer={setOfferProduct}
+        closeModal={() => setOfferModal(false)}
+      />
+      <DetailedInfos
+        product={productActive}
+        visible={detailModal}
+        closeModal={() => setDetailModal(false)}
+      />
       <Footer />
     </Container>
   );
