@@ -1,4 +1,5 @@
 import { Container } from '../../CommomStyles';
+import DescriptionModal from '../../components/Description';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
 import { api_path } from '../../constants/api_path';
@@ -19,6 +20,11 @@ const MyStore = () => {
     detailModal,
     setDetailModal,
     setOfferProduct,
+    descriptionModal,
+    setDescriptionModal,
+    handleChangeDescriptionProduct,
+    editor,
+    setEditor,
   } = UseMyStore();
 
   console.log('REQUESTE DAS INFORMAçÕES de vendedor', sellerData);
@@ -104,7 +110,13 @@ const MyStore = () => {
                 </C.ItemInfo>
               </C.InfosProduct>
               <C.AreaOptions>
-                <C.ActionIcon>
+                <C.ActionIcon
+                  type='button'
+                  onClick={() => {
+                    setProductActive(item);
+                    setDescriptionModal(true);
+                  }}
+                >
                   <img src='/assets/icons/descriptionIcon.svg' alt='' />
                   <C.Paragraph>
                     Editar <br />
@@ -153,6 +165,14 @@ const MyStore = () => {
         product={productActive}
         visible={detailModal}
         closeModal={() => setDetailModal(false)}
+      />
+      <DescriptionModal
+        visible={descriptionModal}
+        product={productActive}
+        closeModal={() => setDescriptionModal(false)}
+        editor={editor}
+        setEditor={setEditor}
+        submit={handleChangeDescriptionProduct}
       />
       <Footer />
     </Container>

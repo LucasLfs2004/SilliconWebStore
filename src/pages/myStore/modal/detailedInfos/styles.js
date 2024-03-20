@@ -201,3 +201,19 @@ export const BtnClose = styled.button`
     /* color: #ecf0f3; */
   }
 `;
+
+export const DescriptionCard = styled.div`
+  margin-top: 24px;
+  padding: 16px;
+  width: calc(100% - 32px);
+  background-color: #ecf0f3;
+  box-shadow: 11px 11px 20px 0px #d1d9e6, -11px -11px 20px 0px #fff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  align-items: center;
+  justify-content: center;
+  max-height: 300px;
+  overflow-y: scroll;
+`;

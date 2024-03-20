@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {
   deleteProduct,
   getSellerData,
+  postDescriptionProduct,
   postOfferProduct,
 } from '../../services/Requests';
 
@@ -13,6 +14,8 @@ const UseMyStore = () => {
   const [productActive, setProductActive] = useState(undefined);
   const [detailModal, setDetailModal] = useState(false);
   const [offerModal, setOfferModal] = useState(false);
+  const [descriptionModal, setDescriptionModal] = useState(false);
+  const [editor, setEditor] = useState('');
 
   //   const [principalShip, setPrincipalShip] = useState({});
   useEffect(() => {
@@ -58,6 +61,21 @@ const UseMyStore = () => {
     setProductActive(product);
   };
 
+  const handleChangeDescriptionProduct = async () => {
+    const params = {
+      id_product: productActive?.id,
+      description: editor,
+      id_seller: sellerData?.id_seller,
+    };
+    if (productActive?.description?.desc_html === null) {
+      console.log('entrei no if');
+      const retorno = await postDescriptionProduct(user.access_token, params);
+      retorno && (await refetch());
+    }
+    console.log('ola');
+    console.log('params in description product: ', params);
+  };
+
   return {
     sellerData,
     handleDeleteProduct,
@@ -69,6 +87,11 @@ const UseMyStore = () => {
     detailModal,
     setDetailModal,
     setOfferProduct,
+    descriptionModal,
+    setDescriptionModal,
+    handleChangeDescriptionProduct,
+    editor,
+    setEditor,
   };
 };
 
