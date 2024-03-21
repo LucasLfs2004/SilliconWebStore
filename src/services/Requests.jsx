@@ -381,40 +381,20 @@ export const postDescriptionProduct = async (token, params) => {
   }
 };
 
-// export const testRequest = async formData => {
-//   try {
-//     const response = await Api.post(
-//       `/product`,
-
-//       formData,
-
-//       {
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       },
-//     );
-//     return response;
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
-// export const fetchNowPlaying = async () => {
-//   try {
-//     return (await Api.get('/movies/now_playing')).data;
-//   } catch (error) {
-//     return error;
-//   }
-// };
-
-// export const fetchOnTheAir = async () => {
-//   try {
-//     return (await Api.get('/series/on_the_air')).data;
-//   } catch (error) {
-//     return error;
-//   }
-// };
+export const patchDescriptionProduct = async (token, params) => {
+  try {
+    console.log('parametros de patchOfferProduct', params);
+    const response = await Api.patch(`/seller/product/description`, params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
 
 export const getCep = async cep => {
   try {

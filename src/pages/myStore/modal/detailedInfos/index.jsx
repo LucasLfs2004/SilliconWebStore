@@ -18,7 +18,7 @@ const DetailedInfos = ({ visible, product, closeModal }) => {
   };
 
   return (
-    <ContainerModal visible={visible ? 'flex' : 'none'} pt={'128px'}>
+    <ContainerModal visible={visible ? 'flex' : 'none'} pt={'48px'}>
       <ModalWhite width={'1000px'} height={'min-content'} padding={'24px'}>
         <C.Box className='relative'>
           <C.Id className='bold'>ID: {product?.id}</C.Id>

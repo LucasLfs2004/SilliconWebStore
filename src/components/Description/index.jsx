@@ -24,15 +24,17 @@ const DescriptionModal = ({
             Cancelar
           </C.BtnClose>
         </C.Box>
-        <C.InfoProduct>
-          <C.ImageProduct>
-            <img
-              src={`${api_path}/image/product/${product?.images[0]}`}
-              alt=''
-            />
-          </C.ImageProduct>
-          <C.NameProduct>{product?.name}</C.NameProduct>
-        </C.InfoProduct>
+        {product && (
+          <C.InfoProduct>
+            <C.ImageProduct>
+              <img
+                src={`${api_path}/image/product/${product?.images[0]}`}
+                alt=''
+              />
+            </C.ImageProduct>
+            <C.NameProduct>{product?.name}</C.NameProduct>
+          </C.InfoProduct>
+        )}
         <C.EditorCard>
           <ReactQuill theme='snow' value={editor} onChange={setEditor} />
         </C.EditorCard>

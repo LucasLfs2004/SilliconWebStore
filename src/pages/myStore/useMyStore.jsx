@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {
   deleteProduct,
   getSellerData,
+  patchDescriptionProduct,
   postDescriptionProduct,
   postOfferProduct,
 } from '../../services/Requests';
@@ -27,6 +28,15 @@ const UseMyStore = () => {
       window.location.href = '/signin';
     }
   }, [user]);
+
+  useEffect(() => {
+    console.log('product on useEffect of editor: ', productActive);
+    setEditor(
+      productActive?.description?.desc_html
+        ? productActive?.description?.desc_html
+        : '',
+    );
+  }, [productActive]);
 
   const { data: sellerData, refetch } = useQuery({
     queryKey: ['seller-data'],
@@ -65,15 +75,14 @@ const UseMyStore = () => {
     const params = {
       id_product: productActive?.id,
       description: editor,
-      id_seller: sellerData?.id_seller,
     };
     if (productActive?.description?.desc_html === null) {
-      console.log('entrei no if');
       const retorno = await postDescriptionProduct(user.access_token, params);
       retorno && (await refetch());
+    } else {
+      const retorno = await patchDescriptionProduct(user.access_token, params);
+      retorno && (await refetch());
     }
-    console.log('ola');
-    console.log('params in description product: ', params);
   };
 
   return {

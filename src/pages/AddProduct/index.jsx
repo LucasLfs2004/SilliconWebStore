@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Slider from 'react-slick';
 import { Container } from '../../CommomStyles';
+import DescriptionModal from '../../components/Description';
 import ModalImage from './modalImg';
 import useAddProducts, { productZod } from './useAddProducts';
 
@@ -28,6 +29,10 @@ const AddProduct = () => {
     setSelectedFiles,
     setPreviewImages,
     selectedFiles,
+    description,
+    setDescription,
+    modalDescription,
+    setModalDescription,
   } = useAddProducts();
 
   const {
@@ -203,13 +208,12 @@ const AddProduct = () => {
                 </C.FormInput>
               </C.Box>
               <C.FormInput className='complete-width'>
-                <label htmlFor=''>descrição</label>
-                <textarea
-                  placeholder='descrição'
-                  {...register('description')}
-                  // onChange={e => setDescription(e.target.value)}
-                />
-                <p>{errors?.description?.message}</p>
+                <C.BtnDescription
+                  type='button'
+                  onClick={() => setModalDescription(true)}
+                >
+                  Adicionar descrição
+                </C.BtnDescription>
               </C.FormInput>
             </C.ColumnForm>
             <C.ColumnForm className='center'>
@@ -260,6 +264,13 @@ const AddProduct = () => {
           setFiles={setSelectedFiles}
           setImages={setPreviewImages}
           closeModal={() => setModalVisible(false)}
+        />
+        <DescriptionModal
+          visible={modalDescription}
+          editor={description}
+          setEditor={setDescription}
+          closeModal={() => setModalDescription(false)}
+          submit={() => setModalDescription(false)}
         />
         {/* {window.screen.width > 1024 ? <FormDesk /> : <FormMobile />} */}
       </C.Body>

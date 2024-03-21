@@ -548,3 +548,20 @@ export const BtnModal = styled.button`
     padding-left: 3px;
   }
 `;
+
+export const BtnDescription = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  background: #ecf0f3;
+  box-shadow: 5px 5px 6px 0px #d1d9e6,
+    -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
+  border-radius: 5px;
+  border: none;
+  font-size: 10px;
+  color: #5b43d6;
+  font-weight: 300;
+  width: calc(25% - 28px);
+  margin-top: 8px;
+`;

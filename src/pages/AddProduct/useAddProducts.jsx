@@ -16,6 +16,8 @@ const useAddProducts = () => {
   const [categorySelect, setCategorySelect] = useState(null);
   const [brandSelect, setBrandSelect] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
+  const [description, setDescription] = useState('');
+  const [modalDescription, setModalDescription] = useState(false);
 
   useEffect(() => {
     if (!user && !user?.access_token && !user?.idSeller) {
@@ -111,6 +113,10 @@ const useAddProducts = () => {
     setSelectedFiles,
     confirmChanges,
     setPreviewImages,
+    description,
+    setDescription,
+    modalDescription,
+    setModalDescription,
   };
 };
 
@@ -166,7 +172,6 @@ export const productZod = z
       .string()
       .nonempty({ message: 'Selecione uma Marca' })
       .transform(field => DOMPurify.sanitize(field)),
-    description: z.string().transform(field => DOMPurify.sanitize(field)),
   })
   .required();
 
