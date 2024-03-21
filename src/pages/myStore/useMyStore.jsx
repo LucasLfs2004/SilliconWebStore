@@ -6,7 +6,7 @@ import {
   getSellerData,
   patchDescriptionProduct,
   postDescriptionProduct,
-  postOfferProduct,
+  setOfferProduct as setOfferProductRequest,
 } from '../../services/Requests';
 
 const UseMyStore = () => {
@@ -57,10 +57,7 @@ const UseMyStore = () => {
 
   const setOfferProduct = async params => {
     if (user.access_token) {
-      const retorno = await postOfferProduct(user.access_token, {
-        ...params,
-        id_seller: sellerData?.id_seller,
-      });
+      const retorno = await setOfferProductRequest(user.access_token, params);
       retorno && (await refetch());
       setOfferModal(prev => false);
     }

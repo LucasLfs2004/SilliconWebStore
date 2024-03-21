@@ -351,10 +351,10 @@ export const deleteProduct = async (token, id_product) => {
   }
 };
 
-export const postOfferProduct = async (token, params) => {
+export const setOfferProduct = async (token, params) => {
   try {
     console.log('parametros de postOfferProduct', params);
-    const response = await Api.post(`/seller/product/offer`, params, {
+    const response = await Api.patch(`/seller/product/offer`, params, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
