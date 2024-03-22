@@ -1,44 +1,20 @@
 import { styled } from 'styled-components';
 
-export const Container = styled.main`
-  margin: 0;
-  min-height: 100vh;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 30px;
-
-  input:focus,
-  textarea:focus {
-    outline: none;
-  }
-`;
-
-export const Body = styled.section`
-  background-color: #010f20;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 36px;
-  min-height: calc(100vh - 90px);
-  height: auto;
-  padding-bottom: 36px;
-  position: relative;
-`;
-
 export const Section = styled.form`
-  background-color: #010f20;
   margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #ecf0f3;
-  width: 84.61%;
   border-radius: 15px;
-  box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
+  width: 100%;
+`;
 
+export const TopContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
   .top {
     /* margin-left: 35px; */
     margin-top: 20px;
@@ -105,7 +81,7 @@ export const DivWrap = styled.section`
   }
 `;
 
-export const Message = styled.p`
+export const Message = styled.button`
   color: #010f20;
   font-size: 9px;
   font-weight: 400;
@@ -113,10 +89,9 @@ export const Message = styled.p`
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
-
-  a {
-    color: #51e1e6;
-  }
+  background-color: transparent;
+  border: none;
+  color: #51e1e6;
 
   @media (min-width: 1024px) {
     font-size: 14px;
@@ -173,10 +148,6 @@ export const FormInput = styled.div`
     color: #010f20cc;
   }
 
-  select {
-    outline: none;
-  }
-
   input[type='number'] {
     -moz-appearance: textfield;
   }
@@ -210,6 +181,7 @@ export const FormInput = styled.div`
     width: calc(100%);
     font-weight: 300;
     font-size: 12px;
+    outline: none;
   }
 
   select.selected {
@@ -238,6 +210,7 @@ export const FormInput = styled.div`
     font-weight: 275;
     margin: 0;
   }
+
   @media (min-width: 1024px) {
     input,
     select {
@@ -419,20 +392,6 @@ export const InputImg = styled.div`
     }
   }
 
-  @media (min-width: 1024px) {
-    label,
-    p {
-      font-size: 14px;
-      font-weight: 600;
-    }
-    p {
-      padding-bottom: 2px;
-    }
-    label {
-      cursor: pointer;
-    }
-  }
-
   @media (min-width: 1024px) and (max-width: 1440px) {
     width: 250px;
     align-items: flex-start;
@@ -532,8 +491,7 @@ export const BtnSubmit = styled.button`
     width: 150px;
     font-weight: 500;
     cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
   }
 `;
 
@@ -611,9 +569,4 @@ export const BtnDescription = styled.div`
   font-weight: 300;
   width: calc(25% - 28px);
   margin-top: 8px;
-
-  @media (min-width: 1024px) {
-    font-size: 14px;
-    font-weight: 600;
-  }
 `;

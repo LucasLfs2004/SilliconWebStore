@@ -38,14 +38,16 @@ export const ModalWhite = styled.div`
   flex-direction: column;
   align-items: center;
   background: #ecf0f3;
-  /* min-width: 800px;
-  max-width: 1200px;
-  max-height: 340px; */
+  max-height: calc(100vh - 260px);
   width: ${props => props.width};
   height: ${props => props.height};
   padding: ${props => props.padding};
   border-radius: 15px;
   box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
+
+  &.scroll-y {
+    overflow-y: scroll;
+  }
 
   @media (max-width: 1024px) {
     max-width: calc(90% - 32px);
@@ -184,5 +186,28 @@ export const FormInput = styled.div`
     select {
       width: 100%;
     }
+  }
+`;
+
+export const BtnCloseTop = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ecf0f3;
+  border-radius: 5px;
+  border: none;
+  height: 30px;
+  color: #5b43d6;
+  font-weight: 500;
+  transition: all 0.4s ease;
+  position: absolute;
+  right: 0;
+
+  &:hover {
+    box-shadow: 5px 5px 6px 0px #d1d9e6,
+      -5px -5px 6px 0px rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    /* background-color: #5b43d6; */
+    /* color: #ecf0f3; */
   }
 `;

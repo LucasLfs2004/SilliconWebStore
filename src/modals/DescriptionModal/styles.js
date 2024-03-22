@@ -61,10 +61,10 @@ export const EditorCard = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 500px;
+  height: 400px;
 
   .ql-container {
-    height: 460px;
+    height: 360px;
   }
 `;
 

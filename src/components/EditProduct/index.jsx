@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import Header from '../../components/Header';
+import Header from '../Header';
 import * as C from './styles';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,9 +10,9 @@ import Slider from 'react-slick';
 import { Container } from '../../CommomStyles';
 import DescriptionModal from '../../modals/DescriptionModal';
 import ModalImage from './modalImg';
-import useAddProducts, { productZod } from './useAddProducts';
+import useEditProducts, { productZod } from './useAddProducts';
 
-const AddProduct = () => {
+const EditProduct = () => {
   const {
     settings,
     brands,
@@ -33,7 +33,7 @@ const AddProduct = () => {
     setDescription,
     modalDescription,
     setModalDescription,
-  } = useAddProducts();
+  } = useEditProducts();
 
   const {
     register,
@@ -282,4 +282,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default EditProduct;

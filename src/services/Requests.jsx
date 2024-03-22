@@ -45,7 +45,7 @@ export const uploadImages = async files => {
   }
 };
 
-export const createProduct = async formData => {
+export const createProduct = async (token, formData) => {
   try {
     const response = await Api.post(
       `/product`,
@@ -54,6 +54,7 @@ export const createProduct = async formData => {
 
       {
         headers: {
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data',
         },
       },
@@ -61,6 +62,22 @@ export const createProduct = async formData => {
     return response;
   } catch (error) {
     console.log(error);
+    return error;
+  }
+};
+
+export const updateProduct = async (token, params) => {
+  try {
+    console.log(token);
+    const response = await Api.put('/product', params, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    // console.log('return of setVoucher', response);
+    return response.data;
+  } catch (error) {
     return error;
   }
 };

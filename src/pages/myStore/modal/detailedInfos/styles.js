@@ -213,7 +213,6 @@ export const DescriptionCard = styled.div`
   flex-direction: column;
   row-gap: 24px;
   align-items: center;
-  justify-content: center;
-  max-height: 300px;
+  min-height: 500px;
   overflow-y: scroll;
 `;

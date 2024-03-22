@@ -16,9 +16,9 @@ const UseMyStore = () => {
   const [detailModal, setDetailModal] = useState(false);
   const [offerModal, setOfferModal] = useState(false);
   const [descriptionModal, setDescriptionModal] = useState(false);
+  const [editProductModal, setEditProductModal] = useState(false);
   const [editor, setEditor] = useState('');
 
-  //   const [principalShip, setPrincipalShip] = useState({});
   useEffect(() => {
     if (
       user?.access_token === null ||
@@ -30,7 +30,6 @@ const UseMyStore = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log('product on useEffect of editor: ', productActive);
     setEditor(
       productActive?.description?.desc_html
         ? productActive?.description?.desc_html
@@ -98,6 +97,9 @@ const UseMyStore = () => {
     handleChangeDescriptionProduct,
     editor,
     setEditor,
+    editProductModal,
+    setEditProductModal,
+    refetch,
   };
 };
 

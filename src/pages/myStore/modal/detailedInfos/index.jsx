@@ -7,8 +7,6 @@ import { api_path } from '../../../../constants/api_path';
 import * as C from './styles';
 
 const DetailedInfos = ({ visible, product, closeModal }) => {
-  console.log('Detalhes do produto', product);
-
   const settings = {
     dots: true,
     infinite: true,
@@ -19,7 +17,12 @@ const DetailedInfos = ({ visible, product, closeModal }) => {
 
   return (
     <ContainerModal visible={visible ? 'flex' : 'none'} pt={'48px'}>
-      <ModalWhite width={'1000px'} height={'min-content'} padding={'24px'}>
+      <ModalWhite
+        width={'1000px'}
+        height={'min-content'}
+        padding={'24px 48px'}
+        className='scroll-y'
+      >
         <C.Box className='relative'>
           <C.Id className='bold'>ID: {product?.id}</C.Id>
           <C.Title>Detalhes do produto</C.Title>

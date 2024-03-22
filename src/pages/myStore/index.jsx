@@ -1,8 +1,9 @@
 import { Container } from '../../CommomStyles';
-import DescriptionModal from '../../components/Description';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
 import { api_path } from '../../constants/api_path';
+import DescriptionModal from '../../modals/DescriptionModal';
+import EditProductModal from '../../modals/EditProductModal';
 import DetailedInfos from './modal/detailedInfos';
 import OfferModal from './modal/offerModal';
 import * as C from './styles';
@@ -25,9 +26,11 @@ const MyStore = () => {
     handleChangeDescriptionProduct,
     editor,
     setEditor,
+    editProductModal,
+    setEditProductModal,
+    refetch,
   } = UseMyStore();
 
-  console.log('REQUESTE DAS INFORMAçÕES de vendedor', sellerData);
   return (
     <Container>
       <HeaderPage
@@ -133,7 +136,13 @@ const MyStore = () => {
                     promoção
                   </C.Paragraph>
                 </C.ActionIcon>
-                <C.ActionIcon>
+                <C.ActionIcon
+                  type='button'
+                  onClick={() => {
+                    setProductActive(item);
+                    setEditProductModal(true);
+                  }}
+                >
                   <img src='/assets/icons/editIconPurple.svg' alt='' />
                   <C.Paragraph>
                     Editar <br />
@@ -173,6 +182,12 @@ const MyStore = () => {
         editor={editor}
         setEditor={setEditor}
         submit={handleChangeDescriptionProduct}
+      />
+      <EditProductModal
+        visible={editProductModal}
+        closeModal={() => setEditProductModal(false)}
+        product={productActive}
+        refetch={refetch}
       />
       <Footer />
     </Container>

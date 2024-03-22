@@ -24,12 +24,9 @@ const OfferModal = ({ visible, closeModal, product, setOffer }) => {
   }, [product]);
 
   const handleChangeNewPrice = value => {
-    console.log(value);
     if (value < commonPrice) {
       setNewPrice(value);
       setErrors('');
-
-      // setCommonPrice(value);
     } else {
       setErrors('O valor da oferta não pode ser maior que o valor atual.');
     }
@@ -106,7 +103,6 @@ const OfferModal = ({ visible, closeModal, product, setOffer }) => {
               value={commonPrice}
               min={0}
               onChange={e => setCommonPrice(e.target.value)}
-              // {...register('commonPrice', { valueAsNumber: true })}
             />
             <p></p>
           </FormInput>
@@ -122,7 +118,6 @@ const OfferModal = ({ visible, closeModal, product, setOffer }) => {
               step={0.01}
               value={newPrice}
               onChange={e => handleChangeNewPrice(parseFloat(e.target.value))}
-              // {...register('newPrice', { valueAsNumber: true })}
             />
             <p>{errors}</p>
           </FormInput>

@@ -41,9 +41,10 @@ const DescriptionModal = ({
         <C.BtnConfirmArea>
           <C.BtnConfirm
             type='button'
-            onClick={() =>
-              submit({ description: editor, id_product: product?.id })
-            }
+            onClick={() => {
+              submit({ description: editor, id_product: product?.id });
+              closeModal();
+            }}
           >
             Confirmar
           </C.BtnConfirm>

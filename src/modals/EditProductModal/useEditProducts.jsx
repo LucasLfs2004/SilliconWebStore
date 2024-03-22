@@ -1,23 +1,20 @@
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery } from '@tanstack/react-query';
 import DOMPurify from 'dompurify';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { z } from 'zod';
 import {
-  createProduct,
   getBrands,
   getCategorys,
+  updateProduct,
 } from '../../services/Requests';
 
-const useAddProducts = () => {
+const useEditProducts = (product, refetch, closeModal) => {
   const user = useSelector(state => state.user);
-  const [previewImages, setPreviewImages] = useState([]);
-  const [selectedFiles, setSelectedFiles] = useState([]);
   const [categorySelect, setCategorySelect] = useState(null);
   const [brandSelect, setBrandSelect] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [description, setDescription] = useState('');
-  const [modalDescription, setModalDescription] = useState(false);
 
   useEffect(() => {
     if (!user && !user?.access_token && !user?.idSeller) {
@@ -34,55 +31,75 @@ const useAddProducts = () => {
     queryFn: async () => await getCategorys(),
   });
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
-  const handleFileChange = event => {
-    const newfile = Array.from(event.target.files);
-    setSelectedFiles(files => [...files, ...newfile]);
-
-    const newImages = newfile.map(file => URL.createObjectURL(file));
-    setPreviewImages(prevImages => [...prevImages, ...newImages]);
-  };
-
   const handleCreateProduct = async data => {
-    if (selectedFiles.length > 0) {
-      try {
-        const formData = new FormData();
-        formData.append('name', data.name);
-        formData.append('brand_id', data.brand);
-        formData.append('category_id', data.category);
-        formData.append('price', data.price);
-        formData.append('portions', data.portions);
-        formData.append('fees_monthly', data.feesMonthly);
-        formData.append('fees_credit', data.feesCredit);
-        formData.append('stock', data.stock);
-        formData.append('featured', true);
-        formData.append('warranty', data.warranty);
-        formData.append('model', data.model);
-        // formData.append('description', data.description);
-        selectedFiles.forEach(file => {
-          formData.append('files', file, file.name);
-        });
-        await createProduct(user.access_token, formData);
-        alert('Produto cadastrado com sucesso');
-      } catch (error) {
-        alert('Erro, não foi possível criar o produto');
-      }
-    } else {
-      alert('Insira Imagens por favor');
+    try {
+      const paramsRequest = {
+        id: product.id,
+        name: data.name,
+        brand: data.brand,
+        category: data.category,
+        price: data.price,
+        portions: data.portions,
+        warranty: data.warranty,
+        stock: data.stock,
+        model: data.model,
+        fees_credit: data.feesCredit,
+        fees_monthly: data.feesMonthly,
+        active: true,
+        featured: true,
+      };
+      console.log('data of updateProduct', paramsRequest);
+
+      const success = await updateProduct(user.access_token, paramsRequest);
+      // console.log(dataProduct);
+      success && refetch();
+      success && closeModal();
+      alert('Produto cadastrado com sucesso');
+    } catch (error) {
+      alert('Erro, não foi possível criar o produto');
+      console.log('Erro na criação do produto', error);
     }
   };
 
-  const confirmChanges = files => {
-    setModalVisible(false);
-    setSelectedFiles(...files);
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    mode: 'all',
+    resolver: zodResolver(productZod),
+  });
+
+  const handleSetInputs = () => {
+    const brand = brands?.find(item => item.name === product?.brand?.name)?.id;
+    const category = categorys?.find(
+      item => item.name === product?.category,
+    )?.id;
+    setBrandSelect(brand);
+    setCategorySelect(category);
+    const dataRegister = {
+      name: product?.name || '',
+      stock: product?.stock || '',
+      portions: product?.value?.portions || 0,
+      price: product?.value?.common_price || 0,
+      feesMonthly: product?.value?.fees_monthly || 0,
+      feesCredit: product?.value?.fees_credit || 0,
+      warranty: product?.warranty || 0,
+      model: product?.model || '',
+      category: String(category) || 'null',
+      brand: String(brand) || 'null',
+    };
+    Object.keys(dataRegister).forEach(campo => {
+      if (!register(campo)) return; // Garante que o campo está registrado no formulário
+      if (!register(campo).value) setValue(campo, dataRegister[campo]);
+    });
   };
+
+  useEffect(() => {
+    console.log('product for edit: ', product);
+    handleSetInputs();
+  }, [product]);
 
   return {
     categorys,
@@ -91,21 +108,10 @@ const useAddProducts = () => {
     setCategorySelect,
     brandSelect,
     setBrandSelect,
-    previewImages,
-    setPreviewImages,
-    settings,
-    handleFileChange,
     handleCreateProduct,
-    modalVisible,
-    setModalVisible,
-    selectedFiles,
-    setSelectedFiles,
-    confirmChanges,
-    setPreviewImages,
-    description,
-    setDescription,
-    modalDescription,
-    setModalDescription,
+    register,
+    handleSubmit,
+    errors,
   };
 };
 
@@ -115,7 +121,7 @@ export const productZod = z
       .string()
       .min(5, 'Este campo deve ter no mínimo 5 caracteres')
       .transform(field => DOMPurify.sanitize(field)),
-    // model: z.string().transform(field => DOMPurify.sanitize(field)),
+    model: z.string().transform(field => DOMPurify.sanitize(field)),
     // brand: z.string().transform(field => DOMPurify.sanitize(field)),
     stock: z
       .number()
@@ -164,4 +170,4 @@ export const productZod = z
   })
   .required();
 
-export default useAddProducts;
+export default useEditProducts;
