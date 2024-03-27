@@ -17,6 +17,7 @@ const UseMyStore = () => {
   const [offerModal, setOfferModal] = useState(false);
   const [descriptionModal, setDescriptionModal] = useState(false);
   const [editProductModal, setEditProductModal] = useState(false);
+  const [editImagesModal, setEditImagesModal] = useState(false);
   const [editor, setEditor] = useState('');
 
   useEffect(() => {
@@ -100,6 +101,8 @@ const UseMyStore = () => {
     editProductModal,
     setEditProductModal,
     refetch,
+    editImagesModal,
+    setEditImagesModal,
   };
 };
 

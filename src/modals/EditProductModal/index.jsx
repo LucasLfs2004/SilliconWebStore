@@ -74,7 +74,7 @@ const EditProductModal = ({ visible, closeModal, product, refetch }) => {
                       Selecionar
                     </option>
                     {categorys &&
-                      categorys.map((item, key) => {
+                      categorys?.map((item, key) => {
                         return (
                           <option key={key} value={item.id}>
                             {item.name}
@@ -101,6 +101,8 @@ const EditProductModal = ({ visible, closeModal, product, refetch }) => {
                       Selecionar
                     </option>
                     {brands &&
+                      brands !== null &&
+                      brands !== undefined &&
                       brands.map((item, key) => {
                         return (
                           <option key={key} value={item.id}>
@@ -109,7 +111,7 @@ const EditProductModal = ({ visible, closeModal, product, refetch }) => {
                         );
                       })}
                   </select>
-                  <p>{errors?.model}</p>
+                  <p>{errors?.brand}</p>
                 </C.FormInput>
               </C.Box>
               <C.Box>

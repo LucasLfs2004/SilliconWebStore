@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
 import { api_path } from '../../constants/api_path';
 import DescriptionModal from '../../modals/DescriptionModal';
+import EditImagesProductModal from '../../modals/EditImagesProductModal';
 import EditProductModal from '../../modals/EditProductModal';
 import DetailedInfos from './modal/detailedInfos';
 import OfferModal from './modal/offerModal';
@@ -28,6 +29,8 @@ const MyStore = () => {
     setEditor,
     editProductModal,
     setEditProductModal,
+    editImagesModal,
+    setEditImagesModal,
     refetch,
   } = UseMyStore();
 
@@ -151,6 +154,19 @@ const MyStore = () => {
                 </C.ActionIcon>
                 <C.ActionIcon
                   type='button'
+                  onClick={() => {
+                    setProductActive(item);
+                    setEditImagesModal(true);
+                  }}
+                >
+                  <img src='/assets/icons/editImagePurple.svg' alt='' />
+                  <C.Paragraph>
+                    Editar <br />
+                    imagens
+                  </C.Paragraph>
+                </C.ActionIcon>
+                <C.ActionIcon
+                  type='button'
                   onClick={() => handleDeleteProduct(item.id)}
                 >
                   <img src='/assets/icons/trash.svg' alt='' />
@@ -188,6 +204,11 @@ const MyStore = () => {
         closeModal={() => setEditProductModal(false)}
         product={productActive}
         refetch={refetch}
+      />
+      <EditImagesProductModal
+        product={productActive}
+        visible={editImagesModal}
+        closeModal={() => setEditImagesModal(false)}
       />
       <Footer />
     </Container>
