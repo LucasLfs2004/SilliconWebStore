@@ -6,7 +6,11 @@ export const Section = styled.form`
   flex-direction: column;
   align-items: center;
   border-radius: 15px;
-  width: 100%;
+  width: 90vw;
+
+  @media (min-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 export const TopContent = styled.div`
@@ -15,14 +19,19 @@ export const TopContent = styled.div`
   justify-content: center;
   width: 100%;
   position: relative;
+
   .top {
-    /* margin-left: 35px; */
-    margin-top: 20px;
     display: flex;
     flex-direction: row;
+    column-gap: 10px;
     align-items: center;
-    row-gap: 7px;
-    column-gap: 8px;
+  }
+
+  @media (min-width: 1024px) {
+    .top {
+      margin-top: 20px;
+      row-gap: 7px;
+    }
   }
 `;
 
@@ -64,7 +73,6 @@ export const Form = styled.section`
 `;
 
 export const DivWrap = styled.section`
-  /* margin-top: 20px; */
   padding: 20px 0;
   display: flex;
   flex-direction: column;
@@ -165,6 +173,10 @@ export const FormInput = styled.div`
   .no-spin::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; /* Pode adicionar um espaço em branco se necessário */
+  }
+
+  &.half {
+    width: calc(50% - 18px);
   }
 
   select {
@@ -511,7 +523,9 @@ export const ColumnForm = styled.section`
 export const Box = styled.div`
   margin: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
   width: 100%;
 
   @media (min-width: 1024px) {

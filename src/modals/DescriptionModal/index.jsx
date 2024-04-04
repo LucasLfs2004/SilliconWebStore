@@ -12,9 +12,6 @@ const DescriptionModal = ({
   editor,
   setEditor,
 }) => {
-  // const [editor, setEditor] = useState(EditorState.createEmpty());
-
-  console.log(editor);
   return (
     <ContainerModal visible={visible ? 'flex' : 'none'} pt={'64px'}>
       <ModalWhite width={'1104px'} height={'min-content'} padding={'32px 48px'}>

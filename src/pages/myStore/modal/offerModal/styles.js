@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Title = styled.h1`
   color: #5b43d6;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 16px;
   max-height: calc(16px * 2);
   line-height: normal;
@@ -13,7 +13,7 @@ export const Title = styled.h1`
   text-overflow: ellipsis;
 
   @media (min-width: 1024px) {
-    font-size: 18px;
+    font-size: 24px;
   }
 `;
 
@@ -40,11 +40,59 @@ export const Box = styled.div`
   &.justify-center {
     justify-content: center;
   }
+
+  &.between {
+    justify-content: space-between;
+  }
+`;
+
+export const InfoProduct = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 12px;
+  margin: 8px 0;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    column-gap: 12px;
+  }
+`;
+
+export const ImgProduct = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background-color: #fff;
+  width: 100px;
+  height: 100px;
+
+  img {
+    width: 90px;
+  }
+
+  @media (min-width: 1024px) {
+    width: 80px;
+    height: 80px;
+
+    img {
+      width: 80%;
+    }
+  }
+  @media (min-width: 1440px) {
+    width: 100px;
+    height: 100px;
+
+    img {
+      width: 80px;
+    }
+  }
 `;
 
 export const NameProduct = styled.p`
   font-size: 14px;
-  width: 260px;
+  width: 100%;
   /* max-height: calc(16px * 2); */
   line-height: normal;
   overflow: hidden;
@@ -77,11 +125,15 @@ export const Price = styled.p`
 `;
 
 export const Form = styled.form`
-  padding-top: 12px;
-  display: flex;
   width: 100%;
-  column-gap: 24px;
-  align-items: flex-start;
+
+  @media (min-width: 1024px) {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 12px;
+    width: 100%;
+    column-gap: 24px;
+  }
 `;
 
 export const BtnConfirm = styled.button`
@@ -96,12 +148,20 @@ export const BtnConfirm = styled.button`
   border: none;
   height: 30px;
   color: #5b43d6;
-  font-weight: 500;
   transition: all 0.4s ease;
+  width: 50%;
+  font-weight: 600;
 
   &:hover {
     background-color: #5b43d6;
     color: #ecf0f3;
+  }
+
+  @media (max-width: 1024px) {
+    &.red {
+      background-color: #f00;
+      color: #ecf0f3;
+    }
   }
 
   &.red:hover {
@@ -110,9 +170,12 @@ export const BtnConfirm = styled.button`
   }
 
   @media (min-width: 1024px) {
+    font-weight: 500;
     cursor: pointer;
+    width: auto;
   }
 `;
+
 export const BtnClose = styled.button`
   display: flex;
   align-items: center;

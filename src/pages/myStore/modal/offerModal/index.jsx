@@ -7,7 +7,6 @@ import {
   ModalWhite,
 } from '../../../../CommomStyles';
 import { api_path } from '../../../../constants/api_path';
-import { ImgProduct } from '../../styles';
 // import { offerZod } from '../../useMyStore';
 import * as C from './styles';
 
@@ -41,13 +40,13 @@ const OfferModal = ({ visible, closeModal, product, setOffer }) => {
           </C.BtnClose>
           <C.Title>Promoção</C.Title>
         </C.Box>
-        <C.Box>
-          <ImgProduct>
+        <C.InfoProduct>
+          <C.ImgProduct>
             <img
               src={`${api_path}/image/product/${product?.images[0]}`}
               alt=''
             />
-          </ImgProduct>
+          </C.ImgProduct>
           <C.Box className='column'>
             <C.NameProduct>{product?.name}</C.NameProduct>
             <C.Price>
@@ -73,7 +72,7 @@ const OfferModal = ({ visible, closeModal, product, setOffer }) => {
               </C.Price>
             )}
           </C.Box>
-        </C.Box>
+        </C.InfoProduct>
         <C.Box className='column full'>
           {newPrice > 0 && (
             <C.Price>
@@ -92,45 +91,49 @@ const OfferModal = ({ visible, closeModal, product, setOffer }) => {
             closeModal();
           }}
         >
-          <FormInput className='flex'>
-            <label htmlFor='price-original'>preço atual</label>
-            <input
-              disabled
-              name='price-original'
-              id='price-original'
-              type='number'
-              placeholder='preço atual'
-              value={commonPrice}
-              min={0}
-              onChange={e => setCommonPrice(e.target.value)}
-            />
-            <p></p>
-          </FormInput>
-          <FormInput className='flex'>
-            <label htmlFor='price-new'>valor da oferta</label>
-            <input
-              name='price-new'
-              id='price-new'
-              type='number'
-              placeholder='valor da oferta'
-              min={0}
-              max={commonPrice + 0.1}
-              step={0.01}
-              value={newPrice}
-              onChange={e => handleChangeNewPrice(parseFloat(e.target.value))}
-            />
-            <p>{errors}</p>
-          </FormInput>
-          <C.BtnConfirm
-            type='button'
-            className='red'
-            onClick={() => {
-              setOffer({ id_product: product.id, new_price: null });
-            }}
-          >
-            Remover Oferta
-          </C.BtnConfirm>
-          <C.BtnConfirm type='submit'>Confirmar</C.BtnConfirm>
+          <C.Box>
+            <FormInput className='flex'>
+              <label htmlFor='price-original'>preço atual</label>
+              <input
+                disabled
+                name='price-original'
+                id='price-original'
+                type='number'
+                placeholder='preço atual'
+                value={commonPrice}
+                min={0}
+                onChange={e => setCommonPrice(e.target.value)}
+              />
+              <p></p>
+            </FormInput>
+            <FormInput className='flex'>
+              <label htmlFor='price-new'>valor da oferta</label>
+              <input
+                name='price-new'
+                id='price-new'
+                type='number'
+                placeholder='valor da oferta'
+                min={0}
+                max={commonPrice + 0.1}
+                step={0.01}
+                value={newPrice}
+                onChange={e => handleChangeNewPrice(parseFloat(e.target.value))}
+              />
+              <p>{errors}</p>
+            </FormInput>
+          </C.Box>
+          <C.Box className='between'>
+            <C.BtnConfirm
+              type='button'
+              className='red'
+              onClick={() => {
+                setOffer({ id_product: product.id, new_price: null });
+              }}
+            >
+              Remover Oferta
+            </C.BtnConfirm>
+            <C.BtnConfirm type='submit'>Confirmar</C.BtnConfirm>
+          </C.Box>
         </C.Form>
       </ModalWhite>
     </ContainerModal>

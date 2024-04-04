@@ -4,11 +4,10 @@ export const Main = styled.main`
   max-width: 100vw;
   width: calc() (100vw - 5%);
   padding: 24px 5%;
+  background-color: #ecf0f3;
+  box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
 
   @media (min-width: 1024px) {
-    background-color: #ecf0f3;
-    box-shadow: 10px 10px 20px 0px #d1d9e6 inset,
-      -10px -10px 20px 0px #fff inset;
     width: calc(100% - 96px);
     min-height: calc(100vh - 270px);
     padding: 36px 48px;
@@ -37,6 +36,7 @@ export const Title = styled.h1`
 
 export const ProductArea = styled.section`
   background-color: #ecf0f3;
+  box-shadow: 15px 15px 29px 0px #d1d9e6, -15px -15px 29px 0px #fff;
   width: calc(100% - 32px);
   padding: 18px 16px;
   margin: 12px 0 0 0;
@@ -46,11 +46,15 @@ export const ProductArea = styled.section`
   @media (min-width: 1024px) {
     row-gap: 12px;
     padding: 18px 24px;
-    box-shadow: 15px 15px 29px 0px #d1d9e6, -15px -15px 29px 0px #fff;
     margin: 36px auto;
     display: flex;
     flex-direction: column;
-    max-width: 1360px;
+    max-width: 1440px;
+    width: fit-content;
+  }
+
+  @media (min-width: 1500px) {
+    max-width: 1460px;
   }
 `;
 
@@ -101,6 +105,10 @@ export const Box = styled.div`
   @media (min-width: 1024px) {
     align-items: center;
     width: auto;
+    column-gap: 12px;
+  }
+
+  @media (min-width: 1500px) {
     column-gap: 24px;
   }
 `;
@@ -119,6 +127,14 @@ export const ImgProduct = styled.div`
   }
 
   @media (min-width: 1024px) {
+    width: 80px;
+    height: 80px;
+
+    img {
+      width: 80%;
+    }
+  }
+  @media (min-width: 1440px) {
     width: 100px;
     height: 100px;
 
@@ -133,9 +149,19 @@ export const NameProduct = styled.p`
   width: 260px;
 
   @media (min-width: 1024px) {
-    font-size: 16;
     font-weight: 400;
     color: #010f20;
+    max-width: 260px;
+    width: max-content;
+  }
+
+  @media (min-width: 1440px) {
+    font-size: 16px;
+    max-width: 350px;
+    width: max-content;
+  }
+
+  @media (min-width: 1500px) {
     max-width: 400px;
     width: 400px;
   }
@@ -148,10 +174,14 @@ export const InfosProduct = styled.div`
   column-gap: 32px;
 
   @media (min-width: 1024px) {
-    column-gap: 42px;
+    column-gap: 24px;
     padding: 0 24px;
     border-left: 1px solid rgba(2, 237, 223, 0.3);
     border-right: 1px solid rgba(2, 237, 223, 0.3);
+  }
+
+  @media (min-width: 1600px) {
+    column-gap: 42px;
   }
 `;
 
@@ -192,9 +222,13 @@ export const AreaOptions = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  column-gap: 24px;
+  column-gap: 10px;
 
   @media (min-width: 1024px) {
+    column-gap: 16px;
+  }
+
+  @media (min-width: 1600px) {
     column-gap: 32px;
   }
 `;

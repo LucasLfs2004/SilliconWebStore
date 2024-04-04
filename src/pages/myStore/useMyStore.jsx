@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import {
   deleteProduct,
   getSellerData,
@@ -8,9 +9,12 @@ import {
   postDescriptionProduct,
   setOfferProduct as setOfferProductRequest,
 } from '../../services/Requests';
+import { initializeUser } from '../../store/actions/userActions';
 
 const UseMyStore = () => {
   const user = useSelector(state => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [productActive, setProductActive] = useState(undefined);
   const [detailModal, setDetailModal] = useState(false);
@@ -43,6 +47,16 @@ const UseMyStore = () => {
     queryFn: async () => {
       if (user.access_token) {
         const response = await getSellerData(user.access_token);
+        if (response?.status && response.status === 401) {
+          dispatch(initializeUser());
+          localStorage.removeItem('user');
+          navigate('/signin', {
+            state: {
+              message: 'Sua sessão expirou, realize o login novamente',
+            },
+          });
+        }
+
         return response;
       }
     },

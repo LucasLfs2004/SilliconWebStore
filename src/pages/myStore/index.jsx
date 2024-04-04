@@ -37,11 +37,11 @@ const MyStore = () => {
   return (
     <Container>
       <HeaderPage
-        // img_path={'/assets/icons/carrinho-gradient.svg'}
-        page_title={'Minha loja'}
+        page_title={
+          sellerData?.store_name ? sellerData.store_name : 'Minha loja'
+        }
       />
       <C.Main>
-        <C.Title>{sellerData?.store_name}</C.Title>
         <C.ProductArea>
           <C.HeaderBox>
             <C.Title className='font-24'>Meus produtos</C.Title>
@@ -209,6 +209,7 @@ const MyStore = () => {
         product={productActive}
         visible={editImagesModal}
         closeModal={() => setEditImagesModal(false)}
+        refetch={refetch}
       />
       <Footer />
     </Container>

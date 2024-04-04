@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import { ContainerModal, ModalWhite } from '../../../CommomStyles';
 import * as C from './styles';
 
 export const ModalImage = ({
@@ -43,9 +44,22 @@ export const ModalImage = ({
     setSelectedFiles(arrayFile);
   };
 
+  const removeImage = position => {
+    setPreviewImages(
+      previewImages.filter(element => element !== previewImages[position]),
+    );
+    setSelectedFiles(
+      selectedFiles.filter(element => element !== selectedFiles[position]),
+    );
+  };
+
   return (
-    <C.container visible={visible ? 'flex' : 'none'}>
-      <C.Modal>
+    <ContainerModal visible={visible ? 'flex' : 'none'} pt={'48px'}>
+      <ModalWhite
+        width={'fit-content'}
+        height={'fit-content'}
+        padding={'24px 48px'}
+      >
         <C.Title>Editar imagens</C.Title>
 
         <C.Carousel>
@@ -60,6 +74,9 @@ export const ModalImage = ({
                   >
                     <img src='/assets/icons/arrowLeftIcon.svg' alt='' />
                   </C.BtnArrow>
+                  <C.BtnDelete onClick={() => removeImage(index)}>
+                    <img src='/assets/icons/trash.svg' alt='' />
+                  </C.BtnDelete>
                   <C.BtnArrow
                     onClick={() => changeOrder(index, 1)}
                     disabled={index === previewImages.length - 1 ? true : false}
@@ -86,8 +103,8 @@ export const ModalImage = ({
             <p>Confirmar</p>
           </C.BtnModal>
         </C.Box>
-      </C.Modal>
-    </C.container>
+      </ModalWhite>
+    </ContainerModal>
   );
 };
 

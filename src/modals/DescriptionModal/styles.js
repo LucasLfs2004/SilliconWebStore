@@ -11,7 +11,12 @@ export const Content = styled.section`
 
 export const Title = styled.h1`
   color: #5b43d6;
-  line-height: 48px;
+  font-size: 16px;
+
+  @media (min-width: 1024px) {
+    font-size: 32px;
+    line-height: 48px;
+  }
 `;
 
 export const EditorArea = styled.div`
@@ -61,20 +66,34 @@ export const EditorCard = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  /* height: 460px; */
   height: 400px;
 
   .ql-container {
-    height: 360px;
+    height: 330px;
+  }
+
+  @media (min-width: 1024px) {
+    .ql-container {
+      height: 360px;
+    }
   }
 `;
 
 export const InfoProduct = styled.div`
   display: flex;
-  flex-direction: row;
-  width: 450px;
-  column-gap: 32px;
-  margin-bottom: 16px;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 12px 0 12px 0;
+  row-gap: 8px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    column-gap: 32px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
 `;
 
 export const ImageProduct = styled.div`

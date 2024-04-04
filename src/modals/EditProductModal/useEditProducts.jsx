@@ -97,7 +97,7 @@ const useEditProducts = (product, refetch, closeModal) => {
   };
 
   useEffect(() => {
-    console.log('product for edit: ', product);
+    // console.log('product for edit: ', product);
     handleSetInputs();
   }, [product]);
 

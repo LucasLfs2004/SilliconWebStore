@@ -69,7 +69,7 @@ export const Carousel = styled.section`
 
 export const ItemDiv = styled.div`
   margin: 0;
-  max-width: 400px;
+  max-width: 200px;
   padding: 12px;
   /* display: flex !important; */
   flex-direction: column;
@@ -93,8 +93,21 @@ export const ItemDiv = styled.div`
 
 export const BtnArrow = styled.button`
   border: none;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
+
+  img {
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    cursor: pointer;
+  }
+`;
+export const BtnDelete = styled.button`
+  border: none;
+  width: 28px;
+  height: 24px;
 
   img {
     width: 100%;
@@ -130,4 +143,8 @@ export const BtnModal = styled.button`
   font-size: 14px;
   color: #5b43d6;
   padding: 4px 8px;
+
+  @media (min-width: 1024px) {
+    cursor: pointer;
+  }
 `;

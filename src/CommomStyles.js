@@ -63,7 +63,7 @@ export const FormInput = styled.div`
   width: 100%;
 
   &.flex {
-    width: auto;
+    width: 50%;
   }
 
   label {

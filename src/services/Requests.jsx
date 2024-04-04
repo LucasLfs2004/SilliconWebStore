@@ -35,10 +35,22 @@ export const effectLogin = async dataLogin => {
 
 export const uploadImages = async files => {
   try {
-    const response = await Api.post(`/upload`, files, {
+    const response = await Api.post(`/product/image`, files, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const patchImages = async files => {
+  try {
+    const response = await Api.patch(`/product/image`, files, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+    return response.data;
   } catch (error) {
     console.log(error);
     return error;
@@ -195,7 +207,7 @@ export const getSellerData = async token => {
     // console.log('user request', response);
     return response.data;
   } catch (error) {
-    return error;
+    return error.response;
   }
 };
 
