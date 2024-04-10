@@ -24,6 +24,14 @@ export const Box = styled.div`
   display: flex;
   width: 100%;
   column-gap: 64px;
+
+  &.width {
+    width: ${props => props.width};
+  }
+
+  &.column-gap {
+    column-gap: ${props => props.cgap};
+  }
 `;
 
 export const ComponentNeumorphism = styled.div`
@@ -365,5 +373,26 @@ export const ImageComponent = styled.div`
     max-width: 100%;
     max-height: 100%;
     /* height: 100%; */
+  }
+`;
+
+export const LogoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 8px;
+  width: 100px;
+  height: 100px;
+
+  img {
+    max-width: 100%;
+    max-height: 80%;
+  }
+
+  p {
+    color: #5b43d6;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
   }
 `;
