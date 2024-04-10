@@ -19,7 +19,7 @@ const AdminScreen = () => {
     setNameInput,
     brandEditId,
     setBrandEditId,
-
+    addCategory,
     categoryEditId,
     setCategoryEditId,
     handleFileChange,
@@ -45,29 +45,30 @@ const AdminScreen = () => {
           <C.ComponentNeumorphism>
             <C.Title>Categorias</C.Title>
             <C.ListContent>
-              {categorys?.map((item, index) => (
-                <C.RowCard key={`categorys-row-component-${index}`}>
-                  <C.NameComponent>{item.name}</C.NameComponent>
-                  <C.IdComponent>
-                    <span>ID:</span> {item.id}
-                  </C.IdComponent>
-                  <C.ActionsArea>
-                    <C.BtnAction>
-                      <img src='/assets/icons/trash.svg' alt='' />
-                    </C.BtnAction>
-                    <C.BtnAction
-                      onClick={() => {
-                        setCategoryEditId(item.id);
-                        setCategoryNameInput(item.name);
-                      }}
-                    >
-                      <img src='/assets/icons/editIconPurple.svg' alt='' />
-                    </C.BtnAction>
-                  </C.ActionsArea>
-                </C.RowCard>
-              ))}
+              {categorys &&
+                categorys.map((item, index) => (
+                  <C.RowCard key={`categorys-row-component-${index}`}>
+                    <C.NameComponent>{item.name}</C.NameComponent>
+                    <C.IdComponent>
+                      <span>ID:</span> {item.id}
+                    </C.IdComponent>
+                    <C.ActionsArea>
+                      <C.BtnAction>
+                        <img src='/assets/icons/trash.svg' alt='' />
+                      </C.BtnAction>
+                      <C.BtnAction
+                        onClick={() => {
+                          setCategoryEditId(item.id);
+                          setCategoryNameInput(item.name);
+                        }}
+                      >
+                        <img src='/assets/icons/editIconPurple.svg' alt='' />
+                      </C.BtnAction>
+                    </C.ActionsArea>
+                  </C.RowCard>
+                ))}
             </C.ListContent>
-            <C.Form>
+            <C.Form onSubmit={e => addCategory(e)}>
               <C.Title className='mini left'>
                 {categoryEditId !== undefined && categoryEditId !== null
                   ? 'Editar categoria'
@@ -104,34 +105,35 @@ const AdminScreen = () => {
           <C.ComponentNeumorphism>
             <C.Title>Marcas</C.Title>
             <C.ListContent>
-              {brands?.map((item, index) => (
-                <C.RowCard key={`brands-row-component-${index}`}>
-                  <C.ImageComponent>
-                    <img
-                      src={`${api_path}/image/brand/${item.brand_logo_black}`}
-                      alt=''
-                    />
-                  </C.ImageComponent>
-                  <C.NameComponent>{item.name}</C.NameComponent>
-                  <C.IdComponent>
-                    <span>ID: </span>
-                    {item.id}
-                  </C.IdComponent>
-                  <C.ActionsArea>
-                    <C.BtnAction>
-                      <img src='/assets/icons/trash.svg' alt='' />
-                    </C.BtnAction>
-                    <C.BtnAction
-                      onClick={() => {
-                        setProductEditId(item.id);
-                        setNameInput(item.name);
-                      }}
-                    >
-                      <img src='/assets/icons/editIconPurple.svg' alt='' />
-                    </C.BtnAction>
-                  </C.ActionsArea>
-                </C.RowCard>
-              ))}
+              {brands &&
+                brands.map((item, index) => (
+                  <C.RowCard key={`brands-row-component-${index}`}>
+                    <C.ImageComponent>
+                      <img
+                        src={`${api_path}/image/brand/${item.brand_logo_black}`}
+                        alt=''
+                      />
+                    </C.ImageComponent>
+                    <C.NameComponent>{item.name}</C.NameComponent>
+                    <C.IdComponent>
+                      <span>ID: </span>
+                      {item.id}
+                    </C.IdComponent>
+                    <C.ActionsArea>
+                      <C.BtnAction>
+                        <img src='/assets/icons/trash.svg' alt='' />
+                      </C.BtnAction>
+                      <C.BtnAction
+                        onClick={() => {
+                          setProductEditId(item.id);
+                          setNameInput(item.name);
+                        }}
+                      >
+                        <img src='/assets/icons/editIconPurple.svg' alt='' />
+                      </C.BtnAction>
+                    </C.ActionsArea>
+                  </C.RowCard>
+                ))}
             </C.ListContent>
             <C.Title className='mini left'>Nova marca</C.Title>
             <C.Form>

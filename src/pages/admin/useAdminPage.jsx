@@ -1,8 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { getBrands, getCategorys } from '../../services/Requests';
+import { useSelector } from 'react-redux';
+import { getBrands, getCategorys, postCategory } from '../../services/Requests';
 
 const useAdminPage = () => {
+  const user = useSelector(state => state.user);
+
   const [brandEditId, setBrandEditId] = useState(null);
   const [categoryEditId, setCategoryEditId] = useState(null);
   const [brandNameInput, setBrandNameInput] = useState('');
@@ -11,7 +14,7 @@ const useAdminPage = () => {
   const [logoBrand, setLogoBrand] = useState(null);
   const [blackLogoBrand, setBlackLogoBrand] = useState(null);
 
-  const { data: brands } = useQuery({
+  const { data: brands, refetch: refetchCategory } = useQuery({
     queryKey: ['brands-admin-page'],
     queryFn: async () => await getBrands(),
   });
@@ -32,7 +35,28 @@ const useAdminPage = () => {
     return { preview: newImages[0], file: newfile[0] };
   };
 
+  const addCategory = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (
+      categoryNameInput !== null &&
+      categoryNameInput !== undefined &&
+      categoryNameInput !== ''
+    ) {
+      const formData = new FormData();
+      formData.append('name_category', categoryNameInput);
+      if (iconCategory?.file) {
+        formData.append('path_img', iconCategory.file, iconCategory.file.name);
+      }
+      const response = postCategory(formData, user.access_token);
+      if (response) {
+        // refetchCategory();
+      }
+    }
+  };
+
   return {
+    addCategory,
     brands,
     categorys,
     categoryNameInput,

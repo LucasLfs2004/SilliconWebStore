@@ -153,6 +153,22 @@ export const getCategorys = async () => {
   }
 };
 
+export const postCategory = async (data, token) => {
+  try {
+    console.log(data);
+    const response = await Api.post('/category', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export const getProfile = async token => {
   try {
     const response = await Api.get('/person/me', {
