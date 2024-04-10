@@ -3,6 +3,7 @@ import { useRoutes } from 'react-router-dom';
 import AddImage from '../pages/AddImage';
 import AddProduct from '../pages/AddProduct';
 import CarouselTeste from '../pages/CarouselTeste';
+import AdminScreen from '../pages/admin';
 import Brand from '../pages/brand';
 import Carrinho from '../pages/carrinho';
 import Home from '../pages/home';
@@ -51,6 +52,7 @@ const Content = props => {
       path: '/profile/my-store',
       element: <MyStore />,
     },
+    { path: '/admin', element: <AdminScreen /> },
   ]);
 
   return <Suspense>{routes}</Suspense>;

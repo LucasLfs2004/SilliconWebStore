@@ -66,6 +66,7 @@ const Menu = () => {
             <Link>Mais vendidos</Link>
           </C.Item>
         </C.List>
+        <C.Border />
 
         {user?.isSeller && (
           <C.List>
@@ -78,6 +79,13 @@ const Menu = () => {
           <C.List>
             <C.Item>
               <Link to={'/profile/my-store'}>Minha loja</Link>
+            </C.Item>
+          </C.List>
+        )}
+        {user?.isAdmin && (
+          <C.List>
+            <C.Item>
+              <Link to={'/admin'}>Administrar Loja</Link>
             </C.Item>
           </C.List>
         )}

@@ -157,3 +157,9 @@ export const UserInfos = styled.div`
     }
   }
 `;
+
+export const Border = styled.div`
+  width: 100%;
+  height: 0;
+  border-bottom: 1px solid #5059d7;
+`;
