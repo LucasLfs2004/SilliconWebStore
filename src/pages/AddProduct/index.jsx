@@ -8,6 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import Slider from 'react-slick';
 import { Container } from '../../CommomStyles';
+import ToastComponent from '../../components/ToastComponent';
 import DescriptionModal from '../../modals/DescriptionModal';
 import ModalImage from './modalImg';
 import useAddProducts, { productZod } from './useAddProducts';
@@ -47,6 +48,7 @@ const AddProduct = () => {
   return (
     <Container>
       <Header />
+      <ToastComponent />
       <C.Body>
         <C.Section onSubmit={handleSubmit(handleCreateProduct)}>
           <div className='top'>

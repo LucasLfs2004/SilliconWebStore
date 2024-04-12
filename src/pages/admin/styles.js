@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ContentPage = styled.section`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const Title = styled.h1`
@@ -54,11 +55,11 @@ export const ComponentNeumorphism = styled.div`
     display: flex;
     flex-direction: column;
     max-width: 1440px;
-    width: fit-content;
+    /* width: fit-content; */
   }
 
   @media (min-width: 1500px) {
-    max-width: 1460px;
+    max-width: 40%;
   }
 `;
 
@@ -66,10 +67,23 @@ export const ListContent = styled.div`
   display: flex;
   flex-direction: column;
   max-height: 304px;
+  width: 100%;
   overflow-y: auto;
   /* background-color: #010f20; */
   border-radius: 8px;
   padding: 8px 12px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    padding-left: 10px; /* largura da barra de rolagem */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #010f20; /* cor de fundo da trilha de rolagem */
+    border-radius: 5px; /* arredondamento das bordas do botão de rolagem */
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #ecf0f3; /* cor do botão de rolagem */
+  }
 `;
 
 export const RowCard = styled.div`
@@ -78,6 +92,10 @@ export const RowCard = styled.div`
   padding: 6px 6px;
   border-bottom: 1px solid #5b43d6;
   column-gap: 24px;
+
+  @media (min-width: 1440px) {
+    justify-content: space-between;
+  }
 `;
 
 export const NameComponent = styled.p`

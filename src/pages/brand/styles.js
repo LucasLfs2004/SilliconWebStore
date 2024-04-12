@@ -16,6 +16,10 @@ export const TopBrand = styled.div`
   align-items: center;
   justify-content: center;
 
+  img {
+    max-height: 70%;
+  }
+
   @media (min-width: 1024px) {
     width: calc(100% - 80px);
     padding: 0 40px;

@@ -146,7 +146,10 @@ export const shipZod = z
       .max(15, 'Preencha um número de telefone válido')
       .transform(field => DOMPurify.sanitize(field)),
     number: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .int()
       .positive()
       .transform(field => DOMPurify.sanitize(field)),

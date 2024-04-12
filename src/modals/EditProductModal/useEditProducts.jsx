@@ -124,36 +124,54 @@ export const productZod = z
     model: z.string().transform(field => DOMPurify.sanitize(field)),
     // brand: z.string().transform(field => DOMPurify.sanitize(field)),
     stock: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .int()
       .positive()
       .transform(field => DOMPurify.sanitize(field)),
     portions: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .int()
       .positive()
       .transform(field => DOMPurify.sanitize(field)),
     warranty: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .int()
       .positive()
       .transform(field => DOMPurify.sanitize(field)),
     price: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .positive()
       .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
         message: 'O preço deve ser um número real',
       })
       .transform(field => DOMPurify.sanitize(field)),
     feesMonthly: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .positive()
       .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
         message: 'O preço deve ser um número real',
       })
       .transform(field => DOMPurify.sanitize(field)),
     feesCredit: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .positive()
       .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
         message: 'O preço deve ser um número real',

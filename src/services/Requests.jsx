@@ -502,7 +502,6 @@ export const postDescriptionProduct = async (token, params) => {
 
 export const patchDescriptionProduct = async (token, params) => {
   try {
-    console.log('parametros de patchOfferProduct', params);
     const response = await Api.patch(`/seller/product/description`, params, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -511,6 +510,30 @@ export const patchDescriptionProduct = async (token, params) => {
     });
     return response.data;
   } catch (error) {
+    return error;
+  }
+};
+
+export const getBanners = async () => {
+  try {
+    const response = await Api.get(`/banner`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const postBanner = async (data, token) => {
+  try {
+    const response = await Api.post('/banner', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
     return error;
   }
 };

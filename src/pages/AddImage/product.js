@@ -6,7 +6,10 @@ export const AddProductZod = z
     name: z.string().transform(field => DOMPurify.sanitize(field)),
     brand: z.string().transform(field => DOMPurify.sanitize(field)),
     stock: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .int()
       .positive()
       .transform(field => DOMPurify.sanitize(field)),

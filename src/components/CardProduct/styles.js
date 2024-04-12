@@ -136,7 +136,8 @@ export const ImageProductWeb = styled.div`
     height: 200px;
 
     img {
-      height: 100%;
+      max-width: 90%;
+      max-height: 90%;
     }
   }
 `;

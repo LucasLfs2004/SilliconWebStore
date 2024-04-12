@@ -2,7 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import DOMPurify from 'dompurify';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import { z } from 'zod';
+import { toastErr, toastSuc } from '../../components/ToastComponent';
 import {
   createProduct,
   getBrands,
@@ -10,6 +12,7 @@ import {
 } from '../../services/Requests';
 
 const useAddProducts = () => {
+  const navigate = useNavigate();
   const user = useSelector(state => state.user);
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -69,10 +72,23 @@ const useAddProducts = () => {
         selectedFiles.forEach(file => {
           formData.append('files', file, file.name);
         });
-        await createProduct(user.access_token, formData);
-        alert('Produto cadastrado com sucesso');
+
+        if (
+          description !== '' &&
+          description !== null &&
+          description !== undefined
+        ) {
+          formData.append('description', description);
+        }
+        const response = await createProduct(user.access_token, formData);
+        if (response) {
+          toastSuc('Produto cadastrado!');
+          navigate('/profile/my-store');
+        } else {
+          toastErr('Erro, não foi possível criar o produto');
+        }
       } catch (error) {
-        alert('Erro, não foi possível criar o produto');
+        toastErr('Erro, não foi possível criar o produto');
       }
     } else {
       alert('Insira Imagens por favor');
@@ -118,36 +134,54 @@ export const productZod = z
     // model: z.string().transform(field => DOMPurify.sanitize(field)),
     // brand: z.string().transform(field => DOMPurify.sanitize(field)),
     stock: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .int()
       .positive()
       .transform(field => DOMPurify.sanitize(field)),
     portions: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .int()
       .positive()
       .transform(field => DOMPurify.sanitize(field)),
     warranty: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .int()
       .positive()
       .transform(field => DOMPurify.sanitize(field)),
     price: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .positive()
       .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
         message: 'O preço deve ser um número real',
       })
       .transform(field => DOMPurify.sanitize(field)),
     feesMonthly: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .positive()
       .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
         message: 'O preço deve ser um número real',
       })
       .transform(field => DOMPurify.sanitize(field)),
     feesCredit: z
-      .number()
+      .number({
+        required_error: 'Este campo é obrigatório!',
+        invalid_type_error: 'Preencha o campo corretamente.',
+      })
       .positive()
       .refine(value => !Number.isNaN(value) && Number.isFinite(value), {
         message: 'O preço deve ser um número real',

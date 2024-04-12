@@ -6,6 +6,7 @@ import {
   InputImgNeumorphism,
   InputNeumorphism,
 } from '../../components/InputNeumorphism';
+import ToastComponent from '../../components/ToastComponent';
 import { api_path } from '../../constants/api_path';
 import * as C from './styles';
 import useAdminPage from './useAdminPage';
@@ -38,6 +39,7 @@ const AdminScreen = () => {
 
   return (
     <Container>
+      <ToastComponent />
       <HeaderPage page_title={'Administração da Loja'} />
       <C.ContentPage>
         <C.Box>
@@ -200,6 +202,9 @@ const AdminScreen = () => {
             </C.Form>
           </C.ComponentNeumorphism>
         </C.Box>
+        <C.ComponentNeumorphism>
+          <C.Title>Banner</C.Title>
+        </C.ComponentNeumorphism>
       </C.ContentPage>
       <Footer />
     </Container>

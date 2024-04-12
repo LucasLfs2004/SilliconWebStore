@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { toastErr, toastSuc } from '../../components/ToastComponent';
 import {
   deleteBrand,
   deleteCategory,
@@ -57,19 +58,24 @@ const useAdminPage = () => {
       categoryEditId !== '' &&
       categoryNameInput.length > 0
     ) {
-      console.log('edit CATEGORY');
       formData.append('id', categoryEditId);
       const response = await patchCategory(formData, user.access_token);
       if (response) {
+        toastSuc('Categoria editada com sucesso');
         refetchCategory();
         cleanCategoryForm();
+      } else {
+        toastErr('Não foi possível concluir, por favor tente novamente');
       }
     } else {
       const response = await postCategory(formData, user.access_token);
       console.log(response);
       if (response) {
+        toastSuc(`Categoria ${categoryNameInput} cadastrada!`);
         refetchCategory();
         cleanCategoryForm();
+      } else {
+        toastErr('Não foi possível concluir, por favor tente novamente');
       }
     }
   };
@@ -77,6 +83,7 @@ const useAdminPage = () => {
   const brandRequest = async e => {
     e.preventDefault();
     e.stopPropagation();
+    // let response;
     const formData = new FormData();
 
     formData.append('name', brandNameInput);
@@ -92,9 +99,6 @@ const useAdminPage = () => {
       );
     }
 
-    console.log(brandEditId);
-    console.log(categoryNameInput);
-
     if (
       brandEditId !== null &&
       brandEditId !== '' &&
@@ -106,15 +110,21 @@ const useAdminPage = () => {
       const response = await patchBrand(formData, user.access_token);
       console.log(response);
       if (response) {
+        toastSuc(`Marca editada com sucesso`);
         refetchBrand();
         cleanBrandForm();
+      } else {
+        toastErr('Não foi possível concluir, por favor tente novamente');
       }
     } else {
       console.log('NEW BRAND');
       const response = await postBrand(formData, user.access_token);
       if (response) {
+        toastSuc(`Marca ${brandNameInput} cadastrada!`);
         refetchBrand();
         cleanBrandForm();
+      } else {
+        toastErr('Não foi possível concluir, por favor tente novamente');
       }
       console.log('RESPONSE OF REQUEST: ', response);
     }
@@ -124,6 +134,8 @@ const useAdminPage = () => {
     console.log('DELETANDO CATEGORIA DE ID: ', id);
     const response = await deleteCategory(id, user.access_token);
     if (response) {
+      toastSuc(`Categoria deletada!`);
+      cleanCategoryForm();
       refetchCategory();
     }
   };
@@ -132,6 +144,8 @@ const useAdminPage = () => {
     const response = await deleteBrand(id, user.access_token);
     console.log(response);
     if (response) {
+      toastSuc(`Marca deletada!`);
+      cleanBrandForm();
       refetchBrand();
     }
   };
