@@ -137,9 +137,53 @@ export const searchProducts = async name_search => {
 export const getBrands = async () => {
   try {
     const response = await Api.get(`/brand`);
-    console.log(response);
     return response.data;
   } catch (error) {
+    return error;
+  }
+};
+
+export const postBrand = async (data, token) => {
+  try {
+    const response = await Api.post('/brand', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const patchBrand = async (data, token) => {
+  try {
+    const response = await Api.patch('/brand', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const deleteBrand = async (data, token) => {
+  try {
+    const response = await Api.delete(`/brand/${data}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
     return error;
   }
 };
@@ -155,13 +199,43 @@ export const getCategorys = async () => {
 
 export const postCategory = async (data, token) => {
   try {
-    console.log(data);
     const response = await Api.post('/category', data, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
       },
     });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const patchCategory = async (data, token) => {
+  try {
+    const response = await Api.patch('/category', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const deleteCategory = async (data, token) => {
+  try {
+    const response = await Api.delete(`/category/${data}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);

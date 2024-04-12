@@ -14,28 +14,27 @@ const AdminScreen = () => {
   const {
     brands,
     categorys,
-    edit,
-    nameInput,
-    setNameInput,
     brandEditId,
     setBrandEditId,
-    addCategory,
+    categoryRequest,
     categoryEditId,
     setCategoryEditId,
     handleFileChange,
     setCategoryNameInput,
     categoryNameInput,
-    setProductEditId,
     brandNameInput,
     setBrandNameInput,
     setLogoBrand,
     logoBrand,
     setBlackLogoBrand,
-    setIconCategory,
     iconCategory,
     blackLogoBrand,
+    cleanCategoryForm,
+    cleanBrandForm,
+    brandRequest,
+    handleDeleteCategory,
+    handleDeleteBrand,
   } = useAdminPage();
-  console.log({ brands: brands, categorys: categorys });
 
   return (
     <Container>
@@ -53,7 +52,9 @@ const AdminScreen = () => {
                       <span>ID:</span> {item.id}
                     </C.IdComponent>
                     <C.ActionsArea>
-                      <C.BtnAction>
+                      <C.BtnAction
+                        onClick={() => handleDeleteCategory(item.id)}
+                      >
                         <img src='/assets/icons/trash.svg' alt='' />
                       </C.BtnAction>
                       <C.BtnAction
@@ -68,12 +69,15 @@ const AdminScreen = () => {
                   </C.RowCard>
                 ))}
             </C.ListContent>
-            <C.Form onSubmit={e => addCategory(e)}>
-              <C.Title className='mini left'>
-                {categoryEditId !== undefined && categoryEditId !== null
-                  ? 'Editar categoria'
-                  : 'Nova categoria'}
-              </C.Title>
+            <C.Form onSubmit={e => categoryRequest(e)}>
+              <C.Box>
+                <C.Title className='mini left'>
+                  {categoryEditId !== undefined && categoryEditId !== null
+                    ? `Editar categoria: ${categoryEditId}`
+                    : 'Nova categoria'}
+                </C.Title>
+                <C.BtnCancel onClick={cleanCategoryForm}>Limpar</C.BtnCancel>
+              </C.Box>
               <C.Box>
                 <C.Column>
                   <InputNeumorphism
@@ -84,13 +88,6 @@ const AdminScreen = () => {
                     valueInput={categoryNameInput}
                     setValueInput={setCategoryNameInput}
                   />
-                  <InputImgNeumorphism
-                    id={'icone-category-input-img'}
-                    multipleFiles={false}
-                    label={'Ícone:'}
-                    setValueInput={e => setIconCategory(handleFileChange(e))}
-                    placeholder={'ícone'}
-                  />
                 </C.Column>
                 {iconCategory?.preview && (
                   <C.LogoDiv>
@@ -99,7 +96,10 @@ const AdminScreen = () => {
                   </C.LogoDiv>
                 )}
               </C.Box>
-              <BtnSubmit type='submit' text={edit ? 'Editar' : 'Adicionar'} />
+              <BtnSubmit
+                type='submit'
+                text={categoryEditId ? 'Editar' : 'Adicionar'}
+              />
             </C.Form>
           </C.ComponentNeumorphism>
           <C.ComponentNeumorphism>
@@ -120,13 +120,20 @@ const AdminScreen = () => {
                       {item.id}
                     </C.IdComponent>
                     <C.ActionsArea>
-                      <C.BtnAction>
+                      <C.BtnAction onClick={() => handleDeleteBrand(item.id)}>
                         <img src='/assets/icons/trash.svg' alt='' />
                       </C.BtnAction>
                       <C.BtnAction
+                        type='button'
                         onClick={() => {
-                          setProductEditId(item.id);
-                          setNameInput(item.name);
+                          setBrandEditId(item.id);
+                          setBrandNameInput(item.name);
+                          setBlackLogoBrand({
+                            preview: `${api_path}/image/brand/${item.brand_logo_black}`,
+                          });
+                          setLogoBrand({
+                            preview: `${api_path}/image/brand/${item.brand_logo}`,
+                          });
                         }}
                       >
                         <img src='/assets/icons/editIconPurple.svg' alt='' />
@@ -135,15 +142,20 @@ const AdminScreen = () => {
                   </C.RowCard>
                 ))}
             </C.ListContent>
-            <C.Title className='mini left'>Nova marca</C.Title>
-            <C.Form>
+            <C.Box>
+              <C.Title className='mini left'>
+                {brandEditId ? `Editar marca (${brandEditId})` : 'Nova marca'}
+              </C.Title>
+              <C.BtnCancel onClick={cleanBrandForm}>Limpar</C.BtnCancel>
+            </C.Box>
+            <C.Form onSubmit={e => brandRequest(e)}>
               <C.Box>
                 <C.Column>
                   <InputNeumorphism
                     id={'brand-name'}
                     label={'Nome:'}
                     placeholder={'nome'}
-                    value={brandNameInput}
+                    valueInput={brandNameInput}
                     setValueInput={setBrandNameInput}
                     width={'76%'}
                   />
@@ -181,7 +193,10 @@ const AdminScreen = () => {
                   )}
                 </C.Box>
               </C.Box>
-              <BtnSubmit type='submit' text={'Adicionar'} />
+              <BtnSubmit
+                type='submit'
+                text={brandEditId ? 'Editar' : 'Adicionar'}
+              />
             </C.Form>
           </C.ComponentNeumorphism>
         </C.Box>
