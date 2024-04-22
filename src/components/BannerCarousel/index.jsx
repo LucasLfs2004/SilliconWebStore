@@ -1,7 +1,9 @@
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import { banners, bannersWeb } from '../../falseDatabase/banner';
+import { api_path } from '../../constants/api_path';
 import * as C from './styles';
 
 const BannerCarousel = () => {
@@ -13,24 +15,38 @@ const BannerCarousel = () => {
     slidesToScroll: 1,
   };
 
+  const banners = useSelector(state => state.banner);
+
+  const navigate = useNavigate();
+  const handleNavigate = href => {
+    navigate(href);
+  };
+
+  console.log('BANNERSSSS', banners);
+
   return (
     <C.Container>
-      <Slider className='carousel-image-product' {...settings}>
-        {banners &&
-          window.screen.width < 1024 &&
-          banners.map((image, index) => (
-            <C.ItemBanner key={index} className='carousel-item'>
-              <img src={image} alt={`Imagem ${index}`} />
-            </C.ItemBanner>
-          ))}
-        {bannersWeb &&
-          window.screen.width > 1024 &&
-          bannersWeb.map((image, index) => (
-            <C.ItemBanner key={index} className='carousel-item'>
-              <img src={image} alt={`Imagem ${index}`} />
-            </C.ItemBanner>
-          ))}
-      </Slider>
+      {banners.length > 0 && (
+        <Slider className='carousel-image-product' {...settings}>
+          {banners &&
+            banners.map((image, index) => (
+              <C.ItemBanner
+                key={index}
+                className='carousel-item'
+                onClick={() => handleNavigate(image.link)}
+              >
+                <img
+                  src={`${api_path}/image/banner/${
+                    window.screen.width > 1024
+                      ? image.img_banner_web
+                      : image.img_banner_mobile
+                  }`}
+                  alt={`Imagem ${index}`}
+                />
+              </C.ItemBanner>
+            ))}
+        </Slider>
+      )}
     </C.Container>
   );
 };

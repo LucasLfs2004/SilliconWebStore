@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { calculatePayment } from '../../store/actions/paymentActions';
 
 import { useQuery } from '@tanstack/react-query';
-import { getCart, getProducts } from '../../services/Requests';
+import { getBanners, getCart, getProducts } from '../../services/Requests';
+import { setBanner } from '../../store/actions/bannerActions';
 import { setCart } from '../../store/actions/cartActions';
 
 export const useHome = () => {
@@ -32,6 +33,15 @@ export const useHome = () => {
       }
     },
   });
+
+  const { data: banners } = useQuery({
+    queryKey: ['banners-data'],
+    queryFn: async () => await getBanners(),
+  });
+
+  useEffect(() => {
+    dispatch(setBanner(banners));
+  }, [banners]);
 
   useEffect(() => {
     console.log('cartRequest', cartRequest);
