@@ -5,10 +5,12 @@ import { toastErr, toastSuc } from '../../components/ToastComponent';
 import {
   deleteBrand,
   deleteCategory,
+  getBanners,
   getBrands,
   getCategorys,
   patchBrand,
   patchCategory,
+  postBanner,
   postBrand,
   postCategory,
 } from '../../services/Requests';
@@ -18,11 +20,15 @@ const useAdminPage = () => {
 
   const [brandEditId, setBrandEditId] = useState(null);
   const [categoryEditId, setCategoryEditId] = useState(null);
+  const [bannerEditId, setBannerEditId] = useState(null);
   const [brandNameInput, setBrandNameInput] = useState('');
   const [categoryNameInput, setCategoryNameInput] = useState('');
   const [iconCategory, setIconCategory] = useState(null);
   const [logoBrand, setLogoBrand] = useState(null);
   const [blackLogoBrand, setBlackLogoBrand] = useState(null);
+  const [bannerWeb, setBannerWeb] = useState(null);
+  const [bannerMobile, setBannerMobile] = useState(null);
+  const [linkPath, setLinkPath] = useState('');
 
   const { data: brands, refetch: refetchBrand } = useQuery({
     queryKey: ['brands-admin-page'],
@@ -31,6 +37,11 @@ const useAdminPage = () => {
   const { data: categorys, refetch: refetchCategory } = useQuery({
     queryKey: ['categorys-admin-page'],
     queryFn: async () => await getCategorys(),
+  });
+
+  const { data: banners, refetch: refetchBanners } = useQuery({
+    queryKey: ['banners-data'],
+    queryFn: async () => await getBanners(),
   });
 
   const handleFileChange = event => {
@@ -130,6 +141,50 @@ const useAdminPage = () => {
     }
   };
 
+  const bannerRequest = async e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const formData = new FormData();
+
+    if (linkPath.length > 0 && bannerMobile?.file && bannerWeb?.file) {
+      formData.append('link_redirect', linkPath);
+      formData.append('image_web', bannerWeb.file, bannerWeb.file.name);
+      formData.append(
+        'image_mobile',
+        bannerMobile.file,
+        bannerMobile.file.name,
+      );
+
+      if (
+        bannerEditId !== null &&
+        bannerEditId !== '' &&
+        bannerEditId !== undefined
+      ) {
+        formData.append('id', bannerEditId);
+        const response = await patchBrand(formData, user.access_token);
+        console.log(response);
+        if (response) {
+          toastSuc(`Marca editada com sucesso`);
+          refetchBrand();
+          cleanBrandForm();
+        } else {
+          toastErr('Não foi possível concluir, por favor tente novamente');
+        }
+      } else {
+        const response = await postBanner(formData, user.access_token);
+        if (response) {
+          toastSuc('Novo banner adicionado!');
+          refetchBanners();
+          cleanBrandForm();
+        } else {
+          toastErr('Não foi possível concluir, por favor tente novamente');
+        }
+        console.log('RESPONSE OF REQUEST: ', response);
+      }
+    }
+  };
+
   const handleDeleteCategory = async id => {
     console.log('DELETANDO CATEGORIA DE ID: ', id);
     const response = await deleteCategory(id, user.access_token);
@@ -167,9 +222,10 @@ const useAdminPage = () => {
   }, [brands]);
 
   return {
-    categoryRequest,
     brands,
     categorys,
+    banners,
+    categoryRequest,
     categoryNameInput,
     setCategoryNameInput,
     brandEditId,
@@ -190,6 +246,15 @@ const useAdminPage = () => {
     brandRequest,
     handleDeleteCategory,
     handleDeleteBrand,
+    linkPath,
+    setLinkPath,
+    bannerMobile,
+    setBannerMobile,
+    bannerWeb,
+    setBannerWeb,
+    bannerRequest,
+    bannerEditId,
+    setBannerEditId,
   };
 };
 

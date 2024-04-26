@@ -40,6 +40,7 @@ const BannerCarousel = () => {
                     window.screen.width > 1024
                       ? image.img_banner_web
                       : image.img_banner_mobile
+                    // image.img_banner_mobile
                   }`}
                   alt={`Imagem ${index}`}
                 />

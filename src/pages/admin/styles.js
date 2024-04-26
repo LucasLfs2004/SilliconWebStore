@@ -210,3 +210,110 @@ export const BtnCancel = styled.button`
     cursor: pointer;
   }
 `;
+
+export const ListBanners = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+`;
+
+export const BannerItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #c3c6ce;
+  padding: 4px 12px;
+  border-radius: 18px;
+  transition: 0.5s ease-out;
+  overflow: visible;
+  width: 45%;
+  row-gap: 8px;
+
+  &:hover {
+    border-color: #5b43d6;
+    box-shadow: 0 4px 18px 0 #5ce1e620;
+  }
+
+  .edit-icon path,
+  .trash-icon {
+    transition: all 0.3s ease-out;
+  }
+
+  &:hover .edit-icon path {
+    stroke: #5b43d6;
+  }
+
+  &:hover .trash-icon {
+    fill: #ff0000;
+  }
+
+  .id {
+    font-weight: 600;
+    color: #5b43d6;
+
+    span {
+      color: #010f20;
+    }
+  }
+
+  .img-area {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+  }
+
+  p {
+    color: #010f20;
+  }
+`;
+
+export const BannerImgArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  p {
+    font-weight: 500;
+    color: #5b43d6;
+  }
+
+  img.web {
+    max-width: 100%;
+    max-height: 100px;
+    object-fit: cover;
+  }
+
+  img.mobile {
+    /* width: 80%; */
+    max-width: 100%;
+  }
+`;
+
+export const BottomBannerArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  column-gap: 16px;
+`;
+
+export const BtnBanner = styled.button`
+  border: none;
+  height: 32px;
+  width: 44px;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (min-width: 1024px) {
+    cursor: pointer;
+  }
+
+  svg {
+    max-width: 100%;
+    max-height: 30px;
+  }
+`;
