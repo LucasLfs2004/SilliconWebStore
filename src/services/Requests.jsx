@@ -538,6 +538,36 @@ export const postBanner = async (data, token) => {
   }
 };
 
+export const patchBanner = async (data, token) => {
+  try {
+    const response = await Api.patch('/banner', data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const deleteBanner = async (id, token) => {
+  try {
+    const response = await Api.delete(`/banner/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export const getCep = async cep => {
   try {
     return (await axios.get(`https://viacep.com.br/ws/${cep}/json/`)).data;

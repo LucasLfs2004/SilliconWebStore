@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toastErr, toastSuc } from '../../components/ToastComponent';
 import {
+  deleteBanner,
   deleteBrand,
   deleteCategory,
   getBanners,
   getBrands,
   getCategorys,
+  patchBanner,
   patchBrand,
   patchCategory,
   postBanner,
@@ -141,14 +143,15 @@ const useAdminPage = () => {
     }
   };
 
-  const bannerRequest = async e => {
+  const postBannerRequest = async e => {
     e.preventDefault();
     e.stopPropagation();
 
-    const formData = new FormData();
-
     if (linkPath.length > 0 && bannerMobile?.file && bannerWeb?.file) {
+      const formData = new FormData();
+
       formData.append('link_redirect', linkPath);
+
       formData.append('image_web', bannerWeb.file, bannerWeb.file.name);
       formData.append(
         'image_mobile',
@@ -156,32 +159,47 @@ const useAdminPage = () => {
         bannerMobile.file.name,
       );
 
-      if (
-        bannerEditId !== null &&
-        bannerEditId !== '' &&
-        bannerEditId !== undefined
-      ) {
-        formData.append('id', bannerEditId);
-        const response = await patchBrand(formData, user.access_token);
-        console.log(response);
-        if (response) {
-          toastSuc(`Marca editada com sucesso`);
-          refetchBrand();
-          cleanBrandForm();
-        } else {
-          toastErr('Não foi possível concluir, por favor tente novamente');
-        }
+      const response = await postBanner(formData, user.access_token);
+      if (response) {
+        toastSuc('Novo banner adicionado!');
+        refetchBanners();
+        cleanBannerForm();
       } else {
-        const response = await postBanner(formData, user.access_token);
-        if (response) {
-          toastSuc('Novo banner adicionado!');
-          refetchBanners();
-          cleanBrandForm();
-        } else {
-          toastErr('Não foi possível concluir, por favor tente novamente');
-        }
-        console.log('RESPONSE OF REQUEST: ', response);
+        toastErr('Não foi possível concluir, por favor tente novamente');
       }
+      console.log('RESPONSE OF REQUEST: ', response);
+    } else {
+      toastErr('Preencha todos os campos do formulário');
+    }
+  };
+
+  const patchBannerRequest = async e => {
+    e.preventDefault();
+    e.stopPropagation();
+    const formData = new FormData();
+
+    formData.append('id', bannerEditId);
+
+    linkPath.length > 0 && formData.append('link_redirect', linkPath);
+
+    bannerWeb?.file &&
+      formData.append('image_web', bannerWeb.file, bannerWeb.file.name);
+
+    bannerMobile?.file &&
+      formData.append(
+        'image_mobile',
+        bannerMobile.file,
+        bannerMobile.file.name,
+      );
+
+    const response = await patchBanner(formData, user.access_token);
+    console.log(response);
+    if (response) {
+      toastSuc(`Banner editado com sucesso`);
+      refetchBanners();
+      cleanBannerForm();
+    } else {
+      toastErr('Não foi possível concluir, por favor tente novamente');
     }
   };
 
@@ -205,6 +223,16 @@ const useAdminPage = () => {
     }
   };
 
+  const handleDeleteBanner = async id => {
+    const response = await deleteBanner(id, user.access_token);
+    if (response) {
+      refetchBanners();
+      toastSuc('Banner excluído');
+    } else {
+      toastErr('Não foi possível excluir o banner');
+    }
+  };
+
   const cleanCategoryForm = () => {
     setCategoryEditId(null);
     setCategoryNameInput('');
@@ -215,6 +243,13 @@ const useAdminPage = () => {
     setBrandNameInput('');
     setBlackLogoBrand(null);
     setLogoBrand(null);
+  };
+
+  const cleanBannerForm = () => {
+    setBannerEditId(null);
+    setLinkPath('');
+    setBannerMobile(null);
+    setBannerWeb(null);
   };
 
   useEffect(() => {
@@ -252,9 +287,11 @@ const useAdminPage = () => {
     setBannerMobile,
     bannerWeb,
     setBannerWeb,
-    bannerRequest,
+    postBannerRequest,
+    patchBannerRequest,
     bannerEditId,
     setBannerEditId,
+    handleDeleteBanner,
   };
 };
 

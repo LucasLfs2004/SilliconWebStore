@@ -13,6 +13,8 @@ const BannerCarousel = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 10000,
   };
 
   const banners = useSelector(state => state.banner);

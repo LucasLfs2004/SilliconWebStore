@@ -33,6 +33,10 @@ export const Box = styled.div`
   &.column-gap {
     column-gap: ${props => props.cgap};
   }
+
+  &.flex-start {
+    justify-content: flex-start;
+  }
 `;
 
 export const ComponentNeumorphism = styled.div`
@@ -51,15 +55,22 @@ export const ComponentNeumorphism = styled.div`
   @media (min-width: 1024px) {
     row-gap: 12px;
     padding: 18px 24px;
-    margin: 36px auto;
+    margin: 36px;
     display: flex;
     flex-direction: column;
     max-width: 1440px;
+
+    &.full {
+      width: 100%;
+    }
     /* width: fit-content; */
   }
 
   @media (min-width: 1500px) {
     max-width: 40%;
+    &.full {
+      max-width: 80%;
+    }
   }
 `;
 
@@ -217,6 +228,7 @@ export const ListBanners = styled.div`
   padding: 20px;
   flex-wrap: wrap;
   width: 100%;
+  column-gap: 24px;
 `;
 
 export const BannerItem = styled.div`
@@ -227,8 +239,9 @@ export const BannerItem = styled.div`
   border-radius: 18px;
   transition: 0.5s ease-out;
   overflow: visible;
-  width: 45%;
+  width: calc(50% - 48px);
   row-gap: 8px;
+  /* max-width: 300px; */
 
   &:hover {
     border-color: #5b43d6;
