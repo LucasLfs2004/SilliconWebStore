@@ -18,10 +18,7 @@ export const useHome = () => {
     isLoading,
   } = useQuery({
     queryKey: ['products-home'],
-    queryFn: async () => {
-      const response = await getProducts();
-      return response;
-    },
+    queryFn: async () => await getProducts(),
   });
 
   const { data: cartRequest } = useQuery({

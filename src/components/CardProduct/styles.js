@@ -17,8 +17,10 @@ export const Card = styled.div`
 
   @media (min-width: 1024px) {
     padding: 5px 10px 10px 10px;
-    width: calc((100% / 6) - 42px);
-    min-width: 240px;
+    /* width: calc((100% / 6) - 42px); */
+    /* max-width: 300px; */
+    /* min-width: 266px; */
+    width: calc(${props => props.widthCard}px - 24px);
     height: auto;
     min-height: 370px;
     transition: all 0.15s ease-in-out;

@@ -5,7 +5,7 @@ import Stars from '../Stars';
 import * as C from './styles';
 import { useCardProduct } from './useCardProduct';
 
-const CardProduct = ({ item }) => {
+const CardProduct = ({ item, widthCard }) => {
   const {
     handleAddToCart,
     handleBuyProduct,
@@ -22,10 +22,10 @@ const CardProduct = ({ item }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  console.log(item);
+  // console.log(item);
 
   return (
-    <C.Card onClick={event => navigateToProduct(event)}>
+    <C.Card onClick={event => navigateToProduct(event)} widthCard={widthCard}>
       <C.Rating>
         <Stars rating={item.rating.rating_value} />
         <C.RatingValue className='dark-hover'>

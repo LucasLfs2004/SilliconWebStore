@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from 'react-redux';
-import NewCard from '../../../../components/NewCard';
 import { setPayForm } from '../../../../store/actions/paymentActions';
 import { Paragraph } from '../../styles';
 import * as C from './styles';
@@ -30,7 +29,7 @@ const PaymentCard = () => {
           </C.List>
         </C.InfoPay>
       </C.ItemPay>
-      <C.ItemPay
+      {/* <C.ItemPay
         className={payment.payForm.method === 'credit-card' && 'selected'}
       >
         <C.PayCard
@@ -44,7 +43,7 @@ const PaymentCard = () => {
           <Paragraph>Cartão de crédito</Paragraph>
         </C.PayCard>
         {payment.payForm.method === 'credit-card' && <NewCard view={true} />}
-      </C.ItemPay>
+      </C.ItemPay> */}
       <C.ItemPay className={payment.payForm.method === 'pix' && 'selected'}>
         <C.PayCard onClick={() => dispatch(setPayForm({ method: 'pix' }))}>
           {payment.payForm.method === 'pix' ? (

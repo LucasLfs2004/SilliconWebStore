@@ -4,7 +4,6 @@ import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import ProductArea from '../../components/ProductArea';
-import BtnFilter from '../../components/btnFilter';
 import BtnOrder from '../../components/btnOrder';
 import { api_path } from '../../constants/api_path';
 import { OrderProduct } from './hooks';
@@ -27,7 +26,7 @@ const Brand = () => {
   };
 
   const { brand } = useBrand();
-  console.log(brand);
+  // console.log(brand);
   // let brand = brands.find(item => item.id === id_brand);
   return (
     <Container>
@@ -37,7 +36,7 @@ const Brand = () => {
           <C.NameBrand>{brand?.brand_name}</C.NameBrand>
           <img src={`${api_path}/image/brand/${brand?.brand_logo}`} alt='' />
           <C.Buttons className='web'>
-            <BtnFilter boxShadow={false} />
+            {/* <BtnFilter boxShadow={false} /> */}
             <BtnOrder
               boxShadow={false}
               openOrder={openOrder}
@@ -48,7 +47,7 @@ const Brand = () => {
           </C.Buttons>
         </C.TopBrand>
         <C.Buttons className='mobile'>
-          <BtnFilter boxShadow={true} />
+          {/* <BtnFilter boxShadow={true} /> */}
           <BtnOrder
             boxShadow={true}
             openOrder={openOrder}

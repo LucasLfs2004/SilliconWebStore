@@ -53,18 +53,18 @@ const Menu = () => {
           </C.List>
         )}
         <C.List>
-          <C.Item>
+          {/* <C.Item>
             <Link>Lançamentos</Link>
-          </C.Item>
-          <C.Item>
+          </C.Item> */}
+          {/* <C.Item>
             <Link>Ofertas do dia</Link>
-          </C.Item>
+          </C.Item> */}
           <C.Item>
             <Link>Departamentos</Link>
           </C.Item>
-          <C.Item>
+          {/* <C.Item>
             <Link>Mais vendidos</Link>
-          </C.Item>
+          </C.Item> */}
         </C.List>
         <C.Border />
 

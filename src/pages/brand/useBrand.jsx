@@ -7,12 +7,10 @@ const useBrand = () => {
   const id_brand = parseInt(useParams().id);
   const { data: brand } = useQuery({
     queryKey: [`products-of-brand-${id_brand}`],
-    queryFn: async () => {
-      return await getProductsOfBrand(id_brand);
-    },
+    queryFn: async () => await getProductsOfBrand(id_brand),
   });
 
-  console.log('products in page brand: ', brand);
+  // console.log('products in page brand: ', brand);
   return { brand };
 };
 
