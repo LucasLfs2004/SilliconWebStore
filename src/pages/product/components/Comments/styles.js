@@ -3,8 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.section`
   display: flex;
   flex-direction: column;
-  padding: 0 48px 48px 48px;
+  padding: 16px 5% 24px 5%;
   row-gap: 24px;
+
+  @media (min-width: 1024px) {
+    padding: 0 48px 48px 48px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -23,6 +27,7 @@ export const CommentBox = styled.div`
   flex-wrap: wrap;
   width: 100%;
   justify-content: space-between;
+  row-gap: 24px;
 
   @media (min-width: 1440px) {
     justify-content: flex-start;
@@ -32,7 +37,7 @@ export const CommentBox = styled.div`
 `;
 
 export const CardComment = styled.div`
-  width: 45%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   border-radius: 6px;
@@ -40,6 +45,10 @@ export const CardComment = styled.div`
   box-shadow: 5px 5px 9px #d7dadd, -5px -5px 9px #ffffff;
   row-gap: 16px;
   padding: 8px 14px;
+
+  @media (min-width: 600px) {
+    width: 45%;
+  }
 
   @media (min-width: 1440px) {
     width: 30%;

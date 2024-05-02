@@ -4,7 +4,7 @@ export const Container = styled.div`
   margin: 0;
   width: 100%;
   background-color: #ffffff;
-  height: calc(100vw / 2.5);
+  height: calc(100vw / 3);
   z-index: 1;
 
   *:focus {
@@ -42,6 +42,12 @@ export const Container = styled.div`
   .slick-dots li.slick-active button::before {
     color: #5ce1e6;
     opacity: 1;
+  }
+
+  @media (max-width: 1024px) {
+    .carousel-item {
+      height: calc(100vw / 3);
+    }
   }
 
   @media (min-width: 1024px) {

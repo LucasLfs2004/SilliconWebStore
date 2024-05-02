@@ -3,12 +3,16 @@ import styled from 'styled-components';
 export const Content = styled.section`
   display: flex;
   flex-direction: row;
-  column-gap: 48px;
+  column-gap: 0px;
   background-color: #010f20;
-  padding: 8px 24px 36px 24px;
-  align-items: center;
+  padding: 8px 16px 36px 16px;
+  align-items: flex-end;
   border-radius: 5px;
   justify-content: center;
+
+  @media (min-width: 1440px) {
+    column-gap: 48px;
+  }
 `;
 
 export const ImagesColumn = styled.div`
@@ -21,22 +25,35 @@ export const ContentColumn = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 700px;
+  width: 470px;
+
+  @media (min-width: 1440px) {
+    width: 700px;
+  }
 `;
 
 export const ProductImage = styled.div`
   box-shadow: -8px -8px 30px 0px rgba(209, 217, 230, 0.25),
     8px 8px 30px 0px rgba(209, 217, 230, 0.25);
   background-color: #fff;
-  width: 520px;
-  height: 370px;
+  width: 450px;
+  height: 330px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
 
   img {
-    width: 350px;
+    width: 300px;
+  }
+
+  @media (min-width: 1440px) {
+    width: 520px;
+    height: 370px;
+
+    img {
+      width: 350px;
+    }
   }
 `;
 
@@ -84,6 +101,8 @@ export const Carousel = styled.section`
     opacity: 0.75;
   }
 
+
+
   .slick-dots {
     position: absolute;
     bottom: 0px;
@@ -108,6 +127,10 @@ export const Carousel = styled.section`
     color: #5ce1e6;
     opacity: 1;
   } */
+
+  .slick-dots {
+    display: none !important;
+  }
 
   .slick-slide {
     width: 70px !important;
