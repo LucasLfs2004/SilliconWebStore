@@ -30,9 +30,9 @@ export const setUser = data => {
   };
 };
 
-export const clearUser = data => {
+export const clearUser = () => {
   return {
     type: CLEAR_USER,
-    payload: data,
+    payload: null,
   };
 };

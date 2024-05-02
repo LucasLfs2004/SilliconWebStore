@@ -44,7 +44,7 @@ const userReducer = (state = initialState, action) => {
       };
     case CLEAR_USER:
       localStorage.removeItem('user');
-      return initialState;
+      return action.payload;
     default:
       return state;
   }

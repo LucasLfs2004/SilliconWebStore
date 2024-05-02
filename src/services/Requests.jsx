@@ -388,7 +388,8 @@ export const addCartItem = async (token, params) => {
     });
     return response.data;
   } catch (error) {
-    return error;
+    console.error(error);
+    return false;
   }
 };
 

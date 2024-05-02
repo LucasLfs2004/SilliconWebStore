@@ -7,9 +7,11 @@ import 'slick-carousel/slick/slick.css';
 import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import ToastComponent from '../../components/ToastComponent';
 import { getProduct } from '../../services/Requests';
 import { setProduct } from '../../store/actions/productActions';
 import Comments from './components/Comments';
+import Description from './components/Description';
 import ProductPresentation from './components/ProductPresentation';
 import PriceProduct from './components/priceProduct';
 import TopInfos from './components/topInfos';
@@ -22,10 +24,7 @@ export const Product = () => {
 
   const { data: product_data } = useQuery({
     queryKey: ['product-id', id],
-    queryFn: async () => {
-      const response = await getProduct(id);
-      return response;
-    },
+    queryFn: async () => await getProduct(id),
   });
 
   useEffect(() => {
@@ -34,6 +33,7 @@ export const Product = () => {
 
   return (
     <Container>
+      <ToastComponent />
       <Header />
       {product_data && (
         <C.ContentPage>
@@ -47,6 +47,7 @@ export const Product = () => {
             </C.BoxContent>
           </C.ProductSection>
           <Comments />
+          <Description />
         </C.ContentPage>
       )}
       <Footer />

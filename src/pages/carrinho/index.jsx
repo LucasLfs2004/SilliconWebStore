@@ -2,6 +2,7 @@ import { Container } from '../../CommomStyles';
 import EmptyCart from '../../components/EmptyCart';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
+import ToastComponent from '../../components/ToastComponent';
 import CartResume from './components/cartResume/CartResume';
 import CepCard from './components/cepCard/CepCard';
 import ProductsAndServices from './components/productsAndServices/ProductsAndServices';
@@ -10,10 +11,11 @@ import * as C from './styles';
 import { useCart } from './useCart';
 
 const Carrinho = () => {
-  const { cart, user } = useCart();
+  const { cart } = useCart();
 
   return (
     <Container>
+      <ToastComponent />
       <HeaderPage
         img_path={'/assets/icons/carrinho-gradient.svg'}
         page_title={'Carrinho'}

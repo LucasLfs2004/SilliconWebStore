@@ -18,6 +18,10 @@ export const ContentPage = styled.section`
     column-gap: 48px;
     row-gap: 48px;
   }
+
+  @media (min-width: 1440px) {
+    align-items: center;
+  }
 `;
 
 export const ProductSection = styled.section`

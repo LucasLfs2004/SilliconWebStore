@@ -5,6 +5,7 @@ export const Container = styled.section`
   flex-direction: column;
   padding: 16px 5% 24px 5%;
   row-gap: 24px;
+  max-width: 1440px;
 
   @media (min-width: 1024px) {
     padding: 0 48px 48px 48px;
@@ -19,6 +20,12 @@ export const Title = styled.h1`
   &.comment {
     font-size: 16px;
   }
+
+  @media (min-width: 1024px) {
+    &.comment {
+      font-size: 18px;
+    }
+  }
 `;
 
 export const CommentBox = styled.div`
@@ -29,7 +36,7 @@ export const CommentBox = styled.div`
   justify-content: space-between;
   row-gap: 24px;
 
-  @media (min-width: 1440px) {
+  @media (min-width: 1024px) {
     justify-content: flex-start;
     column-gap: 5%;
     /* width: 30%; */
@@ -50,9 +57,9 @@ export const CardComment = styled.div`
     width: 45%;
   }
 
-  @media (min-width: 1440px) {
+  /* @media (min-width: 1440px) {
     width: 30%;
-  }
+  } */
 `;
 
 export const TopContent = styled.div`
@@ -79,5 +86,14 @@ export const Text = styled.p`
   &.mini {
     font-size: 10px;
     font-weight: 500;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 14px;
+    font-size: 500;
+
+    &.mini {
+      font-size: 12px;
+    }
   }
 `;

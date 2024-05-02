@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { toastErr, toastSuc } from '../../../../components/ToastComponent';
 import { addCartItem } from '../../../../services/Requests';
 import { setCart } from '../../../../store/actions/cartActions';
 
@@ -46,10 +47,16 @@ export const usePriceProduct = () => {
         id_product: product.id,
         amount: 1,
       });
-      dispatch(setCart(cartReturn));
+      if (cartReturn !== false) {
+        dispatch(setCart(cartReturn));
+        toastSuc('Produto adicionado com sucesso');
+        setTimeout(() => navigate('/carrinho'), 1500);
+      } else {
+        toastErr(
+          'Não foi possível adicionar o produto, por favor tente novamente',
+        );
+      }
     }
-
-    navigate('/carrinho');
   };
 
   const handleAddToCart = async event => {
@@ -59,8 +66,16 @@ export const usePriceProduct = () => {
         id_product: product.id,
         amount: 1,
       });
-      console.log(cartReturn);
-      dispatch(setCart(cartReturn));
+      console.log('cartReturn', cartReturn);
+
+      if (cartReturn !== false) {
+        dispatch(setCart(cartReturn));
+        toastSuc('Produto adicionado ao carrinho');
+      } else {
+        toastErr(
+          'Não foi possível adicionar o produto, por favor tente novamente',
+        );
+      }
       // alert('sucesso');
     }
   };
