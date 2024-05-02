@@ -14,15 +14,15 @@ const Footer = () => {
             <img src='/assets/icons/miniArrow.svg' alt='' />
             Departamentos
           </Link>
-          <Link to={'/'}>
+          <Link to={'mailto:lucas.lfs2004@gmail.com'}>
             <img src='/assets/icons/miniArrow.svg' alt='' />
             Atendimento
           </Link>
-          <Link to={'/'}>
+          {/* <Link to={'/'}>
             <img src='/assets/icons/miniArrow.svg' alt='' />
             Compra Segura
-          </Link>
-          <Link to={'/'}>
+          </Link> */}
+          <Link to={'/faq'}>
             <img src='/assets/icons/miniArrow.svg' alt='' />
             FAQ
           </Link>
@@ -37,7 +37,7 @@ const Footer = () => {
       </C.Row>
       <C.Bottom>
         <p>SILLICON STORE - VAREJO DE PRODUTOS DE INFORMÁTICA LTDA</p>
-        <Link to={'/'}>TERMOS E PRIVACIDADE</Link>
+        <Link to={'/terms-privacy'}>TERMOS E PRIVACIDADE</Link>
       </C.Bottom>
     </C.Footer>
   );
