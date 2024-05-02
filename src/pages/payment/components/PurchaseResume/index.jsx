@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { calculatePayment } from '../../../../store/actions/paymentActions';
 import { TopBox } from '../../../carrinho/components/cartResume/styles';
+import usePayment from '../../usePayment';
 import * as C from './styles';
 
 export const PurchaseResume = () => {
-  const cart = useSelector(state => state.cart);
+  const { shipValue, cart } = usePayment();
   const payment = useSelector(state => state.payment);
   const [payInfos, setPayInfos] = useState({ payMethod: '', imgIcon: '' });
   const dispatch = useDispatch();
@@ -38,19 +39,20 @@ export const PurchaseResume = () => {
         return;
     }
   }, [payment]);
+
   return (
     <C.Resume>
       <TopBox>
         <C.Title className='blue no-padding'>Resumo</C.Title>
         <C.ResumeList>
           {cart &&
-            cart?.cart?.map((item, index) => (
+            cart?.items?.map((item, index) => (
               <C.RowP key={index}>
                 <C.Paragraph>
-                  {item.amount} x {item.product.name}
+                  {item?.amount} x {item?.name}
                 </C.Paragraph>
                 <C.Paragraph>
-                  {(item.product.value.priceNow * item.amount).toLocaleString(
+                  {(item?.value?.price_now * item?.amount).toLocaleString(
                     'pt-BR',
                     {
                       style: 'currency',
@@ -69,24 +71,44 @@ export const PurchaseResume = () => {
           )}
           <C.RowP>
             <C.Paragraph>Entrega</C.Paragraph>
-            {payment.shipValue > 0 && (
-              <C.Paragraph>{payInfos.shipValue}</C.Paragraph>
+            {shipValue && shipValue !== null && (
+              <C.Paragraph>
+                {shipValue > 0
+                  ? shipValue.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                      minimumFractionDigits: 2,
+                    })
+                  : 'Grátis'}
+              </C.Paragraph>
             )}
           </C.RowP>
-          {/* <C.RowP className='total'>
-          <C.Paragraph>Total</C.Paragraph>
-          <C.Paragraph className='right'>
-            {window.screen.width > 1024 && payment.portions.length > 0
-              ? payInfos.valueCredit
-              : payInfos.totalValue}
-            <br />
-            {window.screen.width > 1024 && payment.portions.length > 0 && (
-              <span>
-                {`Em até ${payInfos.maxOften}x de ${payInfos.discountInCash}`}
-              </span>
-            )}
-          </C.Paragraph>
-        </C.RowP> */}
+          <C.RowP className='total'>
+            <C.Paragraph>Total</C.Paragraph>
+            <C.Paragraph className='right'>
+              {window.screen.width > 1024 && cart.list_portions.length > 0
+                ? cart?.list_portions[
+                    cart.portions - 1
+                  ]?.value_credit.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                  })
+                : cart.product_total_value}
+              <br />
+              {window.screen.width > 1024 && cart.list_portions.length > 0 && (
+                <span>
+                  {`Em até ${cart.portions}x de ${cart.list_portions[
+                    cart.portions - 1
+                  ].value_portion.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                  })}`}
+                </span>
+              )}
+            </C.Paragraph>
+          </C.RowP>
         </C.ResumeList>
       </TopBox>
       <C.BottomBox>
@@ -103,7 +125,7 @@ export const PurchaseResume = () => {
             <C.Row>
               <C.Paragraph className='emphasis'>Total a pagar:</C.Paragraph>
               <C.Paragraph className='emphasis'>
-                {payment.valueTotal.toLocaleString('pt-BR', {
+                {cart.cart_total_value.toLocaleString('pt-BR', {
                   style: 'currency',
                   currency: 'BRL',
                   minimumFractionDigits: 2,

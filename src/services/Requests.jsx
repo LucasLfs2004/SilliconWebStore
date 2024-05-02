@@ -430,6 +430,20 @@ export const getShipValue = async region => {
   }
 };
 
+export const getShipInfo = async token => {
+  try {
+    const response = await Api.get('/ship-info', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const postShipInfo = async (token, params) => {
   try {
     const response = await Api.post('/ship-info', params, {

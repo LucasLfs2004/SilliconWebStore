@@ -40,7 +40,7 @@ export const Button = styled.button`
   margin: 0;
   color: #fff;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -49,9 +49,13 @@ export const Button = styled.button`
   justify-content: center;
   align-items: center;
   column-gap: 5px;
-  width: 104px;
+  width: 130px;
   border-radius: 3px;
   background-color: transparent;
   border: 1px solid #fff;
-  height: 22px;
+  height: 26px;
+
+  @media (min-width: 1024px) {
+    cursor: pointer;
+  }
 `;

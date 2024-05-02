@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setPayForm } from '../../../../store/actions/paymentActions';
 import { Paragraph } from '../../styles';
+import usePayment from '../../usePayment';
 import * as C from './styles';
 
 const PaymentCard = () => {
   const payment = useSelector(state => state.payment);
   const dispatch = useDispatch();
+
+  const { cart } = usePayment();
 
   return (
     <C.Payment>
@@ -29,7 +32,7 @@ const PaymentCard = () => {
           </C.List>
         </C.InfoPay>
       </C.ItemPay>
-      {/* <C.ItemPay
+      <C.ItemPay
         className={payment.payForm.method === 'credit-card' && 'selected'}
       >
         <C.PayCard
@@ -42,8 +45,19 @@ const PaymentCard = () => {
           )}
           <Paragraph>Cartão de crédito</Paragraph>
         </C.PayCard>
-        {payment.payForm.method === 'credit-card' && <NewCard view={true} />}
-      </C.ItemPay> */}
+        {payment.payForm.method === 'credit-card' && (
+          <C.Portion>
+            <select name='parcelas' id=''>
+              {cart.list_portions.map(portion => (
+                <option>
+                  {portion.often}x de {portion.value_portion}
+                </option>
+              ))}
+              <option value='null' disabled></option>
+            </select>
+          </C.Portion>
+        )}
+      </C.ItemPay>
       <C.ItemPay className={payment.payForm.method === 'pix' && 'selected'}>
         <C.PayCard onClick={() => dispatch(setPayForm({ method: 'pix' }))}>
           {payment.payForm.method === 'pix' ? (

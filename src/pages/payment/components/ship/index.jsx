@@ -1,7 +1,10 @@
 import { Paragraph, Subtitle } from '../../styles';
+import usePayment from '../../usePayment';
 import * as C from './styles';
 
 const ShipComponent = () => {
+  const { shipSelected } = usePayment();
+
   return (
     <C.Ship>
       <C.InfosShip>
@@ -10,10 +13,12 @@ const ShipComponent = () => {
           <Subtitle>Endereço principal</Subtitle>
         </C.Line>
         <Paragraph className='spaced'>
-          Rua Vicente do Rêgo Monteiro, 137
+          {shipSelected?.street}, {shipSelected?.ship_number}
         </Paragraph>
-        <Paragraph className='spaced'>Parque Brasil - 04843-060</Paragraph>
-        <Paragraph className='spaced'>Lucas Ferreira Silva</Paragraph>
+        <Paragraph className='spaced'>
+          {shipSelected?.district} - {shipSelected?.cep}
+        </Paragraph>
+        <Paragraph className='spaced'>{shipSelected?.receiver_name}</Paragraph>
       </C.InfosShip>
       <C.ButtonsShip>
         <C.Button>
