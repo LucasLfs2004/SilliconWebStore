@@ -32,6 +32,10 @@ export const useCart = () => {
   });
 
   useEffect(() => {
+    refetchCartRequest();
+  }, []);
+
+  useEffect(() => {
     dispatch(setCart(cartRequest));
   }, [cartRequest]);
 
