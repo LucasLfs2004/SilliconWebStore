@@ -1,9 +1,16 @@
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Paragraph, Subtitle } from '../../styles';
-import usePayment from '../../usePayment';
 import * as C from './styles';
 
-const ShipComponent = () => {
-  const { shipSelected } = usePayment();
+const ShipComponent = ({ openModalShip }) => {
+  // const { shipSelected } = usePayment();
+
+  const shipSelected = useSelector(state => state.ship.shipSelected);
+
+  useEffect(() => {
+    console.log('shipSelected mudou: ', shipSelected);
+  }, [shipSelected]);
 
   return (
     <C.Ship>
@@ -26,7 +33,7 @@ const ShipComponent = () => {
           Editar
         </C.Button>
         <C.Button>Selecionar outro</C.Button>
-        <C.Button>Novo endereço</C.Button>
+        <C.Button onClick={() => openModalShip()}>Novo endereço</C.Button>
       </C.ButtonsShip>
     </C.Ship>
   );

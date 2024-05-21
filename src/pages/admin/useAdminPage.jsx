@@ -1,36 +1,53 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import moment from 'moment';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toastErr, toastSuc } from '../../components/ToastComponent';
 import {
   deleteBanner,
   deleteBrand,
   deleteCategory,
+  deleteVoucher,
   getBanners,
   getBrands,
   getCategorys,
+  getVouchers,
   patchBanner,
   patchBrand,
   patchCategory,
   postBanner,
   postBrand,
   postCategory,
+  postVoucher,
 } from '../../services/Requests';
 
 const useAdminPage = () => {
   const user = useSelector(state => state.user);
 
-  const [brandEditId, setBrandEditId] = useState(null);
+  // Category
   const [categoryEditId, setCategoryEditId] = useState(null);
-  const [bannerEditId, setBannerEditId] = useState(null);
-  const [brandNameInput, setBrandNameInput] = useState('');
   const [categoryNameInput, setCategoryNameInput] = useState('');
   const [iconCategory, setIconCategory] = useState(null);
+
+  // Brand
+  const [brandEditId, setBrandEditId] = useState(null);
+  const [brandNameInput, setBrandNameInput] = useState('');
   const [logoBrand, setLogoBrand] = useState(null);
   const [blackLogoBrand, setBlackLogoBrand] = useState(null);
+
+  // Banner
+  const [bannerEditId, setBannerEditId] = useState(null);
   const [bannerWeb, setBannerWeb] = useState(null);
   const [bannerMobile, setBannerMobile] = useState(null);
   const [linkPath, setLinkPath] = useState('');
+
+  // Voucher
+  const [voucherCode, setVoucherCode] = useState('');
+  const [voucherDiscount, setVoucherDiscount] = useState('');
+  const [voucherExpiration, setVoucherExpiration] = useState('');
+  const [voucherMinValue, setVoucherMinValue] = useState(null);
+  const [voucherPercentualDiscount, setVoucherPercentualDiscount] =
+    useState(false);
 
   const { data: brands, refetch: refetchBrand } = useQuery({
     queryKey: ['brands-admin-page'],
@@ -44,6 +61,11 @@ const useAdminPage = () => {
   const { data: banners, refetch: refetchBanners } = useQuery({
     queryKey: ['banners-data'],
     queryFn: async () => await getBanners(),
+  });
+
+  const { data: vouchers, refetch: refetchVouchers } = useQuery({
+    queryKey: ['vouchers-data'],
+    queryFn: async () => await getVouchers(user.access_token),
   });
 
   const handleFileChange = event => {
@@ -173,6 +195,52 @@ const useAdminPage = () => {
     }
   };
 
+  const postVoucherRequest = async e => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    let discount = 0;
+    if (voucherPercentualDiscount) {
+      if (voucherDiscount <= 60) {
+        discount = parseFloat(voucherDiscount / 100);
+      } else {
+        toastErr('O desconto percentual não pode ser maior que 60%');
+        return;
+      }
+    } else {
+      discount = parseFloat(voucherDiscount);
+    }
+
+    if (voucherMinValue === null || voucherMinValue === '') {
+      toastErr('Preencha um valor mínimo para o cupom de desconto');
+      return;
+    }
+
+    if (voucherExpiration === null || voucherExpiration === '') {
+      toastErr('Preencha uma expiração válida para a data de expiração');
+      return;
+    }
+
+    const postData = {
+      code: voucherCode,
+      discount: discount,
+      expiration: parseInt(moment(voucherExpiration).unix()),
+      min_value: parseFloat(voucherMinValue),
+    };
+
+    console.log(postData);
+
+    const response = await postVoucher(postData, user?.access_token);
+    if (response === true) {
+      toastSuc('Novo cupom de desconto adicionado!');
+      refetchVouchers();
+      cleanVoucherForm();
+    } else {
+      toastErr('Não foi possível concluir, por favor tente novamente');
+    }
+    console.log('RESPONSE OF REQUEST: ', response);
+  };
+
   const patchBannerRequest = async e => {
     e.preventDefault();
     e.stopPropagation();
@@ -233,6 +301,16 @@ const useAdminPage = () => {
     }
   };
 
+  const handleDeleteVoucher = async code => {
+    const response = await deleteVoucher(code, user.access_token);
+    if (response) {
+      refetchVouchers();
+      toastSuc('Voucher excluído');
+    } else {
+      toastErr('Não foi possível excluir o voucher');
+    }
+  };
+
   const cleanCategoryForm = () => {
     setCategoryEditId(null);
     setCategoryNameInput('');
@@ -252,9 +330,11 @@ const useAdminPage = () => {
     setBannerWeb(null);
   };
 
-  useEffect(() => {
-    console.log('brands mudou: ', brands);
-  }, [brands]);
+  const cleanVoucherForm = () => {
+    setVoucherCode('');
+    setVoucherDiscount('');
+    setVoucherMinValue('');
+  };
 
   return {
     brands,
@@ -292,6 +372,19 @@ const useAdminPage = () => {
     bannerEditId,
     setBannerEditId,
     handleDeleteBanner,
+    vouchers,
+    handleDeleteVoucher,
+    voucherCode,
+    setVoucherCode,
+    voucherDiscount,
+    setVoucherDiscount,
+    voucherExpiration,
+    setVoucherExpiration,
+    postVoucherRequest,
+    voucherMinValue,
+    setVoucherMinValue,
+    voucherPercentualDiscount,
+    setVoucherPercentualDiscount,
   };
 };
 

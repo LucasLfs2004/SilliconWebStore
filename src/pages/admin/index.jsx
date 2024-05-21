@@ -9,6 +9,7 @@ import {
 import ToastComponent from '../../components/ToastComponent';
 import { api_path } from '../../constants/api_path';
 import BannerComponent from './components/bannerComponent';
+import VoucherComponent from './components/voucherComponent';
 import * as C from './styles';
 import useAdminPage from './useAdminPage';
 
@@ -208,6 +209,7 @@ const AdminScreen = () => {
         </C.Box>
         <C.Box className='flex-start'>
           <BannerComponent />
+          <VoucherComponent />
         </C.Box>
       </C.ContentPage>
       <Footer />

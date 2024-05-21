@@ -57,5 +57,5 @@ export const useCart = () => {
     }
   };
 
-  return { cart, user, removeItemCart, updateItemCart };
+  return { cart, user, removeItemCart, updateItemCart, refetchCartRequest };
 };

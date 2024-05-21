@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toastErr } from '../../../../components/ToastComponent';
 import { regionList } from '../../../../constants/list_ship';
 import { getCep, setShipInfo } from '../../../../services/Requests';
-import { setCart } from '../../../../store/actions/cartActions';
+import { useCart } from '../../useCart';
 
 export const useCepCard = () => {
   const user = useSelector(state => state.user);
   const cart = useSelector(state => state.cart);
   const [cep, setCep] = useState(cart.ship_cep ? cart.ship_cep : '');
   const dispatch = useDispatch();
+  const { refetchCartRequest } = useCart();
 
   const searchCep = async () => {
     console.log('cep', cep);
@@ -40,7 +42,11 @@ export const useCepCard = () => {
         cep: uf.cep,
         street: uf.logradouro + ' - ' + uf.bairro,
       });
-      dispatch(setCart(cartData));
+      if (cartData) {
+        refetchCartRequest();
+      } else {
+        toastErr('Não foi possível calcular o prazo, tente novamente.');
+      }
     }
   };
 

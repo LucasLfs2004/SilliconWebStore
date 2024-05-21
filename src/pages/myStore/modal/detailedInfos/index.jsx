@@ -134,15 +134,17 @@ const DetailedInfos = ({ visible, product, closeModal }) => {
           )}
         </C.Box>
 
-        <C.DescriptionCard>
-          <C.Title>Descrição do produto</C.Title>
-          <C.Box
-            className='column'
-            dangerouslySetInnerHTML={{
-              __html: product?.description?.desc_html,
-            }}
-          />
-        </C.DescriptionCard>
+        {product?.description?.desc_html && (
+          <C.DescriptionCard>
+            <C.Title>Descrição do produto</C.Title>
+            <C.Box
+              className='column'
+              dangerouslySetInnerHTML={{
+                __html: product?.description?.desc_html,
+              }}
+            />
+          </C.DescriptionCard>
+        )}
       </ModalWhite>
     </ContainerModal>
   );

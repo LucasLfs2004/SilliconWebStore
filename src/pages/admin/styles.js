@@ -124,6 +124,10 @@ export const IdComponent = styled.p`
   span {
     color: #5b43d6;
   }
+
+  &.set-width {
+    width: ${props => props.width};
+  }
 `;
 
 export const ActionsArea = styled.div`
@@ -229,6 +233,7 @@ export const ListBanners = styled.div`
   flex-wrap: wrap;
   width: 100%;
   column-gap: 24px;
+  row-gap: 24px;
 `;
 
 export const BannerItem = styled.div`

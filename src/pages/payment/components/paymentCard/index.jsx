@@ -50,7 +50,19 @@ const PaymentCard = () => {
             <select name='parcelas' id=''>
               {cart.list_portions.map(portion => (
                 <option>
-                  {portion.often}x de {portion.value_portion}
+                  {portion.often}x de{' '}
+                  {portion.value_portion.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                  })}{' '}
+                  -{' '}
+                  {portion.value_credit.toLocaleString('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                    minimumFractionDigits: 2,
+                  })}{' '}
+                  à vista
                 </option>
               ))}
               <option value='null' disabled></option>

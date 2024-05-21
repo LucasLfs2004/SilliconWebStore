@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import * as C from './styles';
 
 export const InputNeumorphism = ({
@@ -18,6 +19,112 @@ export const InputNeumorphism = ({
         placeholder={placeholder}
         value={valueInput}
         onChange={e => setValueInput(e.target.value)}
+      />
+      {error && <C.ErrorSpan>{error}</C.ErrorSpan>}
+    </C.InputContainer>
+  );
+};
+
+export const InputNumberNeumorphism = ({
+  id,
+  label,
+  placeholder,
+  valueInput,
+  setValueInput,
+  error,
+  width,
+}) => {
+  return (
+    <C.InputContainer width={width ? width : '100%'}>
+      <C.Label htmlFor={id}>{label}</C.Label>
+      <C.Input
+        type='number'
+        id={id}
+        placeholder={placeholder}
+        value={valueInput}
+        onChange={e => setValueInput(e.target.value)}
+      />
+      {error && <C.ErrorSpan>{error}</C.ErrorSpan>}
+    </C.InputContainer>
+  );
+};
+export const InputCheckboxNeumorphism = ({
+  id,
+  label,
+  placeholder,
+  valueInput,
+  setValueInput,
+  error,
+  width,
+}) => {
+  return (
+    <C.Checkbox width={width ? width : '100%'}>
+      <label className='container'>
+        {' '}
+        <p>{label}</p>
+        <input
+          id={id}
+          type='checkbox'
+          checked={valueInput}
+          onChange={() => setValueInput(!valueInput)}
+        />
+        <div className='checkmark'></div>
+      </label>
+      {error && <C.ErrorSpan>{error}</C.ErrorSpan>}
+    </C.Checkbox>
+  );
+};
+
+export const InputValueNeumorphism = ({
+  id,
+  label,
+  placeholder,
+  valueInput,
+  setValueInput,
+  error,
+  width,
+}) => {
+  return (
+    <C.InputContainer width={width ? width : '100%'}>
+      <C.Label htmlFor={id}>{label}</C.Label>
+      <C.Input
+        type='number'
+        step={0.01}
+        id={id}
+        placeholder={placeholder}
+        value={valueInput}
+        onChange={e => setValueInput(e.target.value)}
+      />
+      {error && <C.ErrorSpan>{error}</C.ErrorSpan>}
+    </C.InputContainer>
+  );
+};
+
+export const InputDateNeumorphism = ({
+  id,
+  label,
+  placeholder,
+  valueInput,
+  setValueInput,
+  error,
+  width,
+}) => {
+  console.log('dataValue', valueInput);
+  const [placeholderColor, setPlaceholderColor] = useState(true);
+
+  return (
+    <C.InputContainer width={width ? width : '100%'}>
+      <C.Label htmlFor={id}>{label}</C.Label>
+      <C.Input
+        type='datetime-local'
+        id={id}
+        placeholder={placeholder}
+        value={valueInput}
+        className='datetime-color'
+        onChange={e => {
+          setValueInput(e.target.value);
+          setPlaceholderColor(false);
+        }}
       />
       {error && <C.ErrorSpan>{error}</C.ErrorSpan>}
     </C.InputContainer>

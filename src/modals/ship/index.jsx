@@ -1,87 +1,19 @@
-import * as C from './styles';
-
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { getCep } from '../../../../services/Requests';
 // import useShip from './useShip';
-import { shipZod } from '../../useProfile';
+import * as C from './styles';
+import useShipModal from './useShipModal';
 
-const ModalShip = ({
-  submitForm,
-  visible,
-  closeModal,
-  checked,
-  setChecked,
-  editObj,
-}) => {
-  // const { shipZod } = useShip();
-
+const ModalShip = ({ visible, closeModal, editObj, setEditObj }) => {
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
-  } = useForm({
-    mode: 'all',
-    resolver: zodResolver(shipZod),
-  });
-
-  const handleCepChange = async event => {
-    const cep = event.target.value;
-
-    if (cep.replaceAll('-', '').length === 8) {
-      const dadosDoCep = await getCep(cep);
-      const dataRegister = {
-        street: dadosDoCep.logradouro,
-        state: dadosDoCep.uf,
-        city: dadosDoCep.localidade,
-        district: dadosDoCep.bairro,
-      };
-      Object.keys(dataRegister).forEach(campo => {
-        if (!register(campo)) return; // Garante que o campo está registrado no formulário
-        if (!register(campo).value) setValue(campo, dataRegister[campo]);
-      });
-    }
-  };
-
-  const setEditValues = () => {
-    console.log(editObj);
-    const dataRegister = {
-      cep:
-        editObj !== undefined && editObj?.cep && editObj.cep !== undefined
-          ? editObj.cep
-          : '',
-      city: editObj?.city,
-      complement: editObj?.complement,
-      district: editObj?.district,
-      street: editObj?.street,
-      phone_number:
-        editObj !== undefined &&
-        editObj?.phone_number &&
-        editObj?.phone_number !== undefined
-          ? editObj.phone_number
-          : '',
-      receiver: editObj?.receiver_name,
-      name: editObj?.ship_name,
-      number: editObj?.ship_number,
-      state: editObj?.state,
-    };
-
-    Object.keys(dataRegister).forEach(campo => {
-      if (!register(campo)) return; // Garante que o campo está registrado no formulário
-      if (!register(campo).value) setValue(campo, dataRegister[campo]);
-    });
-  };
-
-  useEffect(() => {
-    console.log('VALUE OF EDITOBJ: ', editObj);
-    setEditValues();
-  }, [editObj]);
-
-  useEffect(() => {
-    console.log(register.cep);
-  }, [register]);
+    errors,
+    profile,
+    submitForm,
+    checkedPrincipalShip,
+    setCheckedPrincipalShip,
+    handleCepChange,
+  } = useShipModal(closeModal, editObj, setEditObj);
 
   return (
     <C.Container>
@@ -215,8 +147,10 @@ const ModalShip = ({
                 <p>Endereço Principal</p>
                 <input
                   type='checkbox'
-                  checked={checked}
-                  onChange={() => setChecked(!checked)}
+                  checked={checkedPrincipalShip}
+                  onChange={() =>
+                    setCheckedPrincipalShip(!checkedPrincipalShip)
+                  }
                 />
                 <div className='checkmark'></div>
               </label>

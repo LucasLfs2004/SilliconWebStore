@@ -583,6 +583,49 @@ export const deleteBanner = async (id, token) => {
   }
 };
 
+export const getVouchers = async token => {
+  try {
+    const response = await Api.get(`/voucher`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+export const postVoucher = async (data, token) => {
+  try {
+    console.log({ data, token });
+    const response = await Api.post(`/voucher`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteVoucher = async (code, token) => {
+  try {
+    const response = await Api.delete(`/voucher/${code}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export const getCep = async cep => {
   try {
     return (await axios.get(`https://viacep.com.br/ws/${cep}/json/`)).data;

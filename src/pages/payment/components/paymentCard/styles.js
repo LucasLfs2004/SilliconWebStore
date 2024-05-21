@@ -90,7 +90,7 @@ export const Portion = styled.div`
   padding: 16px;
 
   select {
-    width: 164px;
+    width: 360px;
     padding: 2px 6px;
     height: 28px;
     background-color: #010f20;
@@ -99,5 +99,6 @@ export const Portion = styled.div`
     border: 1px solid #02efdf;
     border-radius: 6px;
     box-shadow: -8px -8px 12px 0px #01142a, 8px 8px 12px 0px #010b16;
+    outline: none;
   }
 `;

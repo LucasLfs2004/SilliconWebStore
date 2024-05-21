@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toastErr } from '../../../../components/ToastComponent';
 import { clearVoucher, setVoucher } from '../../../../services/Requests';
-import { setCart } from '../../../../store/actions/cartActions';
 import { ButtonPurple, InputDisplay, Title } from '../../styles';
+import { useCart } from '../../useCart';
 import * as C from './styles';
 
 export const VoucherCard = () => {
@@ -12,22 +13,25 @@ export const VoucherCard = () => {
   const [cupom, setCupom] = useState('');
   const dispatch = useDispatch();
 
+  const { refetchCartRequest } = useCart();
+
   const applyVoucher = async () => {
     if (user.access_token) {
       const cartUpdated = await setVoucher(user.access_token, {
         code: String(cupom.toUpperCase()),
       });
-      console.log(cartUpdated);
-      dispatch(setCart(cartUpdated));
-    } else {
-      console.log('User not logged');
+      if (cartUpdated === true) {
+        refetchCartRequest();
+      } else {
+        toastErr('Cupom Inválido');
+      }
     }
   };
 
   const removeVoucher = async () => {
     if (user.access_token) {
-      const cartUpdated = await clearVoucher(user.access_token);
-      dispatch(setCart(cartUpdated));
+      await clearVoucher(user.access_token);
+      refetchCartRequest();
     } else {
       console.log('User not logged');
     }
