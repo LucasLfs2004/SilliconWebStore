@@ -1,4 +1,5 @@
 import Stars from '../../../../components/Stars';
+import { parseRealCurrency } from '../../../../functions/realCurrency';
 import PortionsCard from '../portionsCard';
 import ShipCalcCard from '../shipCalc';
 import * as C from './styles';
@@ -33,17 +34,11 @@ const PriceProduct = () => {
             <img src='/assets/icons/pix.svg' alt='' />
             <C.Price>
               <p>
-                {product?.value?.price_now
-                  ? product?.value?.price_now.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                    })
-                  : product?.value?.common_price.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                    })}
+                {parseRealCurrency(
+                  product?.value?.price_now
+                    ? product?.value?.price_now
+                    : product?.value?.common_price,
+                )}
               </p>
               <span>à vista no pix</span>
             </C.Price>
@@ -60,23 +55,11 @@ const PriceProduct = () => {
         </C.RowPriceBtn>
 
         <C.PriceInCredit>
-          <p>
-            {priceInPortions.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            })}
-          </p>
+          <p>{parseRealCurrency(priceInPortions)}</p>
           <span>
             Em até {product?.value?.portions} x de{' '}
-            <strong>
-              {pricePerPortions.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              })}
-            </strong>{' '}
-            sem juros no cartão
+            <strong>{parseRealCurrency(pricePerPortions)}</strong> sem juros no
+            cartão
           </span>
           <span>Ou em 1x no cartão com até 5% OFF</span>
         </C.PriceInCredit>
@@ -88,20 +71,10 @@ const PriceProduct = () => {
             alt=''
           />
           <C.Price>
-            <p>
-              {priceInPortions.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              })}
-            </p>
+            <p>{parseRealCurrency(priceInPortions)}</p>
             <span>
               {product?.value?.portions} x de{' '}
-              {pricePerPortions.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              })}
+              {parseRealCurrency(pricePerPortions)}
             </span>
             <C.BtnPortions onClick={() => setSeePortions(!seePortions)}>
               <img src='/assets/icons/miniArrowGray.svg' alt='' />
@@ -133,17 +106,11 @@ const PriceProduct = () => {
       <C.BuyComponent>
         <C.Price className='cian'>
           <p>
-            {product?.value?.price_now
-              ? product.value.price_now.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })
-              : product?.value?.common_price.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })}
+            {parseRealCurrency(
+              product?.value?.price_now
+                ? product.value.price_now
+                : product?.value?.common_price,
+            )}
           </p>
           <span>À vista no pix</span>
         </C.Price>

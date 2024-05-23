@@ -1,6 +1,7 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import { parseRealCurrency } from '../../functions/realCurrency';
 import Stars from '../Stars';
 import * as C from './styles';
 import { useCardProduct } from './useCardProduct';
@@ -61,30 +62,13 @@ const CardProduct = ({ item, widthCard }) => {
       <C.NameProduct className='dark-hover'>{item.name}</C.NameProduct>
       <C.PriceView>
         <C.InCash>
-          <C.Price>
-            {price.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            })}
-          </C.Price>
+          <C.Price>{parseRealCurrency(price)}</C.Price>
           <p className='condition'>À vista no pix</p>
         </C.InCash>
         <C.Portions>
-          <C.Price>
-            {priceInPortions.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            })}
-          </C.Price>
+          <C.Price>{parseRealCurrency(priceInPortions)}</C.Price>
           <p className='condition'>
-            {item.value.portions}x de{' '}
-            {pricePerPortions.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            })}
+            {item.value.portions}x de {parseRealCurrency(pricePerPortions)}
           </p>
         </C.Portions>
       </C.PriceView>

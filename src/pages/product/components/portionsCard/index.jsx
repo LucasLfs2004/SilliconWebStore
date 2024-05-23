@@ -1,3 +1,4 @@
+import { parseRealCurrency } from '../../../../functions/realCurrency';
 import * as C from './styles';
 
 const PortionsCard = ({ seePortions, portions, product, setSeePortions }) => {
@@ -11,20 +12,9 @@ const PortionsCard = ({ seePortions, portions, product, setSeePortions }) => {
             return (
               <C.Portion>
                 <p>
-                  {index + 1} x de{' '}
-                  {(item / (index + 1)).toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })}
+                  {index + 1} x de {parseRealCurrency(item / (index + 1))}
                 </p>
-                <span>
-                  {item.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })}
-                </span>
+                <span>{parseRealCurrency(item)}</span>
               </C.Portion>
             );
           })}

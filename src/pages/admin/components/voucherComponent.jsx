@@ -6,6 +6,7 @@ import {
   InputNumberNeumorphism,
   InputValueNeumorphism,
 } from '../../../components/InputNeumorphism';
+import { parseRealCurrency } from '../../../functions/realCurrency';
 import * as C from '../styles';
 import useAdminPage from '../useAdminPage';
 
@@ -37,11 +38,7 @@ const VoucherComponent = () => {
               <C.IdComponent className='set-width' width={'200px'}>
                 <span>Desconto:</span>{' '}
                 {item.discount > 1
-                  ? item.discount.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                    })
+                  ? parseRealCurrency(item.discount)
                   : `${item.discount * 100}%`}
               </C.IdComponent>
               <C.ActionsArea>

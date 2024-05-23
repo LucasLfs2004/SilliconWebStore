@@ -1,5 +1,6 @@
 import InputMask from 'react-input-mask';
 import { Link } from 'react-router-dom';
+import { parseRealCurrency } from '../../../../functions/realCurrency';
 import { ButtonPurple, InputDisplay, Title } from '../../styles';
 import * as C from './styles';
 import { useCepCard } from './useCepCard';
@@ -47,11 +48,7 @@ const CepCard = () => {
               </div>
               <h1>
                 {cart.ship_value > 0
-                  ? cart.ship_value.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                    })
+                  ? parseRealCurrency(cart.ship_value)
                   : 'Grátis'}
               </h1>
             </C.Subtitle>

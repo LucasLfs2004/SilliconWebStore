@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { parseRealCurrency } from '../../../../functions/realCurrency';
 import { setPayForm } from '../../../../store/actions/paymentActions';
 import { Paragraph } from '../../styles';
 import usePayment from '../../usePayment';
@@ -69,19 +70,9 @@ const PaymentCard = () => {
             >
               {cart.list_portions.map(portion => (
                 <option key={portion.often} value={JSON.stringify(portion)}>
-                  {portion.often}x de{' '}
-                  {portion.value_portion.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })}{' '}
-                  -{' '}
-                  {portion.value_credit.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })}{' '}
-                  à vista
+                  {`${portion.often}x de ${parseRealCurrency(
+                    portion.value_portion,
+                  )} - ${parseRealCurrency(portion.value_credit)} à vista`}
                 </option>
               ))}
             </select>

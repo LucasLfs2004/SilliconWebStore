@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toastErr } from '../../../../components/ToastComponent';
+import { parseRealCurrency } from '../../../../functions/realCurrency';
 import { clearVoucher, setVoucher } from '../../../../services/Requests';
 import { ButtonPurple, InputDisplay, Title } from '../../styles';
 import { useCart } from '../../useCart';
@@ -69,11 +70,7 @@ export const VoucherCard = () => {
             <p className='green'>Cupom aplicado: {cart?.voucher}</p>
             <span>
               {cart.discount > 1
-                ? `${cart.discount.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })} de desconto`
+                ? `${parseRealCurrency(cart.discount)} de desconto`
                 : `${cart.discount * 100}% off`}
             </span>
           </>

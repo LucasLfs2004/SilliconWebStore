@@ -1,4 +1,5 @@
 import InputMask from 'react-input-mask';
+import { parseRealCurrency } from '../../../../functions/realCurrency';
 import * as C from './styles';
 import useCep from './useCep';
 
@@ -40,11 +41,7 @@ const ShipCalcCard = () => {
         {shipValue?.value?.value && shipValue?.value?.deadline && (
           <span>
             {shipValue?.value?.value > 0
-              ? shipValue.value.value.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })
+              ? parseRealCurrency(shipValue.value.value)
               : 'Grátis'}
             {' - '}
             {shipValue?.value?.deadline &&

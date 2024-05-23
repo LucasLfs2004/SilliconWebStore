@@ -8,6 +8,7 @@ import {
 } from '../../../../CommomStyles';
 import { api_path } from '../../../../constants/api_path';
 // import { offerZod } from '../../useMyStore';
+import { parseRealCurrency } from '../../../../functions/realCurrency';
 import * as C from './styles';
 
 const OfferModal = ({ visible, closeModal, product, setOffer }) => {
@@ -51,24 +52,12 @@ const OfferModal = ({ visible, closeModal, product, setOffer }) => {
             <C.NameProduct>{product?.name}</C.NameProduct>
             <C.Price>
               Preço original:{' '}
-              <span>
-                {product?.value?.common_price.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })}
-              </span>
+              <span>{parseRealCurrency(product?.value?.common_price)}</span>
             </C.Price>
             {product?.value?.price_now && (
               <C.Price>
                 Preço atual:{' '}
-                <span>
-                  {product?.value?.price_now.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })}
-                </span>
+                <span>{parseRealCurrency(product?.value?.price_now)}</span>
               </C.Price>
             )}
           </C.Box>

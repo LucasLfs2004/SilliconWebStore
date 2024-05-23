@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { parseRealCurrency } from '../../functions/realCurrency';
 import { useDebounce } from '../../hooks/useDebounce';
 import { searchProducts } from '../../services/Requests';
 import * as C from './styles';
@@ -88,17 +89,11 @@ const Search = () => {
                     <C.InfoProduct>
                       <C.Text>{item.name}</C.Text>
                       <C.Text className='mini'>
-                        {item.value.price_now
-                          ? item.value.price_now.toLocaleString('pt-BR', {
-                              style: 'currency',
-                              currency: 'BRL',
-                              minimumFractionDigits: 2,
-                            })
-                          : item.value.common_price.toLocaleString('pt-BR', {
-                              style: 'currency',
-                              currency: 'BRL',
-                              minimumFractionDigits: 2,
-                            })}
+                        {parseRealCurrency(
+                          item.value.price_now
+                            ? item.value.price_now
+                            : item.value.common_price,
+                        )}
                       </C.Text>
                     </C.InfoProduct>
                   </C.ItemProduct>

@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { parseRealCurrency } from '../../../../functions/realCurrency';
 import * as C from './styles';
 
 const CartResume = () => {
@@ -17,21 +18,9 @@ const CartResume = () => {
                 </p>
                 <p>
                   {item?.value?.price_now
-                    ? (item?.value?.price_now * item.amount).toLocaleString(
-                        'pt-BR',
-                        {
-                          style: 'currency',
-                          currency: 'BRL',
-                          minimumFractionDigits: 2,
-                        },
-                      )
-                    : (item?.value?.common_price * item.amount).toLocaleString(
-                        'pt-BR',
-                        {
-                          style: 'currency',
-                          currency: 'BRL',
-                          minimumFractionDigits: 2,
-                        },
+                    ? parseRealCurrency(item?.value?.price_now * item.amount)
+                    : parseRealCurrency(
+                        item?.value?.common_price * item.amount,
                       )}
                 </p>
               </C.RowP>
@@ -40,11 +29,7 @@ const CartResume = () => {
             <C.RowP>
               <p className='grey'>Desconto</p>
               <p className='purple'>
-                {(-cart.discount_value).toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })}
+                {parseRealCurrency(-cart.discount_value)}
               </p>
             </C.RowP>
           )}
@@ -56,31 +41,21 @@ const CartResume = () => {
             <p>Total</p>
             <p className='right'>
               {window.screen.width > 1024 && cart?.list_portions?.length > 0
-                ? cart?.list_portions[
-                    cart.list_portions.length - 1
-                  ]?.value_credit.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })
-                : cart.cart_total_value.toLocaleString('pt-BR', {
-                    style: 'currency',
-                    currency: 'BRL',
-                    minimumFractionDigits: 2,
-                  })}
+                ? parseRealCurrency(
+                    cart?.list_portions[cart.list_portions.length - 1]
+                      ?.value_credit,
+                  )
+                : parseRealCurrency(cart.cart_total_value)}
               <br />
               {window.screen.width > 1024 &&
                 cart?.list_portions?.length > 0 && (
                   <span>
                     {`Em até ${
                       cart?.list_portions[cart.list_portions.length - 1]?.often
-                    }x de ${cart.list_portions[
-                      cart.list_portions.length - 1
-                    ].value_portion.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL',
-                      minimumFractionDigits: 2,
-                    })}`}
+                    }x de ${parseRealCurrency(
+                      cart.list_portions[cart.list_portions.length - 1]
+                        .value_portion,
+                    )}`}
                   </span>
                 )}
             </p>
@@ -90,24 +65,15 @@ const CartResume = () => {
       <C.BottomBox>
         <C.InCashPrice>
           <p>Valor à vista no PIX</p>
-          <h2>
-            {cart.cart_total_value.toLocaleString('pt-BR', {
-              style: 'currency',
-              currency: 'BRL',
-              minimumFractionDigits: 2,
-            })}
-          </h2>
+          <h2>{parseRealCurrency(cart.cart_total_value)}</h2>
           <p className='mini'>
-            {cart?.list_portions?.length > 0 &&
-              (
+            {`${
+              cart?.list_portions?.length > 0 &&
+              parseRealCurrency(
                 cart.list_portions[cart.list_portions.length - 1].value_credit -
-                cart.cart_total_value
-              ).toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              })}{' '}
-            de economia
+                  cart.cart_total_value,
+              )
+            } de economia`}
           </p>
         </C.InCashPrice>
         <C.Navigation>

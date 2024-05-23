@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import { ContainerModal, ModalWhite } from '../../../../CommomStyles';
 import Stars from '../../../../components/Stars';
 import { api_path } from '../../../../constants/api_path';
+import { parseRealCurrency } from '../../../../functions/realCurrency';
 import * as C from './styles';
 
 const DetailedInfos = ({ visible, product, closeModal }) => {
@@ -93,20 +94,12 @@ const DetailedInfos = ({ visible, product, closeModal }) => {
             <C.Title className='cyan'>Valores</C.Title>
             <C.Paragraph className='bold border-bottom'>
               <span>Preço: </span>
-              {product?.value?.common_price.toLocaleString('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-                minimumFractionDigits: 2,
-              })}
+              {parseRealCurrency(product?.value?.common_price)}
             </C.Paragraph>
             {product?.value?.price_now > 0 && (
               <C.Paragraph className='bold border-bottom'>
                 <span>Preço de oferta: </span>
-                {product?.value?.common_price.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })}
+                {parseRealCurrency(product?.value?.common_price)}
               </C.Paragraph>
             )}
             <C.Paragraph className='bold border-bottom'>

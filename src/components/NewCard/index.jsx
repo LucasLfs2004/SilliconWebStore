@@ -1,4 +1,5 @@
 import { useSelector } from 'react-redux';
+import { parseRealCurrency } from '../../functions/realCurrency';
 import * as C from './styles';
 
 const NewCard = (portions = false) => {
@@ -25,12 +26,7 @@ const NewCard = (portions = false) => {
             <option value='null'>Selecionar parcela</option>
             {payment.portions.map((item, key) => (
               <option value={item.often} key={key}>
-                {item.often} x de{' '}
-                {item.valuePortion.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })}
+                {item.often} x de {parseRealCurrency(item.valuePortion)}
               </option>
             ))}
           </C.Select>

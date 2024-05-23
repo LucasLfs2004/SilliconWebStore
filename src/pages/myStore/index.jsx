@@ -2,6 +2,7 @@ import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
 import { api_path } from '../../constants/api_path';
+import { parseRealCurrency } from '../../functions/realCurrency';
 import DescriptionModal from '../../modals/DescriptionModal';
 import EditImagesProductModal from '../../modals/EditImagesProductModal';
 import EditProductModal from '../../modals/EditProductModal';
@@ -67,17 +68,11 @@ const MyStore = () => {
                   <C.Paragraph>
                     Preço <br />
                     <span>
-                      {item?.value.price_now
-                        ? item?.value.price_now.toLocaleString('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL',
-                            minimumFractionDigits: 2,
-                          })
-                        : item?.value?.common_price.toLocaleString('pt-BR', {
-                            style: 'currency',
-                            currency: 'BRL',
-                            minimumFractionDigits: 2,
-                          })}
+                      {parseRealCurrency(
+                        item?.value.price_now
+                          ? item?.value.price_now
+                          : item?.value?.common_price,
+                      )}
                     </span>
                   </C.Paragraph>
                   <C.Paragraph>
