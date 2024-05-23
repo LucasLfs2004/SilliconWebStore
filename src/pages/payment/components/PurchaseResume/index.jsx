@@ -10,6 +10,9 @@ export const PurchaseResume = () => {
   const payment = useSelector(state => state.payment);
   const [payInfos, setPayInfos] = useState({ payMethod: '', imgIcon: '' });
   const dispatch = useDispatch();
+
+  console.log('payment redux: ', payment);
+
   useEffect(() => {
     dispatch(calculatePayment(cart));
   }, [cart]);
@@ -19,18 +22,21 @@ export const PurchaseResume = () => {
     switch (payment.payForm.method) {
       case 'boleto':
         setPayInfos({
+          payForm: 'boleto',
           payMethod: 'Boleto bancário',
           imgIcon: '/assets/icons/boletoBlue.svg',
         });
         break;
       case 'credit-card':
         setPayInfos({
+          payForm: 'credit-card',
           payMethod: 'Cartão de crédito',
           imgIcon: '/assets/icons/creditCardBlue.svg',
         });
         break;
       case 'pix':
         setPayInfos({
+          payForm: 'pix',
           payMethod: 'Pix',
           imgIcon: '/assets/icons/pixBlue.svg',
         });
@@ -39,6 +45,8 @@ export const PurchaseResume = () => {
         return;
     }
   }, [payment]);
+
+  console.log('cart: ', cart);
 
   return (
     <C.Resume>
@@ -63,10 +71,17 @@ export const PurchaseResume = () => {
                 </C.Paragraph>
               </C.RowP>
             ))}
-          {payment.discountValue > 0 && (
+          {cart.discount_value > 0 && (
             <C.RowP>
               <C.Paragraph>Desconto</C.Paragraph>
-              <C.Paragraph>{payInfos.discountValue}</C.Paragraph>
+              <C.Paragraph className='red'>
+                -{' '}
+                {cart.discount_value.toLocaleString('pt-BR', {
+                  style: 'currency',
+                  currency: 'BRL',
+                  minimumFractionDigits: 2,
+                })}
+              </C.Paragraph>
             </C.RowP>
           )}
           <C.RowP>
@@ -118,20 +133,43 @@ export const PurchaseResume = () => {
             <C.Row>
               <C.Paragraph className='emphasis'>Método:</C.Paragraph>
               <C.PayMethod>
-                <C.Paragraph>{payInfos.payMethod}</C.Paragraph>
-                {payInfos.imgIcon !== '' && <C.Icon src={payInfos.imgIcon} />}
+                <C.Paragraph>{payment.method}</C.Paragraph>
+                {/* <C.Paragraph>{payInfos.payForm}</C.Paragraph> */}
+                {payment.imgIcon !== '' && <C.Icon src={payment.imgIcon} />}
               </C.PayMethod>
             </C.Row>
-            <C.Row>
+            <C.Row className='align-top'>
               <C.Paragraph className='emphasis'>Total a pagar:</C.Paragraph>
-              <C.Paragraph className='emphasis'>
-                {cart.cart_total_value.toLocaleString('pt-BR', {
-                  style: 'currency',
-                  currency: 'BRL',
-                  minimumFractionDigits: 2,
-                })}
+              <C.Paragraph className='emphasis right'>
+                {payment?.payForm?.method === 'credit-card'
+                  ? `${
+                      payment.payForm.portion.often
+                    }x de ${payment.payForm.portion.value_portion.toLocaleString(
+                      'pt-BR',
+                      {
+                        style: 'currency',
+                        currency: 'BRL',
+                        minimumFractionDigits: 2,
+                      },
+                    )}`
+                  : cart.cart_total_value.toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                      minimumFractionDigits: 2,
+                    })}
                 <br />
-                {payment.payForm === 'credit-cart' && <C.Span>Portions</C.Span>}
+                {payment?.payForm?.method === 'credit-card' && (
+                  <C.Span>
+                    {payment.payForm.portion.value_credit.toLocaleString(
+                      'pt-BR',
+                      {
+                        style: 'currency',
+                        currency: 'BRL',
+                        minimumFractionDigits: 2,
+                      },
+                    )}
+                  </C.Span>
+                )}{' '}
               </C.Paragraph>
             </C.Row>
           </C.Infos>

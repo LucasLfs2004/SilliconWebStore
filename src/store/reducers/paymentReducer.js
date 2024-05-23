@@ -3,7 +3,7 @@ import {
   CLEAR_VOUCHER,
   INITIALIZE_PAYMENT,
   SET_PAY_FORM,
-  SET_SHIP_INFOS
+  SET_SHIP_INFOS,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -88,11 +88,30 @@ const paymentReducer = (state = initialState, action) => {
         discount: 0,
       };
     case SET_PAY_FORM:
+      let method = '';
+      let img = '';
+      switch (action.payload.method) {
+        case 'boleto':
+          method = 'Boleto bancário';
+          img = '/assets/icons/boletoBlue.svg';
+          break;
+        case 'pix':
+          method = 'Pix';
+          img = '/assets/icons/pixBlue.svg';
+          break;
+        case 'credit-card':
+          method = 'Cartão de crédito';
+          img = '/assets/icons/creditCardBlue.svg';
+          break;
+      }
+
       return {
         ...state,
+        method: method,
+        imgIcon: img,
         payForm: {
           method: action.payload.method,
-          portion: action.payload.portion ? action.payload : null,
+          portion: action.payload.portion ? action.payload.portion : null,
         },
       };
     default:

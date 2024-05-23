@@ -67,6 +67,10 @@ export const Row = styled.div`
   column-gap: 10px;
   align-items: center;
 
+  &.align-top {
+    align-items: start;
+  }
+
   @media (min-width: 1024px) {
     justify-content: space-between;
   }
@@ -145,6 +149,10 @@ export const Paragraph = styled.p`
   overflow: hidden;
   max-width: 220px;
 
+  &.right {
+    text-align: right;
+  }
+
   &.spaced {
     padding-left: 34px;
   }
@@ -161,6 +169,10 @@ export const Paragraph = styled.p`
     font-size: 16px;
     font-weight: 500;
   }
+
+  &.red {
+    color: #f00;
+  }
 `;
 
 export const Infos = styled.div`
@@ -175,7 +187,7 @@ export const Infos = styled.div`
 
 export const Span = styled.span`
   color: rgba(236, 240, 243, 0.7);
-  font-size: 11px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -229,7 +241,7 @@ export const RowP = styled.div`
 
     &.total {
       border-top: 1px solid #5ce1e6;
-      margin: 14px 14px 0 14px;
+      margin: 14px 0 0 0;
       padding: 4px 8px 0 8px;
     }
 

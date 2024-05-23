@@ -36,7 +36,14 @@ const PaymentCard = () => {
         className={payment.payForm.method === 'credit-card' && 'selected'}
       >
         <C.PayCard
-          onClick={() => dispatch(setPayForm({ method: 'credit-card' }))}
+          onClick={() =>
+            dispatch(
+              setPayForm({
+                method: 'credit-card',
+                portion: cart.list_portions.length > 0 && cart.list_portions[0],
+              }),
+            )
+          }
         >
           {payment.payForm.method === 'credit-card' ? (
             <img src='/assets/icons/creditCardBlue.svg' alt='' />
@@ -47,9 +54,21 @@ const PaymentCard = () => {
         </C.PayCard>
         {payment.payForm.method === 'credit-card' && (
           <C.Portion>
-            <select name='parcelas' id=''>
+            <select
+              name='parcelas'
+              id=''
+              onChange={e => {
+                console.log(JSON.parse(e.target.value));
+                dispatch(
+                  setPayForm({
+                    method: 'credit-card',
+                    portion: JSON.parse(e.target.value),
+                  }),
+                );
+              }}
+            >
               {cart.list_portions.map(portion => (
-                <option key={portion.often}>
+                <option key={portion.often} value={JSON.stringify(portion)}>
                   {portion.often}x de{' '}
                   {portion.value_portion.toLocaleString('pt-BR', {
                     style: 'currency',
@@ -65,7 +84,6 @@ const PaymentCard = () => {
                   à vista
                 </option>
               ))}
-              <option value='null' disabled></option>
             </select>
           </C.Portion>
         )}

@@ -38,8 +38,6 @@ const useShipModal = (closeModal, editObj, setEditObj) => {
     queryFn: async () => {
       if (user.access_token) {
         const response = await getProfile(user.access_token);
-        // console.log('profile user', response);
-
         if (response?.status && response.status === 401) {
           dispatch(initializeUser());
           localStorage.removeItem('user');
@@ -49,7 +47,6 @@ const useShipModal = (closeModal, editObj, setEditObj) => {
             },
           });
         }
-
         response.birthday = moment(response.birthday)
           .locale('pt-br')
           .format('DD/MM/YYYY');
