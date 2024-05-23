@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getShipInfo } from '../../services/Requests';
+import { getCart, getShipInfo } from '../../services/Requests';
 import useCep from '../product/components/shipCalc/useCep';
 
 import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { getProfile, setPrincipalShipUser } from '../../services/Requests';
+import { setCart } from '../../store/actions/cartActions';
 import { setShipSelected } from '../../store/actions/shipActions';
 import { initializeUser } from '../../store/actions/userActions';
 
@@ -28,13 +29,23 @@ const usePayment = () => {
   const [modalViewShipVisible, setModalViewShipVisible] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
   const [principalShip, setPrincipalShip] = useState({});
-  const [shipEditObject, setShipEditObject] = useState(undefined);
+  const [shipEditObject, setShipEditObject] = useState(null);
 
   const { data: shipInfo, refetch: refetchShipInfo } = useQuery({
     queryKey: ['ship-info-payment'],
     queryFn: async () =>
       user.access_token && (await getShipInfo(user.access_token)),
   });
+
+  const { data: cartRequest, refetch: refetchCartRequest } = useQuery({
+    queryKey: ['cart-data'],
+    queryFn: async () =>
+      user.access_token && (await getCart(user.access_token)),
+  });
+
+  useEffect(() => {
+    dispatch(setCart(cartRequest));
+  }, [cartRequest]);
 
   const getShipSelected = id => {
     console.log(shipInfo);
@@ -75,7 +86,7 @@ const usePayment = () => {
   useEffect(() => {
     console.log('SHIPIDSELECTED mudou: ', shipIdSelected);
     refetchShipInfo();
-  }, [shipIdSelected]);
+  }, [shipIdSelected, modalShipVisible]);
 
   const { data: profile, refetch } = useQuery({
     queryKey: ['profile-data'],
@@ -140,6 +151,7 @@ const usePayment = () => {
     refetch,
     setShipEditObject,
     setShipIdSelected,
+    shipSelected,
   };
 };
 

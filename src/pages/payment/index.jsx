@@ -1,7 +1,10 @@
+import { useDispatch } from 'react-redux';
 import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
+import ModalSelectShip from '../../modals/SelectShip';
 import ModalShip from '../../modals/Ship';
+import { setShipSelected } from '../../store/actions/shipActions';
 import PurchaseResume from './components/PurchaseResume';
 import PaymentCard from './components/paymentCard';
 import ShipComponent from './components/ship';
@@ -10,7 +13,7 @@ import usePayment from './usePayment';
 
 const Payment = () => {
   // const payment = useSelector(state => state.payment);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const {
     setShipIdSelected,
@@ -26,11 +29,12 @@ const Payment = () => {
     principalShip,
     handlePrincipalShip,
     profile,
+    shipSelected,
     setShipEditObject,
   } = usePayment();
 
   return (
-    <Container>
+    <Container className='dark'>
       <HeaderPage
         img_path={'/assets/icons/carrinho-gradient.svg'}
         page_title={'Pagamento'}
@@ -39,7 +43,14 @@ const Payment = () => {
         <C.ContentPage>
           <C.Box className='left-side'>
             <C.Title className='only-mobile'>Endereço de entrega</C.Title>
-            <ShipComponent openModalShip={() => setModalShipVisible(true)} />
+            <ShipComponent
+              openModalShip={() => setModalShipVisible(true)}
+              openEditModalShip={() => {
+                setModalShipVisible(true);
+                setShipEditObject(shipSelected);
+              }}
+              openSelectModalShip={() => setModalViewShipVisible(true)}
+            />
             <C.Title className='only-mobile'>Forma de Pagamento</C.Title>
             <PaymentCard />
           </C.Box>
@@ -60,10 +71,23 @@ const Payment = () => {
         closeModal={value => {
           setModalShipVisible(false);
           setShipIdSelected(value);
+          setShipEditObject(null);
           refetch();
         }}
         editObj={shipEditObject}
         setEditObj={value => setShipEditObject(value)}
+      />
+      <ModalSelectShip
+        visible={modalViewShipVisible}
+        closeModal={() => {
+          setModalViewShipVisible(false);
+        }}
+        selectShip={value => {
+          dispatch(setShipSelected(value));
+          setModalViewShipVisible(false);
+          setShipIdSelected(value);
+        }}
+        profile={profile}
       />
     </Container>
   );

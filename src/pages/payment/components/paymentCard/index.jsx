@@ -49,7 +49,7 @@ const PaymentCard = () => {
           <C.Portion>
             <select name='parcelas' id=''>
               {cart.list_portions.map(portion => (
-                <option>
+                <option key={portion.often}>
                   {portion.often}x de{' '}
                   {portion.value_portion.toLocaleString('pt-BR', {
                     style: 'currency',

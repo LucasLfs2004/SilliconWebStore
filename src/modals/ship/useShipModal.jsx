@@ -65,7 +65,7 @@ const useShipModal = (closeModal, editObj, setEditObj) => {
     };
     if (user.access_token) {
       let id = null;
-      if (editObj === undefined) {
+      if (editObj === undefined || editObj === null) {
         const retorno = await postShipInfo(user.access_token, params);
         console.log('POST BEM SUCEDIDO', retorno);
         id = retorno.id;

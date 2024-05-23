@@ -596,6 +596,7 @@ export const getVouchers = async token => {
     return error;
   }
 };
+
 export const postVoucher = async (data, token) => {
   try {
     console.log({ data, token });
@@ -628,7 +629,13 @@ export const deleteVoucher = async (code, token) => {
 
 export const getCep = async cep => {
   try {
-    return (await axios.get(`https://viacep.com.br/ws/${cep}/json/`)).data;
+    if (cep !== undefined && cep !== null && cep !== '') {
+      return (
+        await axios.get(`https://viacep.com.br/ws/${cep}/json/`, {
+          headers: {},
+        })
+      ).data;
+    }
   } catch (error) {
     return error;
   }

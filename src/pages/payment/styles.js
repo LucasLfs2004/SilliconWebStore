@@ -11,7 +11,6 @@ export const ContentPage = styled.section`
     column-gap: 36px;
     justify-content: center;
     padding: 64px 0;
-    background: #ecf0f3;
   }
 `;
 
