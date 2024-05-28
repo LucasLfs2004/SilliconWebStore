@@ -6,6 +6,7 @@ export const Container = styled.section`
   padding: 16px 5% 24px 5%;
   row-gap: 24px;
   max-width: 1440px;
+  width: -webkit-fill-available;
 
   @media (min-width: 1024px) {
     padding: 0 48px 48px 48px;
@@ -16,6 +17,11 @@ export const Title = styled.h1`
   color: #5b43d6;
   font-size: 24px;
   font-weight: 600;
+
+  &.left {
+    width: 100%;
+    text-align: left;
+  }
 
   &.comment {
     font-size: 16px;

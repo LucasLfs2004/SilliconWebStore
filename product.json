@@ -1,34 +1,62 @@
 {
-  "id": "041dc6c2-2555-4bdf-88ae-c005626d1a76",
-  "name": "Placa de Vídeo RX 6600 CLD 8G ASRock AMD Radeon, 8GB, GDDR6 - 90-GA2RZZ-00UANF",
-  "brand": "AMD",
-  "model": "90-GA2RZZ-00UANF",
-  "stock": 50,
-  "value": {
-    "portions": 12,
-    "price_now": null,
-    "fees_credit": 4,
-    "common_price": 1059.99,
-    "fees_monthly": 1.5
-  },
-  "active": 1,
-  "images": [
-    "public/product/1702314904.3107789rx6600_3.jpeg",
-    "public/product/1702314904.3049338rx6600_2.jpeg",
-    "public/product/1702314904.319927rx6600_5.jpeg",
-    "public/product/1702314904.293344rx6600_1.jpeg",
-    "public/product/1702314904.3148339rx6600_4.jpeg"
+  "items": [
+    {
+      "name": "iPhone 15 Pro Apple (512GB) Titânio Natural, Tela de 6,1\", 5G e Câmera de 48MP",
+      "brand": {
+        "logo": "1701967705.244529appleLogo.svg",
+        "name": "Apple",
+        "logo_black": "1701967705.24575appleLogoBlack.svg"
+      },
+      "price": 6626.63,
+      "images": [
+        { "path": "1702917824.8963342iphone15pro_5.jpeg", "index": 4 },
+        { "path": "1702917824.8984802iphone15pro_6.jpeg", "index": 5 },
+        { "path": "1702917824.89391iphone15pro_4.jpeg", "index": 3 },
+        { "path": "1702917824.881082iphone15pro_2.jpeg", "index": 1 },
+        { "path": "1702917824.9114602iphone15pro_7.jpeg", "index": 6 },
+        { "path": "1702917824.864584iphone15pro_1.jpeg", "index": 0 },
+        { "path": "1702917824.8915389iphone15pro_3.jpeg", "index": 2 }
+      ],
+      "rating": {
+        "comments": [
+          {
+            "created_at": "2024-02-19 14:46:54.000000",
+            "id_comment": "1297754295",
+            "title_text": "Amei!",
+            "rating_value": 4.5,
+            "text_comment": "Excelente produto, atendeu todas as minhas expectativas"
+          },
+          {
+            "created_at": "2024-02-23 11:38:46.000000",
+            "id_comment": "1397754295",
+            "title_text": "Celular Excelente",
+            "rating_value": 5.0,
+            "text_comment": "O produto é de qualidade Apple, fnciona muito bem, a câmera é incrível e consigo tirar ótimas fotos com ele, a bateria poderia durar um pouco mais, mas acho que é por causa do tamanho do celular "
+          }
+        ],
+        "rating_value": 4.75,
+        "amount_rating": 2
+      },
+      "category": "Smartphone",
+      "quantity": 1,
+      "warranty": 24,
+      "id_product": "1197754295",
+      "id_order_item": "b7e6d8c1-bda9-4cb3-a954-9e39f4d25ubg"
+    }
   ],
-  "rating": {
-    "comments": [],
-    "rating_value": 0,
-    "amount_rating": 0
+  "often": 10,
+  "id_order": "b7e6d8c1-bda9-4cb3-a954-9e39f4d25efg",
+  "order_date": "2024-05-25 00:00:00.000000",
+  "total_value": 6626.63,
+  "status_order": "completed",
+  "delivery_infos": {
+    "cep": "04843-060",
+    "city": "São Paulo",
+    "state": "SP",
+    "number": 137,
+    "street": "Rua Vicente do Rêgo Monteiro",
+    "complement": "Casa"
   },
-  "category": "Placa de vídeo",
-  "featured": 1,
-  "warranty": 24,
-  "description": {
-    "desc_html": "<h1>Teste</h1>",
-    "updated_at": "2023-12-12 01:44:18.000000"
-  }
+  "payment_method": "credit-card",
+  "portions_value": 662.66
 }

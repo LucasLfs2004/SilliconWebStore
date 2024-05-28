@@ -47,7 +47,7 @@ export const Product = () => {
             </C.BoxContent>
           </C.ProductSection>
           <Comments />
-          <Description />
+          {product_data?.description?.desc_html && <Description />}
         </C.ContentPage>
       )}
       <Footer />

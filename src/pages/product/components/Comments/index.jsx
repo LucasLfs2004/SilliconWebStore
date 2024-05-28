@@ -10,7 +10,7 @@ const Comments = () => {
 
   return (
     <C.Container>
-      <C.Title>
+      <C.Title className='left'>
         Comentários (
         {product?.rating?.comments?.length
           ? product?.rating?.comments?.length
