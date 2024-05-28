@@ -10,6 +10,7 @@ import Brand from '../pages/brand';
 import Carrinho from '../pages/carrinho';
 import Home from '../pages/home';
 import MyStore from '../pages/myStore';
+import PurchaseOrders from '../pages/orders';
 import Payment from '../pages/payment';
 import Product from '../pages/product';
 import Profile from '../pages/profile';
@@ -57,6 +58,7 @@ const Content = props => {
     { path: '/admin', element: <AdminScreen /> },
     { path: '/terms-privacy', element: <PrivacyTerms /> },
     { path: '/faq', element: <Faq /> },
+    { path: '/orders', element: <PurchaseOrders /> },
   ]);
 
   return <Suspense>{routes}</Suspense>;

@@ -80,7 +80,7 @@ const Search = () => {
             <C.Text className='mini'>Resultados</C.Text>
             {dataProduct &&
               dataProduct.map((item, index) => (
-                <Link to={`product/${item.id}`} key={index}>
+                <Link to={`/product/${item.id}`} key={index}>
                   <C.ItemProduct key={index}>
                     <img
                       src={`http://0.0.0.0:8080/image/product/${item.images[0]}`}

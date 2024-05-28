@@ -17,7 +17,7 @@ const HeaderPage = ({ img_path, page_title }) => {
         </C.Logo>
       </C.DivBlock>
       <C.Page>
-        <img src={img_path} alt='' />
+        {img_path && <img src={img_path} alt='' />}
         <h1>{page_title}</h1>
       </C.Page>
       <C.DivBlock>

@@ -1,6 +1,9 @@
+import moment from 'moment';
 import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import { api_path } from '../../constants/api_path';
+import { parseRealCurrency } from '../../functions/realCurrency';
 import ModalProfile from './modal/editProfile';
 import ModalShip from './modal/ship';
 import ModalViewShip from './modal/viewShip';
@@ -64,9 +67,6 @@ const Profile = () => {
               <C.Row className='gap' gap={16}>
                 <img
                   className='common-width'
-                  // src={`/assets/icons/calendar/calendar_${
-                  //   profile?.birthday.split('/')[0]
-                  // }.svg`}
                   src='/assets/icons/commonCalendar.svg'
                   alt=''
                 />
@@ -106,6 +106,86 @@ const Profile = () => {
             </C.Row>
           </C.NeumorphismCard>
         </C.DisplayCards>
+
+        <C.DisplayCards>
+          <C.NeumorphismCard className='full'>
+            <C.Row className='between'>
+              <C.Row className='gap' gap={12}>
+                <img
+                  className='cart'
+                  src='/assets/icons/carrinho-gradient.svg'
+                  alt=''
+                />
+                <h3>
+                  {`Resumo do seu último pedido - 
+                  ${moment(profile?.last_order?.order_date).format(
+                    'DD/MM/YYYY',
+                  )}`}
+                </h3>
+              </C.Row>
+              <C.BtnDetails>DETALHES</C.BtnDetails>
+            </C.Row>
+            <C.Row style={{ marginLeft: '44px' }}>
+              <p>{profile?.last_order?.id_order}</p>
+            </C.Row>
+            <C.ContentOrder>
+              <C.Row className='between'>
+                {profile?.last_order?.payment_method === 'pix' && (
+                  <C.PayMethod className='gap' gap={16}>
+                    <img src='/assets/icons/pixBlue.svg' alt='' />
+                    <p>Pagamento via PIX</p>
+                  </C.PayMethod>
+                )}
+                {profile?.last_order?.payment_method === 'credit-card' && (
+                  <C.PayMethod className='gap' gap={16}>
+                    <img src='/assets/icons/creditCardBlue.svg' alt='' />
+                    <p>Pagamento via Cartão de Crédito</p>
+                  </C.PayMethod>
+                )}
+                {profile?.last_order?.payment_method === 'boleto' && (
+                  <C.PayMethod className='gap' gap={16}>
+                    <img src='/assets/icons/boletoBlue.svg' alt='' />
+                    <p>Pagamento via Boleto Bancário</p>
+                  </C.PayMethod>
+                )}
+                {profile?.last_order?.status_order === 'completed' && (
+                  <C.StatusOrder className='green'>
+                    Pedido concluído
+                  </C.StatusOrder>
+                )}
+                {profile?.last_order?.status_order === 'processing' && (
+                  <C.StatusOrder className='yellow'>
+                    Pedido em processo
+                  </C.StatusOrder>
+                )}
+                {profile?.last_order?.status_order === 'canceled' && (
+                  <C.StatusOrder className='red'>
+                    Pedido cancelado
+                  </C.StatusOrder>
+                )}
+              </C.Row>
+              {profile?.last_order?.items?.map((product, key) => (
+                <C.productOrderArea key={key}>
+                  <div className='img-area'>
+                    <img
+                      src={`${api_path}/image/product/${product?.images[0]}`}
+                      alt=''
+                    />
+                  </div>
+                  <C.DataOrderItem>
+                    <span>Vendido e entregue por {product?.store_name}</span>
+                    <p>{product?.name}</p>
+                    <div className='row'>
+                      <p>Quantidade: {product?.quantity}</p>
+                      <p>{parseRealCurrency(product?.price)}</p>
+                    </div>
+                  </C.DataOrderItem>
+                </C.productOrderArea>
+              ))}
+            </C.ContentOrder>
+          </C.NeumorphismCard>
+        </C.DisplayCards>
+
         <ModalViewShip
           profile={profile}
           visible={modalViewShipVisible}

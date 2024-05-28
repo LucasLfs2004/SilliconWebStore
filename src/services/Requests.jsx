@@ -627,6 +627,20 @@ export const deleteVoucher = async (code, token) => {
   }
 };
 
+export const getOrders = async token => {
+  try {
+    const response = await Api.get(`/purchase-orders`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getCep = async cep => {
   try {
     if (cep !== undefined && cep !== null && cep !== '') {

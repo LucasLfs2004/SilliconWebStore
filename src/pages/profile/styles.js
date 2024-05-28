@@ -6,6 +6,7 @@ export const ContentPage = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
+  row-gap: 48px;
 `;
 
 export const Title = styled.h3`
@@ -41,6 +42,10 @@ export const Row = styled.div`
     height: 14px;
   }
 
+  img.cart {
+    height: 25px;
+  }
+
   h3 {
     font-size: 18px;
     font-weight: 500;
@@ -65,6 +70,10 @@ export const NeumorphismCard = styled.div`
   @media (min-width: 1024px) {
     width: 50%;
     margin: 0;
+
+    &.full {
+      width: 100%;
+    }
   }
 `;
 
@@ -125,5 +134,90 @@ export const DisplayCards = styled.div`
     flex-direction: row;
     column-gap: 48px;
     padding: 0 5%;
+  }
+`;
+
+export const BtnDetails = styled.button`
+  background-color: #5ce1e6;
+  border: none;
+  height: 32px;
+  color: #010f20;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 0 12px;
+`;
+
+export const ContentOrder = styled.div`
+  border-top: 1px solid #5ce1e690;
+  border-bottom: 1px solid #5ce1e690;
+  width: -webkit-fil-available;
+  margin-top: 12px;
+  padding: 8px 2%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+`;
+
+export const PayMethod = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
+
+  p {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700;
+  }
+`;
+
+export const StatusOrder = styled.span`
+  font-size: 14px;
+  font-weight: 700;
+
+  &.green {
+    color: #0f0;
+  }
+
+  &.yellow {
+    color: #ff0;
+  }
+
+  &.red {
+    color: #f00;
+  }
+`;
+
+export const productOrderArea = styled.div`
+  display: flex;
+  flex-direction: row;
+  column-gap: 16px;
+
+  .img-area {
+    border-radius: 4px;
+    padding: 3px;
+    background-color: #fff;
+  }
+
+  img {
+    width: 100px;
+  }
+`;
+
+export const DataOrderItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+  color: #fff;
+  width: -webkit-fill-available;
+
+  span {
+    font-weight: 700;
+    font-size: 11px;
+  }
+  div.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
