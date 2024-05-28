@@ -9,8 +9,9 @@ import AdminScreen from '../pages/admin';
 import Brand from '../pages/brand';
 import Carrinho from '../pages/carrinho';
 import Home from '../pages/home';
+import PurchaseOrders from '../pages/listOrders';
 import MyStore from '../pages/myStore';
-import PurchaseOrders from '../pages/orders';
+import OrderDetailed from '../pages/order';
 import Payment from '../pages/payment';
 import Product from '../pages/product';
 import Profile from '../pages/profile';
@@ -58,7 +59,8 @@ const Content = props => {
     { path: '/admin', element: <AdminScreen /> },
     { path: '/terms-privacy', element: <PrivacyTerms /> },
     { path: '/faq', element: <Faq /> },
-    { path: '/orders', element: <PurchaseOrders /> },
+    { path: '/profile/order', element: <PurchaseOrders /> },
+    { path: '/profile/order/:id', element: <OrderDetailed /> },
   ]);
 
   return <Suspense>{routes}</Suspense>;

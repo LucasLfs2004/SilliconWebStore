@@ -50,6 +50,9 @@ const Menu = () => {
             <C.Item>
               <Link to={'/profile'}>Meu perfil</Link>
             </C.Item>
+            <C.Item>
+              <Link to={'/profile/order'}>Meus pedidos</Link>
+            </C.Item>
           </C.List>
         )}
         <C.List>
