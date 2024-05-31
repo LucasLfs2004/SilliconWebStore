@@ -35,7 +35,20 @@ const useCep = () => {
     };
   };
 
-  return { cep, setCep, shipValue, calcShip, calcShipCep };
+  const getRegion = async cepCode => {
+    const cepData = await getCep(cepCode);
+    return findRegion(cepData?.uf);
+  };
+
+  return {
+    cep,
+    setCep,
+    shipValue,
+    calcShip,
+    calcShipCep,
+    getRegion,
+    findRegion,
+  };
 };
 
 export default useCep;

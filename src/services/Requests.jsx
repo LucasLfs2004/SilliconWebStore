@@ -669,6 +669,20 @@ export const getCep = async cep => {
   }
 };
 
+export const setShipIdCart = async (data, token) => {
+  try {
+    const response = await Api.patch(`/cart-ship/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const UserExpired = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
