@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toastSuc } from '../../../../components/ToastComponent';
 import { api_path } from '../../../../constants/api_path';
 import * as C from './styles';
 
@@ -38,7 +39,18 @@ const SimpleInfos = ({ product }) => {
             <img src='/assets/icons/favoriteGray.svg' alt='' />
           )}
         </button>
-        <img className='share-icon' src='/assets/icons/shareGray.svg' alt='' />
+        <button
+          onClick={() => {
+            navigator.clipboard.writeText(window.location);
+            toastSuc('Endereço copiado!');
+          }}
+        >
+          <img
+            className='share-icon'
+            src='/assets/icons/shareGray.svg'
+            alt=''
+          />
+        </button>
       </C.BtnActions>
     </C.SimpleInfos>
   );

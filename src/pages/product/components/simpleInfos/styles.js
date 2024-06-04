@@ -26,7 +26,7 @@ export const LogoInfo = styled.div`
   justify-content: flex-end;
 
   img {
-    max-height: 18px;
+    max-height: 26px;
     max-width: 70px;
   }
 
@@ -81,6 +81,10 @@ export const BtnActions = styled.div`
 
     img.share-icon {
       width: 20px;
+    }
+
+    button {
+      cursor: pointer;
     }
   }
 `;
