@@ -86,6 +86,11 @@ export const ContentOrder = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 24px;
+
+  &.without-border-top {
+    border-top: none;
+    margin-top: 0;
+  }
 `;
 
 export const PayMethod = styled.div`
@@ -126,10 +131,14 @@ export const productOrderArea = styled.div`
     border-radius: 4px;
     padding: 3px;
     background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   img {
     width: 100px;
+    height: auto;
   }
 `;
 
@@ -139,6 +148,12 @@ export const DataOrderItem = styled.div`
   row-gap: 12px;
   color: #fff;
   width: -webkit-fill-available;
+
+  a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+  }
 
   span {
     font-weight: 700;
