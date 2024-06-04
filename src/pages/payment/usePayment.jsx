@@ -3,10 +3,12 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { toastErr, toastSuc } from '../../components/ToastComponent';
 import {
   getCart,
   getProfile,
   getShipInfo,
+  postPurchaseOrder,
   setPrincipalShipUser,
   setShipIdCart,
 } from '../../services/Requests';
@@ -16,22 +18,22 @@ import { initializeUser } from '../../store/actions/userActions';
 import useCep from '../product/components/shipCalc/useCep';
 
 const usePayment = () => {
-  const { calcShipCep } = useCep();
-
-  const cart = useSelector(state => state.cart);
-  const user = useSelector(state => state.user);
-  const { shipSelected } = useSelector(state => state.ship);
-  const { findRegion } = useCep();
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const cart = useSelector(state => state.cart);
+  const payment = useSelector(state => state.payment);
+  const user = useSelector(state => state.user);
+  const { shipSelected } = useSelector(state => state.ship);
+
+  const { calcShipCep, findRegion } = useCep();
+
   const [shipIdSelected, setShipIdSelected] = useState(null);
-  // const [shipSelected, setShipSelected] = useState(null);
   const [shipValue, setShipValue] = useState();
   const [modalShipVisible, setModalShipVisible] = useState(false);
   const [modalViewShipVisible, setModalViewShipVisible] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
+  const [modalSuccess, setModalSuccess] = useState(false);
   const [principalShip, setPrincipalShip] = useState({});
   const [shipEditObject, setShipEditObject] = useState(null);
 
@@ -47,11 +49,8 @@ const usePayment = () => {
       user.access_token && (await getCart(user.access_token)),
   });
 
-  useQuery({
-    queryKey: [
-      'ship-id-cart',
-      shipSelected?.ship_id === null ? 'ship' : shipSelected?.ship_id,
-    ],
+  const { refetch: refetchShipIdCart } = useQuery({
+    queryKey: ['ship-id-cart', shipSelected],
     queryFn: async () => {
       if (user.access_token) {
         if (shipSelected !== null && shipSelected !== undefined) {
@@ -82,31 +81,6 @@ const usePayment = () => {
     console.log(ship);
     ship?.length > 0 && dispatch(setShipSelected(ship[0]));
   };
-
-  const handleSetShipIdInCart = async () => {
-    console.log('SHIP SELECTED IN SET SHIP ID CART', shipSelected);
-    if (shipSelected !== null && shipSelected !== undefined) {
-      const region = findRegion(shipSelected.state);
-
-      if (
-        region !== null &&
-        region !== '' &&
-        (user.access_token !== null) & (user.access_token !== undefined)
-      ) {
-        const response = await setShipIdCart(
-          { region: region, id: shipSelected.ship_id },
-          user.access_token,
-        );
-        if (response) {
-          console.log('DEU CERTO O SET DO ID DO CART: ', response);
-        }
-      }
-    }
-  };
-
-  // useEffect(() => {
-  //   handleSetShipIdInCart();
-  // }, [shipSelected]);
 
   useEffect(() => {
     if (shipIdSelected !== null) {
@@ -175,6 +149,27 @@ const usePayment = () => {
     }
   };
 
+  const finishOrder = async () => {
+    if (
+      payment?.payForm?.method !== null &&
+      payment?.payForm?.method !== undefined &&
+      user.access_token
+    ) {
+      const dataOrder = {
+        payment_method: payment?.payForm?.method,
+        often: payment?.payForm?.portion?.often,
+        id_often: payment?.payForm?.portion?.id,
+      };
+      await refetchShipIdCart();
+      const response = await postPurchaseOrder(dataOrder, user.access_token);
+      toastSuc('Compra realizada com sucesso!!');
+      setTimeout(() => navigate(`/profile/order/${response.id_order}`), 1500);
+    } else {
+      toastErr('Por favor selecione um método de pagamento');
+    }
+    console.log('Carrinho: ', payment);
+  };
+
   return {
     shipValue,
     shipSelected,
@@ -194,6 +189,9 @@ const usePayment = () => {
     setShipEditObject,
     setShipIdSelected,
     shipSelected,
+    modalSuccess,
+    setModalSuccess,
+    finishOrder,
   };
 };
 

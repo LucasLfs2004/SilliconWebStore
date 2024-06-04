@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
@@ -14,10 +15,16 @@ const PurchaseOrders = () => {
     <Container className='dark'>
       <HeaderPage page_title={'Pedidos'} />
       <C.ContentPage>
-        {orders?.map((order, key) => (
-          <CardOrder purchase={order} key={key} />
-        ))}
+        {orders?.length > 0 ? (
+          orders?.map((order, key) => <CardOrder purchase={order} key={key} />)
+        ) : (
+          <C.Empty>
+            <p>Você ainda não possui nenhum pedido</p>
+            <Link to={'/'}>Voltar ao início</Link>
+          </C.Empty>
+        )}
       </C.ContentPage>
+
       <Footer />
     </Container>
   );

@@ -20,7 +20,7 @@ export const setShipSelected = data => {
   };
 };
 
-export const clearShipSelected = data => {
+export const clearShipSelected = () => {
   return {
     type: CLEAR_SHIP_SELECTED,
     payload: null,

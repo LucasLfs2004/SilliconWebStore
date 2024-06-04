@@ -7,3 +7,16 @@ export const ContentPage = styled.div`
   padding: 48px 5%;
   row-gap: 48px;
 `;
+
+export const Empty = styled.div`
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  font-size: 36px;
+  padding-top: 108px;
+
+  a {
+    color: #02efdf;
+  }
+`;

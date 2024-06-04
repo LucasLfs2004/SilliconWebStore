@@ -2,7 +2,9 @@ import {
   APPLY_VOUCHER,
   CALCULATE_PAYMENT,
   CLEAR_VOUCHER,
+  CLOSE_PAYMENT_SUCCESS_MODAL,
   INITIALIZE_PAYMENT,
+  OPEN_PAYMENT_SUCCESS_MODAL,
   SET_PAY_FORM,
   SET_SHIP_INFOS,
 } from './actionTypes';
@@ -13,6 +15,7 @@ export const initializePayment = () => {
     discountValue: 0,
     portions: [],
     payForm: { method: null, portions: null },
+    showSuccessModal: false,
     shipValue: 0,
     shipInfos: {},
     voucher: null,
@@ -21,6 +24,20 @@ export const initializePayment = () => {
   return {
     type: INITIALIZE_PAYMENT,
     payload: paymentData,
+  };
+};
+
+export const openPaymentSuccessModal = () => {
+  return {
+    type: OPEN_PAYMENT_SUCCESS_MODAL,
+    payload: true,
+  };
+};
+
+export const closePaymentSuccessModal = () => {
+  return {
+    type: CLOSE_PAYMENT_SUCCESS_MODAL,
+    payload: false,
   };
 };
 

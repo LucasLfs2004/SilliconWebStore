@@ -287,6 +287,7 @@ export const ButtonNavigation = styled.button`
     background-color: #02eddf;
     font-size: 18px;
     font-weight: 500;
+    cursor: pointer;
 
     &.transparent {
       color: #fff;

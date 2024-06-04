@@ -7,7 +7,7 @@ import usePayment from '../../usePayment';
 import * as C from './styles';
 
 export const PurchaseResume = () => {
-  const { shipValue, cart } = usePayment();
+  const { shipValue, cart, finishOrder } = usePayment();
   const payment = useSelector(state => state.payment);
   const dispatch = useDispatch();
 
@@ -102,7 +102,9 @@ export const PurchaseResume = () => {
       </C.Box> */}
 
         <C.ButtonsPayment>
-          <C.ButtonNavigation>Finalizar pagamento</C.ButtonNavigation>
+          <C.ButtonNavigation onClick={() => finishOrder()}>
+            Finalizar pagamento
+          </C.ButtonNavigation>
           <C.ButtonNavigation className='transparent'>
             Voltar
           </C.ButtonNavigation>

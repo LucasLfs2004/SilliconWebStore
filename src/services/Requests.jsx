@@ -655,6 +655,21 @@ export const getOrder = async (id, token) => {
   }
 };
 
+export const postPurchaseOrder = async (data, token) => {
+  try {
+    console.log('token for postPurchaseOrder: ', token);
+    const response = await Api.post(`/purchase-orders`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getCep = async cep => {
   try {
     if (cep !== undefined && cep !== null && cep !== '') {

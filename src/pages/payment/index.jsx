@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
+import ToastComponent from '../../components/ToastComponent';
 import ModalSelectShip from '../../modals/SelectShip';
 import ModalShip from '../../modals/Ship';
 import { setShipSelected } from '../../store/actions/shipActions';
@@ -31,10 +32,13 @@ const Payment = () => {
     profile,
     shipSelected,
     setShipEditObject,
+    setModalSuccess,
+    modalSuccess,
   } = usePayment();
 
   return (
     <Container className='dark'>
+      <ToastComponent />
       <HeaderPage
         img_path={'/assets/icons/carrinho-gradient.svg'}
         page_title={'Pagamento'}

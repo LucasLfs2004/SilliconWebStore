@@ -6,7 +6,7 @@ const useOrders = () => {
   const user = useSelector(state => state.user);
 
   const { data: orders, refetch } = useQuery({
-    queryKey: ['profile-data'],
+    queryKey: ['orders-profile'],
     queryFn: async () =>
       user.access_token && (await getOrders(user.access_token)),
   });

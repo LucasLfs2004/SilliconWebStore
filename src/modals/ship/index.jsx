@@ -72,7 +72,7 @@ const ModalShip = ({ visible, closeModal, editObj, setEditObj }) => {
           </C.Box>
           <C.Box></C.Box>
           <C.Box className='row'>
-            <C.FormInput className='width' widthP={65}>
+            <C.FormInput className='width' widthp={65}>
               <label htmlFor='street'>Rua</label>
               <input
                 name='street'
@@ -82,7 +82,7 @@ const ModalShip = ({ visible, closeModal, editObj, setEditObj }) => {
               />
               <p>{errors?.street?.message}</p>
             </C.FormInput>
-            <C.FormInput className='width' widthP={30}>
+            <C.FormInput className='width' widthp={30}>
               <label htmlFor='numero'>Numero</label>
               <input
                 name='numero'
@@ -106,7 +106,7 @@ const ModalShip = ({ visible, closeModal, editObj, setEditObj }) => {
               <p>{errors?.district?.message}</p>
             </C.FormInput>
             <C.Box className='row'>
-              <C.FormInput className='width' widthP={70}>
+              <C.FormInput className='width' widthp={70}>
                 <label htmlFor='cidade'>Cidade</label>
                 <input
                   name='cidade'
@@ -116,7 +116,7 @@ const ModalShip = ({ visible, closeModal, editObj, setEditObj }) => {
                 />
                 <p>{errors?.city?.message}</p>
               </C.FormInput>
-              <C.FormInput className='width' widthP={25}>
+              <C.FormInput className='width' widthp={25}>
                 <label htmlFor='estado'>Estado</label>
                 <input
                   name='estado'

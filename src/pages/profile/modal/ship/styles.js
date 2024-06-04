@@ -95,7 +95,7 @@ export const FormInput = styled.div`
   color: #e8e8e8;
 
   &.width {
-    width: ${props => props.widthP}%;
+    width: ${props => props.widthp}%;
   }
 
   @media (min-width: 1024px) {
