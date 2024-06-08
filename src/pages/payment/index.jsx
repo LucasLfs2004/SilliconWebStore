@@ -4,7 +4,7 @@ import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
 import ToastComponent from '../../components/ToastComponent';
 import ModalSelectShip from '../../modals/SelectShip';
-import ModalShip from '../../modals/ship';
+import ModalShip from '../../modals/Ship';
 import { setShipSelected } from '../../store/actions/shipActions';
 import PurchaseResume from './components/PurchaseResume';
 import PaymentCard from './components/paymentCard';
