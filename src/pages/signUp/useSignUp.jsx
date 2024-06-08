@@ -40,7 +40,7 @@ export const useSignUp = () => {
       const data_user = await createAccount(user);
       console.log(data_user);
       dispatch(setUser(data_user));
-      window.history.back();
+      // window.history.back();
     } catch (error) {
       console.log(error.response.data);
       alert('Não foi possível criar sua conta');

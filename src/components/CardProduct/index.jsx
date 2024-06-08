@@ -1,6 +1,7 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
+import { api_path } from '../../constants/api_path';
 import { parseRealCurrency } from '../../functions/realCurrency';
 import Stars from '../Stars';
 import * as C from './styles';
@@ -39,17 +40,14 @@ const CardProduct = ({ item, widthCard }) => {
             item.images.map((img_path, index) => (
               <C.ImgProduct key={index}>
                 <img
-                  src={`http://0.0.0.0:8080/image/product/${img_path}`}
+                  src={`${api_path}/image/product/${img_path}`}
                   alt={`Imagem ${item.name}`}
                 />
               </C.ImgProduct>
             ))}
         </Slider>
         <C.ImageProductWeb>
-          <img
-            src={`http://0.0.0.0:8080/image/product/${item?.images[0]}`}
-            alt=''
-          />
+          <img src={`${api_path}/image/product/${item?.images[0]}`} alt='' />
         </C.ImageProductWeb>
 
         {item?.discount && (

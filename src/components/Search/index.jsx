@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { api_path } from '../../constants/api_path';
 import { parseRealCurrency } from '../../functions/realCurrency';
 import { useDebounce } from '../../hooks/useDebounce';
 import { searchProducts } from '../../services/Requests';
@@ -83,7 +84,7 @@ const Search = () => {
                 <Link to={`/product/${item.id}`} key={index}>
                   <C.ItemProduct key={index}>
                     <img
-                      src={`http://0.0.0.0:8080/image/product/${item.images[0]}`}
+                      src={`${api_path}/image/product/${item.images[0]}`}
                       alt=''
                     />
                     <C.InfoProduct>

@@ -32,7 +32,9 @@ export const useCart = () => {
   });
 
   useEffect(() => {
-    refetchCartRequest();
+    return () => {
+      refetchCartRequest();
+    };
   }, []);
 
   useEffect(() => {

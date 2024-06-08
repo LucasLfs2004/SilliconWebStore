@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { api_path } from '../constants/api_path';
 
 export const Api = axios.create({
-  baseURL: 'http://0.0.0.0:8080',
+  baseURL: api_path,
 });
 
 // Api.interceptors.request.use(

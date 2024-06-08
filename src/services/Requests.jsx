@@ -96,8 +96,13 @@ export const updateProduct = async (token, params) => {
 
 export const getProducts = async () => {
   try {
-    const response = await Api.get(`/product/40`);
-    // console.log('products request', response);
+    const response = await Api.get(`/product/40`, {
+      headers: {
+        'ngrok-skip-browser-warning': 'ngrok-skip-browser-warning',
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log('products request', response);
     return response.data;
   } catch (error) {
     return error;

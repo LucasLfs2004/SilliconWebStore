@@ -24,7 +24,7 @@ const BrandCarousel = () => {
       <C.Carousel>
         <Slider className='carousel-image-product' {...settings}>
           {brands?.length > 0 &&
-            brands.map((item, index) => (
+            brands?.map((item, index) => (
               <C.ItemBrand
                 key={index}
                 className='carousel-item'
