@@ -17,6 +17,7 @@ import Product from '../pages/product';
 import Profile from '../pages/profile';
 import Login from '../pages/signIn';
 import CreateAccount from '../pages/signUp';
+import RateProduct from '../pages/rateProduct';
 
 const Content = props => {
   const routes = useRoutes([
@@ -61,6 +62,7 @@ const Content = props => {
     { path: '/faq', element: <Faq /> },
     { path: '/profile/order', element: <PurchaseOrders /> },
     { path: '/profile/order/:id', element: <OrderDetailed /> },
+    { path: '/profile/rate-product/:id/:id_order', element: <RateProduct /> },
   ]);
 
   return <Suspense>{routes}</Suspense>;
