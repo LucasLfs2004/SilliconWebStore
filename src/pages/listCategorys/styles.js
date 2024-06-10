@@ -18,6 +18,4 @@ export const TopContent = styled.div`
     height: 48px;
     font-size: 24px;
     font-weight: 600;
-
-
 `
