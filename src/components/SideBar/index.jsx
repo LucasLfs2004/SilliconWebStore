@@ -63,7 +63,7 @@ const Menu = () => {
             <Link>Ofertas do dia</Link>
           </C.Item> */}
           <C.Item>
-            <Link>Departamentos</Link>
+            <Link to={'/category'} >Departamentos</Link>
           </C.Item>
           {/* <C.Item>
             <Link>Mais vendidos</Link>

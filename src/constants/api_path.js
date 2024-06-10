@@ -1,1 +1,1 @@
-export const api_path = 'https://ec2-34-224-38-13.compute-1.amazonaws.com';
+export const api_path = 'http://0.0.0.0:8080';

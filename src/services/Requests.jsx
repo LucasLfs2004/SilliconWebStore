@@ -109,6 +109,15 @@ export const getProducts = async () => {
   }
 };
 
+export const getProductsOfCategory = async brand => {
+  try {
+    const response = await Api.get(`/product/category/${brand}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getProductsOfBrand = async brand => {
   try {
     const response = await Api.get(`/product/brand/${brand}`);

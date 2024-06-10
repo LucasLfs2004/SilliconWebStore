@@ -18,6 +18,8 @@ import Profile from '../pages/profile';
 import Login from '../pages/signIn';
 import CreateAccount from '../pages/signUp';
 import RateProduct from '../pages/rateProduct';
+import ListCategorys from '../pages/listCategorys';
+import Category from '../pages/category';
 
 const Content = props => {
   const routes = useRoutes([
@@ -63,6 +65,8 @@ const Content = props => {
     { path: '/profile/order', element: <PurchaseOrders /> },
     { path: '/profile/order/:id', element: <OrderDetailed /> },
     { path: '/profile/rate-product/:id/:id_order', element: <RateProduct /> },
+    { path: '/category', element: <ListCategorys /> },
+    { path: '/category/:id_category', element: <Category /> },
   ]);
 
   return <Suspense>{routes}</Suspense>;
