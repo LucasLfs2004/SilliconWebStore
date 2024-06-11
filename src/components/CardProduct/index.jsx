@@ -38,7 +38,7 @@ const CardProduct = ({ item, widthCard }) => {
       <C.ContentImg>
         <Slider className='carousel-image-product' {...settings}>
           {item &&
-            item.images.map((img_path, index) => (
+            item?.images?.map((img_path, index) => (
               <C.ImgProduct key={index}>
                 <img
                   src={`${api_path}/image/product/${img_path}`}
@@ -48,7 +48,9 @@ const CardProduct = ({ item, widthCard }) => {
             ))}
         </Slider>
         <C.ImageProductWeb>
-          <img src={`${api_path}/image/product/${item?.images[0]}`} alt='' />
+          {item?.images?.length > 0 && (
+            <img src={`${api_path}/image/product/${item?.images[0]}`} alt='' />
+          )}
         </C.ImageProductWeb>
 
         {item?.value.price_now && (

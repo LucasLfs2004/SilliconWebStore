@@ -34,7 +34,7 @@ const ProductArea = ({ products }) => {
   return (
     <C.Container id='product-area' ref={areaRef}>
       {products?.length > 0 &&
-        products.map((item, index) => (
+        products?.map((item, index) => (
           <CardProduct key={index} item={item} widthCard={widthCard} />
         ))}
     </C.Container>

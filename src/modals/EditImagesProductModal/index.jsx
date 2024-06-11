@@ -30,10 +30,12 @@ const EditImagesProductModal = ({ visible, closeModal, product, refetch }) => {
         </C.TopContent>
         <C.InfoProduct>
           <C.ImgProduct>
-            <img
-              src={`${api_path}/image/product/${product?.images[0]}`}
-              alt=''
-            />
+            {product?.images?.length > 0 && (
+              <img
+                src={`${api_path}/image/product/${product?.images[0]}`}
+                alt=''
+              />
+            )}
           </C.ImgProduct>
           <C.NameProduct>{product?.name}</C.NameProduct>
         </C.InfoProduct>

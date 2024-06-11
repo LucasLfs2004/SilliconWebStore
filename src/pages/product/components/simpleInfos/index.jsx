@@ -32,24 +32,20 @@ const SimpleInfos = ({ product }) => {
         <img src='/assets/icons/linePurple.svg' alt='' />
       </C.WarrantyInfo>
       <C.BtnActions>
-        <button onClick={() => setFavorite(!favorite)}>
+        {/* <button onClick={() => setFavorite(!favorite)}>
           {favorite ? (
             <img src='/assets/icons/favoritePurple.svg' alt='' />
           ) : (
             <img src='/assets/icons/favoriteGray.svg' alt='' />
           )}
-        </button>
+        </button> */}
         <button
           onClick={() => {
             navigator.clipboard.writeText(window.location);
             toastSuc('Endereço copiado!');
           }}
         >
-          <img
-            className='share-icon'
-            src='/assets/icons/shareGray.svg'
-            alt=''
-          />
+          <img className='share-icon' src='/assets/icons/share.svg' alt='' />
         </button>
       </C.BtnActions>
     </C.SimpleInfos>

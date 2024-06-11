@@ -10,6 +10,7 @@ import { useHome } from './useHome';
 const Home = () => {
   const { products, brands } = useHome();
   console.log(products);
+
   return (
     <Container>
       <Header />
@@ -21,7 +22,7 @@ const Home = () => {
       <C.TitlePurple>
         <h1>Promoções</h1>
       </C.TitlePurple>
-      {products && products.length > 0 && <ProductArea products={products} />}
+      {products && products?.length > 0 && <ProductArea products={products} />}
       <Footer />
     </Container>
   );

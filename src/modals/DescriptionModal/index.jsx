@@ -24,10 +24,12 @@ const DescriptionModal = ({
         {product && (
           <C.InfoProduct>
             <C.ImageProduct>
-              <img
-                src={`${api_path}/image/product/${product?.images[0]}`}
-                alt=''
-              />
+              {product?.images?.length > 0 && (
+                <img
+                  src={`${api_path}/image/product/${product?.images[0]}`}
+                  alt=''
+                />
+              )}
             </C.ImageProduct>
             <C.NameProduct>{product?.name}</C.NameProduct>
           </C.InfoProduct>

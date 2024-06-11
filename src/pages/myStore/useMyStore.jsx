@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { toastErr, toastSuc } from '../../components/ToastComponent';
 import {
   deleteProduct,
   getSellerData,
@@ -60,6 +61,7 @@ const UseMyStore = () => {
         return response;
       }
     },
+    staleTime: 0,
   });
 
   const handleDeleteProduct = async id_product => {
@@ -72,8 +74,15 @@ const UseMyStore = () => {
   const setOfferProduct = async params => {
     if (user.access_token) {
       const retorno = await setOfferProductRequest(user.access_token, params);
-      retorno && (await refetch());
-      setOfferModal(prev => false);
+      if (retorno) {
+        await refetch();
+        toastSuc('Promoção aplicada!');
+        setOfferModal(prev => false);
+      } else {
+        toastErr(
+          'Não foi possível aplicar a promoção, por favor tente novamente.',
+        );
+      }
     }
   };
 

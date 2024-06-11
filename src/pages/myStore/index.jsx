@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router';
 import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import HeaderPage from '../../components/HeaderAlternative';
+import ToastComponent from '../../components/ToastComponent';
 import { api_path } from '../../constants/api_path';
 import { parseRealCurrency } from '../../functions/realCurrency';
 import DescriptionModal from '../../modals/DescriptionModal';
@@ -35,6 +37,9 @@ const MyStore = () => {
     refetch,
   } = UseMyStore();
 
+  const navigate = useNavigate();
+  console.log(sellerData);
+
   return (
     <Container>
       <HeaderPage
@@ -42,6 +47,7 @@ const MyStore = () => {
           sellerData?.store_name ? sellerData.store_name : 'Minha loja'
         }
       />
+      <ToastComponent />
       <C.Main>
         <C.ProductArea>
           <C.HeaderBox>
@@ -56,10 +62,12 @@ const MyStore = () => {
             <C.ItemProduct key={key}>
               <C.Box>
                 <C.ImgProduct>
-                  <img
-                    src={`${api_path}/image/product/${item?.images[0]}`}
-                    alt=''
-                  />
+                  {item?.images?.length > 0 && (
+                    <img
+                      src={`${api_path}/image/product/${item?.images[0]}`}
+                      alt=''
+                    />
+                  )}
                 </C.ImgProduct>
                 <C.NameProduct>{item.name}</C.NameProduct>
               </C.Box>
@@ -97,8 +105,16 @@ const MyStore = () => {
                 <C.ItemInfo>
                   <C.Paragraph>
                     Quantidade vendida <br />
-                    <span>0</span>
+                    <span>{item.sold_amount}</span>
                   </C.Paragraph>
+                  {/* <C.BtnLink
+                    type='button'
+                    onClick={() => {
+                      navigate(`/product/${item.id}`);
+                    }}
+                  >
+                    Ver produto
+                  </C.BtnLink> */}
                   <C.BtnLink
                     type='button'
                     onClick={() => {

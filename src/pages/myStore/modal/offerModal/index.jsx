@@ -43,10 +43,12 @@ const OfferModal = ({ visible, closeModal, product, setOffer }) => {
         </C.Box>
         <C.InfoProduct>
           <C.ImgProduct>
-            <img
-              src={`${api_path}/image/product/${product?.images[0]}`}
-              alt=''
-            />
+            {product?.images?.length > 0 && (
+              <img
+                src={`${api_path}/image/product/${product?.images[0]}`}
+                alt=''
+              />
+            )}
           </C.ImgProduct>
           <C.Box className='column'>
             <C.NameProduct>{product?.name}</C.NameProduct>

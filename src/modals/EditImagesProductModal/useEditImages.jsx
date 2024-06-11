@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toastErr, toastSuc } from '../../components/ToastComponent';
 import { patchImages } from '../../services/Requests';
 
 const UseEditImages = (product, refetch, closeModal) => {
@@ -91,6 +92,11 @@ const UseEditImages = (product, refetch, closeModal) => {
         setPreviewImages([]);
         closeModal();
         refetch();
+        toastSuc('Imagens alteradas!');
+      } else {
+        toastErr(
+          'Não foi possível alterar as imagens, por favor, tente novamente',
+        );
       }
     } else {
       console.error('NENHUM PRODUTO EM PROPS');

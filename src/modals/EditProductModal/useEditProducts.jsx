@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { z } from 'zod';
+import { toastErr, toastSuc } from '../../components/ToastComponent';
 import {
   getBrands,
   getCategorys,
@@ -48,15 +49,12 @@ const useEditProducts = (product, refetch, closeModal) => {
         active: true,
         featured: true,
       };
-      console.log('data of updateProduct', paramsRequest);
-
       const success = await updateProduct(user.access_token, paramsRequest);
-      // console.log(dataProduct);
       success && refetch();
       success && closeModal();
-      alert('Produto cadastrado com sucesso');
+      toastSuc('Produto alterado!');
     } catch (error) {
-      alert('Erro, não foi possível criar o produto');
+      toastErr('Erro, não foi possível criar o produto');
       console.log('Erro na criação do produto', error);
     }
   };
