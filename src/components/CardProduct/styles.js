@@ -171,9 +171,9 @@ export const ImgProduct = styled.div`
 export const Discount = styled.div`
   position: absolute;
   left: 11px;
-  bottom: -9px;
-  width: 36px;
-  height: 18px;
+  bottom: -11px;
+  width: 48px;
+  height: 22px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -185,9 +185,9 @@ export const Discount = styled.div`
     color: #010f20;
     font-size: 12px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     line-height: normal;
-    margin-right: -1px;
+    margin-right: 2px;
   }
 `;
 

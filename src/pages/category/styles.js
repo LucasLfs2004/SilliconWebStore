@@ -16,14 +16,9 @@ export const TopCategory = styled.div`
   align-items: center;
   justify-content: center;
 
-  img {
-    max-height: 70%;
-  }
-
   @media (min-width: 1024px) {
     width: calc(100% - 80px);
     padding: 0 40px;
-    justify-content: space-between;
   }
 `;
 
@@ -41,7 +36,7 @@ export const NameCategory = styled.p`
     display: flex;
     font-size: 16px;
     font-weight: 700;
-    width: 336px;
+    text-align: center;
   }
 `;
 
@@ -79,4 +74,15 @@ export const ProductArea = styled.section`
   width: 100%;
   align-items: center;
   padding: 30px 0;
+`;
+
+export const NotFound = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 64px;
+
+  h1 {
+    color: #010f20;
+  }
 `;

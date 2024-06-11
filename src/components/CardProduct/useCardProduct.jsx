@@ -33,6 +33,11 @@ export const useCardProduct = item => {
   }
   const pricePerPortions = priceInPortions / item.value.portions;
 
+  const discount = (
+    100 -
+    (item.value.price_now * 100) / item.value.common_price
+  ).toFixed(0);
+
   return {
     navigateToProduct,
     handleAddToCart,
@@ -40,6 +45,7 @@ export const useCardProduct = item => {
     priceInPortions,
     pricePerPortions,
     price,
+    discount,
   };
 };
 

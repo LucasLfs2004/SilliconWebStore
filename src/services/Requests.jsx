@@ -109,9 +109,10 @@ export const getProducts = async () => {
   }
 };
 
-export const getProductsOfCategory = async brand => {
+export const getProductsOfCategory = async category => {
   try {
-    const response = await Api.get(`/product/category/${brand}`);
+    console.log(category);
+    const response = await Api.get(`/product/category/${category}`);
     return response.data;
   } catch (error) {
     return error;

@@ -12,6 +12,8 @@ const CardOrder = ({ purchase, hideDetail }) => {
     navigate(`/profile/order/${purchase.id_order}`);
   };
 
+  console.log(purchase);
+
   return (
     <C.NeumorphismCard className='full'>
       {!hideDetail && (
@@ -70,7 +72,16 @@ const CardOrder = ({ purchase, hideDetail }) => {
               />
             </Link>
             <C.DataOrderItem>
-              <span>Vendido e entregue por {product?.store_name}</span>
+              <div className='row'>
+                <span>Vendido e entregue por {product?.store_name}</span>
+                <C.BtnCommentProduct>
+                  <Link
+                    to={`/profile/rate-product/${product?.id_product}/${product?.id_order_item}`}
+                  >
+                    Avaliar
+                  </Link>
+                </C.BtnCommentProduct>
+              </div>
               <Link to={`/product/${product.id_product}`}>
                 <p>{product?.name}</p>
               </Link>

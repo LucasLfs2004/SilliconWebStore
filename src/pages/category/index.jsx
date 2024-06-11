@@ -13,9 +13,15 @@ const Category = () => {
       <Header />
       <C.Category>
         <C.TopCategory>
-          <C.NameCategory>{category?.category_name}</C.NameCategory>
+          <C.NameCategory>{category?.name}</C.NameCategory>
         </C.TopCategory>
-        <ProductArea products={category?.products} />
+        {category?.products ? (
+          <ProductArea products={category?.products} />
+        ) : (
+          <C.NotFound>
+            <h1>Nenhum produto nessa categoria :(</h1>
+          </C.NotFound>
+        )}
       </C.Category>
       <Footer />
     </Container>

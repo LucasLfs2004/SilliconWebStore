@@ -15,6 +15,7 @@ const CardProduct = ({ item, widthCard }) => {
     priceInPortions,
     pricePerPortions,
     price,
+    discount,
   } = useCardProduct(item);
 
   const settings = {
@@ -50,9 +51,9 @@ const CardProduct = ({ item, widthCard }) => {
           <img src={`${api_path}/image/product/${item?.images[0]}`} alt='' />
         </C.ImageProductWeb>
 
-        {item?.discount && (
+        {item?.value.price_now && (
           <C.Discount>
-            {/* <p>{item.discount}%</p> */}
+            <p>{discount}%</p>
             <img src='/assets/icons/seta.svg' alt='' />
           </C.Discount>
         )}

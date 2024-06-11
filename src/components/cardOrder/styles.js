@@ -166,3 +166,16 @@ export const DataOrderItem = styled.div`
     align-items: center;
   }
 `;
+
+export const BtnCommentProduct = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #02eddf;
+  padding: 3px 12px;
+  border-radius: 4px;
+
+  a {
+    color: #010f20 !important;
+  }
+`;

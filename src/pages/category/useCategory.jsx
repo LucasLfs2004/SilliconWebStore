@@ -1,14 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import { getProductsOfBrand } from '../../services/Requests';
+import { getProductsOfCategory } from '../../services/Requests';
 
 import { useParams } from 'react-router';
 
 const useCategory = () => {
-  const id_category = parseInt(useParams().id);
+  const id_category = parseInt(useParams().id_category);
   const { data: category } = useQuery({
     queryKey: [`category-of-brand-${id_category}`],
-    queryFn: async () => await getProductsOfBrand(id_category),
+    queryFn: async () => await getProductsOfCategory(id_category),
   });
+  console.log(category);
   return { category };
 };
 
