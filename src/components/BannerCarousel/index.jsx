@@ -24,8 +24,6 @@ const BannerCarousel = () => {
     navigate(href);
   };
 
-  console.log('BANNERSSSS', banners);
-
   return (
     <C.Container>
       {banners.length > 0 && (
@@ -42,7 +40,6 @@ const BannerCarousel = () => {
                     window.screen.width > 1024
                       ? image.img_banner_web
                       : image.img_banner_mobile
-                    // image.img_banner_mobile
                   }`}
                   alt={`Imagem ${index}`}
                 />

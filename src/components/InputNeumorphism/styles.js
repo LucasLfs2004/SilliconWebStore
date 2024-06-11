@@ -67,7 +67,9 @@ export const InputContainer = styled.div`
 
     input::placeholder,
     select::placeholder,
-    input {
+    input,
+    textarea,
+    textarea::placeholder {
       font-size: 14px;
     }
 
@@ -174,6 +176,10 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
+  width: 100%;
+`;
+
+export const TextArea = styled.textarea`
   width: 100%;
 `;
 

@@ -83,13 +83,14 @@ export const InputValueNeumorphism = ({
   setValueInput,
   error,
   width,
+  step,
 }) => {
   return (
     <C.InputContainer width={width ? width : '100%'}>
       <C.Label htmlFor={id}>{label}</C.Label>
       <C.Input
         type='number'
-        step={0.01}
+        step={step ? step : '0.01'}
         id={id}
         placeholder={placeholder}
         value={valueInput}
@@ -156,5 +157,29 @@ export const InputImgNeumorphism = ({
         <p>{placeholder}</p>
       </C.LabelImg>
     </C.InputImg>
+  );
+};
+
+export const TextAreaNeumorphism = ({
+  id,
+  label,
+  placeholder,
+  valueInput,
+  setValueInput,
+  error,
+  width,
+}) => {
+  return (
+    <C.InputContainer width={width ? width : '100%'}>
+      <C.Label htmlFor={id}>{label}</C.Label>
+      <C.TextArea
+        type='text'
+        id={id}
+        placeholder={placeholder}
+        value={valueInput}
+        onChange={e => setValueInput(e.target.value)}
+      />
+      {error && <C.ErrorSpan>{error}</C.ErrorSpan>}
+    </C.InputContainer>
   );
 };

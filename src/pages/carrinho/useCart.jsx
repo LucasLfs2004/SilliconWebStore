@@ -29,13 +29,8 @@ export const useCart = () => {
     queryKey: ['cart-data'],
     queryFn: async () =>
       user.access_token && (await getCart(user.access_token)),
+    staleTime: 0,
   });
-
-  useEffect(() => {
-    return () => {
-      refetchCartRequest();
-    };
-  }, []);
 
   useEffect(() => {
     dispatch(setCart(cartRequest));

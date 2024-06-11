@@ -713,6 +713,20 @@ export const setShipIdCart = async (data, token) => {
   }
 };
 
+export const postCommentProduct = async (data, token) => {
+  try {
+    const response = await Api.post(`/comment/`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const UserExpired = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

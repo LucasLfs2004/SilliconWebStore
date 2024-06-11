@@ -41,7 +41,6 @@ export const useHome = () => {
   }, [banners]);
 
   useEffect(() => {
-    console.log('cartRequest', cartRequest);
     dispatch(setCart(cartRequest));
   }, [cartRequest]);
 

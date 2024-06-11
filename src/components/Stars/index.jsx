@@ -1,6 +1,6 @@
 import * as C from './styles';
 
-const Stars = ({ rating }) => {
+const Stars = ({ rating, height }) => {
   // const value = parseInt(rating);
   // console.log('rating_int',value)
   const stars = [];
@@ -9,7 +9,7 @@ const Stars = ({ rating }) => {
     // console.log({rating: rating,
     //                       i: i,
     //                     value: value})
-    if (i < rating) {
+    if (i <= rating) {
       stars.push('starComplete.svg');
     } else if (rating + 0.99 > i) {
       stars.push('starHalf.svg');
@@ -20,7 +20,7 @@ const Stars = ({ rating }) => {
 
   // console.log(stars);
   return (
-    <C.Row>
+    <C.Row height={height}>
       {stars.map((item, index) => (
         <img alt='' src={`/assets/icons/${item}`} key={index} />
       ))}
