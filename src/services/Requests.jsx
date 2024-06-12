@@ -98,11 +98,22 @@ export const getProducts = async () => {
   try {
     const response = await Api.get(`/product/40`, {
       headers: {
-        'ngrok-skip-browser-warning': 'ngrok-skip-browser-warning',
         'Content-Type': 'application/json',
       },
     });
-    console.log('products request', response);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getProductsInOffers = async () => {
+  try {
+    const response = await Api.get(`/product/offers/40`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     return response.data;
   } catch (error) {
     return error;

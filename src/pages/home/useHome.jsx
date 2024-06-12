@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { calculatePayment } from '../../store/actions/paymentActions';
 
 import { useQuery } from '@tanstack/react-query';
-import { getBanners, getCart, getProducts } from '../../services/Requests';
+import { getBanners, getCart, getProducts, getProductsInOffers } from '../../services/Requests';
 import { setBanner } from '../../store/actions/bannerActions';
 import { setCart } from '../../store/actions/cartActions';
 
@@ -11,6 +11,13 @@ export const useHome = () => {
   const cart = useSelector(state => state.cart);
   const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+
+  const {
+    data: offerProducts,
+  } = useQuery({
+    queryKey: ['products-in-offer'],
+    queryFn: async () => await getProductsInOffers(),
+  })
 
   const {
     data: products,
@@ -36,6 +43,8 @@ export const useHome = () => {
     queryFn: async () => await getBanners(),
   });
 
+  const recommendedProducts = products?.filter(item => (item.value.price_now === null))
+
   useEffect(() => {
     dispatch(setBanner(banners));
   }, [banners]);
@@ -48,5 +57,7 @@ export const useHome = () => {
     dispatch(calculatePayment(cart));
   }, [cart]);
 
-  return { products, isError, isLoading, cart };
+
+
+  return { products, isError, isLoading, cart, offerProducts, recommendedProducts };
 };

@@ -192,6 +192,7 @@ const usePayment = () => {
     modalSuccess,
     setModalSuccess,
     finishOrder,
+    navigate
   };
 };
 

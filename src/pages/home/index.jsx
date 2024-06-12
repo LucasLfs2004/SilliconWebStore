@@ -8,7 +8,7 @@ import * as C from './styles';
 import { useHome } from './useHome';
 
 const Home = () => {
-  const { products, brands } = useHome();
+  const { products, brands, offerProducts, recommendedProducts } = useHome();
   console.log(products);
 
   return (
@@ -22,7 +22,11 @@ const Home = () => {
       <C.TitlePurple>
         <h1>Promoções</h1>
       </C.TitlePurple>
-      {products && products?.length > 0 && <ProductArea products={products} />}
+      {offerProducts && offerProducts?.length > 0 && <ProductArea products={offerProducts} />}
+      <C.TitlePurple>
+        <h1>Recomendações</h1>
+      </C.TitlePurple>
+      {recommendedProducts && recommendedProducts?.length > 0 && <ProductArea products={recommendedProducts} />}
       <Footer />
     </Container>
   );
