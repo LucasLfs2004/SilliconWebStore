@@ -17,18 +17,11 @@ export const ModalImage = ({
   const [selectedFiles, setSelectedFiles] = useState(null);
 
   useEffect(() => {
-    console.log('useEffect');
     setPreviewImages(images);
     setSelectedFiles(files);
   }, [images, files]);
 
   const changeOrder = (position, direction) => {
-    console.log('initializeChangeOrder: ', {
-      position: position,
-      direction: direction,
-      positionPlusDirection: position + direction,
-    });
-    // previewImages
     const image = previewImages[position];
     let array = [...previewImages];
     array[position] = previewImages[position + direction];
@@ -36,11 +29,11 @@ export const ModalImage = ({
     setPreviewImages(array);
 
     const file = selectedFiles[position];
-    console.log('file: ', file, '\nposition: ', position);
+
     let arrayFile = [...selectedFiles];
     arrayFile[position] = selectedFiles[position + direction];
     arrayFile[position + direction] = file;
-    console.log('files after update', arrayFile);
+
     setSelectedFiles(arrayFile);
   };
 
@@ -94,7 +87,6 @@ export const ModalImage = ({
           <C.BtnModal
             type='button'
             onClick={() => {
-              console.log('selected files: ', selectedFiles);
               setImages(previewImages);
               setFiles(selectedFiles);
               setModalVisible(false);

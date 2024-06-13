@@ -13,7 +13,6 @@ export const useCepCard = () => {
   const { refetchCartRequest } = useCart();
 
   const searchCep = async () => {
-    console.log('cep', cep);
     if (cep !== '' && cep !== undefined) {
       const response = await getCep(cep);
       // dispatch(setShipInfos(response));

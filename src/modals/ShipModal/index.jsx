@@ -156,9 +156,7 @@ const ModalShip = ({ visible, closeModal, editObj, setEditObj }) => {
               </label>
             </C.Checkbox>
           </C.Box>
-          <C.BtnSubmit onClick={() => console.log('CLIQUEI')} type='submit'>
-            Adicionar
-          </C.BtnSubmit>
+          <C.BtnSubmit type='submit'>Adicionar</C.BtnSubmit>
         </C.Form>
       </C.Modal>
     </C.Container>

@@ -59,7 +59,6 @@ export const useCardProduct = item => {
         id_product: item.id,
         amount: 1,
       });
-      console.log('cartReturn', cartReturn);
 
       if (cartReturn !== false) {
         dispatch(setCart(cartReturn));

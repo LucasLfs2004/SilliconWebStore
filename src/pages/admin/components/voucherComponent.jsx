@@ -26,7 +26,6 @@ const VoucherComponent = () => {
     voucherPercentualDiscount,
     setVoucherPercentualDiscount,
   } = useAdminPage();
-  console.log('vouchers', vouchers);
   return (
     <C.ComponentNeumorphism>
       <C.Title>Cupons de desconto</C.Title>

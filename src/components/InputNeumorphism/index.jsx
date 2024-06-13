@@ -110,7 +110,6 @@ export const InputDateNeumorphism = ({
   error,
   width,
 }) => {
-  console.log('dataValue', valueInput);
   const [placeholderColor, setPlaceholderColor] = useState(true);
 
   return (

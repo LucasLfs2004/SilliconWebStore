@@ -7,7 +7,6 @@ import * as C from './styles';
 
 const Menu = () => {
   const user = useSelector(state => state.user);
-  // console.log('user', user);
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
 
@@ -15,7 +14,6 @@ const Menu = () => {
     e.preventDefault();
     e.stopPropagation();
     dispatch(clearUser());
-    console.log('logout efetuado');
   };
 
   return (
@@ -63,7 +61,7 @@ const Menu = () => {
             <Link>Ofertas do dia</Link>
           </C.Item> */}
           <C.Item>
-            <Link to={'/category'} >Departamentos</Link>
+            <Link to={'/category'}>Departamentos</Link>
           </C.Item>
           {/* <C.Item>
             <Link>Mais vendidos</Link>

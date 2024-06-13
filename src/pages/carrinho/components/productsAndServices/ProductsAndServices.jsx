@@ -13,7 +13,6 @@ const ProductsAndServices = () => {
     if (user.access_token) {
       const isCleaned = await clearCartUser(user.access_token);
       if (isCleaned) dispatch(clearCart());
-      console.log(isCleaned);
     }
   };
 

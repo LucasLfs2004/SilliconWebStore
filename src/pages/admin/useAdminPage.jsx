@@ -73,10 +73,6 @@ const useAdminPage = () => {
 
     const newImages = newfile.map(file => URL.createObjectURL(file));
 
-    console.log('handleLogoChange: ', {
-      preview: newImages[0],
-      file: newfile[0],
-    });
     return { preview: newImages[0], file: newfile[0] };
   };
 
@@ -104,7 +100,6 @@ const useAdminPage = () => {
       }
     } else {
       const response = await postCategory(formData, user.access_token);
-      console.log(response);
       if (response) {
         toastSuc(`Categoria ${categoryNameInput} cadastrada!`);
         refetchCategory();
@@ -140,10 +135,8 @@ const useAdminPage = () => {
       brandEditId !== undefined &&
       brandNameInput.length > 0
     ) {
-      console.log('EDIT BRAND');
       formData.append('id', brandEditId);
       const response = await patchBrand(formData, user.access_token);
-      console.log(response);
       if (response) {
         toastSuc(`Marca editada com sucesso`);
         refetchBrand();
@@ -152,7 +145,6 @@ const useAdminPage = () => {
         toastErr('Não foi possível concluir, por favor tente novamente');
       }
     } else {
-      console.log('NEW BRAND');
       const response = await postBrand(formData, user.access_token);
       if (response) {
         toastSuc(`Marca ${brandNameInput} cadastrada!`);
@@ -161,7 +153,6 @@ const useAdminPage = () => {
       } else {
         toastErr('Não foi possível concluir, por favor tente novamente');
       }
-      console.log('RESPONSE OF REQUEST: ', response);
     }
   };
 
@@ -189,7 +180,6 @@ const useAdminPage = () => {
       } else {
         toastErr('Não foi possível concluir, por favor tente novamente');
       }
-      console.log('RESPONSE OF REQUEST: ', response);
     } else {
       toastErr('Preencha todos os campos do formulário');
     }
@@ -228,8 +218,6 @@ const useAdminPage = () => {
       min_value: parseFloat(voucherMinValue),
     };
 
-    console.log(postData);
-
     const response = await postVoucher(postData, user?.access_token);
     if (response === true) {
       toastSuc('Novo cupom de desconto adicionado!');
@@ -238,7 +226,6 @@ const useAdminPage = () => {
     } else {
       toastErr('Não foi possível concluir, por favor tente novamente');
     }
-    console.log('RESPONSE OF REQUEST: ', response);
   };
 
   const patchBannerRequest = async e => {
@@ -261,7 +248,6 @@ const useAdminPage = () => {
       );
 
     const response = await patchBanner(formData, user.access_token);
-    console.log(response);
     if (response) {
       toastSuc(`Banner editado com sucesso`);
       refetchBanners();
@@ -272,7 +258,6 @@ const useAdminPage = () => {
   };
 
   const handleDeleteCategory = async id => {
-    console.log('DELETANDO CATEGORIA DE ID: ', id);
     const response = await deleteCategory(id, user.access_token);
     if (response) {
       toastSuc(`Categoria deletada!`);
@@ -283,7 +268,6 @@ const useAdminPage = () => {
 
   const handleDeleteBrand = async id => {
     const response = await deleteBrand(id, user.access_token);
-    console.log(response);
     if (response) {
       toastSuc(`Marca deletada!`);
       cleanBrandForm();

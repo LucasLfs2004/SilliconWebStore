@@ -5,7 +5,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { z } from 'zod';
+import { toastErr, toastSuc } from '../../components/ToastComponent';
 import {
+  deleteShipInfo,
   getProfile,
   patchShipInfo,
   postShipInfo,
@@ -43,7 +45,6 @@ export const useProfile = () => {
     queryFn: async () => {
       if (user.access_token) {
         const response = await getProfile(user.access_token);
-        // console.log('profile user', response);
 
         if (response?.status && response.status === 401) {
           dispatch(initializeUser());
@@ -64,10 +65,8 @@ export const useProfile = () => {
   });
 
   useEffect(() => {
-    console.log('executando verificação do endereço principal');
     if (profile?.ship_info) {
       profile.ship_info.forEach(function (item) {
-        console.log(item);
         if (profile.principal_ship === item.ship_id) {
           setPrincipalShip(item);
         }
@@ -78,13 +77,21 @@ export const useProfile = () => {
   const handlePrincipalShip = async id => {
     const success = await setPrincipalShipUser(id, user.access_token);
     if (success) {
+      toastSuc('Endereço definido como principal!');
       await refetch();
       setModalViewShipVisible(false);
     }
   };
 
+  const deleteShip = async id => {
+    const success = await deleteShipInfo(user.access_token, id);
+    if (success) {
+      toastSuc('Endereço excluído!');
+      await refetch();
+    }
+  };
+
   const submitForm = async data => {
-    // console.log('SUBMIT COMPLETO: ', data);
     const params = {
       ...data,
       principal_ship: checkedPrincipalShip,
@@ -92,13 +99,21 @@ export const useProfile = () => {
     if (user.access_token) {
       if (shipEditObject === undefined) {
         const retorno = await postShipInfo(user.access_token, params);
-        console.log('POST BEM SUCEDIDO', retorno);
+        if (retorno) {
+          toastSuc('Endereço adicionado com sucesso!');
+        } else {
+          toastErr('Um erro aconteceu, por favor tente novamente.');
+        }
       } else {
         const retorno = await patchShipInfo(user.access_token, {
           ...params,
           id: shipEditObject.ship_id,
         });
-        console.log('PATCH BEM SUCEDIDO', retorno);
+        if (retorno) {
+          toastSuc('Endereço alterado com sucesso!');
+        } else {
+          toastErr('Um erro aconteceu, por favor tente novamente.');
+        }
       }
       await refetch();
       setShipEditObject(undefined);
@@ -122,6 +137,7 @@ export const useProfile = () => {
     setCheckedPrincipalShip,
     shipEditObject,
     setShipEditObject,
+    deleteShip,
   };
 };
 

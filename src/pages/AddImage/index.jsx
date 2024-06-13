@@ -8,7 +8,6 @@ import { uploadImages } from '../../services/Requests';
 import * as C from './styles';
 
 const AddImage = () => {
-  // console.log(brand);
   const settings = {
     dots: true,
     infinite: true,
@@ -36,8 +35,6 @@ const AddImage = () => {
     setItemWidth(widthAreaRef?.current?.offsetWidth / numberOfItens);
   }, []);
 
-  console.log(selectedFiles);
-
   const handleUploadImages = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -47,10 +44,7 @@ const AddImage = () => {
       formData.append('files', file, file.name);
     });
 
-    console.log(formData);
-
     const retorno = uploadImages(formData);
-    console.log(retorno);
   };
 
   return (

@@ -10,36 +10,9 @@ const Search = () => {
   const [search, setSearch] = useState('');
   const [showResult, setShowResult] = useState([]);
 
-  // useEffect(() => {
-  //   const searchResult = products.filter(product =>
-  //     product.name.toLowerCase().includes(search.toLowerCase()),
-  //   );
-  //   if (search === '') {
-  //     setResult([]);
-  //   } else {
-  //     setResult(searchResult);
-  //   }
-  //   console.log(searchResult);
-  // }, [search]);
-
-  // const handleSearch = async () => {
-  //   const searchResult = await searchProducts(search);
-  //   if (search === null) {
-  //     setResult([]);
-  //   } else {
-  //     setResult(searchResult);
-  //   }
-  //   console.log(searchResult);
-  // };
-
   const debouncedSearch = useDebounce(search, 300);
 
-  const {
-    data: dataProduct = [],
-    // isFetching: searchLoading,
-    // isError: searchError,
-    // isFetched: searchFetchStatus,
-  } = useQuery({
+  const { data: dataProduct = [] } = useQuery({
     queryKey: ['search-products', debouncedSearch],
     queryFn: async () => {
       const response = await searchProducts(debouncedSearch);

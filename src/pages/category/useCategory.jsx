@@ -9,7 +9,6 @@ const useCategory = () => {
     queryKey: [`category-of-brand-${id_category}`],
     queryFn: async () => await getProductsOfCategory(id_category),
   });
-  console.log(category);
   return { category };
 };
 

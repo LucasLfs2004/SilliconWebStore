@@ -23,8 +23,6 @@ const ProductImagesWeb = ({ product }) => {
     verticalSwiping: true,
   };
 
-  console.log(product.images);
-
   return (
     <C.Content>
       {product?.images?.length > 4 ? (

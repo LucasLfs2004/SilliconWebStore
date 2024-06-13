@@ -64,14 +64,12 @@ const useShipModal = (closeModal, editObj, setEditObj) => {
       let id = null;
       if (editObj === undefined || editObj === null) {
         const retorno = await postShipInfo(user.access_token, params);
-        console.log('POST BEM SUCEDIDO', retorno);
         id = retorno.id;
       } else {
         const retorno = await patchShipInfo(user.access_token, {
           ...params,
           id: editObj.ship_id,
         });
-        console.log('PATCH BEM SUCEDIDO', retorno);
         id = editObj.ship_id;
       }
       await refetchProfile();
@@ -100,7 +98,6 @@ const useShipModal = (closeModal, editObj, setEditObj) => {
   };
 
   const setEditValues = () => {
-    console.log(editObj);
     const dataRegister = {
       cep:
         editObj !== undefined && editObj?.cep && editObj.cep !== undefined
@@ -131,10 +128,6 @@ const useShipModal = (closeModal, editObj, setEditObj) => {
   useEffect(() => {
     setEditValues();
   }, [editObj]);
-
-  useEffect(() => {
-    console.log(register.cep);
-  }, [register]);
 
   return {
     register,

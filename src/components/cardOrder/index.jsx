@@ -12,8 +12,6 @@ const CardOrder = ({ purchase, hideDetail }) => {
     navigate(`/profile/order/${purchase.id_order}`);
   };
 
-  console.log(purchase);
-
   return (
     <C.NeumorphismCard>
       {!hideDetail && (

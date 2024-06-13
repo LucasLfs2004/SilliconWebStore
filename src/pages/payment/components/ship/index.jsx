@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Paragraph, Subtitle } from '../../styles';
 import * as C from './styles';
@@ -8,13 +7,7 @@ const ShipComponent = ({
   openEditModalShip,
   openSelectModalShip,
 }) => {
-  // const { shipSelected } = usePayment();
-
   const shipSelected = useSelector(state => state.ship.shipSelected);
-
-  useEffect(() => {
-    console.log('shipSelected mudou: ', shipSelected);
-  }, [shipSelected]);
 
   return (
     <C.Ship>

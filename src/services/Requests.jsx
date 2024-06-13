@@ -19,7 +19,6 @@ export const createAccount = async user => {
 };
 
 export const effectLogin = async dataLogin => {
-  console.log(dataLogin);
   try {
     const response = await Api.post('/login', dataLogin, {
       headers: {
@@ -80,14 +79,12 @@ export const createProduct = async (token, formData) => {
 
 export const updateProduct = async (token, params) => {
   try {
-    console.log(token);
     const response = await Api.put('/product', params, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     });
-    // console.log('return of setVoucher', response);
     return response.data;
   } catch (error) {
     return error;
@@ -122,7 +119,6 @@ export const getProductsInOffers = async () => {
 
 export const getProductsOfCategory = async category => {
   try {
-    console.log(category);
     const response = await Api.get(`/product/category/${category}`);
     return response.data;
   } catch (error) {
@@ -141,9 +137,7 @@ export const getProductsOfBrand = async brand => {
 
 export const getProduct = async id => {
   try {
-    console.log(id);
     const response = await Api.get(`/product/id/${id}`);
-    // console.log('products request', response);
     return response.data;
   } catch (error) {
     return error;
@@ -261,7 +255,6 @@ export const deleteCategory = async (data, token) => {
         'Content-Type': 'application/json',
       },
     });
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -277,7 +270,6 @@ export const getProfile = async token => {
         'Content-Type': 'application/json',
       },
     });
-    console.log('user request', response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -300,7 +292,6 @@ export const setPrincipalShipUser = async (id, token) => {
         },
       },
     );
-    console.log('return of setPrincipalShip', response);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -320,7 +311,6 @@ export const getSellerData = async token => {
         'Content-Type': 'application/json',
       },
     });
-    // console.log('user request', response);
     return response.data;
   } catch (error) {
     return error.response;
@@ -335,7 +325,6 @@ export const getCart = async token => {
         'Content-Type': 'application/json',
       },
     });
-    console.log('cart request with token', response);
     return response.data;
   } catch (error) {
     return error;
@@ -350,7 +339,6 @@ export const clearCartUser = async token => {
         'Content-Type': 'application/json',
       },
     });
-    console.log('cart delete', response);
     return response.data;
   } catch (error) {
     return error;
@@ -359,14 +347,12 @@ export const clearCartUser = async token => {
 
 export const setShipInfo = async (token, params) => {
   try {
-    console.log(params);
     const response = await Api.post('/cart-ship', params, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     });
-    console.log('cart request with token', response);
     return response.data;
   } catch (error) {
     return error;
@@ -375,15 +361,12 @@ export const setShipInfo = async (token, params) => {
 
 export const setVoucher = async (token, code) => {
   try {
-    console.log(code);
-    console.log(token);
     const response = await Api.post('/cart-discount', code, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     });
-    console.log('return of setVoucher', response);
     return response.data;
   } catch (error) {
     return error;
@@ -497,6 +480,20 @@ export const patchShipInfo = async (token, params) => {
   }
 };
 
+export const deleteShipInfo = async (token, id) => {
+  try {
+    const response = await Api.delete(`/ship-info/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const deleteProduct = async (token, id_product) => {
   try {
     const response = await Api.delete(`/product/${id_product}`, {
@@ -513,7 +510,6 @@ export const deleteProduct = async (token, id_product) => {
 
 export const setOfferProduct = async (token, params) => {
   try {
-    console.log('parametros de postOfferProduct', params);
     const response = await Api.patch(`/seller/product/offer`, params, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -528,7 +524,6 @@ export const setOfferProduct = async (token, params) => {
 
 export const postDescriptionProduct = async (token, params) => {
   try {
-    console.log('parametros de postOfferProduct', params);
     const response = await Api.post(`/seller/product/description`, params, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -625,7 +620,6 @@ export const getVouchers = async token => {
 
 export const postVoucher = async (data, token) => {
   try {
-    console.log({ data, token });
     const response = await Api.post(`/voucher`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -683,7 +677,6 @@ export const getOrder = async (id, token) => {
 
 export const postPurchaseOrder = async (data, token) => {
   try {
-    console.log('token for postPurchaseOrder: ', token);
     const response = await Api.post(`/purchase-orders`, data, {
       headers: {
         Authorization: `Bearer ${token}`,

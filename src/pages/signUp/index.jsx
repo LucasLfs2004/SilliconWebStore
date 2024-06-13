@@ -1,6 +1,7 @@
 import InputMask from 'react-input-mask';
 import { Link } from 'react-router-dom';
 import BtnSubmit from '../../components/BtnSubmit';
+import ToastComponent from '../../components/ToastComponent';
 import * as C from '../signIn/styles';
 import { useSignUp } from './useSignUp';
 
@@ -20,6 +21,7 @@ const CreateAccount = () => {
       <C.Header>
         <img src='/assets/imgs/logo-horizontal.svg' alt='' />
       </C.Header>
+      <ToastComponent />
       <C.Section className='sign-up'>
         <div className='top'>
           <img src='/assets/imgs/vga.svg' alt='' />

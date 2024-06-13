@@ -25,7 +25,6 @@ const CardProduct = ({ item, widthCard }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  // console.log(item);
 
   return (
     <C.Card onClick={event => navigateToProduct(event)} widthCard={widthCard}>

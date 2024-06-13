@@ -3,17 +3,14 @@ import DOMPurify from 'dompurify';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router';
 import { z } from 'zod';
 import { effectLogin } from '../../services/Requests';
 import { setUser } from '../../store/actions/userActions';
 
 export const useLogin = () => {
   const dispatch = useDispatch();
-  const { state } = useLocation();
 
   const [viewPass, setViewPass] = useState(false);
-  console.log(`message of profile navigate: `, state);
 
   const handleEffectLogin = async data => {
     try {
@@ -21,20 +18,13 @@ export const useLogin = () => {
         email: data.email,
         password: data.password,
       };
-      // console.log(login);
       const response = await effectLogin(login);
-      // console.log(response);
-      console.log('Resultado do login', response);
       if (response.status === 200) {
-        // console.log(response);
         dispatch(setUser(response.data));
         window.history.back();
-
-        // localStorage.setItem('user', JSON.stringify(response.user_data));
       }
     } catch (error) {
       alert('Erro, não foi possível realizar o login');
-      console.log(error);
     }
   };
 

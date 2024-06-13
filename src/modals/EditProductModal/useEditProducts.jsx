@@ -55,7 +55,6 @@ const useEditProducts = (product, refetch, closeModal) => {
       toastSuc('Produto alterado!');
     } catch (error) {
       toastErr('Erro, não foi possível criar o produto');
-      console.log('Erro na criação do produto', error);
     }
   };
 
@@ -95,7 +94,6 @@ const useEditProducts = (product, refetch, closeModal) => {
   };
 
   useEffect(() => {
-    // console.log('product for edit: ', product);
     handleSetInputs();
   }, [product]);
 

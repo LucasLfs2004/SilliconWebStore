@@ -5,7 +5,6 @@ import useCep from './useCep';
 
 const ShipCalcCard = () => {
   const { cep, setCep, shipValue, calcShip } = useCep();
-  console.log(shipValue);
 
   return (
     <C.Card>

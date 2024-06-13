@@ -11,7 +11,6 @@ import * as C from './styles';
 
 const OrderDetailed = () => {
   const id = useParams().id;
-  console.log(id);
   const user = useSelector(state => state.user);
 
   const { data: order, refetch } = useQuery({
@@ -19,8 +18,6 @@ const OrderDetailed = () => {
     queryFn: async () =>
       user.access_token && (await getOrder(id, user.access_token)),
   });
-
-  console.log(order);
 
   return (
     <Container className='dark'>

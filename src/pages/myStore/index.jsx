@@ -38,7 +38,6 @@ const MyStore = () => {
   } = UseMyStore();
 
   const navigate = useNavigate();
-  console.log(sellerData);
 
   return (
     <Container>

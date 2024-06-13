@@ -1,6 +1,7 @@
 import { Container } from '../../CommomStyles';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import ToastComponent from '../../components/ToastComponent';
 import CardOrder from '../../components/cardOrder';
 import ModalProfile from './modal/editProfile';
 import ModalShip from './modal/ship';
@@ -24,14 +25,13 @@ const Profile = () => {
     setCheckedPrincipalShip,
     setShipEditObject,
     shipEditObject,
+    deleteShip,
   } = useProfile();
-
-  console.log('profile: ', profile);
-  console.log('Principal endereço de entrega', principalShip);
 
   return (
     <Container className='dark'>
       <Header />
+      <ToastComponent />
       <C.ContentPage>
         <C.Title>Minha conta</C.Title>
         <C.DisplayCards>
@@ -123,6 +123,9 @@ const Profile = () => {
             setShipEditObject(ship);
             setModalViewShipVisible(false);
             setModalShipVisible(true);
+          }}
+          deleteShip={id => {
+            deleteShip(id);
           }}
         />
         <ModalShip

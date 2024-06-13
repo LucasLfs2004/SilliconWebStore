@@ -10,7 +10,6 @@ const useBrand = () => {
     queryFn: async () => await getProductsOfBrand(id_brand),
   });
 
-  // console.log('products in page brand: ', brand);
   return { brand };
 };
 

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { z } from 'zod';
+import { toastErr, toastSuc } from '../../components/ToastComponent';
 import { createAccount } from '../../services/Requests';
 import { setUser } from '../../store/actions/userActions';
 
@@ -24,7 +25,6 @@ export const useSignUp = () => {
   });
 
   const handleCreateAccount = async data => {
-    console.log('HandleCreateAccount');
     try {
       const user = {
         name: data.name,
@@ -34,16 +34,18 @@ export const useSignUp = () => {
         birth: moment(data.birth, 'DD/MM/YYYY', true).format('YYYY-MM-DD'),
         password: data.password,
       };
-      //   const dataFormata = moment(user.birth, 'DD/MM/YYYY', true).format(
-      //     'YYYY-MM-DD',
-      //   );
       const data_user = await createAccount(user);
-      console.log(data_user);
-      dispatch(setUser(data_user));
-      // window.history.back();
+      if (data_user) {
+        dispatch(setUser(data_user));
+        toastSuc('Conta criada com sucesso');
+        setTimeout(() => window.history.back(), 1500);
+      } else {
+        console.log(data_user);
+        toastErr('Não foi possível criar sua conta, tente novamente.');
+      }
     } catch (error) {
       console.log(error.response.data);
-      alert('Não foi possível criar sua conta');
+      toastErr('Não foi possível criar sua conta, tente novamente.');
     }
   };
 

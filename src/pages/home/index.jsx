@@ -10,7 +10,6 @@ import { useHome } from './useHome';
 
 const Home = () => {
   const { products, brands, offerProducts, recommendedProducts } = useHome();
-  console.log(products);
 
   return (
     <Container>

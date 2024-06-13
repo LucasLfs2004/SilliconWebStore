@@ -34,7 +34,6 @@ export const VoucherCard = () => {
       await clearVoucher(user.access_token);
       refetchCartRequest();
     } else {
-      console.log('User not logged');
     }
   };
 

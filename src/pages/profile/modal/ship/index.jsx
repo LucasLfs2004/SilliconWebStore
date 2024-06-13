@@ -46,7 +46,6 @@ const ModalShip = ({
   };
 
   const setEditValues = () => {
-    console.log(editObj);
     const dataRegister = {
       cep:
         editObj !== undefined && editObj?.cep && editObj.cep !== undefined
@@ -75,13 +74,10 @@ const ModalShip = ({
   };
 
   useEffect(() => {
-    console.log('VALUE OF EDITOBJ: ', editObj);
     setEditValues();
   }, [editObj]);
 
-  useEffect(() => {
-    console.log(register.cep);
-  }, [register]);
+  useEffect(() => {}, [register]);
 
   return (
     <C.Container>
@@ -222,9 +218,7 @@ const ModalShip = ({
               </label>
             </C.Checkbox>
           </C.Box>
-          <C.BtnSubmit onClick={() => console.log('CLIQUEI')} type='submit'>
-            Adicionar
-          </C.BtnSubmit>
+          <C.BtnSubmit type='submit'>Adicionar</C.BtnSubmit>
         </C.Form>
       </C.Modal>
     </C.Container>

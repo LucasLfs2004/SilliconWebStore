@@ -16,9 +16,8 @@ export const Modal = styled.section`
   box-shadow: 13px 13px 26px #010a16, -13px -13px 26px #01142a;
   padding: 18px 0;
   width: calc(90%);
-  /* margin: 0 5%; */
-  position: absolute;
-  top: 48px;
+  top: 96px;
+  position: fixed;
   max-height: 600px;
 
   @media (min-width: 1024px) {

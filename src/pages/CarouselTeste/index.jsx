@@ -20,12 +20,7 @@ const CarouselTeste = () => {
   const itemSize = 70;
 
   useEffect(() => {
-    console.log(heightAreaRef.current.offsetHeight);
     setItemMargin((heightAreaRef.current.offsetHeight / 4 - itemSize) / 2);
-    console.log(
-      'itemMargin',
-      (heightAreaRef.current.offsetHeight / 4 - itemSize) / 2,
-    );
   }, []);
 
   const handleUpScroll = () => {
@@ -41,19 +36,11 @@ const CarouselTeste = () => {
     const scroll = heightScroll.current?.offsetHeight;
     const top = y + area;
     let maxTop = scroll - area;
-    console.log({
-      scrollY: scrollY,
-      maxTop: maxTop,
-      area: area,
-      top: top,
-      scroll: scroll,
-    });
+
     if (scrollY <= maxTop - area) {
       setScrollY(top);
-      console.log('scrollY', top);
     } else if (scrollY < maxTop) {
       setScrollY(maxTop);
-      console.log('scrollY', maxTop);
     }
   };
 

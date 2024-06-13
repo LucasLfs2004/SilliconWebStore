@@ -59,7 +59,6 @@ const PaymentCard = () => {
               name='parcelas'
               id=''
               onChange={e => {
-                console.log(JSON.parse(e.target.value));
                 dispatch(
                   setPayForm({
                     method: 'credit-card',

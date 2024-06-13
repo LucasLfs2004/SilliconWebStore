@@ -58,13 +58,10 @@ const usePayment = () => {
           const region = findRegion(shipSelected.state);
 
           if (region !== null && region !== '') {
-            const response = await setShipIdCart(
+            await setShipIdCart(
               { region: region, id: shipSelected.ship_id },
               user.access_token,
             );
-            if (response) {
-              console.log('DEU CERTO O SET DO ID DO CART: ', response);
-            }
           }
         }
       }
@@ -77,9 +74,7 @@ const usePayment = () => {
   }, [cartRequest]);
 
   const getShipSelected = id => {
-    console.log(shipInfo);
     const ship = shipInfo?.ship_info?.filter(item => item.ship_id === id);
-    console.log(ship);
     ship?.length > 0 && dispatch(setShipSelected(ship[0]));
   };
 
@@ -113,7 +108,6 @@ const usePayment = () => {
   }, [user]);
 
   useEffect(() => {
-    console.log('SHIPIDSELECTED mudou: ', shipIdSelected);
     refetchShipInfo();
   }, [shipIdSelected, modalShipVisible]);
 
@@ -122,7 +116,6 @@ const usePayment = () => {
     queryFn: async () => {
       if (user.access_token) {
         const response = await getProfile(user.access_token);
-        // console.log('profile user', response);
 
         if (response?.status && response.status === 401) {
           dispatch(initializeUser());
@@ -168,7 +161,6 @@ const usePayment = () => {
     } else {
       toastErr('Por favor selecione um método de pagamento');
     }
-    console.log('Carrinho: ', payment);
   };
 
   return {

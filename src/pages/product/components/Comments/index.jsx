@@ -6,8 +6,6 @@ import * as C from './styles';
 const Comments = () => {
   const product = useSelector(state => state.product);
 
-  console.log(product);
-
   return (
     <C.Container>
       <C.Title className='left'>

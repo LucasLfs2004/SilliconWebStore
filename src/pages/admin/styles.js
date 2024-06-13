@@ -315,7 +315,6 @@ export const BannerItem = styled.div`
   overflow: visible;
   row-gap: 8px;
   width: calc(100% - 24px);
-  /* max-width: 300px; */
 
   &:hover {
     border-color: #5b43d6;

@@ -66,7 +66,6 @@ export const usePriceProduct = () => {
         id_product: product.id,
         amount: 1,
       });
-      console.log('cartReturn', cartReturn);
 
       if (cartReturn !== false) {
         dispatch(setCart(cartReturn));

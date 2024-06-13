@@ -9,6 +9,7 @@ const ModalViewShip = ({
   handlePrincipalShip,
   addShip,
   editShip,
+  deleteShip,
 }) => {
   return (
     <C.Container>
@@ -30,7 +31,10 @@ const ModalViewShip = ({
               <C.Row className='mt' mt={6}>
                 <C.TextBorderBottom>{item.ship_name}</C.TextBorderBottom>
                 <C.Row>
-                  <C.Btn className='trash'>
+                  <C.Btn
+                    className='trash'
+                    onClick={() => deleteShip(item.ship_id)}
+                  >
                     <img src='/assets/icons/trash.svg' alt='' />
                   </C.Btn>
                   <C.Btn onClick={() => editShip(item)}>

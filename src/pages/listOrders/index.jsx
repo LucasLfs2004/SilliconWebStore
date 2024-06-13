@@ -9,8 +9,6 @@ import useOrders from './useOrders';
 const PurchaseOrders = () => {
   const { orders } = useOrders();
 
-  console.log(orders);
-
   return (
     <Container className='dark'>
       <HeaderPage page_title={'Pedidos'} />

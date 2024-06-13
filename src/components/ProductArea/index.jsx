@@ -29,8 +29,6 @@ const ProductArea = ({ products }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, [areaRef]);
-
-  // console.log('products', products);
   return (
     <C.Container id='product-area' ref={areaRef}>
       {products?.length > 0 &&

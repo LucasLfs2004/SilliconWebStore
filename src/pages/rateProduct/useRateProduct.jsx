@@ -24,7 +24,6 @@ const useRateProduct = () => {
   const postComment = async e => {
     e.preventDefault();
     e.stopPropagation();
-    console.log(rateObj.title);
     if (
       rateObj.title === '' ||
       rateObj.title === undefined ||
@@ -42,7 +41,6 @@ const useRateProduct = () => {
         title: rateObj.title,
       };
       const response = await postCommentProduct(dataComment, user.access_token);
-      console.log(response);
       if (response.id_comment) {
         toastSuc('Comentário salvo!');
         setTimeout(() => navigate(-1), 1500);

@@ -15,10 +15,8 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZE_USER:
-      // console.log('iniciando a porra do user', action.payload);
       return action.payload;
     case SET_USER:
-      console.log(action);
       const dataUser = {
         id: action.payload.person.id,
         email: action.payload.person.email,

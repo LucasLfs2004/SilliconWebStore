@@ -5,10 +5,8 @@ const initialState = {};
 const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case INITIALIZE_PRODUCT:
-      // console.log('iniciando a porra do product', initialState);
       return initialState;
     case SET_PRODUCT:
-      console.log(action);
       return action.payload;
     default:
       return state;
