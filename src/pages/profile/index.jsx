@@ -27,6 +27,8 @@ const Profile = () => {
     deleteShip,
   } = useProfile();
 
+  console.log(profile);
+
   return (
     <Container className='dark'>
       <Header />
@@ -81,14 +83,17 @@ const Profile = () => {
                 <C.BtnAdd
                   onClick={() => {
                     setModalShipVisible(true);
-                    setShipEditObject(null);
+                    setShipEditObject(undefined);
                   }}
                 >
                   <img src='/assets/icons/addIcon.svg' alt='' />
                 </C.BtnAdd>
-                <C.BtnEdit onClick={() => setModalViewShipVisible(true)}>
-                  <img src='/assets/icons/editIconPurple.svg' alt='' />
-                </C.BtnEdit>
+                {profile?.ship_info.length > 0 &&
+                  profile?.ship_info[0]?.ship_id && (
+                    <C.BtnEdit onClick={() => setModalViewShipVisible(true)}>
+                      <img src='/assets/icons/editIconPurple.svg' alt='' />
+                    </C.BtnEdit>
+                  )}
               </C.Row>
             </C.Row>
             {principalShip ? (
@@ -153,13 +158,7 @@ const Profile = () => {
           setChecked={setCheckedPrincipalShip}
           editObj={shipEditObject}
         />
-        {/* <ModalProfile
-          visible={modalProfile}
-          closeModal={() => setModalProfile(false)}
-          profile={profile}
-        /> */}
       </C.ContentPage>
-
       <Footer />
     </Container>
   );

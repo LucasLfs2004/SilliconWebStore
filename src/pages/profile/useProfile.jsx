@@ -96,8 +96,9 @@ export const useProfile = () => {
       ...data,
       principal_ship: checkedPrincipalShip,
     };
+    console.log(shipEditObject);
     if (user.access_token) {
-      if (shipEditObject === undefined) {
+      if (shipEditObject === undefined || shipEditObject === null) {
         const retorno = await postShipInfo(user.access_token, params);
         if (retorno) {
           toastSuc('Endereço adicionado com sucesso!');
