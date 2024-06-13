@@ -62,6 +62,7 @@ export const useProfile = () => {
         return response;
       }
     },
+    staleTime: 0,
   });
 
   useEffect(() => {
