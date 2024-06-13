@@ -83,7 +83,7 @@ const useAddProducts = () => {
         const response = await createProduct(user.access_token, formData);
         if (response) {
           toastSuc('Produto cadastrado!');
-          // setTimeout(() => navigate('/profile/my-store'), 1500);
+          setTimeout(() => navigate('/profile/my-store'), 1500);
         } else {
           toastErr('Erro, não foi possível criar o produto');
         }

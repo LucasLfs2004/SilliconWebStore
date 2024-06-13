@@ -24,6 +24,7 @@ export const Product = () => {
   const { data: product_data } = useQuery({
     queryKey: ['product-id', id],
     queryFn: async () => await getProduct(id),
+    staleTime: 0,
   });
 
   useEffect(() => {
@@ -45,7 +46,7 @@ export const Product = () => {
               <PriceProduct product={product_data} />
             </C.BoxContent>
           </C.ProductSection>
-          <Comments />
+          {product_data?.rating?.comments?.length > 0 && <Comments />}
           {product_data?.description?.desc_html && <Description />}
         </C.ContentPage>
       )}

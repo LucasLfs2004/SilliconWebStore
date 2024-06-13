@@ -194,7 +194,10 @@ const MyStore = () => {
         product={productActive}
         visible={offerModal}
         setOffer={setOfferProduct}
-        closeModal={() => setOfferModal(false)}
+        closeModal={() => {
+          setOfferModal(false);
+          setProductActive(null);
+        }}
       />
       <DetailedInfos
         product={productActive}
@@ -218,7 +221,10 @@ const MyStore = () => {
       <EditImagesProductModal
         product={productActive}
         visible={editImagesModal}
-        closeModal={() => setEditImagesModal(false)}
+        closeModal={() => {
+          setEditImagesModal(false);
+          setProductActive(null);
+        }}
         refetch={refetch}
       />
       <Footer />
