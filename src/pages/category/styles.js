@@ -23,13 +23,12 @@ export const TopCategory = styled.div`
 `;
 
 export const NameCategory = styled.p`
-  display: none;
   position: absolute;
   left: 20px;
   color: #fff;
   text-align: center;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
 
   @media (min-width: 1024px) {
     position: static;

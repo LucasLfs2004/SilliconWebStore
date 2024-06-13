@@ -68,7 +68,7 @@ const PaymentCard = () => {
                 );
               }}
             >
-              {cart.list_portions.map(portion => (
+              {cart?.list_portions?.map(portion => (
                 <option key={portion.often} value={JSON.stringify(portion)}>
                   {`${portion.often}x de ${parseRealCurrency(
                     portion.value_portion,

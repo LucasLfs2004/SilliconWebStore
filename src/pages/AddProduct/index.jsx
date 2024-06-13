@@ -258,28 +258,28 @@ const AddProduct = () => {
             <Link to={'/'}>cancelar</Link>
           </C.Message>
         </C.Section>
-        <ModalImage
-          images={previewImages}
-          files={selectedFiles}
-          visible={modalVisible}
-          setModalVisible={setModalVisible}
-          setFiles={setSelectedFiles}
-          setImages={setPreviewImages}
-          closeModal={() => setModalVisible(false)}
-        />
-        <DescriptionModal
-          visible={modalDescription}
-          editor={description}
-          setEditor={setDescription}
-          closeModal={() => setModalDescription(false)}
-          submit={() => setModalDescription(false)}
-        />
         {/* {window.screen.width > 1024 ? <FormDesk /> : <FormMobile />} */}
       </C.Body>
       <C.Footer>
         <p>SILLICON STORE - VAREJO DE PRODUTOS DE INFORMÁTICA LTDA</p>
         <Link to={'/'}>TERMOS E PRIVACIDADE</Link>
       </C.Footer>
+      <ModalImage
+        images={previewImages}
+        files={selectedFiles}
+        visible={modalVisible}
+        setModalVisible={setModalVisible}
+        setFiles={setSelectedFiles}
+        setImages={setPreviewImages}
+        closeModal={() => setModalVisible(false)}
+      />
+      <DescriptionModal
+        visible={modalDescription}
+        editor={description}
+        setEditor={setDescription}
+        closeModal={() => setModalDescription(false)}
+        submit={() => setModalDescription(false)}
+      />
     </Container>
   );
 };

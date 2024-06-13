@@ -4,7 +4,14 @@ export const ContentPage = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 100vw;
   width: 100%;
+
+  @media (min-width: 1024px) {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 `;
 
 export const TopContent = styled.div`
@@ -25,9 +32,14 @@ export const ListCategory = styled.div`
   width: 90%;
   column-gap: 24px;
   row-gap: 16px;
-  flex-wrap: wrap;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+  }
 `;
 
 export const ItemCategory = styled.button`

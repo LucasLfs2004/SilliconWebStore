@@ -14,19 +14,15 @@ export const Section = styled.form`
   flex-direction: column;
   align-items: center;
   background: #ecf0f3;
-  width: auto;
   border-radius: 15px;
   box-shadow: 10px 10px 20px 0px #d1d9e6 inset, -10px -10px 20px 0px #fff inset;
   padding: 24px 0;
+  max-width: 90%;
+  margin-top: 24px;
 
-  .top {
-    /* margin-left: 35px; */
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    row-gap: 7px;
-    column-gap: 8px;
+  @media (min-width: 1024px) {
+    width: auto;
+    margin-top: 0;
   }
 `;
 
@@ -34,25 +30,43 @@ export const ProductArea = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  justify-content: space-between;
   width: 90%;
   padding-top: 24px;
+  column-gap: 4px;
+  justify-content: center;
+  column-gap: 8px;
 
   .img {
-    width: 130px;
-    height: 130px;
+    background-color: #fff;
+    width: 70px;
+    height: 70px;
+  }
 
+  img {
+    width: 95%;
+  }
+  h1 {
+    color: #5b43d6;
+    font-weight: 500;
+    font-size: 14px;
+    width: 180px;
+  }
+
+  @media (min-width: 1024px) {
+    justify-content: space-between;
+    column-gap: 0;
+    .img {
+      width: 130px;
+      height: 130px;
+    }
     img {
       width: 90%;
     }
-  }
-
-  h1 {
-    padding-top: 6px;
-    color: #5b43d6;
-    font-weight: 500;
-    font-size: 18px;
-    width: 350px;
+    h1 {
+      padding-top: 6px;
+      font-size: 18px;
+      width: 350px;
+    }
   }
 `;
 
@@ -81,7 +95,7 @@ export const Form = styled.section`
   display: flex;
   flex: 1;
   overflow: hidden;
-  padding: 10%;
+  padding: 16px 10%;
   flex-direction: column;
 
   width: calc(100% - 20%);

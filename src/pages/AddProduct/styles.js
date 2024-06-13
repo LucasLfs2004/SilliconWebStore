@@ -609,11 +609,14 @@ export const BtnDescription = styled.div`
   font-size: 10px;
   color: #5b43d6;
   font-weight: 300;
-  width: calc(25% - 28px);
+  width: 60%;
+  margin-bottom: 12px;
   margin-top: 8px;
 
   @media (min-width: 1024px) {
+    width: calc(25%);
     font-size: 14px;
     font-weight: 600;
+    cursor: pointer;
   }
 `;

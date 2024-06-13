@@ -7,7 +7,7 @@ const ProductPresentation = ({ product }) => {
   return (
     <C.DarkArea>
       <C.Rating>
-        <Stars rating={product?.rating?.rating} />
+        <Stars rating={product?.rating?.rating_value} />
         <C.RatingValue>
           {product?.rating?.rating} ({product?.rating?.amount_rating})
         </C.RatingValue>

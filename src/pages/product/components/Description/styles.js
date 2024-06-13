@@ -3,8 +3,12 @@ import styled from 'styled-components';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 48px 32px 48px;
-  max-width: 1440px;
+  padding: 0 18px 24px 18px;
+
+  @media (min-width: 1024px) {
+    padding: 0 48px 32px 48px;
+    max-width: 1440px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -36,5 +40,15 @@ export const DescriptionArea = styled.div`
 
   h1 {
     font-weight: 600;
+  }
+
+  @media (max-width: 1024px) {
+    ul {
+      margin-left: -16px;
+    }
+
+    li {
+      margin-bottom: 6px;
+    }
   }
 `;

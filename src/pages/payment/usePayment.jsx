@@ -47,6 +47,7 @@ const usePayment = () => {
     queryKey: ['cart-data'],
     queryFn: async () =>
       user.access_token && (await getCart(user.access_token)),
+    staleTime: 0,
   });
 
   const { refetch: refetchShipIdCart } = useQuery({
@@ -192,7 +193,7 @@ const usePayment = () => {
     modalSuccess,
     setModalSuccess,
     finishOrder,
-    navigate
+    navigate,
   };
 };
 

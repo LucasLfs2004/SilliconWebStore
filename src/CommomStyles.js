@@ -28,7 +28,7 @@ export const ContainerModal = styled.section`
   justify-content: center;
   background-color: #00000030;
   width: 100%;
-  height: calc(100% - ${props => props.pt});
+  height: 100%;
   padding-top: ${props => props.pt};
   z-index: 100;
 `;

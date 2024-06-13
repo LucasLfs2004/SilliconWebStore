@@ -15,9 +15,9 @@ const CardOrder = ({ purchase, hideDetail }) => {
   console.log(purchase);
 
   return (
-    <C.NeumorphismCard className='full'>
+    <C.NeumorphismCard>
       {!hideDetail && (
-        <C.Row className='between'>
+        <C.Row className='between mobile-column'>
           <C.Row className='gap' gap={12}>
             <img className='cart' src='/assets/icons/orderIcon.svg' alt='' />
             <h3>
@@ -31,7 +31,7 @@ const CardOrder = ({ purchase, hideDetail }) => {
       )}
       <C.ContentOrder className={`${hideDetail && 'without-border-top'}`}>
         {!hideDetail && (
-          <C.Row className='between'>
+          <C.Row className='between mobile-column'>
             {purchase?.payment_method === 'pix' && (
               <C.PayMethod className='gap' gap={16}>
                 <img src='/assets/icons/pixBlue.svg' alt='' />
@@ -65,6 +65,16 @@ const CardOrder = ({ purchase, hideDetail }) => {
         )}
         {purchase?.items?.map((product, key) => (
           <C.productOrderArea key={key}>
+            <C.TopContentCard>
+              <span>Vendido e entregue por {product?.store_name}</span>
+              <C.BtnCommentProduct>
+                <Link
+                  to={`/profile/rate-product/${product?.id_product}/${product?.id_order_item}`}
+                >
+                  Avaliar
+                </Link>
+              </C.BtnCommentProduct>
+            </C.TopContentCard>
             <Link className='img-area' to={`/product/${product.id_product}`}>
               <img
                 src={`${api_path}/image/product/${product?.images[0]}`}
