@@ -27,7 +27,7 @@ export const useProfile = () => {
   const [modalShipVisible, setModalShipVisible] = useState(false);
   const [modalProfile, setModalProfile] = useState(false);
   const [checkedPrincipalShip, setCheckedPrincipalShip] = useState(false);
-  const [principalShip, setPrincipalShip] = useState({});
+  const [principalShip, setPrincipalShip] = useState(null);
   const [shipEditObject, setShipEditObject] = useState(undefined);
 
   useEffect(() => {

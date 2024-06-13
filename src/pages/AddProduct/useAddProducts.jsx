@@ -24,7 +24,9 @@ const useAddProducts = () => {
 
   useEffect(() => {
     if (!user && !user?.access_token && !user?.idSeller) {
-      window.location.pathname = 'signin';
+      navigate('/signin');
+    } else if (user?.idSeller === null) {
+      navigate('/');
     }
   }, [user]);
 

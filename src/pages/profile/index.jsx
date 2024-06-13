@@ -78,7 +78,12 @@ const Profile = () => {
                 <h3>Endereços</h3>
               </C.Row>
               <C.Row className='gap' gap={18}>
-                <C.BtnAdd onClick={() => setModalShipVisible(true)}>
+                <C.BtnAdd
+                  onClick={() => {
+                    setModalShipVisible(true);
+                    setShipEditObject(null);
+                  }}
+                >
                   <img src='/assets/icons/addIcon.svg' alt='' />
                 </C.BtnAdd>
                 <C.BtnEdit onClick={() => setModalViewShipVisible(true)}>
@@ -86,21 +91,31 @@ const Profile = () => {
                 </C.BtnEdit>
               </C.Row>
             </C.Row>
-            <C.Row className='mt' mt={6}>
-              <C.TextBorderBottom>{principalShip.ship_name}</C.TextBorderBottom>
-            </C.Row>
-            <C.Row className='between'>
-              <C.ParagraphShip>{principalShip.receiver_name}</C.ParagraphShip>
-              <C.ParagraphShip>{principalShip.cep}</C.ParagraphShip>
-            </C.Row>
-            <C.Row>
-              <C.ParagraphShip>
-                {principalShip.street}, {principalShip.ship_number}
-              </C.ParagraphShip>
-            </C.Row>
-            <C.Row>
-              <C.ParagraphShip>{principalShip.district}</C.ParagraphShip>
-            </C.Row>
+            {principalShip ? (
+              <>
+                <C.Row className='mt' mt={6}>
+                  <C.TextBorderBottom>
+                    {principalShip.ship_name}
+                  </C.TextBorderBottom>
+                </C.Row>
+                <C.Row className='between'>
+                  <C.ParagraphShip>
+                    {principalShip.receiver_name}
+                  </C.ParagraphShip>
+                  <C.ParagraphShip>{principalShip.cep}</C.ParagraphShip>
+                </C.Row>
+                <C.Row>
+                  <C.ParagraphShip>
+                    {principalShip.street}, {principalShip.ship_number}
+                  </C.ParagraphShip>
+                </C.Row>
+                <C.Row>
+                  <C.ParagraphShip>{principalShip.district}</C.ParagraphShip>
+                </C.Row>
+              </>
+            ) : (
+              <h1>Nenhum endereço adicionado</h1>
+            )}
           </C.NeumorphismCard>
         </C.DisplayCards>
 

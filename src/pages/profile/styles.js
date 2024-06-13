@@ -67,6 +67,11 @@ export const NeumorphismCard = styled.div`
   display: flex;
   flex-direction: column;
 
+  h1 {
+    color: #fff;
+    font-size: 18px;
+  }
+
   &.gap {
     row-gap: ${props => props.gap}px;
   }
