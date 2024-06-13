@@ -40,14 +40,12 @@ const AdminScreen = () => {
     banners,
   } = useAdminPage();
 
-  console.log('banners', banners);
-
   return (
     <Container>
       <ToastComponent />
       <HeaderPage page_title={'Administração da Loja'} />
       <C.ContentPage>
-        <C.Box>
+        <C.Box className='row-gap' rg={'32px'}>
           <C.ComponentNeumorphism>
             <C.Title>Categorias</C.Title>
             <C.ListContent>
@@ -77,7 +75,7 @@ const AdminScreen = () => {
                 ))}
             </C.ListContent>
             <C.Form onSubmit={e => categoryRequest(e)}>
-              <C.Box>
+              <C.Box className='box-form'>
                 <C.Title className='mini left'>
                   {categoryEditId !== undefined && categoryEditId !== null
                     ? `Editar categoria: ${categoryEditId}`
@@ -85,7 +83,7 @@ const AdminScreen = () => {
                 </C.Title>
                 <C.BtnCancel onClick={cleanCategoryForm}>Limpar</C.BtnCancel>
               </C.Box>
-              <C.Box>
+              <C.Box className='box-form'>
                 <C.Column>
                   <InputNeumorphism
                     width={'76%'}
@@ -96,12 +94,12 @@ const AdminScreen = () => {
                     setValueInput={setCategoryNameInput}
                   />
                 </C.Column>
-                {iconCategory?.preview && (
+                {/* {iconCategory?.preview && (
                   <C.LogoDiv>
                     <p>Ícone:</p>
                     <img src={iconCategory.preview} alt='' />
                   </C.LogoDiv>
-                )}
+                )} */}
               </C.Box>
               <BtnSubmit
                 type='submit'
@@ -149,14 +147,14 @@ const AdminScreen = () => {
                   </C.RowCard>
                 ))}
             </C.ListContent>
-            <C.Box>
+            <C.Box className='box-form'>
               <C.Title className='mini left'>
                 {brandEditId ? `Editar marca (${brandEditId})` : 'Nova marca'}
               </C.Title>
               <C.BtnCancel onClick={cleanBrandForm}>Limpar</C.BtnCancel>
             </C.Box>
             <C.Form onSubmit={e => brandRequest(e)}>
-              <C.Box>
+              <C.Box className='box-form break-mobile'>
                 <C.Column>
                   <InputNeumorphism
                     id={'brand-name'}
@@ -182,7 +180,7 @@ const AdminScreen = () => {
                   />
                 </C.Column>
                 <C.Box
-                  className='width column-gap'
+                  className='width column-gap preview-logo-brand'
                   width={'auto'}
                   cgap={'12px'}
                 >
@@ -207,7 +205,7 @@ const AdminScreen = () => {
             </C.Form>
           </C.ComponentNeumorphism>
         </C.Box>
-        <C.Box className='flex-start'>
+        <C.Box className='flex-start row-gap' rg={'32px'}>
           <BannerComponent />
           <VoucherComponent />
         </C.Box>

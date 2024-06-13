@@ -111,7 +111,7 @@ const BannerComponent = () => {
           bannerEditId ? patchBannerRequest(e) : postBannerRequest(e)
         }
       >
-        <C.Box>
+        <C.Box className='box-form break-mobile'>
           <C.Column>
             <InputNeumorphism
               id={'link-path'}
@@ -136,17 +136,17 @@ const BannerComponent = () => {
               placeholder={'banner mobile'}
             />
           </C.Column>
-          <C.Column>
+          <C.Column className='flex-end'>
             {bannerWeb?.preview && (
               <C.BannerImgArea>
                 <p>Banner web:</p>
-                <img src={bannerWeb.preview} alt='' />
+                <img className='web' src={bannerWeb.preview} alt='' />
               </C.BannerImgArea>
             )}
             {bannerMobile?.preview && (
               <C.BannerImgArea>
                 <p>Banner Mobile:</p>
-                <img src={bannerMobile.preview} alt='' />
+                <img className='mobile' src={bannerMobile.preview} alt='' />
               </C.BannerImgArea>
             )}
           </C.Column>

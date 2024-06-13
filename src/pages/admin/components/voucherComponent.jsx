@@ -51,7 +51,7 @@ const VoucherComponent = () => {
       </C.ListContent>
       <C.Title className='mini left'>Novo cupom de desconto</C.Title>
       <C.Form onSubmit={e => postVoucherRequest(e)}>
-        <C.Box>
+        <C.Box className='box-form'>
           <C.Column>
             <InputNeumorphism
               id={'voucher-code'}

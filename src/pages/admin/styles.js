@@ -4,6 +4,8 @@ export const ContentPage = styled.section`
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding: 32px 0 48px 0;
+  row-gap: 32px;
 `;
 
 export const Title = styled.h1`
@@ -23,11 +25,14 @@ export const Title = styled.h1`
 
 export const Box = styled.div`
   display: flex;
-  width: 100%;
-  column-gap: 64px;
-
+  flex-direction: column;
+  align-items: center;
   &.width {
     width: ${props => props.width};
+  }
+
+  &.row-gap {
+    row-gap: ${props => props.rg};
   }
 
   &.column-gap {
@@ -37,15 +42,44 @@ export const Box = styled.div`
   &.flex-start {
     justify-content: flex-start;
   }
+
+  @media (max-width: 1350px) {
+    &.box-form {
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    &.preview-logo-brand {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+  @media (min-width: 1350px) {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    column-gap: 64px;
+  }
+
+  @media (max-width: 1024px) {
+    &.break-mobile {
+      width: 100%;
+      flex-direction: column;
+      row-gap: 12px;
+    }
+  }
 `;
 
 export const ComponentNeumorphism = styled.div`
-  width: 45%;
   display: flex;
+  flex-direction: column;
   height: fit-content;
   background-color: #ecf0f3;
   box-shadow: 15px 15px 29px 0px #d1d9e6, -15px -15px 29px 0px #fff;
-  width: calc(100% - 32px);
+  width: 80%;
   padding: 18px 16px;
   margin: 12px 0 0 0;
   border-radius: 8px;
@@ -53,6 +87,13 @@ export const ComponentNeumorphism = styled.div`
   align-items: center;
 
   @media (min-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    max-width: 800px;
+  }
+
+  @media (min-width: 1350px) {
+    width: 45%;
     row-gap: 12px;
     padding: 18px 24px;
     margin: 36px;
@@ -63,7 +104,6 @@ export const ComponentNeumorphism = styled.div`
     &.full {
       width: 100%;
     }
-    /* width: fit-content; */
   }
 
   @media (min-width: 1500px) {
@@ -100,6 +140,7 @@ export const ListContent = styled.div`
 export const RowCard = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   padding: 6px 6px;
   border-bottom: 1px solid #5b43d6;
   column-gap: 24px;
@@ -110,14 +151,19 @@ export const RowCard = styled.div`
 `;
 
 export const NameComponent = styled.p`
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 600;
   color: #010f20;
-  width: 140px;
+  width: 110px;
+
+  @media (min-width: 1024px) {
+    width: 140px;
+    font-size: 16px;
+  }
 `;
 
 export const IdComponent = styled.p`
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   width: 130px;
 
@@ -127,6 +173,10 @@ export const IdComponent = styled.p`
 
   &.set-width {
     width: ${props => props.width};
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 16px;
   }
 `;
 
@@ -160,8 +210,12 @@ export const Form = styled.form`
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
   row-gap: 12px;
+  width: 100%;
+
+  @media (min-width: 1024px) {
+    width: 50%;
+  }
 `;
 
 export const ColumnDiv = styled.div`
@@ -173,16 +227,27 @@ export const ColumnDiv = styled.div`
 export const ImageComponent = styled.div`
   /* max-width: 30px; */
   max-height: 25px;
-  max-width: 100px;
+  max-width: 70px;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
-  width: 100px;
+  width: 70px;
 
   img {
     max-width: 100%;
     max-height: 100%;
-    /* height: 100%; */
+  }
+
+  @media (min-width: 1024px) {
+    max-height: 25px;
+    max-width: 100px;
+    display: flex;
+    align-items: center;
+    width: 100px;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
   }
 `;
 
@@ -228,12 +293,16 @@ export const BtnCancel = styled.button`
 
 export const ListBanners = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 20px;
-  flex-wrap: wrap;
   width: 100%;
-  column-gap: 24px;
   row-gap: 24px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 24px;
+  }
 `;
 
 export const BannerItem = styled.div`
@@ -244,8 +313,8 @@ export const BannerItem = styled.div`
   border-radius: 18px;
   transition: 0.5s ease-out;
   overflow: visible;
-  width: calc(50% - 48px);
   row-gap: 8px;
+  width: calc(100% - 24px);
   /* max-width: 300px; */
 
   &:hover {
@@ -284,6 +353,10 @@ export const BannerItem = styled.div`
   p {
     color: #010f20;
   }
+
+  @media (min-width: 1024px) {
+    width: calc(50% - 48px);
+  }
 `;
 
 export const BannerImgArea = styled.div`
@@ -296,14 +369,20 @@ export const BannerImgArea = styled.div`
     color: #5b43d6;
   }
 
+  img {
+    width: 300px;
+  }
+
   img.web {
     max-width: 100%;
-    max-height: 100px;
+    max-height: calc(280px / 4.8);
     object-fit: cover;
   }
 
   img.mobile {
     /* width: 80%; */
+    max-height: calc(280px / 3.03);
+    object-fit: cover;
     max-width: 100%;
   }
 `;
