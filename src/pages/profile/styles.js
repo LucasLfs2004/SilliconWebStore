@@ -6,7 +6,11 @@ export const ContentPage = styled.section`
   display: flex;
   flex-direction: column;
   position: relative;
-  row-gap: 48px;
+  row-gap: 24px;
+
+  @media (min-width: 1024px) {
+    row-gap: 48px;
+  }
 `;
 
 export const Title = styled.h3`
@@ -57,9 +61,9 @@ export const NeumorphismCard = styled.div`
   border-radius: 8px;
   background: #010f20;
   box-shadow: inset -10px -10px 25px #02183350, inset 10px 10px 25px #00060d50;
-  width: calc(86% - 40px);
-  margin: 12px 8%;
-  padding: 18px 20px;
+  width: calc(94% - 36px);
+  margin: 12px 3%;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
 
@@ -70,7 +74,9 @@ export const NeumorphismCard = styled.div`
   @media (min-width: 1024px) {
     width: 50%;
     margin: 0;
-
+    width: calc(86% - 40px);
+    margin: 12px 8%;
+    padding: 18px 20px;
     &.full {
       width: 100%;
     }

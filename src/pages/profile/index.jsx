@@ -3,7 +3,6 @@ import Footer from '../../components/Footer';
 import Header from '../../components/Header';
 import ToastComponent from '../../components/ToastComponent';
 import CardOrder from '../../components/cardOrder';
-import ModalProfile from './modal/editProfile';
 import ModalShip from './modal/ship';
 import ModalViewShip from './modal/viewShip';
 import * as C from './styles';
@@ -42,9 +41,9 @@ const Profile = () => {
                   <img src='/assets/icons/userIcon.svg' alt='' />
                   <h3>{profile?.name}</h3>
                 </C.Row>
-                <C.BtnEdit onClick={() => setModalProfile(true)}>
+                {/* <C.BtnEdit onClick={() => setModalProfile(true)}>
                   <img src='/assets/icons/editIconPurple.svg' alt='' />
-                </C.BtnEdit>
+                </C.BtnEdit> */}
               </C.Row>
               <C.Row className='gap' gap={16}>
                 <img
@@ -139,11 +138,11 @@ const Profile = () => {
           setChecked={setCheckedPrincipalShip}
           editObj={shipEditObject}
         />
-        <ModalProfile
+        {/* <ModalProfile
           visible={modalProfile}
           closeModal={() => setModalProfile(false)}
           profile={profile}
-        />
+        /> */}
       </C.ContentPage>
 
       <Footer />

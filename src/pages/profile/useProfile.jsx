@@ -200,10 +200,6 @@ export const profileZod = z
       .string()
       .min(3, 'Este campo deve ter no mínimo 3 caracteres')
       .transform(field => DOMPurify.sanitize(field)),
-    gender: z
-      .string()
-      .nonempty({ message: 'Selecione um gênero' })
-      .transform(field => DOMPurify.sanitize(field)),
     phone_number: z
       .string()
       .regex(

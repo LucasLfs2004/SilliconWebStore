@@ -54,26 +54,6 @@ const ModalProfile = ({ visible, closeModal, submitForm, profile }) => {
               <p>{errors?.phone_number?.message}</p>
             </C.FormInput>
             <C.FormInput>
-              <label htmlFor='genero'>Gênero</label>
-              <select
-                name='genero'
-                id='genero'
-                {...register('category')}
-                onChange={e => setGenderSelect(e.target.value)}
-                className={
-                  genderSelect !== null && genderSelect !== 'null' && 'selected'
-                }
-              >
-                <option checked value={'null'}>
-                  Selecionar
-                </option>
-                <option value={'Feminino'}>Feminino</option>
-                <option value={'Masculino'}>Masculino</option>
-                <option value={'none'}>Prefiro não responder</option>
-              </select>
-              <p>{errors?.gender?.message}</p>
-            </C.FormInput>
-            <C.FormInput>
               <label htmlFor='birthday'>Data de Nascimento</label>
               <C.InputBlocked>
                 <input
